@@ -3,7 +3,7 @@
 ?>
 <div class="col-md-9 col-lg-10">
     <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">สั่งงาน</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">สั่งงาน</button>
     </br></br>
     <!-- The Modal -->
     <div class="modal fade" id="myModal">
@@ -20,12 +20,14 @@
         <div class="modal-body">
             <form>
                 <div class="row">   
-                    <div class="">
+                    <div class="col-6">
                         <label>หัวข้องาน</label><input type="text" name="title" class="form-control">
                         <label>รายละเอียดงาน</label><textarea name="detail"cols="30" rows="10" class="form-control"></textarea>
                     </div>
-                    <label>เวลาเริ่มงาน</label><input type="text" name="title" class="form-control">
-                    <label>เวลาส่งงาน</label><input type="text" name="title" class="form-control">
+                    <div class="col-6">
+                        <label>เวลาเริ่มงาน</label><input type="text" name="title" class="form-control">
+                        <label>เวลาส่งงาน</label><input type="text" name="title" class="form-control">
+                    </div>
                 </div>
                 <input type="hidden" name="controller" value="">
                 
@@ -43,7 +45,7 @@
     </div>
     
     <table class="table table-bordered "> 
-        <tr>
+        <tr align="center">
             <th>#</th>
             <th>หัวข้องาน</th>
             <th>วันที่ลงงาน</th>
