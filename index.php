@@ -39,7 +39,7 @@ else
 <?php require_once("routes.php"); ?>
 <!--/.container-->
 <footer class="container-fluid">
-    <p class="text-right small">©2016-2017 Company</p>
+    <p class="text-right small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
 	<script>
 		$(document).ready(function() {

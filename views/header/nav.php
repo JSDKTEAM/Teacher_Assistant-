@@ -83,7 +83,7 @@
     }
 
 </style>
-<nav class="navbar fixed-top navbar-expand-md navbar-light bg-light mb-3">
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary mb-3">
     <div class="flex-row d-flex">
         <a class="navbar-brand" href="#" title="Free Bootstrap 4 Admin Template">Admin</a>
         <button type="button" class="navbar-toggler" data-toggle="offcanvas" title="Toggle responsive left sidebar">
