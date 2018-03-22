@@ -6,8 +6,8 @@ if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']))
 }
 else
 {
-	$controller = 'page';
-	$action = 'home';
+	$controller = 'work';
+	$action = 'index_work';
 }
 ?>
 <!DOCTYPE html>
@@ -24,18 +24,31 @@ else
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"> 
+
+	<style>
+	body{
+		font-family:Kanit;
+	}
+	</style>
 </head>
 <body>
-<header> 
-	<?php  echo "controller = ".$controller.", action = ".$action."<br>"; ?>
-	[ <a href="?controller=page&action=home">Home </a> ] 
-	[ <a href="?controller=student&action=index"> student </a> ]<br>
-	<hr>
-</header>
 <?php require_once("routes.php"); ?>
-<footer>
-	<hr> 
-	
+<!--/.container-->
+<footer class="container-fluid">
+    <p class="text-right small">©2016-2017 Company</p>
 </footer>
+	<script>
+		$(document).ready(function() {
+			$("#rice a:contains('จัดการข้าว')").parent().addClass('active');
+			$("#dep a:contains('จัดการหน่วยงาน')").parent().addClass('active');
+			$("#district a:contains('จัดการที่อยู่')").parent().addClass('active');
+			$("#user a:contains('จัดการผู้ใช้')").parent().addClass('active');
+			
+		}); //jQuery is loaded
+	</script>
 </body>
 </html>

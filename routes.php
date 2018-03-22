@@ -6,11 +6,14 @@ function call($controller,$action)
 	{
 		case "page":	$controller = new PageController();
 						break;
+		case "work":    $controller = new WorkController();
+						break;
 	}
 	$controller->{$action}();
 }
 
-if( ($controller=='page'&&($action=='home'||$action=='error')) )
+if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
+||  ($controller == 'work' && ($action == 'index_work')))
 {	
 	call($controller,$action);	
 }
