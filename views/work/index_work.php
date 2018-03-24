@@ -1,58 +1,71 @@
 <?php
-    include('views/header/nav.php');
+    include('views/header/nav2.php');
 ?>
-<div class="col-md-9 col-lg-10">
-    <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">สั่งงาน</button>
-    </br></br>
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<style>
+    .work{
+        margin:auto;
+        width:90%;
+        height:300px;
+        background-color:#ECEFF1;
+        padding:20px;
+    }
+</style>
+<div class="content p-4" style="width:100%">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">กรอกรายละเอียดงาน</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-            <form>
-                <div class="row">   
-                    <div class="col-6">
-                        <label>หัวข้องาน</label><input type="text" name="title" class="form-control">
-                        <label>รายละเอียดงาน</label><textarea name="detail"cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                    <div class="col-6">
-                        <label>เวลาเริ่มงาน</label><input type="text" name="title" class="form-control">
-                        <label>เวลาส่งงาน</label><input type="text" name="title" class="form-control">
-                    </div>
-                </div>
-                <input type="hidden" name="controller" value="">
-                
-            
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-block" name="action" value="">สั่งงาน</button>
-            </form>
-        </div>
-
-        </div>
-    </div>
-    </div>
     
-    <table class="table table-bordered "> 
-        <tr align="center">
-            <th>#</th>
-            <th>หัวข้องาน</th>
-            <th>วันที่ลงงาน</th>
-            <th>วันที่เริ่มงาน</th>
-            <th>วันที่ส่งงาน</th>
-            <th>อาจารย์ผู้สั่งงาน</th>
-            <th></th>
-        </tr>
+    <!--<div class="work">
+        <h4>ผู้สั่ง</h4>
+        <p>เวลา</p>
+    </div>-->
+    <table  id="example" class="table  table-bordered"> 
+        <thead>
+            <tr align="center">
+                <th>#</th>
+                <th>รายละเอียด</th>
+                <th>สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 1;
+        foreach($workList as $key=>$work)
+        {
+            $objPatron = $work->get_objPatron();
+            $objPerson = $work->get_objPerson();
+            echo "<tr>
+                    
+                    <td align='center'>$i</td>
+                    <td>
+                    <div class='row'>
+                        <div class='col-6'>
+                            <h4><a href='#'>".$work->get_title()."</a></h4>
+                            <p>ผู้สั่ง : <a href='#'>".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
+                            <p>ผู้รับงาน : <a href='#'>".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
+                            <p>เวลาสั่งงาน : ".$work->get_created_date()."</p>
+                            <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
+                        </div>
+                        <div class='col-6 ' >
+                            <div class='btn-group float-right'>
+                            <a href='#' class='btn btn-primary'><i class='fa fa-eye'></i></a>
+                            <a href='#' class='btn btn-success'><i class='fa fa-pencil'></i></a>
+                            <a href='#' class='btn btn-danger'><i class='fa fa-trash-o'></i></a>
+                      </div>
+                        </div>
+                    </div>
+                    </td>   
+                    <td align='center'>
+                        ".$work->get_status()."
+                    </td>
+                  </tr>";
+        }
+        ?>
+        </tbody>
     </table>
+
 </div>
+
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>

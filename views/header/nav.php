@@ -83,6 +83,9 @@
     }
 
 </style>
+<div id="header">
+
+</div>
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary mb-3">
     <div class="flex-row d-flex">
         <a class="navbar-brand" href="#" title="Free Bootstrap 4 Admin Template">Admin</a>
