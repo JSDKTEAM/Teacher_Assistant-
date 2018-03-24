@@ -28,25 +28,26 @@ else
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"> 
-
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
+ 
 	<style>
 	body{
 		font-family:Kanit;
 	}
 	</style>
 </head>
-<body>
+<body id="<?php echo $controller ?>">
 <?php require_once("routes.php"); ?>
 <!--/.container-->
-<footer class="container-fluid">
-    <p class="text-right small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
+<footer>
+    <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
 	<script>
 		$(document).ready(function() {
-			$("#rice a:contains('จัดการข้าว')").parent().addClass('active');
-			$("#dep a:contains('จัดการหน่วยงาน')").parent().addClass('active');
-			$("#district a:contains('จัดการที่อยู่')").parent().addClass('active');
-			$("#user a:contains('จัดการผู้ใช้')").parent().addClass('active');
+			$("#work a:contains('หน้าแรก')").parent().addClass('active');
 			
 		}); //jQuery is loaded
 	</script>
