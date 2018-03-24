@@ -50,9 +50,19 @@
         {
             $con = conDb::getInstance();
             $stmt = $con->query('SELECT * FROM member');
-            $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
-            $result = $stmt->fetchAll();
-            return $result;
-        }   
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type']);
+            }
+            //$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+            //$result = $stmt->fetchAll();
+            return $member_list;
+        }
+        public static function addMember()
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('INSERT INTO member()');
+        }
     }
 ?>

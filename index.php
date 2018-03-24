@@ -48,7 +48,7 @@ else
 	<script>
 		$(document).ready(function() {
 			$("#work a:contains('หน้าแรก')").parent().addClass('active');
-			
+			$("#userMm a:contains('จัดการระบบ')").parent().addClass('active');
 		}); //jQuery is loaded
 	</script>
 </body>

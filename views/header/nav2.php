@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="#">หน้าแรก</a>
+            <a class="nav-link" href="?controller=work&action=index_work">หน้าแรก</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">จัดการงาน</a>
@@ -30,9 +30,16 @@
         <li class="nav-item">
             <a class="nav-link" href="#">สถิติ</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">จัดการระบบ</a>
-        </li>  
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                จัดการระบบ
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="?controller=userMm&action=index_userMm">จัดการงานของผู้ใช้</a>
+                    <a class="dropdown-item" href="#">จัดการบัญชีผู้ใช้</a>
+                    <a class="dropdown-item" href="#">ตั้งค่าปีการศึกษา</a>
+                </div>
+            </li>  
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -73,8 +80,8 @@
                         <label>รายละเอียดงาน</label><textarea name="detail"cols="30" rows="10" class="form-control"></textarea>
                     </div>
                     <div class="col-6">
-                        <label>เวลาเริ่มงาน</label><input type="text" name="title" class="form-control">
-                        <label>เวลาส่งงาน</label><input type="text" name="title" class="form-control">
+                        <label>เวลาเริ่มงาน</label><input type="date" name="time_start" id="txtFromDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        <label>เวลาส่งงาน</label><input type="date" name="time_stop" id="txtToDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                     </div>
                 </div>
                 <input type="hidden" name="controller" value="">
@@ -84,7 +91,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-block" name="action" value="">สั่งงาน</button>
+            <button type="submit" class="btn btn-success btn-block" name="action" value="">สั่งงาน</button>
             </form>
         </div>
 
