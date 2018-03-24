@@ -17,7 +17,7 @@
         <h4>ผู้สั่ง</h4>
         <p>เวลา</p>
     </div>-->
-    <table  id="example" class="table  table-bordered"> 
+    <table  id="workTable" class="table  table-bordered"> 
         <thead>
             <tr align="center">
                 <th>#</th>
@@ -66,6 +66,6 @@
 
 <script>
     $(document).ready(function() {
-    $('#example').DataTable();
+    $('#workTable').DataTable();
 } );
 </script>

@@ -14,9 +14,12 @@
         {
             $con = conDb::getInstance();
             $stmt = $con->query('SELECT * FROM year_school');
-            $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'YearSchool');
-            $result = $stmt->fetchAll();
-            return $result;
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $yearSchool_list = new YearSchool($value);
+            }
+            return $yearSchool_list;
         }
     }
 ?>

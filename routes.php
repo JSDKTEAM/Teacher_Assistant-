@@ -8,12 +8,15 @@ function call($controller,$action)
 						break;
 		case "work":    $controller = new WorkController();
 						break;
+		case "userMm":  $controller = new UserMmController();
+						break;
 	}
 	$controller->{$action}();
 }
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
-||  ($controller == 'work' && ($action == 'index_work')))
+||  ($controller == 'work' && ($action == 'index_work'))
+||  ($controller == 'userMm' && ($action == 'index_userMm')))
 {	
 	call($controller,$action);	
 }

@@ -77,7 +77,7 @@
         $this->created_date = $work['created_date'];
         $this->due_date = $work['due_date'];
         $this->objPatron = new Member($work['id_patron'],'-',$work['userPatron'],$work['passwdPatron'],$work['fnamePatron'],$work['lnamePatron'],$work['typePatron']);
-        $this->objPerson = new Member($work['id_person'],'-',$work['userPerson'],$work['passwdPerson'],$work['fnamePerson'],$work['lnamePerson'],$work['typePerson']);
+        $this->objPerson = new Member($work['id_person'],$work['id_code'],$work['userPerson'],$work['passwdPerson'],$work['fnamePerson'],$work['lnamePerson'],$work['typePerson']);
         $this->used_time = $work['used_time'];
         $this->summary = $work['summary'];
         $this->objYearSchool = new YearSchool($work);
@@ -97,6 +97,17 @@
             $work_list[] = new Work($value);
         }
         return $work_list;
+    }
+    public static function addWork($title,$detail,$time_start,$time_stop,$id_patron)
+    {
+        $con = conDb::getInstance();
+        $stmt = $con->query('SELECT * FROM year_school
+        WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+        $result = $stmt->fetch();
+        $id_year = $result['id_year'];
+        $stmt = $con->prepare('INSERT INTO work(title,detail,time_start,time_stop,id_patron,status) VALUES(?,?,?,?,?,?)');
+        $check = $stmt->execute([$title,$detail,$time_start,$time_stop,$id_patron,'waiting']);
+        return $check;
     }
  }
 ?>
