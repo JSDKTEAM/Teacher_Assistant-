@@ -51,18 +51,36 @@
             $con = conDb::getInstance();
             $stmt = $con->query('SELECT * FROM member');
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach($result as $key=>$value)
+            if($result)
             {
-                $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type']);
+                foreach($result as $key=>$value)
+                {
+                    $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type']);
+                }
+                //$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+                //$result = $stmt->fetchAll();
+                return $member_list;
             }
-            //$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
-            //$result = $stmt->fetchAll();
-            return $member_list;
+            else
+            {
+                return FALSE;
+            }
         }
-        public static function addMember()
+        public static function addMemberRegister($id_code,$fname,$lname,$username,$passwd)
         {
             $con = conDb::getInstance();
-            $stmt = $con->prepare('INSERT INTO member()');
+            $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
+            $stmt = $con->prepare('INSERT INTO member(id_code,fname,lname,username,passwd,type) VALUES(?,?,?,?,?,?)');
+            $check = $stmt->execute([$id_code,$fname,$lname,$username,$strPassword,'นิสิต']);
+            return $check;
+        }
+        public static function addMemberMm($fname,$lname,$username,$passwd,$type)
+        {
+            $con = conDb::getInstance();
+            $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
+            $stmt = $con->prepare('INSERT INTO member(fname,lname,username,passwd,type) VALUES(?,?,?,?,?)');
+            $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
+            return $check;
         }
     }
 ?>

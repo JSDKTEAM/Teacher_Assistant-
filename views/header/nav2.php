@@ -1,7 +1,7 @@
 <style>
     nav{
-        padding-left:50px !important;
-        padding-right:50px !important; 
+        padding-left:70px !important;
+        padding-right:70px !important; 
         box-shadow: 5px 0px 20px 2px #888888;
     }
 </style>
@@ -42,15 +42,17 @@
             </li>  
         </ul>
         <ul class="navbar-nav ml-auto">
+            <?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle" ></i> สั่งงาน</a>
             </li> 
+            <?php } ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Username
+                <i class="fa fa-user-circle"></i> <?php echo $_SESSION['member']['username'] ?>
                 </a>
                 <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">ตั้งค่าบัญชีผู้ใช้</a>
+                <a class="dropdown-item" href="?controller=userSet&action=index_userSet"><i class="fa fa-cog"></i> ตั้งค่าบัญชีผู้ใช้</a>
                 <a class="dropdown-item" href="?controller=identify&action=logout"><i class="fa fa-sign-out"></i> Logout</a>
                 </div>
             </li>
@@ -59,7 +61,7 @@
     </nav>
 </div>
 </br></br>
-
+<?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
@@ -73,28 +75,29 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-            <form>
+            <form method="POST">
                 <div class="row">   
                     <div class="col-6">
                         <label>หัวข้องาน</label><input type="text" name="title" class="form-control">
                         <label>รายละเอียดงาน</label><textarea name="detail"cols="30" rows="10" class="form-control"></textarea>
                     </div>
                     <div class="col-6">
-                        <label>เวลาเริ่มงาน</label><input type="date" name="time_start" id="txtFromDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-                        <label>เวลาส่งงาน</label><input type="date" name="time_stop" id="txtToDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="txtFromDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="txtToDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                     </div>
                 </div>
-                <input type="hidden" name="controller" value="">
+                <input type="hidden" name="controller" value="work">
                 
             
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button type="submit" class="btn btn-success btn-block" name="action" value="">สั่งงาน</button>
+            <button type="submit" class="btn btn-success btn-block" name="action" value="addWork">สั่งงาน</button>
             </form>
         </div>
 
         </div>
     </div>
     </div>
+<?php } ?>

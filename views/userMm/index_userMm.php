@@ -23,7 +23,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-            <form>
+            <form method="POST">
                 <div class="row">
                     <div class="col-6">
                         <label>รหัสนิสิต</label><input type="text" name="id_code" class="form-control">
@@ -49,8 +49,8 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <input type="hidden" name="controller" value="">
-            <button type="submit" name="action" value="" class="btn btn-success btn-block">เพิ่มบัญชีผู้ใช้</button>
+            <input type="hidden" name="controller" value="userMm">
+            <button type="submit" name="action" value="addMember" class="btn btn-success btn-block">เพิ่มบัญชีผู้ใช้</button>
             </form>
         </div>
 
@@ -70,6 +70,8 @@
         </thead>
         <tbody>
             <?php
+            if($memberList !== FALSE)
+            {
             $i = 1;
             foreach($memberList as $member)
             {
@@ -86,7 +88,7 @@
                         <a href="#" class="btn btn-danger btn-sm">ลบ</a>
                     </td>
                     </tr>
-      <?php $i++; } ?>
+      <?php $i++; }} ?>
         </tbody>
     </table>
 </div>

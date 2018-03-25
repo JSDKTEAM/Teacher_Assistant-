@@ -1,4 +1,5 @@
 <?php 
+ session_start();
 if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']))
 {
 	$controller = $_REQUEST['controller'];
@@ -31,7 +32,10 @@ else
 	
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
  
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
+
+	<link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
+	<script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
  
 	<style>
 	body{
@@ -42,6 +46,7 @@ else
 <body id="<?php echo $controller ?>">
 <?php require_once("routes.php"); ?>
 <!--/.container-->
+้<hr>
 <footer>
     <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
