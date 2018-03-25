@@ -3,10 +3,10 @@
     require_once('models/workModel.class.php');
     require_once('models/yearSchoolModel.class.php');
     class WorkController{
-        public function index_work()
+        public function index_work($param = NULL)
         {
             $workList = Work::getAllWork();
-            require_once('views/work/index_work.php');
+            include('views/work/index_work.php');
         }
     }
 ?>

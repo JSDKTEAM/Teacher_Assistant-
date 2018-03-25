@@ -85,7 +85,7 @@
     public static function getAllWork()
     {
         $con = conDb::getInstance();
-        $stmt = $con->query('SELECT work.id_work,work.title,work.time_start,work.time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
+        $stmt = $con->query('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
         patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson,
         year_school.id_year,year_school.start_date,year_school.end_date FROM work
         INNER JOIN member as patron ON patron.id_member = work.patron_id
