@@ -46,9 +46,9 @@
                     <div class='row'>
                         <div class='col-6'>
                             <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p>ผู้สั่ง : <a href='#'>".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
+                            <p><i class='fa fa-clock-o'></i>".$work->get_created_date()."</p>
+                            <p>ผู้สั่งงาน : <a href='#'>".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
                             <p>ผู้รับงาน : <a href='#'>".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
-                            <p>เวลาสั่งงาน : ".$work->get_created_date()."</p>
                             <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
                         </div>";
             if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())

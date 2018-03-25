@@ -10,7 +10,23 @@
         }
         public function getWork($param = NULL)
         {
+            $work = Work::getWork($param['id_work']);
             include('views/work/work_detail.php');
+        }
+        public function submitWork($param = NULL)
+        {
+            $check = Work::updateStatusWork($param['id_member'],$param['id_work'],'booked');
+            header('location:index.php?controller=work&action=index_work');
+        }
+        public function cancelWork($param = NULL)
+        {
+            $check = Work::updateStatusWork(NULL,$param['id_work'],'waiting');
+            header('location:index.php?controller=work&action=index_work');
+        }
+        public function finishWork($param = NULL)
+        {
+            $check = Work::finishWork($param['id_work'],$param['due_date'],$param['used_time'],$param['summary']);
+            header('location:index.php?controller=work&action=index_work');
         }
         public function addWork($param = NULL)
         {
