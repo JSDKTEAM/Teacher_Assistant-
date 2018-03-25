@@ -1,13 +1,13 @@
 <?php
 class PageController
 {
-	public function home()
+	public function home($param = NULL)
 	{
-		require_once('views/pages/home.php');
+		include('views/pages/home.php');
 	}
-	public function error()
+	public function error($param = NULL)
 	{
-		require_once("views/pages/error.php");
+		include("views/pages/error.php");
 	}
 }
 ?>

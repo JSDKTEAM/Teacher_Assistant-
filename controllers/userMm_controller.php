@@ -1,10 +1,10 @@
 <?php
     require_once('models/memberModel.class.php');
     class UserMmController{
-        public function index_userMm()
+        public function index_userMm($param = NULL)
         {
             $memberList = Member::getAllMember();
-            require_once('views/userMm/index_userMm.php');
+            include('views/userMm/index_userMm.php');
         }
     }
 ?>

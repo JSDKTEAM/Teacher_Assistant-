@@ -51,7 +51,7 @@
                 </a>
                 <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">ตั้งค่าบัญชีผู้ใช้</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i> Logout</a>
+                <a class="dropdown-item" href="?controller=identify&action=logout"><i class="fa fa-sign-out"></i> Logout</a>
                 </div>
             </li>
         </ul>

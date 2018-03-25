@@ -6,8 +6,8 @@ if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']))
 }
 else
 {
-	$controller = 'work';
-	$action = 'index_work';
+	$controller = 'identify';
+	$action = 'index_login';
 }
 ?>
 <!DOCTYPE html>
