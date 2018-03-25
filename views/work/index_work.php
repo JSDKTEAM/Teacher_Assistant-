@@ -28,36 +28,52 @@
         <tbody>
         <?php
         $i = 1;
+        if($workList !== FALSE)
+        {
         foreach($workList as $key=>$work)
         {
             $objPatron = $work->get_objPatron();
             $objPerson = $work->get_objPerson();
+            $submitwork = '';
+            if($work->get_status() == 'waiting' && $_SESSION['member']['type'] == 'นิสิต')
+            {
+                $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
+            }
             echo "<tr>
                     
                     <td align='center'>$i</td>
                     <td>
                     <div class='row'>
                         <div class='col-6'>
-                            <h4><a href='#'>".$work->get_title()."</a></h4>
+                            <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
                             <p>ผู้สั่ง : <a href='#'>".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
                             <p>ผู้รับงาน : <a href='#'>".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
                             <p>เวลาสั่งงาน : ".$work->get_created_date()."</p>
                             <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
-                        </div>
-                        <div class='col-6 ' >
-                            <div class='btn-group float-right'>
+                        </div>";
+            if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+            {
+                echo "
+                    <div class='col-6 ' >
+                        <div class='btn-group float-right'>
                             <a href='#' class='btn btn-primary'><i class='fa fa-eye'></i></a>
                             <a href='#' class='btn btn-success'><i class='fa fa-pencil'></i></a>
                             <a href='#' class='btn btn-danger'><i class='fa fa-trash-o'></i></a>
-                      </div>
                         </div>
-                    </div>
+                    </div>";
+            }
+            else
+            {
+                echo "<div class='col-6 '>
+                </div>";
+            }
+             echo  "</div>
                     </td>   
                     <td align='center'>
                         ".$work->get_status()."
                     </td>
                   </tr>";
-        }
+       $i++; }}
         ?>
         </tbody>
     </table>
@@ -69,3 +85,4 @@
     $('#workTable').DataTable();
 } );
 </script>
+
