@@ -82,5 +82,18 @@
             $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
             return $check;
         }
+        public static function updateMember($id_member,$fname,$lname,$username,$type)
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('UPDATE member SET username=?,fname=?,lname=?,type=? WHERE id_code=?');
+            $stmt->execute([$username,$fname,$lname,$type,$id_member]);
+        }
+        public static function updatePassMember($id_member,$passwd)
+        {
+            $con = conDb::getInstance();
+            $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
+            $stmt = $con->prepare('UPDATE member SET passwd=? WHERE id_code=?');
+            $stmt->execute([$passwd,$id_member]);
+        }
     }
 ?>

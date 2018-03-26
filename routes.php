@@ -38,7 +38,7 @@ function call($controller,$action)
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
 ||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'addWork'))
-||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'))
+||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register')))
 {	
