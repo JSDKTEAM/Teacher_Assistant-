@@ -13,6 +13,10 @@ function call($controller,$action)
 						$param['time_start'] = $_POST['time_start']??'';
 						$param['time_stop'] = $_POST['time_stop']??'';
 						$param['id_work'] = $_REQUEST['id_work']??'';
+						$param['id_member'] = $_POST['id_member']??'';
+						$param['due_date'] = $_POST['due_date']??'';
+						$param['used_time'] = $_POST['used_time']??'';
+						$param['summary'] = $_POST['summary']??NULL;
 						break;
 		case "userMm":  $controller = new UserMmController();
 						$param['id_code'] = $_POST['id_code']??'';
