@@ -119,13 +119,27 @@
         $result = $stmt->fetch();
         if($result)
         {
-            $work_list[] = new Work($result);
-            return $work_list;
+            return new Work($result);
         }
         else
         {
             return false;
         }
+    }
+    public static function updateStatusWork($person_id,$id_work,$status)
+    {
+
+        $con = conDb::getInstance();
+        $stmt = $con->prepare('UPDATE work SET person_id = ?,status = ? WHERE id_work = ?');
+        $check = $stmt->execute([$person_id,$status,$id_work]);
+        return $check;
+    }
+    public static function finishWork($id_work,$due_date,$used_time,$summary)
+    {
+        $con = conDb::getInstance();
+        $stmt = $con->prepare('UPDATE work SET due_date = ? , used_time = ? , summary = ? , status = ? WHERE id_work = ?');
+        $check = $stmt->execute([$due_date,$used_time,$summary,$id_work,'finish']);
+        return $check;
     }
     public static function addWork($patron_id,$title,$detail,$time_start,$time_stop)
     {
