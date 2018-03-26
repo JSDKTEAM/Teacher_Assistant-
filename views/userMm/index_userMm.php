@@ -86,11 +86,15 @@
                     <td align="center">
                         <a href="#"
                         data-id-member =  "<?php echo $member->get_id_member() ?>"
+                        data-username = "<?php echo $member->get_username() ?>"
+                        class="btn btn-success btn-sm btn-edit-pasword">แก้ไขรหัสผ่าน</a>
+                        <a href="#"
+                        data-id-member =  "<?php echo $member->get_id_member() ?>"
                         data-id-code = "<?php echo $member->get_id_code() ?>"
                         data-fname = "<?php echo $member->get_fname() ?>"
                         data-lname = "<?php echo $member->get_lname() ?>"
                         data-type  = "<?php echo $member->get_type() ?>"
-                        class="btn btn-success btn-sm btn-edit-info">แก้ไข</a>
+                        class="btn btn-success btn-sm btn-edit-info">แก้ไขประวัติส่วนตัว</a>
                         <a href="#" 
                         data-id-member = <?php echo $member->get_id_member() ?>
                         class="btn btn-danger btn-sm">ลบ</a>
@@ -127,6 +131,21 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function(){
+        $('.btn-edit-pasword').click(function(){
+        // get data from edit btn
+        var id_member = $(this).attr('data-id-member');
+        var username = $(this).attr('data-username');
+
+        // set value to modal
+        $("#id-member-password").val(id_member);
+        $("#username-password").val(username);
+        $("#edit-password").modal('show');
+        });
+    });
+</script>
+
 <!-- The Modal -->
 <div class="modal fade" id="edit-info">
   <div class="modal-dialog">
@@ -162,6 +181,38 @@
     </div>
   </div>
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="edit-password">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขรหัสผ่าน</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>
+            <label>Username</label><input type="text" id="username-password" class="form-control">
+            <label>Password</label><input type="text" class="form-control">
+            <label>Confirm Password</label><input type="text" class="form-control">
+
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 <script>
     $(document).ready(function() {
     $('#memberTable').DataTable();
