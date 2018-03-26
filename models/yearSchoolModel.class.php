@@ -22,7 +22,7 @@
             return $yearSchool_list;
         }
         
-        public static function add_yearschool($start_date, $start_date,$end_date)
+        public static function add_yearschool($id_year, $start_date,$end_date)
         {
             $con = conDb::getInstance();
             $stmt = $con->prepare('INSERT INTO `year_school`(`id_year`, `start_date`, `end_date`) VALUES (?,?,?)');
