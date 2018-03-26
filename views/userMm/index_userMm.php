@@ -84,8 +84,16 @@
                       ";
             ?>
                     <td align="center">
-                        <a href="#" class="btn btn-success btn-sm">แก้ไข</a>
-                        <a href="#" class="btn btn-danger btn-sm">ลบ</a>
+                        <a href="#"
+                        data-id-member =  "<?php echo $member->get_id_member() ?>"
+                        data-id-code = "<?php echo $member->get_id_code() ?>"
+                        data-fname = "<?php echo $member->get_fname() ?>"
+                        data-lname = "<?php echo $member->get_lname() ?>"
+                        data-type  = "<?php echo $member->get_type() ?>"
+                        class="btn btn-success btn-sm btn-edit-info">แก้ไข</a>
+                        <a href="#" 
+                        data-id-member = <?php echo $member->get_id_member() ?>
+                        class="btn btn-danger btn-sm">ลบ</a>
                     </td>
                     </tr>
       <?php $i++; }} ?>
@@ -93,6 +101,67 @@
     </table>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $('.btn-edit-info').click(function(){
+        // get data from edit btn
+        var id_member = $(this).attr('data-id-member');
+        var id_code = $(this).attr('data-id-code');
+        var fname = $(this).attr('data-fname');
+        var lname = $(this).attr('data-lname');
+        var type = $(this).attr('data-type');
+        var type_info = document.getElementById('type-info');
+        var opts = type_info.options;
+        for (var opt, j = 0; opt = opts[j]; j++) {
+            if (opt.value == type) {
+            type_info.selectedIndex = j;
+            break;
+            }
+        }
+        // set value to modal
+        $("#id-member-info").val(id_member);
+        $("#id-code-info").val(id_code);
+        $("#fname-info").val(fname);
+        $("#lname-info").val(lname);
+        $("#edit-info").modal('show');
+        });
+    });
+</script>
+<!-- The Modal -->
+<div class="modal fade" id="edit-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขประวัติส่วนตัว</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>
+            <label>รหัสนิสิต</label><input id="id-code-info" type="text" name="id_code" class="form-control">
+            <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control">
+            <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control">
+            <label>สถานะ</label>
+            <select name="type" id="type-info" class="form-control">
+                <option value="ผู้ดูแลระบบ">ผู้ดูแลระบบ</option>
+                <option value="อาจารย์">อาจารย์</option>
+                <option value="ผู้ประเมิน">ผู้ประเมิน</option>
+                <option value="นิสิต">นิสิต</option>
+            </select>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 <script>
     $(document).ready(function() {
     $('#memberTable').DataTable();
