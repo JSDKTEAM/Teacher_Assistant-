@@ -13,7 +13,8 @@ function call($controller,$action)
 						$param['time_start'] = $_POST['time_start']??'';
 						$param['time_stop'] = $_POST['time_stop']??'';
 						$param['id_work'] = $_REQUEST['id_work']??'';
-						$param['id_member'] = $_POST['id_member']??'';
+						$param['id_member'] = $_REQUEST['id_member']??'';
+						$param['type'] = $_REQUEST['type']??'';
 						$param['due_date'] = $_POST['due_date']??'';
 						$param['used_time'] = $_POST['used_time']??'';
 						$param['summary'] = $_POST['summary']??NULL;
@@ -27,6 +28,7 @@ function call($controller,$action)
 						$param['type'] = $_POST['type']??'';
 						break;
 		case "userSet":  $controller = new UserSetController();
+						$param['imagebase64'] = $_POST['imagebase64']??'';
 						break;
 		case "identify":$controller = new IdentifyController();
 						$param['id_code'] = $_POST['id_code']??'';
@@ -41,9 +43,9 @@ function call($controller,$action)
 }
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
-||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'addWork'))
+||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'cancelWork'))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember'))
-||  ($controller == 'userSet' && ($action == 'index_userSet'))
+||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register')))
 {	
 	call($controller,$action);	

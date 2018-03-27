@@ -76,8 +76,8 @@
         $this->status = $work['status'];
         $this->created_date = $work['created_date'];
         $this->due_date = $work['due_date'];
-        $this->objPatron = new Member($work['id_patron'],'-',$work['userPatron'],$work['passwdPatron'],$work['fnamePatron'],$work['lnamePatron'],$work['typePatron']);
-        $this->objPerson = new Member($work['id_person'],$work['id_code'],$work['userPerson'],$work['passwdPerson'],$work['fnamePerson'],$work['lnamePerson'],$work['typePerson']);
+        $this->objPatron = new Member($work['id_patron'],'-',$work['userPatron'],$work['passwdPatron'],$work['fnamePatron'],$work['lnamePatron'],$work['typePatron'],$work['patron_img']);
+        $this->objPerson = new Member($work['id_person'],$work['id_code'],$work['userPerson'],$work['passwdPerson'],$work['fnamePerson'],$work['lnamePerson'],$work['typePerson'],$work['person_img']);
         $this->used_time = $work['used_time'];
         $this->summary = $work['summary'];
         $this->objYearSchool = new YearSchool($work);
@@ -86,8 +86,8 @@
     {
         $con = conDb::getInstance();
         $stmt = $con->query('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
-        patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson,
-        year_school.id_year,year_school.start_date,year_school.end_date FROM work
+        patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson
+        ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
         INNER JOIN member as patron ON patron.id_member = work.patron_id
         LEFT JOIN member as person ON person.id_member = work.person_id
         INNER JOIN year_school ON year_school.id_year = work.id_year');
@@ -110,8 +110,8 @@
     {
         $con = conDb::getInstance();
         $stmt = $con->query("SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
-        patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson,
-        year_school.id_year,year_school.start_date,year_school.end_date FROM work
+        patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson,
+        person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
         INNER JOIN member as patron ON patron.id_member = work.patron_id
         LEFT JOIN member as person ON person.id_member = work.person_id
         INNER JOIN year_school ON year_school.id_year = work.id_year
@@ -120,6 +120,42 @@
         if($result)
         {
             return new Work($result);
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static function getAllWorkByMember($id_member,$type)
+    {
+        $con = conDb::getInstance();
+        if($type == 'นิสิต')
+        {
+            $stmt = $con->prepare('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
+            patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson
+            ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
+            INNER JOIN member as patron ON patron.id_member = work.patron_id
+            LEFT JOIN member as person ON person.id_member = work.person_id
+            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  person.id_member = ?');
+        }
+        else
+        {
+            $stmt = $con->prepare('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
+            patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson
+            ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
+            INNER JOIN member as patron ON patron.id_member = work.patron_id
+            LEFT JOIN member as person ON person.id_member = work.person_id
+            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  patron.id_member  = ?');
+        }     
+        $stmt->execute([$id_member]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($result)
+        {
+            foreach($result as $key=>$value)
+            {
+                $work_list[] = new Work($value);
+            }
+            return $work_list;
         }
         else
         {
