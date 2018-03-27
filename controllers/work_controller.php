@@ -13,6 +13,19 @@
             $work = Work::getWork($param['id_work']);
             include('views/work/work_detail.php');
         }
+        public function getAllWorkByMember($param = NULL)
+        {
+            $member = Member::getMember($param['id_member']);
+            $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            if($param['type'] == 'นิสิต')
+            {
+                include('views/work/workMemberStd.php');
+            }
+            else
+            {
+                include('views/work/workMember.php');
+            }
+        }
         public function submitWork($param = NULL)
         {
             $check = Work::updateStatusWork($param['id_member'],$param['id_work'],'booked');

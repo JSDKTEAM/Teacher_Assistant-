@@ -35,8 +35,8 @@
                 จัดการระบบ
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="?controller=userMm&action=index_userMm">จัดการงานของผู้ใช้</a>
-                    <a class="dropdown-item" href="#">จัดการบัญชีผู้ใช้</a>
+                    <a class="dropdown-item" href="">จัดการงานของผู้ใช้</a>
+                    <a class="dropdown-item" href="?controller=userMm&action=index_userMm">จัดการบัญชีผู้ใช้</a>
                     <a class="dropdown-item" href="#">ตั้งค่าปีการศึกษา</a>
                 </div>
             </li>  
@@ -49,7 +49,7 @@
             <?php } ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fa fa-user-circle"></i> <?php echo $_SESSION['member']['username'] ?>
+                <img src="<?php echo $_SESSION['member']['img_user'] ?>" alt="" width=40> <?php echo $_SESSION['member']['username'] ?>
                 </a>
                 <div class="dropdown-menu">
                 <a class="dropdown-item" href="?controller=userSet&action=index_userSet"><i class="fa fa-cog"></i> ตั้งค่าบัญชีผู้ใช้</a>
@@ -60,7 +60,7 @@
     </div> 
     </nav>
 </div>
-</br></br>
+</br></br></br></br>
 <?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
 <!-- The Modal -->
 <div class="modal fade" id="myModal">

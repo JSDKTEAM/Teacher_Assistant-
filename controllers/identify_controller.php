@@ -23,9 +23,9 @@
         }
         public function logout($param = NULL)
         {
-            //session_start();
             session_destroy();
             session_unset();
+            unset($_SESSION['member']);
             call('identify','index_login');
         }
         public function index_register($param = NULL)

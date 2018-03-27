@@ -8,6 +8,7 @@
         private $fname;
         private $lname;
         private $type;
+        private $img_user;
         public function get_id_member()
         {
             return $this->id_member;
@@ -36,7 +37,11 @@
         {
             return $this->type;
         }
-        public function __construct($id_member,$id_code,$username,$passwd,$fname,$lname,$type)
+        public function get_img_user()
+        {
+            return $this->img_user;
+        }
+        public function __construct($id_member,$id_code,$username,$passwd,$fname,$lname,$type,$img_user=NULL)
         {
             $this->id_member = $id_member;
             $this->id_code = $id_code;
@@ -45,6 +50,7 @@
             $this->fname = $fname;
             $this->lname = $lname;
             $this->type = $type;
+            $this->img_user = $img_user;
         }
         public static function getAllMember()
         {
@@ -55,11 +61,26 @@
             {
                 foreach($result as $key=>$value)
                 {
-                    $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type']);
+                    $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type'],$value['img_user']);
                 }
                 //$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
                 //$result = $stmt->fetchAll();
                 return $member_list;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        public static function getMember($id_member)
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('SELECT * FROM member WHERE id_member = ?');
+            $stmt->execute([$id_member]);
+            $result = $stmt->fetch();
+            if($result)
+            {
+                return new Member($result['id_member'],$result['id_code'],$result['username'],$result['passwd'],$result['fname'],$result['lname'],$result['type'],$result['img_user']);
             }
             else
             {
@@ -94,6 +115,26 @@
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
             $stmt = $con->prepare('UPDATE member SET passwd=? WHERE id_code=?');
             $stmt->execute([$passwd,$id_member]);
+        }
+        public static function upload_image($data_img,$id_member,$username)
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('SELECT img_user FROM member WHERE id_member = ?');
+            $stmt->execute([$id_member]);
+            $result = $stmt->fetch();
+            $img_user = $result['img_user'];
+            if($img_user != 'imagesProfile/image-Profile.png')
+            {
+                unlink($img_user);
+            }
+            $data = $data_img;
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $data = base64_decode($data);
+            file_put_contents('imagesProfile/'.$username.'.png', $data);
+            $stmt = $con->prepare('UPDATE member SET img_user= ? WHERE id_member=?');
+            $_SESSION['member']['img_user'] = $img_user;
+            $check = $stmt->execute(['imagesProfile/'.$username.'.png',$id_member]);
         }
     }
 ?>

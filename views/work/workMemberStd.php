@@ -9,14 +9,22 @@
         background-color:#ECEFF1;
         padding:20px;
     }
+    .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 <div class="content p-4" style="width:100%">
-
-    
-    <!--<div class="work">
-        <h4>ผู้สั่ง</h4>
-        <p>เวลา</p>
-    </div>-->
+    <div class="row">
+        <div class="col-2">
+            <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
+        </div>
+        <div class="col-4">
+            <h3> <?php echo $member->get_type()."</br>".$member->get_fname()." ".$member->get_lname() ?></h3>
+        </div>
+    </div>
+    </br>
     <table  id="workTable" class="table  table-bordered"> 
         <thead>
             <tr align="center">
