@@ -13,14 +13,14 @@
         }
         public function updateMember($param = NULL)
         {
-            require_once("models/memberModel.class.php");
-            $check = Member::updateMember($param['id_code'],$param['fname'],$param['lname'],$param['username'],$param['type']);
+            Member::updateMember($param['id_member'],$param['id_code'],$param['fname'],$param['lname'],$param['type']);
+            UserMmController::index_userMm();
             //include('views/userMm/update_userMm.php');
         }
         public function updatePassMember($param = NULL)
         {
-            require_once("models/memberModel.class.php");
-            $check = Member::updatePassMember($param['id_code'],$param['passwd']);
+            Member::updatePassMember($param['username'],$param['passwd']);
+            UserMmController::index_userMm();
             //include('views/userMm/update_userMm.php');
         }
     }

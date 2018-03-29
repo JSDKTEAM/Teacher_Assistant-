@@ -159,7 +159,8 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form method="POST">
+        <input id="id-member-info" type="text" name="id_member" class="form-control" hidden>
             <label>รหัสนิสิต</label><input id="id-code-info" type="text" name="id_code" class="form-control">
             <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control">
             <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control">
@@ -170,13 +171,14 @@
                 <option value="ผู้ประเมิน">ผู้ประเมิน</option>
                 <option value="นิสิต">นิสิต</option>
             </select>
-        </form>
+       
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
-      </div>
+      <input type="hidden" name="controller" value="userMm">
+        <button type="submit" name="action" value="updateMember" class="btn btn-success btn-block">ยืนยันการแก้ไข</button> 
+      </div></form>
 
     </div>
   </div>
@@ -195,17 +197,17 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form method="POST">
             <label>Username</label><input type="text" id="username-password" class="form-control">
-            <label>Password</label><input type="text" class="form-control">
-            <label>Confirm Password</label><input type="text" class="form-control">
-
-        </form>
+            <label>New Password</label><input type="password" name="passwd" class="form-control">
+            <label>Confirm New Password</label><input type="password" name="password" class="form-control">
+        
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
+      <input type="hidden" name="controller" value="userMm">
+        <button type="submit" name="action" value="updatePassMember" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
       </div>
 
     </div>
