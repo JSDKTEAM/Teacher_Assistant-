@@ -72,6 +72,30 @@
                 return FALSE;
             }
         }
+        public static function getMemberByYear()
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->query('SELECT * FROM year_school
+            WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+            $result = $stmt->fetch();
+            $id_year = $result['id_year'];
+            $stmt = $con->query("SELECT * FROM member 
+                                 LEFT JOIN year_member ON year_member.id_member = member.id_member
+                                 WHERE year_member.id_year IS NULL");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                foreach($result as $key=>$value)
+                {
+                    $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type'],$value['img_user']);
+                }
+            }
+            else
+            {
+                return FALSE;
+            }
+            return $member_list;
+        }
         public static function getMember($id_member)
         {
             $con = conDb::getInstance();

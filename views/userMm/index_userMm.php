@@ -5,6 +5,7 @@
     }
 </style>
 <div class="content p-4" style="width:100%">
+    <h2>จัดการบัญชีผู้ใช้</h2>
     <!-- Button to Open the Modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUser">
     เพิ่มบัญชีผู้ใช้
@@ -103,6 +104,28 @@
       <?php $i++; }} ?>
         </tbody>
     </table>
+    </br>
+    <h2>เพิ่มนิสิตเข้าระบบ</h2>
+    <div class="row">
+        <div class="col-4">
+            <div class="demo">
+                <select style="display:none"  name="user" multiple>
+                    <?php
+                        foreach($memberYearList as $member)
+                        {
+                            echo "<option value='".$member->get_id_member()."'>".$member->get_fname()." ".$member->get_lname()."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $('.demo').dropdown({
+  // options here
+        });
+    </script>
 </div>
 
 <script>
