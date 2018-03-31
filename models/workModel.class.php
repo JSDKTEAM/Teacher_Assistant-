@@ -85,12 +85,17 @@
     public static function getAllWork()
     {
         $con = conDb::getInstance();
-        $stmt = $con->query('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
+        $stmt = $con->query('SELECT * FROM year_school
+        WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+        $result = $stmt->fetch();
+        $id_year = $result['id_year'];
+        $stmt = $con->query("SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
         patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson
         ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
         INNER JOIN member as patron ON patron.id_member = work.patron_id
         LEFT JOIN member as person ON person.id_member = work.person_id
-        INNER JOIN year_school ON year_school.id_year = work.id_year');
+        INNER JOIN year_school ON year_school.id_year = work.id_year
+        WHERE work.id_year = $id_year");
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($result)
         {
