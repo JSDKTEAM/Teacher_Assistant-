@@ -20,6 +20,7 @@ function call($controller,$action)
 						$param['summary'] = $_POST['summary']??NULL;
 						break;
 		case "userMm":  $controller = new UserMmController();
+						$param['id_member'] = $_POST['id_member']??'';
 						$param['id_code'] = $_POST['id_code']??'';
 						$param['fname'] = $_POST['fname']??'';
 						$param['lname'] = $_POST['lname']??'';

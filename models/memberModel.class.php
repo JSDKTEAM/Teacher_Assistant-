@@ -127,18 +127,18 @@
             $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
             return $check;
         }
-        public static function updateMember($id_member,$fname,$lname,$username,$type)
+        public static function updateMember($id_member,$id_code,$fname,$lname,$type)
         {
             $con = conDb::getInstance();
-            $stmt = $con->prepare('UPDATE member SET username=?,fname=?,lname=?,type=? WHERE id_code=?');
-            $stmt->execute([$username,$fname,$lname,$type,$id_member]);
+            $stmt = $con->prepare('UPDATE member SET id_code=?,fname=?,lname=?,type=? WHERE id_member=?');
+            $stmt->execute([$id_code,$fname,$lname,$type,$id_member]);
         }
-        public static function updatePassMember($id_member,$passwd)
+        public static function updatePassMember($username,$passwd)
         {
             $con = conDb::getInstance();
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
-            $stmt = $con->prepare('UPDATE member SET passwd=? WHERE id_code=?');
-            $stmt->execute([$passwd,$id_member]);
+            $stmt = $con->prepare('UPDATE member SET passwd=? WHERE username=?');
+            $stmt->execute([$stmtPassword,$username]);
         }
         public static function upload_image($data_img,$id_member,$username)
         {
