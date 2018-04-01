@@ -4,7 +4,19 @@
         private $id_year;
         private $start_date;
         private $end_date;
-        public function construct($yearObj =  NULL)
+        public function get_id_year()
+        {
+            return $this->id_year;
+        }
+        public function get_start_date()
+        {
+            return $this->get_start_date;
+        }
+        public function get_end_date()
+        {
+            return $this->get_end_date;
+        }
+        public function __construct($yearObj =  NULL)
         {
             $this->id_year = $yearObj['id_year'];
             $this->start_date = $yearObj['start_date'];
@@ -17,7 +29,7 @@
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
             {
-                $yearSchool_list = new YearSchool($value);
+                $yearSchool_list[] = new YearSchool($value);
             }
             return $yearSchool_list;
         }

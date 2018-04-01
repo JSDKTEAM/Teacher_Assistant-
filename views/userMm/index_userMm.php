@@ -39,7 +39,6 @@
                         <label><span class="red">*</span> สถานะ</label>
                         <select name="type" class="form-control" required>
                             <option value="">เลือกสถานะ</option>
-                            <option value="ผู้ดูแลระบบ">ผู้ดูแลระบบ</option>
                             <option value="อาจารย์">อาจารย์</option>
                             <option value="ผู้ประเมิน">ผู้ประเมิน</option>
                             <option value="นิสิต">นิสิต</option>
@@ -109,17 +108,53 @@
     <div class="row">
         <div class="col-4">
             <div class="demo">
-                <select style="display:none"  name="user" multiple>
-                    <?php
-                        foreach($memberYearList as $member)
-                        {
-                            echo "<option value='".$member->get_id_member()."'>".$member->get_fname()." ".$member->get_lname()."</option>";
+                <form action="" method="GET">
+                    <select style="display:none"  name="id_member" multiple>
+                        <?php
+                        if($memberYearList !== FALSE){
+                            foreach($memberYearList as $member)
+                            {
+                                echo "<option value='".$member->get_id_member()."'>".$member->get_fname()." ".$member->get_lname()."</option>";
+                            }
                         }
-                    ?>
-                </select>
+                        ?>
+                        
+                    </select>
+                    
             </div>
+            </br>
+            <button type="submit" class="btn btn-success">เพิ่มนิสิตเข้าระบบ</button>
+            </form>
         </div>
     </div>
+    </br></br>
+    <table  id="memberTable2" class="table  table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ชื่อ</th>
+                <th>นามสกุล</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($memberListYear !== FALSE)
+            {
+                $i = 1;
+                foreach($memberListYear as $key=>$value)
+                {
+                 
+                    echo "<tr>
+                            <td>$i</td>
+                            <td>".$value->get_fname()."</td>
+                            <td>".$value->get_lname()."</td>
+                            <td>".$value->get_username()."</td>
+                          </tr>";
+                    $i++;
+                }
+            } ?>
+        </tbody>
+    </table>
     
     <script>
         $('.demo').dropdown({
@@ -188,17 +223,17 @@
             <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control">
             <label>สถานะ</label>
             <select name="type" id="type-info" class="form-control">
-                <option value="ผู้ดูแลระบบ">ผู้ดูแลระบบ</option>
                 <option value="อาจารย์">อาจารย์</option>
                 <option value="ผู้ประเมิน">ผู้ประเมิน</option>
                 <option value="นิสิต">นิสิต</option>
             </select>
-        </form>
+            <input type="hidden" name="controller" value="userMm"> 
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
+        <button type="submit" name="action" value="updateMember" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
+        </form>
       </div>
 
     </div>
@@ -218,7 +253,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form method="POST">
             <label>Username</label><input type="text" id="username-password" class="form-control">
             <label>Password</label><input type="text" class="form-control">
             <label>Confirm Password</label><input type="text" class="form-control">
@@ -239,5 +274,8 @@
 <script>
     $(document).ready(function() {
     $('#memberTable').DataTable();
+} );
+$(document).ready(function() {
+    $('#memberTable2').DataTable();
 } );
 </script>

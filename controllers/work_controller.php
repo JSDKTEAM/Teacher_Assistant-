@@ -6,6 +6,7 @@
         public function index_work($param = NULL)
         {
             $workList = Work::getAllWork();
+            $yearSchoolList = YearSchool::getAllYearSchool();
             include('views/work/index_work.php');
         }
         public function getWork($param = NULL)
@@ -38,7 +39,7 @@
         }
         public function finishWork($param = NULL)
         {
-            $check = Work::finishWork($param['id_work'],$param['due_date'],$param['used_time'],$param['summary']);
+            $check = Work::finishWork($param['id_work'],$param['due_date'],$param['HH'],$param['mm'],$param['summary']);
             header('location:index.php?controller=work&action=index_work');
         }
         public function addWork($param = NULL)

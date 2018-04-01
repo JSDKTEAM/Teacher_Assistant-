@@ -17,6 +17,8 @@ else
 	<meta http-equiv="Content-Language" content="th">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Chart -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<!-- jQuery library -->
@@ -52,8 +54,7 @@ else
 </head>
 <body id="<?php echo $controller ?>">
 <?php require_once("routes.php"); ?>
-<!--/.container-->
-้<hr>
+<hr>
 <footer>
     <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
@@ -61,6 +62,7 @@ else
 		$(document).ready(function() {
 			$("#work a:contains('หน้าแรก')").parent().addClass('active');
 			$("#userMm a:contains('จัดการระบบ')").parent().addClass('active');
+			$("#report a:contains('สถิติ')").parent().addClass('active');
 		}); //jQuery is loaded
 	</script>
 </body>

@@ -1,4 +1,5 @@
 <?php
+//select Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 from work
  require_once('connection_connect.php');
  class Work{
     private $id_work;
@@ -114,7 +115,7 @@
     public static function getWork($id_work)
     {
         $con = conDb::getInstance();
-        $stmt = $con->query("SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
+        $stmt = $con->query("SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,DATE(work.due_date) AS due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
         patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson,
         person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
         INNER JOIN member as patron ON patron.id_member = work.patron_id
@@ -175,11 +176,11 @@
         $check = $stmt->execute([$person_id,$status,$id_work]);
         return $check;
     }
-    public static function finishWork($id_work,$due_date,$used_time,$summary)
+    public static function finishWork($id_work,$due_date,$HH,$mm,$summary)
     {
         $con = conDb::getInstance();
-        $stmt = $con->prepare('UPDATE work SET due_date = ? , used_time = ? , summary = ? , status = ? WHERE id_work = ?');
-        $check = $stmt->execute([$due_date,$used_time,$summary,$id_work,'finish']);
+        $stmt = $con->prepare('UPDATE work SET due_date = CURDATE() , used_time = ? , summary = ? , status = ? WHERE id_work = ?');
+        $check = $stmt->execute(["$HH:$mm:0",$summary,'finish',$id_work]);
         return $check;
     }
     public static function addWork($patron_id,$title,$detail,$time_start,$time_stop)
