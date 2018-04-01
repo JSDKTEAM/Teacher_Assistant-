@@ -17,6 +17,8 @@ function call($controller,$action)
 						$param['type'] = $_REQUEST['type']??'';
 						$param['due_date'] = $_POST['due_date']??'';
 						$param['used_time'] = $_POST['used_time']??'';
+						$param['HH'] = $_POST['HH']??'';
+						$param['mm'] = $_POST['mm']??'';
 						$param['summary'] = $_POST['summary']??NULL;
 						break;
 		case "userMm":  $controller = new UserMmController();
@@ -39,15 +41,18 @@ function call($controller,$action)
 						$param['passwd'] = $_POST['passwd']??'';
 						$param['type'] = $_POST['type']??'';
 						break;
+		case "report":  $controller = new ReportController();
+						break;
 	}
 	$controller->{$action}($param);
 }
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
-||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'cancelWork'))
+||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image'))
-||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register')))
+||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
+|| ($controller == 'report' && ($action == 'index_reportMonth')))
 {	
 	call($controller,$action);	
 }

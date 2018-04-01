@@ -6,6 +6,7 @@
         {
             $memberList = Member::getAllMember();
             $memberYearList =  Member::getMemberByYear();
+            $memberListYear = Member::getAllMemberByYear();
             include('views/userMm/index_userMm.php');
         }
         public function addMember($param = NULL)

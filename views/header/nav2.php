@@ -28,7 +28,7 @@
             <a class="nav-link" href="#">จัดการงาน</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">สถิติ</a>
+            <a class="nav-link" href="?controller=report&action=index_reportMonth">สถิติ</a>
         </li>
         <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -60,7 +60,7 @@
     </div> 
     </nav>
 </div>
-</br></br></br></br>
+</br></br></br>
 <?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
