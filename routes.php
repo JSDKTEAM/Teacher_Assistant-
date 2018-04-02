@@ -43,6 +43,13 @@ function call($controller,$action)
 						break;
 		case "report":  $controller = new ReportController();
 						break;
+
+		case "yearSet": $controller = new YearSetController();
+						$param['id_year']=$_POST['id_year']??'';
+						$param['start_date']=$_POST['start_date']??'';
+						$param['end_date']=$_POST['end_date']??'';
+						
+						break ; 
 	}
 	$controller->{$action}($param);
 }
@@ -52,6 +59,7 @@ if( ($controller =='page'&& ($action =='home'|| $action =='error'))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
+|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'))
 || ($controller == 'report' && ($action == 'index_reportMonth')))
 {	
 	call($controller,$action);	
