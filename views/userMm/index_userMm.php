@@ -27,7 +27,7 @@
             <form method="POST">
                 <div class="row">
                     <div class="col-6">
-                        <label>รหัสนิสิต</label><input type="text" name="id_code" class="form-control">
+                        <label>รหัสนิสิต</label><input type="text" name="id_code" id="id_code_add" class="form-control">
                         <label><span class="red">*</span> ชื่อ</label><input type="text" name="fname" class="form-control" required>
                         <label><span class="red">*</span> นามสกุล</label><input type="text" name="lname" class="form-control" required>
                     </div>
@@ -37,7 +37,7 @@
                         <label><span class="red">*</span> Confirm Password</label><input type="password" class="form-control" required>
 
                         <label><span class="red">*</span> สถานะ</label>
-                        <select name="type" class="form-control" required>
+                        <select name="type" id="type_user" class="form-control" required>
                             <option value="">เลือกสถานะ</option>
                             <option value="อาจารย์">อาจารย์</option>
                             <option value="ผู้ประเมิน">ผู้ประเมิน</option>
@@ -181,6 +181,16 @@
             }
         }
         // set value to modal
+        if(type == 'นิสิต')
+        {
+            $("#lable-code").show();
+            $("#id-code-info").show();
+        }
+        else
+        {
+            $("#lable-code").hide();
+            $("#id-code-info").hide();
+        }
         $("#id-member-info").val(id_member);
         $("#id-code-info").val(id_code);
         $("#fname-info").val(fname);
@@ -218,10 +228,10 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form method="POST">
-        <input id="id-member-info" type="text" name="id_member" class="form-control" hidden>
-            <label>รหัสนิสิต</label><input id="id-code-info" type="text" name="id_code" class="form-control">
-            <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control">
-            <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control">
+            <input id="id-member-info" type="hidden" name="id_member" class="form-control" required>
+            <label id="lable-code">รหัสนิสิต</label><input id="id-code-info" type="text" name="id_code" class="form-control">
+            <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control" required>
+            <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control" required>
             <label>สถานะ</label>
             <select name="type" id="type-info" class="form-control">
                 <option value="อาจารย์">อาจารย์</option>
@@ -255,23 +265,62 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form method="POST">
+            <input type="hidden" id="id-member-password" name="id_member">
             <label>Username</label><input type="text" id="username-password" class="form-control">
-            <label>New Password</label><input type="password" name="passwd" class="form-control">
-            <label>Confirm New Password</label><input type="password" name="password" class="form-control">
-        
+            <label>New Password</label><input type="password" name="passwd" id="passwdinput" class="form-control" required>
+            <label>Confirm New Password</label><input type="password" name="passwdConfirm" id="passwdConfirm" class="form-control" required>
+            <span id="alertPass" class="text-danger"></span>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
       <input type="hidden" name="controller" value="userMm">
-        <button type="submit" name="action" value="updatePassMember" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
+        <button id="btn-submit" type="submit" name="action" value="updatePassMember" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
       </div>
 
     </div>
   </div>
 </div>
-
-
+<!-- ตรวจสอบความถูกต้อง -->
+<script>
+    $(document).ready(function() {
+        $('#passwdConfirm').keyup(function(){
+            if($(this).val() != $("#passwdinput").val())
+            {
+                $("#btn-submit").prop('disabled', true);
+                document.getElementById("alertPass").innerHTML = "ยืนยันรหัสผ่านไม่ถูกต้อง";
+            }
+            else
+            {
+                $("#btn-submit").prop('disabled', false);
+                $("#alertPass").empty();
+            }
+        });
+        $('#passwdinput').keyup(function(){
+            if($(this).val() != $("#passwdConfirm").val() && $("#passwdConfirm").val() != '' )
+            {
+                $("#btn-submit").prop('disabled', true);
+                document.getElementById("alertPass").innerHTML = "ยืนยันรหัสผ่านไม่ถูกต้อง";
+            }
+            else
+            {
+                $("#btn-submit").prop('disabled', false);
+                $("#alertPass").empty();
+            }
+        });
+        $('#type_user').change(function(){
+            if($(this).val() == 'นิสิต')
+            {
+                $("#id_code_add").prop('required', true);
+            }
+            else
+            {
+                $("#id_code_add").prop('required', false);
+            }
+        });
+    });
+</script>
+<!-- ตาราง DataTable -->
 <script>
     $(document).ready(function() {
     $('#memberTable').DataTable();
