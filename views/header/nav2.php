@@ -35,7 +35,7 @@
                 จัดการระบบ
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">จัดการงานของผู้ใช้</a>
+                    <a class="dropdown-item" href="?controller=userMm&action=index_workMm">จัดการงานของผู้ใช้</a>
                     <a class="dropdown-item" href="?controller=userMm&action=index_userMm">จัดการบัญชีผู้ใช้</a>
                     <a class="dropdown-item" href="?controller=yearSet&action=index_year">ตั้งค่าปีการศึกษา</a>
                 </div>

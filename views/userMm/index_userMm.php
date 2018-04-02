@@ -108,8 +108,8 @@
     <div class="row">
         <div class="col-4">
             <div class="demo">
-                <form action="" method="GET">
-                    <select style="display:none"  name="id_member" multiple>
+                <form method="POST">
+                    <select style="display:none"  name="id_member[]" multiple>
                         <?php
                         if($memberYearList !== FALSE){
                             foreach($memberYearList as $member)
@@ -120,10 +120,11 @@
                         ?>
                         
                     </select>
+                    <input type="hidden" name="controller" value="userMm">
                     
             </div>
             </br>
-            <button type="submit" class="btn btn-success">เพิ่มนิสิตเข้าระบบ</button>
+            <button type="submit" name="action" value="addMemberSys" class="btn btn-success">เพิ่มนิสิตเข้าระบบ</button>
             </form>
         </div>
     </div>
