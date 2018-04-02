@@ -25,7 +25,7 @@
             <a class="nav-link" href="?controller=work&action=index_work">หน้าแรก</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">จัดการงาน</a>
+            <a class="nav-link" href="?controller=work&action=get_myWork">จัดการงาน</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="?controller=report&action=index_reportMonth">สถิติ</a>

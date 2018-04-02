@@ -85,8 +85,7 @@
                     <div class="modal-body">
                         <form method="POST">
                             <input type="hidden" name="id_work" value="<?php echo $work->get_id_work() ?>">
-                            <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ </label><input type="date" name="due_date"  class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
-                            <label><span class="red">*</span> จำนวนเวลาที่ทำ </label>
+                            <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div class="row">
                                 <div class="col-4">
                                     <label> ชั่วโมง 
