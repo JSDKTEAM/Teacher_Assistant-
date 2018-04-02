@@ -10,11 +10,11 @@
         }
         public function get_start_date()
         {
-            return $this->get_start_date;
+            return $this->start_date;
         }
         public function get_end_date()
         {
-            return $this->get_end_date;
+            return $this->end_date;
         }
         public function __construct($yearObj =  NULL)
         {
@@ -50,11 +50,11 @@
             return $check ;
 
         }
-        public static function update_yearschool($id_year)
+        public static function update_yearschool($id_year,$start_date,$end_date)
         {
             $con = conDb::getInstance();
             $stmt = $con->prepare('UPDATE `year_school` SET`start_date`=?,`end_date`=? WHERE `id_year`=? ');
-            $check = $stmt->execute([$start_date,$end_date,$id]);
+            $check = $stmt->execute([$start_date,$end_date,$id_year]);
             return $check;
 
 

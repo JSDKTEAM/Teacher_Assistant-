@@ -97,7 +97,7 @@
                         class="btn btn-success btn-sm btn-edit-info">แก้ไขประวัติส่วนตัว</a>
                         <a href="#" 
                         data-id-member = <?php echo $member->get_id_member() ?>
-                        class="btn btn-danger btn-sm">ลบ</a>
+                        class="btn btn-danger btn-sm ">ลบ</a>
                     </td>
                     </tr>
       <?php $i++; }} ?>
