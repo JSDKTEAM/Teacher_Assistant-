@@ -172,6 +172,21 @@
             $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
             return $check;
         }
+        public static function addMemberSys($array_member)
+        {   
+            $con = conDb::getInstance();
+            $stmt = $con->query('SELECT * FROM year_school
+            WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+            $result = $stmt->fetch();
+            $id_year = $result['id_year'];
+            $stmt = $con->prepare('INSERT INTO year_member(id_member,id_year) VALUES(?,?)');
+            foreach($array_member as $key=>$value)
+            {
+                $check = $stmt->execute([$value,$id_year]);
+            }
+            return $check;
+            
+        }
         public static function updateMember($id_member,$id_code,$fname,$lname,$type)
         {
             $con = conDb::getInstance();
