@@ -1,0 +1,84 @@
+<?php
+    include('views/header/nav2.php');
+?>
+<style>
+    .work{
+        margin:auto;
+        width:90%;
+        height:300px;
+        background-color:#ECEFF1;
+        padding:20px;
+    }
+    .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+<div class="content p-4" style="width:100%">
+    <div class="row">
+        <div class="col-2">
+            <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
+        </div>
+        <div class="col-4">
+            <h3> <?php echo $member->get_type()."</br>".$member->get_fname()." ".$member->get_lname() ?></h3>
+        </div>
+    </div>
+    </br>
+    <table  id="workTable" class="table  table-bordered"> 
+        <thead>
+            <tr align="center">
+                <th>#</th>
+                <th>รายละเอียด</th>
+                <th>สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        <?php
+        $i = 1;
+        if($workList !== FALSE)
+        {
+        foreach($workList as $key=>$work)
+        {
+            $objPatron = $work->get_objPatron();
+            $objPerson = $work->get_objPerson();
+            if($work->get_status() == 'booked')
+            {
+                $color='badge badge-primary';
+            }
+            else
+            {
+               $color='badge badge-success';
+            }
+            $submitwork = '';          
+            echo "<tr>
+                    <td align='center'>$i</td>
+                    <td>
+                    <div class='row'>
+                        <div class='col-6'>
+                            <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
+                            <p><i class='fa fa-clock-o'></i>".$work->get_created_date()."</p>
+                            <p>ผู้สั่งงาน : <img src='".$objPatron->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
+                            <p>ผู้รับงาน : <img src='".$objPerson->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
+                            <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
+                        </div>";
+             echo  "</div>
+                    </td>   
+                    <td align='center'>
+                    <h4><span class='$color'>".$work->get_status()."</span></h4>
+                    </td>
+                  </tr>";
+       $i++; }}
+        ?>
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    $(document).ready(function() {
+    $('#workTable').DataTable();
+} );
+</script>
+

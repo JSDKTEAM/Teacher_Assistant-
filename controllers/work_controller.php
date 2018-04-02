@@ -27,6 +27,19 @@
                 include('views/work/workMember.php');
             }
         }
+        public function get_myWork($param = NULL)
+        {
+            $member = Member::getMember($_SESSION['member']['id_member']);
+            $workList = Work::getAllWorkByMember($_SESSION['member']['id_member'],$_SESSION['member']['type']);
+            if($_SESSION['member']['type'] == 'นิสิต')
+            {
+                include('views/work/myWorkStd.php');
+            }
+            else
+            {
+                include('views/work/myWork.php');
+            }
+        }
         public function submitWork($param = NULL)
         {
             $check = Work::updateStatusWork($param['id_member'],$param['id_work'],'booked');

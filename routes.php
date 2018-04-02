@@ -55,7 +55,7 @@ function call($controller,$action)
 }
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
-||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'))
+||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'||$action == 'get_myWork'))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
