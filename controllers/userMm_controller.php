@@ -14,10 +14,15 @@
             $check = Member::addMemberMm($param['fname'],$param['lname'],$param['username'],$param['passwd'],$param['type']);
             header('location:index.php?controller=userMm&action=index_userMm');
         }
+        public function updateMember($param = NULL)
+        {
+            $check = Member::updateMember($param['id_member'],$param['id_code'],$param['fname'],$param['lname'],$param['type']);
+            header('location:index.php?controller=userMm&action=index_userMm');
+        }
         public function updatePassMember($param = NULL)
         {
-            Member::updatePassMember($param['username'],$param['passwd']);
-            UserMmController::index_userMm();
+            Member::updatePassMember($param['id_member'],$param['passwd']);
+            header('location:index.php?controller=userMm&action=index_userMm');
         }
     }
 ?>

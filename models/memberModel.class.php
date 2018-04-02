@@ -178,12 +178,12 @@
             $stmt = $con->prepare('UPDATE member SET id_code=?,fname=?,lname=?,type=? WHERE id_member=?');
             $stmt->execute([$id_code,$fname,$lname,$type,$id_member]);
         }
-        public static function updatePassMember($username,$passwd)
+        public static function updatePassMember($id_member,$passwd)
         {
             $con = conDb::getInstance();
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
-            $stmt = $con->prepare('UPDATE member SET passwd=? WHERE username=?');
-            $stmt->execute([$stmtPassword,$username]);
+            $stmt = $con->prepare('UPDATE member SET passwd=? WHERE id_member=?');
+            $stmt->execute([$strPassword,$id_member]);
         }
         public static function upload_image($data_img,$id_member,$username)
         {
