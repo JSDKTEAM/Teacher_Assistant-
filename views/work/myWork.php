@@ -16,6 +16,7 @@
     }
 </style>
 <div class="content p-4" style="width:100%">
+
 <div class="row">
         <div class="col-2">
             <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
@@ -25,11 +26,27 @@
         </div>
     </div>
     </br>
+    <?php if($_SESSION['member']['type'] != "นิสิต"){?>
+    <label>ปีการศึกษา
+    <select name="id_year" id="id_year" class="form-control">
+        <option value="">--เลือกปีการศึกษา--</option>
+        <?php
+            foreach($yearSchoolList as $yearSchool)
+            {
+                echo "<option>".$yearSchool->get_id_year()."</option>";
+            }
+        ?>
+    </select>
+    </label>
+    <?php } ?>
+    </br></br>
     <table  id="workTable" class="table  table-bordered"> 
         <thead>
             <tr align="center">
                 <th>#</th>
                 <th>รายละเอียด</th>
+                <th>ผู้สั่ง</th>
+                <th>ผู้รับงาน</th>
                 <th>สถานะ</th>
             </tr>
         </thead>
@@ -61,15 +78,13 @@
                     <td align='center'>$i</td>
                     <td>
                     <div class='row'>
-                        <div class='col-6'>
+                        <div class='col-9'>
                             <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p><i class='fa fa-clock-o'></i>".$work->get_created_date()."</p>
-                            <p>ผู้สั่งงาน : <img src='".$objPatron->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
-                            <p>ผู้รับงาน : <img src='".$objPerson->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
+                            <p><i class='far fa-clock'></i> ".$work->get_created_date()."</p>
                             <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
                         </div>";
            ?>
-                    <div class='col-6 ' >
+                    <div class='col-3' >
                         <div class='btn-group float-right'>
                    
                             <a href="#"
@@ -78,16 +93,18 @@
                             data-detail = '<?php echo $work->get_detail()?>'
                             data-time-start = '<?php echo $work->get_time_start()?>'
                             data-time-stop  = '<?php echo $work->get_time_stop()?>'
-                            class='btn btn-success btn-edit'><i class='fa fa-pencil'></i></a>
+                            class='btn btn-success btn-edit'><i class='fas fa-edit'></i></a>
                             <a href="#"
                             data-id-work ='<?php echo $work->get_id_work() ?>'
                             data-title = '<?php echo $work->get_title()?>'
-                            class='btn btn-danger btn-delete'><i class='fa fa-trash-o'></i></a>
+                            class='btn btn-danger btn-delete'><i class='far fa-trash-alt'></i></a>
                         </div>
                     </div>
                     <?php
              echo  "</div>
                     </td>   
+                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
+                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'><img src='".$objPerson->get_img_user()."'  width='50' alt=''>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></td>
                     <td align='center'>
                     <h4><span class='$color'>".$work->get_status()."</span></h4>
                     </td>
@@ -179,7 +196,7 @@
 
 
 <div class="modal fade" id="delete">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog">
     <div class="modal-content">
 
     <!-- Modal Header -->

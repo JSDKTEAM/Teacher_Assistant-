@@ -28,8 +28,7 @@ else
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"> 
 	
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
@@ -61,7 +60,10 @@ else
 	<script>
 		$(document).ready(function() {
 			$("#work a:contains('หน้าแรก')").parent().addClass('active');
+			$("#myWork a:contains('จัดการงาน')").parent().addClass('active');
+			$("#report a:contains('สถิติ')").parent().addClass('active');
 			$("#userMm a:contains('จัดการระบบ')").parent().addClass('active');
+			$("#yearSet a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#report a:contains('สถิติ')").parent().addClass('active');
 		}); //jQuery is loaded
 	</script>

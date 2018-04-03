@@ -43,7 +43,7 @@
         public function submitWork($param = NULL)
         {
             $check = Work::updateStatusWork($param['id_member'],$param['id_work'],'booked');
-            header('location:index.php?controller=work&action=index_work');
+            header("location:index.php?controller=work&action=getWork&id_work=$param[id_work]");
         }
         public function cancelWork($param = NULL)
         {

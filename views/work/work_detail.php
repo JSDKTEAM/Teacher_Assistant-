@@ -13,7 +13,9 @@
     }
 </style>
 <div class="content p-4" style="width:100%">
+    
     <div id="work_detail" >  
+    <p><a href="?controller=work&action=index_work">หน้าแรก</a> / <a href=""><?php echo $work->get_title() ?></a></p>
         <?php
              $objPatron = $work->get_objPatron();
              $objPerson = $work->get_objPerson();
@@ -31,7 +33,7 @@
              }
         ?>
         <h3><?php echo $work->get_title() ?> <span class="<?php echo $color ?>"><?php echo $work->get_status() ?></span></h3>
-        <p><i class="fa fa-clock-o"></i> <?php echo $work->get_created_date() ?></p>
+        <p><i class='far fa-clock'></i>  <?php echo $work->get_created_date() ?></p>
         <hr>
         <div class="row">
             <div class="col-6">    

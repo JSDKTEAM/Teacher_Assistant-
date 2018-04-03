@@ -7,7 +7,7 @@
     $stmt = $con->prepare('SELECT work.person_id,YEAR(work.created_date) as y,MONTHNAME(work.created_date) AS m,COUNT(work.id_work) AS work_count  FROM work 
     WHERE work.person_id = ? AND YEAR(work.created_date) = ?
     GROUP BY work.person_id,YEAR(work.created_date),MONTHNAME(work.created_date)
-    ORDER BY m');
+    ORDER BY MONTH(work.created_date)');
     $stmt->execute([$person_id,$year]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach($result as $key=>$value)

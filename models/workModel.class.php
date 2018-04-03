@@ -96,7 +96,7 @@
         INNER JOIN member as patron ON patron.id_member = work.patron_id
         LEFT JOIN member as person ON person.id_member = work.person_id
         INNER JOIN year_school ON year_school.id_year = work.id_year
-        WHERE work.id_year = $id_year");
+        WHERE work.id_year = $id_year ORDER BY work.created_date DESC" );
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($result)
         {
@@ -121,7 +121,7 @@
         INNER JOIN member as patron ON patron.id_member = work.patron_id
         LEFT JOIN member as person ON person.id_member = work.person_id
         INNER JOIN year_school ON year_school.id_year = work.id_year
-        WHERE work.id_work = $id_work");
+        WHERE work.id_work = $id_work ORDER BY work.created_date DESC");
         $result = $stmt->fetch();
         if($result)
         {
@@ -142,7 +142,7 @@
             ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
             INNER JOIN member as patron ON patron.id_member = work.patron_id
             LEFT JOIN member as person ON person.id_member = work.person_id
-            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  person.id_member = ?');
+            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  person.id_member = ? ORDER BY work.created_date DESC');
         }
         else
         {
@@ -151,7 +151,7 @@
             ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
             INNER JOIN member as patron ON patron.id_member = work.patron_id
             LEFT JOIN member as person ON person.id_member = work.person_id
-            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  patron.id_member  = ?');
+            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  patron.id_member  = ? ORDER BY work.created_date DESC');
         }     
         $stmt->execute([$id_member]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -131,8 +131,8 @@
             <input type="hidden" id="id-member-password" name="id_work">
             <label>title</label><input type="text" id="title" class="form-control">
             <label>รายละเอียด</label><input type="text" name="passwd" id="detail" class="form-control" required>
-            <label>เวลาสร้างงาน</label><input type="text" name="passwdConfirm" id="timestart" class="form-control" required>
-            <label>เวลาสิ้นสุดงาน</label><input type="text" name="passwdConfirm" id="timestop" class="form-control" required>
+            <label>เวลาสร้างงาน</label><input type="date" name="passwdConfirm" id="timestart" class="form-control" required>
+            <label>เวลาสิ้นสุดงาน</label><input type="date" name="passwdConfirm" id="timestop" class="form-control" required>
             <span id="alertPass" class="text-danger"></span>
       </div>
 
