@@ -60,5 +60,17 @@
             $check = Work::addWork($_SESSION['member']['id_member'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
             header('location:index.php?controller=work&action=index_work');
         }
+        public function editWork($param = NULL)
+        {
+            $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+            if($_SESSION['member']['type']=='อาจารย์')
+            header("location:index.php?controller=myWork&action=get_myWork");
+        }
+        public function deleteWork($param = NULL)
+        {
+            $check = Work::deleteWork($param['id_work']);
+            if($_SESSION['member']['type']=='อาจารย์')
+            header("location:index.php?controller=myWork&action=get_myWork");
+        }
     }
 ?>
