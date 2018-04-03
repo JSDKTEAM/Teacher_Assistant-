@@ -58,7 +58,7 @@
                     <td align='center'>$i</td>
                     <td>
                     <div class='row'>
-                        <div class='col-6'>
+                        <div class='col-9'>
                             <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
                             <p><i class='far fa-clock'></i> ".$work->get_created_date()."</p>
                             <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
