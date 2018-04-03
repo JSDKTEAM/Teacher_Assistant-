@@ -31,9 +31,9 @@
         <div class="modal-body">
             <form method="POST">
                
-                    <label>ปีการศึกษา</label><input type="text" name="id_code" id="id_code_add" class="form-control">
-                    <label><span class="red">*</span> วัน/เดือน/ปี เริ่มการศึกษา</label><input type="text" name="fname" class="form-control" required>
-                    <label><span class="red">*</span> วัน/เดือน/ปี สิ้นสุดการศึกษา</label><input type="text" name="lname" class="form-control" required>
+                    <label><span class="red">*</span> ปีการศึกษา</label><input type="text" name="id_code" id="id_code_add" class="form-control" required>
+                    <label><span class="red">*</span> วัน/เดือน/ปี เริ่มการศึกษา</label><input type="date" name="fname" class="form-control" required>
+                    <label><span class="red">*</span> วัน/เดือน/ปี สิ้นสุดการศึกษา</label><input type="date" name="lname" class="form-control" required>
                     
         </div>
 
@@ -56,8 +56,7 @@
                 <th>#</th>
                 <th>ปีการศึกษา</th>
                 <th>วัน/เดือน/ปี เริ่มการศึกษา</th>
-                <th>วัน/เดือน/ปี สิ้นสุดการศึกษา</th>
-               
+                <th>วัน/เดือน/ปี สิ้นสุดการศึกษา</th>               
                 <th></th>
             </tr>
         </thead>
@@ -129,9 +128,9 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form method="POST">
-        <label> ปีการศึกษา</label><input id="id-year-edit"  type="text" name="id_year" class="form-control" required>
-        <label> วัน/เดือน/ปี เริ่มการศึกษา</label><input id="start-date-edit"  type="text" name="start_date" class="form-control" required>
-        <label> วัน/เดือน/ปี สิ้นสุดการศึกษา</label><input id="end-date-edit"  type="text" name="end_date" class="form-control" required>
+        <label><span class="red">*</span>  ปีการศึกษา</label><input id="id-year-edit"  type="text" name="id_year" class="form-control" disabled required>
+        <label><span class="red">*</span>  วัน/เดือน/ปี เริ่มการศึกษา</label><input id="start-date-edit"  type="date" name="start_date" class="form-control" required>
+        <label><span class="red">*</span>  วัน/เดือน/ปี สิ้นสุดการศึกษา</label><input id="end-date-edit"  type="date" name="end_date" class="form-control" required>
         <input type="hidden" name="controller" value="yearSet"> 
       </div>
 
@@ -146,4 +145,8 @@
 </div>
 
 
-
+<script>
+    $(document).ready(function() {
+    $('#yearTable').DataTable();
+} );
+</script>

@@ -11,7 +11,7 @@
     
     <nav class="navbar fixed-top navbar navbar-expand-md bg-light navbar-light">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Teacher Assistant</a>
 
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -22,17 +22,17 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="?controller=work&action=index_work">หน้าแรก</a>
+            <a class="nav-link" href="?controller=work&action=index_work"><i class="fas fa-home"></i> หน้าแรก</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="?controller=work&action=get_myWork">จัดการงาน</a>
+            <a class="nav-link" href="?controller=myWork&action=get_myWork"><i class="fas fa-pen-square"></i> จัดการงาน</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="?controller=report&action=index_reportMonth">สถิติ</a>
+            <a class="nav-link" href="?controller=report&action=index_reportMonth"><i class="fas fa-chart-bar"></i> สถิติ</a>
         </li>
         <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                จัดการระบบ
+                <i class="fas fa-cogs"></i> จัดการระบบ
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="?controller=userMm&action=index_workMm">จัดการงานของผู้ใช้</a>
@@ -53,7 +53,7 @@
                 </a>
                 <div class="dropdown-menu">
                 <a class="dropdown-item" href="?controller=userSet&action=index_userSet"><i class="fa fa-cog"></i> ตั้งค่าบัญชีผู้ใช้</a>
-                <a class="dropdown-item" href="?controller=identify&action=logout"><i class="fa fa-sign-out"></i> Logout</a>
+                <a class="dropdown-item" href="?controller=identify&action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </li>
         </ul>

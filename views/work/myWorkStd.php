@@ -30,6 +30,8 @@
             <tr align="center">
                 <th>#</th>
                 <th>รายละเอียด</th>
+                <th>ผู้สั่ง</th>
+                <th>ผู้รับงาน</th>
                 <th>สถานะ</th>
             </tr>
         </thead>
@@ -58,13 +60,13 @@
                     <div class='row'>
                         <div class='col-6'>
                             <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p><i class='fa fa-clock-o'></i>".$work->get_created_date()."</p>
-                            <p>ผู้สั่งงาน : <img src='".$objPatron->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
-                            <p>ผู้รับงาน : <img src='".$objPerson->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
+                            <p><i class='far fa-clock'></i> ".$work->get_created_date()."</p>
                             <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
                         </div>";
              echo  "</div>
                     </td>   
+                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
+                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'><img src='".$objPerson->get_img_user()."'  width='50' alt=''>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></td>
                     <td align='center'>
                     <h4><span class='$color'>".$work->get_status()."</span></h4>
                     </td>

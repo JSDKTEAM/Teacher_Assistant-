@@ -100,7 +100,18 @@
                 ctx.height = 80;
                 var barGraph = new Chart(ctx,{
                    type: 'bar',
-                   data: chartdata 
+                   data: chartdata,
+                   options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true,
+                                    min: 0,
+                                    stepSize: 1,
+                                }
+                            }]
+                        }
+                    }
                 });
             },
                 
@@ -181,7 +192,9 @@
                         scales: {
                             xAxes: [{
                                 ticks: {
-                                    beginAtZero:true
+                                    beginAtZero:true,
+                                    min: 0,
+                                    stepSize: 1,
                                 }
                             }]
                         }
