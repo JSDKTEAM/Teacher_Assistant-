@@ -195,5 +195,19 @@
         $check = $stmt->execute([$patron_id,$title,$detail,$time_start,$time_stop,$id_year,'waiting']);
         return $check;
     }
+    public static function editWork($id_work,$title,$time_start,$time_stop,$detail)
+    {
+        $con = conDb::getInstance();
+        $stmt = $con->prepare('UPDATE work SET  title = ? , time_start = ? , time_stop = ? , detail = ? WHERE id_work = ?');
+        $check = $stmt->execute([$title,$time_start,$time_stop,$detail,$id_work]);
+        return $check;
+    }
+    public static function deleteWork($id_work)
+    {
+        $con = conDb::getInstance();
+        $stmt = $con->prepare('DELETE FROM work WHERE id_work = ?');
+        $check = $stmt->execute([$id_work]);
+        return $check;
+    }
  }
 ?>

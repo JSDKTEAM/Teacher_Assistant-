@@ -86,7 +86,6 @@
            ?>
                     <div class='col-3' >
                         <div class='btn-group float-right'>
-                   
                             <a href="#"
                             data-id-work = '<?php echo $work->get_id_work()?>'
                             data-title = '<?php echo $work->get_title()?>'
@@ -95,7 +94,7 @@
                             data-time-stop  = '<?php echo $work->get_time_stop()?>'
                             class='btn btn-success btn-edit'><i class='fas fa-edit'></i></a>
                             <a href="#"
-                            data-id-work ='<?php echo $work->get_id_work() ?>'
+                            data-id-work = '<?php echo $work->get_id_work()?>'
                             data-title = '<?php echo $work->get_title()?>'
                             class='btn btn-danger btn-delete'><i class='far fa-trash-alt'></i></a>
                         </div>
@@ -131,11 +130,11 @@
         var time_start = $(this).attr('data-time-start');
         var time_stop = $(this).attr('data-time-stop');        
         // set value to modal
-        $("#data-id-work").val(id_work);
-        $("#data-title").val(title);
-        $("#data-detail").val(detail);
-        $("#data-time-start").val(time_start);
-        $("#data-time-stop").val(time_stop);
+        $("#data-id-work-edit").val(id_work);
+        $("#data-title-edit").val(title);
+        $("#data-detail-edit").val(detail);
+        $("#data-time-start-edit").val(time_start);
+        $("#data-time-stop-edit").val(time_stop);
         $("#edit").modal('show');
         });
     });
@@ -146,10 +145,9 @@
         $('.btn-delete').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("title").innerHTML = $(this).attr('data-title');
+        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
         // set value to modal
-        $("#data-id-work").val(id_work);
-        $("#data-title").val(title);
+        $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
         });
     });
@@ -168,25 +166,25 @@
     <!-- Modal body -->
     <div class="modal-body">
         <form method="POST">
-        <input id="data-id-work" type="text" name="id_work" class="form-control" hidden>
+        <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label>หัวข้องาน</label><input id="data-title" type="text" name="title" class="form-control">
-                    <label>รายละเอียดงาน</label><textarea id="data-detail" name="detail"cols="30" rows="10" class="form-control"></textarea>
+                    <label>หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
+                    <label>รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-                    <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                 </div>
             </div>
-            <input type="hidden" name="controller" value="#">
+            <input type="hidden" name="controller" value="work">
             
         
     </div>
 
     <!-- Modal footer -->
     <div class="modal-footer">
-        <button type="submit" class="btn btn-success btn-block" name="action" value="#">แก้ไข</button>
+        <button type="submit" class="btn btn-success btn-block" name="action" value="editWork">แก้ไข</button>
         </form>
     </div>
 
@@ -208,20 +206,20 @@
     <!-- Modal body -->
     <div class="modal-body">
         <form method="POST">
-        <input id="data-id-work" type="text" name="id_work" class="form-control" hidden>
+        <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label id="title"></label> 
+                    <label id="data-title-delete"></label> 
                  </div>             
             </div>
-            <input type="hidden" name="controller" value="#">
+            <input type="hidden" name="controller" value="work">
             
         
     </div>
 
     <!-- Modal footer -->
     <div class="modal-footer">
-        <button type="submit" class="btn btn-danger btn-block" name="action" value="#">ลบ</button>
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ลบ</button>
         </form>
     </div>
 
