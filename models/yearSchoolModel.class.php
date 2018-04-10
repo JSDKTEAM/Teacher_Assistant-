@@ -43,7 +43,6 @@
         }
         public static function delect_yearschool($id_year)
         {
-
             $con = conDb::getInstance();
             $stmt = $con->prepare('DELETE FROM `year_school` WHERE $id_year = ?');
             $check = $stmt->execute([$id_year]);

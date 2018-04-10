@@ -4,24 +4,36 @@
     <?php include('views/report/nav_report.php')?>
     <div class="row m-chart">
         <div class="col-4">
-            <label for="">เลือกนิสิต</label>
+            <label>เลือกปี</label>
+                <select  id="yearWork" class="form-control">
+                    <option value="">--เลือกปี--</option>
+                    <?php
+                        foreach($yearList as $key=>$year)
+                        {
+                            $yearThai = $year['year'] + 543;
+                            echo "<option value='$year[year]'>$yearThai</option>";
+                        }
+                    ?>
+                </select>
+            
+            <!--<label for="">เลือกนิสิต</label>
             <div class="member">
                 <form  method="GET">
                     <select style="display:none"  name="id_member" id="name_member" class="form-control" placeholder="--เลือกนิสิต--">
                         <option value="">--เลือกนิสิต--</option>
                         <?php
-                        foreach($memberList as $member)
+                        /*foreach($memberList as $member)
                         {
                             echo "<option value='".$member->get_id_member()."'>".$member->get_fname()." ".$member->get_lname()."</option>";
-                        }
+                        }*/
                         ?>
                     </select>         
-            </div>
+            </div>-->
         </div>  
         <div class="col-4"> 
-            <label>เลือกปี</label>
-            <select class="form-control" id="year">
-                    <option value="" selected>--เลือกปี--</option>
+            <label>เลือกนิสิต</label>
+            <select class="form-control" name="nameStd" id="std">
+                    <option value="">--เลือกนิสิต--</option>
             </select>
             </form> 
         </div>
@@ -32,7 +44,7 @@
             <select class="form-control" id="id_year">
                     <option value="" selected>--เลือกปีการศึกษา--</option>
                     <?php
-                    foreach($yearList as $year)
+                    foreach($yearListSchool as $year)
                     {
                         echo "<option>".$year->get_id_year()."</option>";
                     }
@@ -44,45 +56,87 @@
     <div id="chart">
         <canvas id="myChart1"></canvas><br/>
         <span id="work_count"></span>
+        <span id="timeWork"></span>
         <canvas id="myChart2"></canvas><br/>
     </div>   
 </div>
 </br>
 <script>
     $(document).ready(function(){
-        $( "#year").change(function() {
+        $("#yearWork").change(function() {
+            console.log("asd");
             $("#work_count").empty();
+            $("#timeWork").empty();
+            $("#std").empty();
+            $("#std").append("<option value=''>--เลือกนิสิต--</option>")
             $("#myChart1").remove();
             $('#chart').append('<canvas id="myChart1"><canvas>');
-            var input_person_id = $("#name_member").val();
-            var input_year = $("#year").val();
-            if(input_person_id != '' && input_year != '')
+            var input_year = $("#yearWork").val();
+            if(input_year != '')
+            {
+            $.ajax({
+            url : "views/report/getMemberByYear.php",
+            method:"GET",
+            data:{year:input_year},
+            success:function(data){
+                for(var i in data)
+                {
+                    $("#std").append("<option value="+data[i].id_member+">"+data[i].fname+" "+data[i].lname+"</option>")
+                }      
+            },
+                
+            error:function(data){
+                console.log(data);
+            }
+        });
+        }
+        });
+    });
+    $(document).ready(function(){
+        $("#std").change(function() {
+            console.log("asd");
+            $("#work_count").empty();
+            $("#timeWork").empty();
+            $("#myChart1").remove();
+            $('#chart').append('<canvas id="myChart1"><canvas>');
+            var input_year = $("#yearWork").val();
+            var input_std = $("#std").val();
+            if(input_year != '' && input_std != '')
             {
             $.ajax({
             url : "views/report/reportMonth.php",
             method:"GET",
-            data:{person_id:input_person_id,year:input_year},
-            success:function(data){
+            data:{person_id:input_std,year:input_year},
+            success:function(data){  
                 console.log(data);
                 var m = [];
                 var work_count = [];
                 var sum = 0;
+                var timeWork = 0;
                 for(var i in data)
                 {
-                    m.push(data[i].m);
-                    work_count.push(data[i].work_count);
-                    sum = sum + data[i].work_count/1;
+                    if(i != data.length-1)
+                    {
+                        m.push(data[i].m);
+                        work_count.push(data[i].work_count);
+                        sum = sum + data[i].work_count/1;
+                    }
+                    else
+                    {
+                        timeWork = data[i].timeWork;
+                    }
                 }
-                document.getElementById("work_count").innerHTML = "งานทั้งหมดที่ทำ "+sum+" งาน";
+                document.getElementById("work_count").innerHTML = "งานทั้งหมดที่ทำ "+sum+" งาน</br>";
+                document.getElementById("timeWork").innerHTML = "เวลาที่ทำงานทั้งหมด "+timeWork+" นาที";
                 var chartdata = {
                     labels:m,
                     datasets:[
                         {
                             label:'งานที่ทำ',
-                            backgroundColor: 'rgba(76,175,80,0.75)',
-                            borderColor:'rgba(76,175,80)',
-                            hoverBackgroundColor:'rgba(129,199,132)',
-                            hoverBorderColor:'rgba(129,199,132)',
+                            backgroundColor: 'rgba(0,145,234)',
+                            borderColor:'rgba(0,145,234)',
+                            hoverBackgroundColor:'rgba(0,176,255)',
+                            hoverBorderColor:'rgba(0,176,255)',
                             data:work_count,
                             options: {
                                 scales: {
@@ -123,33 +177,6 @@
         });
     });
     $(document).ready(function(){
-        $(".dropdown-option").click(function() {
-            $("#work_count").empty();
-            $("#myChart1").remove();
-            $('#chart').append('<canvas id="myChart1"><canvas>');
-            $("#year").empty();
-            $("#year").append("<option>--เลือกปี--</option>");
-            var input_person_id = $(this).attr("data-value");
-            console.log(input_person_id);
-            $.ajax({
-            url : "views/report/year.php",
-            method:"GET",
-            data:{person_id:input_person_id},
-            success:function(data){
-                console.log(data);
-                var y = [];
-                for(var i in data)
-                {
-                    $("#year").append("<option value="+data[i].y+">"+data[i].y+"</option>")
-                }                   
-            },      
-            error:function(data){
-                console.log(data);
-            }
-        });
-        });
-    });
-    $(document).ready(function(){
         $( "#id_year").change(function() {
             $("#myChart2").remove();
             $('#chart').append('<canvas id="myChart2"><canvas>');
@@ -175,10 +202,10 @@
                     datasets:[
                         {
                             label:'งานที่ทำ',
-                            backgroundColor: 'rgba(76,175,80,0.75)',
-                            borderColor:'rgba(76,175,80)',
-                            hoverBackgroundColor:'rgba(129,199,132)',
-                            hoverBorderColor:'rgba(129,199,132)',
+                            backgroundColor: 'rgba(0,145,234)',
+                            borderColor:'rgba(0,145,234)',
+                            hoverBackgroundColor:'rgba(0,176,255)',
+                            hoverBorderColor:'rgba(0,176,255)',
                             data:work_count
                         }
                     ]
@@ -213,6 +240,7 @@
 </script>
 <script>
         $('.member').dropdown({
-  // options here
+            readOnly: true,
+            searchable: false
         });
 </script>

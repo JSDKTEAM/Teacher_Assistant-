@@ -8,18 +8,19 @@ function call($controller,$action)
 		case "page":	$controller = new PageController();
 						break;
 		case "work":    $controller = new WorkController();
-						$param['title'] = $_POST['title']??'';
-						$param['detail'] = $_POST['detail']??'';
-						$param['time_start'] = $_POST['time_start']??'';
-						$param['time_stop'] = $_POST['time_stop']??'';
-						$param['id_work'] = $_REQUEST['id_work']??'';
-						$param['id_member'] = $_REQUEST['id_member']??'';
-						$param['type'] = $_REQUEST['type']??'';
-						$param['due_date'] = $_POST['due_date']??'';
-						$param['used_time'] = $_POST['used_time']??'';
-						$param['HH'] = $_POST['HH']??'';
-						$param['mm'] = $_POST['mm']??'';
+						$param['title'] = $_POST['title']??NULL;
+						$param['detail'] = $_POST['detail']??NULL;
+						$param['time_start'] = $_POST['time_start']??NULL;
+						$param['time_stop'] = $_POST['time_stop']??NULL;
+						$param['id_work'] = $_REQUEST['id_work']??NULL;
+						$param['id_member'] = $_REQUEST['id_member']??NULL;
+						$param['type'] = $_REQUEST['type']??NULL;
+						$param['due_date'] = $_POST['due_date']??NULL;
+						$param['used_time'] = $_POST['used_time']??NULL;
+						$param['HH'] = $_POST['HH']??NULL;
+						$param['mm'] = $_POST['mm']??NULL;
 						$param['summary'] = $_POST['summary']??NULL;
+						$param['id_year'] =  $_POST['id_year']??NULL;
 						break;
 		case "myWork":  $controller = new MyWorkController();
 						$param['title'] = $_POST['title']??'';
@@ -69,8 +70,8 @@ function call($controller,$action)
 }
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
-||  ($controller == 'work' && ($action == 'index_work' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork'))
-||  ($controller == 'myWork' && ($action == 'get_myWork'))
+||  ($controller == 'work' && ($action == 'index_work' || $action == 'searchWork' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork'))
+||  ($controller == 'myWork' && ($action == 'index_work' || $action == 'getWork' ||$action == 'get_myWork' || $action == 'getWork' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork' ))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))

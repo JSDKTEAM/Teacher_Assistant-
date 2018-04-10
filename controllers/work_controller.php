@@ -27,18 +27,10 @@
                 include('views/work/workMember.php');
             }
         }
-        public function get_myWork($param = NULL)
+        public function searchWork($param = NULL)
         {
-            $member = Member::getMember($_SESSION['member']['id_member']);
-            $workList = Work::getAllWorkByMember($_SESSION['member']['id_member'],$_SESSION['member']['type']);
-            if($_SESSION['member']['type'] == 'นิสิต')
-            {
-                include('views/work/myWorkStd.php');
-            }
-            else
-            {
-                include('views/work/myWork.php');
-            }
+            $workList = Work::searchWork($param['id_year']);
+            header("location:index.php?controller=work&action=index_work");
         }
         public function submitWork($param = NULL)
         {

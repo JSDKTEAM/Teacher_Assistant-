@@ -14,7 +14,8 @@
             if($member != FALSE)
             {
                 $_SESSION['member'] = $member;
-                call('work','index_work');
+                header('location:index.php?controller=work&action=index_work');
+                //call('work','index_work');
             }
             else
             {
