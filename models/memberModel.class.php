@@ -201,7 +201,7 @@
             $stmt->execute([$strPassword,$id_member]);
         }
         public static function upload_image($data_img,$id_member,$username)
-        {
+        {      
             $con = conDb::getInstance();
             $stmt = $con->prepare('SELECT img_user FROM member WHERE id_member = ?');
             $stmt->execute([$id_member]);

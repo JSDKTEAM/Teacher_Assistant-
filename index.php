@@ -35,8 +35,7 @@ else
  
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
 
-	<!--<link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
-	<script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>-->
+
 
 	<!-- Crop images -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
@@ -48,6 +47,10 @@ else
 	<style>
 	body{
 		font-family:Kanit;
+		background-color:#F5F5F5;
+	}
+	table{
+		background-color:#FFFF;
 	}
 	</style>
 </head>

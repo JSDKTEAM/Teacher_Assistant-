@@ -27,25 +27,28 @@
     </div>
     </br>
     <?php if($_SESSION['member']['type'] != "นิสิต"){?>
-    <label>ปีการศึกษา
-    <select name="id_year" id="id_year" class="form-control">
-        <option value="">--เลือกปีการศึกษา--</option>
-        <?php
-            foreach($yearSchoolList as $yearSchool)
-            {
-                echo "<option>".$yearSchool->get_id_year()."</option>";
-            }
-        ?>
-    </select>
-    </label>
+    <form method="POST">
+            <label>ปีการศึกษา
+            <select name="id_year" id="id_year" class="form-control" required>
+                <option value="">--เลือกปีการศึกษา--</option>
+                <?php
+                    foreach($yearSchoolList as $yearSchool)
+                    {
+                        echo "<option>".$yearSchool->get_id_year()."</option>";
+                    }
+                ?>
+            </select>
+            </label>
+            <input type="hidden" name="controller" value="work">
+            <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
+    </form>
     <?php } ?>
     </br></br>
     <table  id="workTable" class="table  table-bordered"> 
         <thead>
-            <tr align="center">
+            <tr align="center" class="table-light">
                 <th>#</th>
                 <th>รายละเอียด</th>
-                <th>ผู้สั่ง</th>
                 <th>ผู้รับงาน</th>
                 <th>สถานะ</th>
             </tr>
@@ -73,15 +76,15 @@
             {
                $color='badge badge-success';
             }
-            echo "<tr>
+            echo "<tr class='table-light'>
                     
                     <td align='center'>$i</td>
                     <td>
                     <div class='row'>
                         <div class='col-9'>
-                            <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p><i class='far fa-clock'></i> ".$work->get_created_date()."</p>
-                            <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
+                            <h4><a href='?controller=myWork&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
+                            <p><i class='far fa-clock'></i> ".$work->DateTimeThai($work->get_created_date())."</p>
+                            <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                         </div>";
            ?>
                     <div class='col-3' >
@@ -102,7 +105,6 @@
                     <?php
              echo  "</div>
                     </td>   
-                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
                     <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'><img src='".$objPerson->get_img_user()."'  width='50' alt=''>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></td>
                     <td align='center'>
                     <h4><span class='$color'>".$work->get_status()."</span></h4>
@@ -212,7 +214,7 @@
                     <label id="data-title-delete"></label> 
                  </div>             
             </div>
-            <input type="hidden" name="controller" value="work">
+            <input type="hidden" name="controller" value="myWork">
             
         
     </div>

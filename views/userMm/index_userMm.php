@@ -59,7 +59,7 @@
     </div>
     <table  id="memberTable" class="table  table-bordered"> 
         <thead>
-            <tr>
+            <tr class="table-light">
                 <th>#</th>
                 <th>ชื่อ</th>
                 <th>นามสกุล</th>
@@ -75,7 +75,7 @@
             $i = 1;
             foreach($memberList as $member)
             {
-                echo "<tr align='center'>
+                echo "<tr align='center' class='table-light'>
                         <td>$i</td>
                         <td>".$member->get_fname()."</td>
                         <td>".$member->get_lname()."</td>
@@ -131,7 +131,7 @@
     </br></br>
     <table  id="memberTable2" class="table  table-bordered">
         <thead>
-            <tr>
+            <tr class="table-light">
                 <th>#</th>
                 <th>ชื่อ</th>
                 <th>นามสกุล</th>
@@ -145,7 +145,7 @@
                 foreach($memberListYear as $key=>$value)
                 {
                  
-                    echo "<tr>
+                    echo "<tr class='table-light'>
                             <td>$i</td>
                             <td>".$value->get_fname()."</td>
                             <td>".$value->get_lname()."</td>

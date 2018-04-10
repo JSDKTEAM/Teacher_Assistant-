@@ -50,7 +50,7 @@
     </div>
     <table  id="memberTable" class="table  table-bordered"> 
         <thead>
-            <tr>
+            <tr class="table-light">
                 <th>#</th>
                 <th>หัวข้องาน</th>
                 <th>รายละเอียด</th>
@@ -66,7 +66,7 @@
             $i = 1;
             foreach($workList as $work)
             {
-                echo "<tr align='center'>
+                echo "<tr align='center' class='table-light'>
                         <td>$i</td>
                         <td>".$work->get_title()."</td>
                         <td>".$work->get_detail()."</td>

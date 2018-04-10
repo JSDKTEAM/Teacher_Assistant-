@@ -14,5 +14,12 @@
     {
         $data[] = $value;
     }
+    $stmt = $con->prepare('SELECT Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 AS timeWork from work WHERE work.person_id = ?');
+    $stmt->execute([$person_id]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach($result as $key=>$value)
+    {
+        $data[] = $value;
+    }
     print json_encode($data);
 ?>

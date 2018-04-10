@@ -15,7 +15,8 @@
 <div class="content p-4" style="width:100%">
     
     <div id="work_detail" >  
-    <a href="?controller=work&action=index_work">หน้าแรก</a> <i class="fas fa-angle-right"></i> <a href=""><?php echo $work->get_title() ?></a></p>
+
+    <a href="?controller=myWork&action=get_myWork">จัดการงาน</a> <i class="fas fa-angle-right"></i> <a href=""><?php echo $work->get_title() ?></a></p>
         <?php
              $objPatron = $work->get_objPatron();
              $objPerson = $work->get_objPerson();
@@ -57,7 +58,7 @@
                 <form method="POST">
                     <input type="hidden" name="id_work" value="<?php echo $work->get_id_work() ?>">
                     <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
-                    <input type="hidden" name="controller" value="work">
+                    <input type="hidden" name="controller" value="myWork">
                     <button type="submit" name="action" value="submitWork" class="btn btn-success btn-block">รับงาน</button>
                 </form>
             </div>
@@ -103,7 +104,7 @@
                             </div>
                             <label>รายละเอียดการส่ง </label><textarea name="summary" class="form-control" cols="30" rows="5"></textarea>
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
-                            <input type="hidden" name="controller" value="work">   
+                            <input type="hidden" name="controller" value="myWork">   
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -138,7 +139,7 @@
                             <h5><?php echo $work->get_title() ?></h5>
                             <input type="hidden" name="id_work" value="<?php echo $work->get_id_work() ?>">
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
-                            <input type="hidden" name="controller" value="work">
+                            <input type="hidden" name="controller" value="myWork">
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">

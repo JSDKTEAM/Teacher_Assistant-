@@ -16,7 +16,7 @@
     }
 </style>
 <div class="content p-4" style="width:100%">
-<p><a href="?controller=work&action=index_work">หน้าแรก</a> / <a href=""><?php echo $member->get_fname()." ".$member->get_lname() ?></a></p>
+<p><a href="?controller=work&action=index_work">หน้าแรก</a> <i class="fas fa-angle-right"></i> <a href=""><?php echo $member->get_fname()." ".$member->get_lname() ?></a></p>
 <div class="row">
         <div class="col-2">
             <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
@@ -28,7 +28,7 @@
     </br>
     <table  id="workTable" class="table  table-bordered"> 
         <thead>
-            <tr align="center">
+            <tr align="center" class="table-light">
                 <th>#</th>
                 <th>รายละเอียด</th>
                 <th>ผู้สั่ง</th>
@@ -63,15 +63,15 @@
             {
                 $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
             }
-            echo "<tr>
+            echo "<tr class='table-light'>
                     
                     <td align='center'>$i</td>
                     <td>
                     <div class='row'>
                         <div class='col-9'>
                             <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p><i class='far fa-clock'></i> ".$work->get_created_date()."</p>
-                            <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
+                            <p><i class='far fa-clock'></i> ".$work->DateTimeThai($work->get_created_date())."</p>
+                            <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                         </div>";
             if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
             {
