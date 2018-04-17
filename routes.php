@@ -82,7 +82,7 @@ if( ($controller =='page'&& ($action =='home'|| $action =='error'))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
-|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'))
+|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear'))
 || ($controller == 'report' && ($action == 'index_reportMonth' || $action == 'getMemberByYear' || $action == 'reportMonth' || $action == 'reportYear')))
 {	
 	call($controller,$action);	
