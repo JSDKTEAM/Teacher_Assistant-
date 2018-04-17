@@ -64,6 +64,69 @@
             <?php } ?>
             <p><?php echo "ชื่อ : ".$_SESSION['member']['fname']." ".$_SESSION['member']['lname']?></p>
             <p><?php echo "Username : ".$_SESSION['member']['username'] ?></p>
+            <a href="#" class="btn-edit-passwd">เปลี่ยนรหัสผ่าน</a> / 
+            <a href="#" class="btn-edit-info" data-type="<?php echo $_SESSION['member']['type'] ?>" data-id-code="<?php echo $_SESSION['member']['id_code'] ?>" data-fname="<?php echo $_SESSION['member']['fname']?>" data-lname="<?php echo $_SESSION['member']['lname'] ?>">แก้ไขข้อมูลส่วนตัว</a>
+            
+            <!-- The Modal -->
+            <div class="modal fade" id="editInfo">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">แก้ไขข้อมูลส่วนตัว</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form method="POST">
+                        <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
+                        <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code" id="id_code" class="form-control" value=""> 
+                        <label>ชื่อ</label><input type="text" name="fname" id="fname" class="form-control" required>
+                        <label>นามสกุล</label><input type="text" name="lname" id="lname" class="form-control" required>
+                        <input type="hidden" name="controller" value="userSet">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-block" name="action" value="updateInfo">ยืนยันการแก้ไข</button>
+                    </form>
+                </div>
+
+                </div>
+            </div>
+            </div>
+            <!-- The Modal -->
+            <div class="modal fade" id="editPasswd">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">แก้ไขข้อมูลส่วนตัว</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form method="POST">
+                        <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
+                        <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code" id="id_code" class="form-control" value=""> 
+                        <label>ชื่อ</label><input type="text" name="fname" id="fname" class="form-control" required>
+                        <label>นามสกุล</label><input type="text" name="lname" id="lname" class="form-control" required>
+                        <input type="hidden" name="controller" value="userSet">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-block" name="action" value="updateInfo">ยืนยันการแก้ไข</button>
+                    </form>
+                </div>
+
+                </div>
+            </div>
+            </div>
         </div>
     </div>
 
@@ -113,4 +176,56 @@ return false;
     });
 
 });
+</script>
+<script>
+     $(document).ready(function(){
+        $('.btn-edit-info').click(function(){
+        // get data from edit btn
+        var type = $(this).attr('data-type');
+        var id_code = $(this).attr('data-id-code');
+        var fname = $(this).attr('data-fname');
+        var lname = $(this).attr('data-lname');
+
+        // set value to modal
+        if(type != "นิสิต")
+        {
+            $("#id_code").hide();
+            $("#lable_id_code").hide();
+        }
+        else
+        {
+            $("id_code").show();
+            $("#lable_id_code").show();
+            $("#id_code").val(id_code);
+        }  
+        $("#fname").val(fname);
+        $("#lname").val(lname);
+        $("#editInfo").modal('show');
+        });
+    });
+    $(document).ready(function(){
+        $('.btn-edit-info').click(function(){
+        // get data from edit btn
+        var type = $(this).attr('data-type');
+        var id_code = $(this).attr('data-id-code');
+        var fname = $(this).attr('data-fname');
+        var lname = $(this).attr('data-lname');
+
+        // set value to modal
+        if(type != "นิสิต")
+        {
+            $("#id_code").hide();
+            $("#lable_id_code").hide();
+        }
+        else
+        {
+            $("id_code").show();
+            $("#lable_id_code").show();
+            $("#id_code").val(id_code);
+        }  
+        $("#fname").val(fname);
+        $("#lname").val(lname);
+        $("#editInfo").modal('show');
+        });
+    });
 </script>

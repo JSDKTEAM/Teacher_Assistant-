@@ -1,6 +1,15 @@
 <?php 
- session_start();
-if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']))
+function isAjax() {
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower(
+        $_SERVER['HTTP_X_REQUESTED_WITH']
+    ) == 'xmlhttprequest';
+}
+session_start();
+if(isAjax())
+{
+	ob_start();
+}
+if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'))
 {
 	$controller = $_REQUEST['controller'];
 	$action = $_REQUEST['action'];
@@ -56,6 +65,7 @@ else
 </head>
 <body id="<?php echo $controller ?>">
 <?php require_once("routes.php"); ?>
+<?php if(isAjax()){ob_start();} ?>
 <hr>
 <footer>
     <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
@@ -72,3 +82,4 @@ else
 	</script>
 </body>
 </html>
+<?php if(isAjax()){ob_end_clean();} ?>

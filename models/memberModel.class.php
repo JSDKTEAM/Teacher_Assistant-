@@ -52,6 +52,65 @@
             $this->type = $type;
             $this->img_user = $img_user;
         }
+        public static function getMemberByYearReport($year)
+        {
+           header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT DISTINCT member.id_member,member.fname,member.lname FROM work 
+            INNER JOIN member ON member.id_member = work.person_id
+            WHERE YEAR(work.created_date) = ?');
+            $stmt->execute([$year]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            ob_end_clean();
+            print json_encode($data);
+            //return $data;
+        }
+        public static function reportMonth($person_id,$year)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT work.person_id,YEAR(work.created_date) as y,MONTHNAME(work.created_date) AS m,COUNT(work.id_work) AS work_count  FROM work 
+            WHERE work.person_id = ? AND YEAR(work.created_date) = ?
+            GROUP BY work.person_id,YEAR(work.created_date),MONTHNAME(work.created_date)
+            ORDER BY MONTH(work.created_date)');
+            $stmt->execute([$person_id,$year]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            $stmt = $con->prepare('SELECT Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 AS timeWork from work WHERE work.person_id = ?');
+            $stmt->execute([$person_id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
+        public static function reportYear($year)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT member.fname,member.lname,work.person_id,work.id_year,COUNT(work.id_work) AS work_count FROM work 
+            INNER JOIN member ON member.id_member = work.person_id
+            WHERE work.id_year = ? 
+            GROUP BY  work.person_id,work.id_year 
+            ORDER BY work.id_year,work_count DESC');
+            $stmt->execute([$year]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
         public static function getAllMember()
         {
             $con = conDb::getInstance();
@@ -186,6 +245,19 @@
             }
             return $check;
             
+        }
+        public static function updateInfo($id_member,$id_code,$fname,$lname)
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('UPDATE member SET id_code = ?,fname=?,lname=? WHERE id_member = ?');
+            $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
+            if($check === TRUE)
+            {
+                $_SESSION['member']['id_code'] = $id_code;
+                $_SESSION['member']['fname'] = $fname;
+                $_SESSION['member']['lname'] = $lname;
+            }
+            return $check;
         }
         public static function updateMember($id_member,$id_code,$fname,$lname,$type)
         {
