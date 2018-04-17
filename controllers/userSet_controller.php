@@ -11,6 +11,11 @@
             $check = Member::upload_image($param['imagebase64'],$_SESSION['member']['id_member'],$_SESSION['member']['username']);
             header('location:index.php?controller=userSet&action=index_userSet');
         }
+        public function updateInfo($param = NULL)
+        {
+            $check = Member::updateInfo($param['id_member'],$param['id_code'],$param['fname'],$param['lname']);
+            header('location:index.php?controller=userSet&action=index_userSet');
+        }
        
     }
 ?>

@@ -53,7 +53,7 @@
             }
             if($work->get_status() == 'waiting' && $_SESSION['member']['type'] == 'นิสิต')
             {
-                $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
+               // $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
             }
             echo "<tr class='table-light'>
                     
