@@ -50,7 +50,15 @@
         public function addWork($param = NULL)
         {
             $check = Work::addWork($_SESSION['member']['id_member'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
-            header('location:index.php?controller=work&action=index_work');
+            if($check)
+            {
+                header('location:index.php?controller=work&action=index_work&success=1');
+            }
+            else
+            {
+                header('location:index.php?controller=work&action=index_work&error=1');
+            }
+            
         }
         public function editWork($param = NULL)
         {

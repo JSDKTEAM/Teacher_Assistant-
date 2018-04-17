@@ -15,20 +15,6 @@
                         }
                     ?>
                 </select>
-            
-            <!--<label for="">เลือกนิสิต</label>
-            <div class="member">
-                <form  method="GET">
-                    <select style="display:none"  name="id_member" id="name_member" class="form-control" placeholder="--เลือกนิสิต--">
-                        <option value="">--เลือกนิสิต--</option>
-                        <?php
-                        /*foreach($memberList as $member)
-                        {
-                            echo "<option value='".$member->get_id_member()."'>".$member->get_fname()." ".$member->get_lname()."</option>";
-                        }*/
-                        ?>
-                    </select>         
-            </div>-->
         </div>  
         <div class="col-4"> 
             <label>เลือกนิสิต</label>
