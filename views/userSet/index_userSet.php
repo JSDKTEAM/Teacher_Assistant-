@@ -177,7 +177,9 @@ return false;
 
 });
 </script>
+
 <script>
+    remove_spacebar("input")
      $(document).ready(function(){
         $('.btn-edit-info').click(function(){
         // get data from edit btn

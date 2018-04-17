@@ -19,6 +19,7 @@ else
 	$controller = 'identify';
 	$action = 'index_login';
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,6 +54,10 @@ else
 	<!-- Search Tags -->
 	<link rel="stylesheet" href="Searchable-Multi-select-jQuery-Dropdown/jquery.dropdown.css">
     <script src="Searchable-Multi-select-jQuery-Dropdown/jquery.dropdown.js"></script>
+	<!-- ตรวจสอบ Form -->
+	<script src="js/validate/remove_spacebar.js"></script>
+	<!--  sweetalert -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<style>
 	body{
 		font-family:Kanit;
