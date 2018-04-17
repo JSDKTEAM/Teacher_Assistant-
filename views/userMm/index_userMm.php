@@ -203,6 +203,8 @@
 <script>
     $(document).ready(function(){
         $('.btn-edit-pasword').click(function(){
+        $("#passwdinput").val('')
+        $("#passwdConfirm").val('')
         // get data from edit btn
         var id_member = $(this).attr('data-id-member');
         var username = $(this).attr('data-username');
@@ -282,9 +284,12 @@
     </div>
   </div>
 </div>
+
 <!-- ตรวจสอบความถูกต้อง -->
 <script>
-    $(document).ready(function() {
+    remove_spacebar("input");
+    confirm_password("#id_code_add","#passwdinput","#passwdConfirm","#type_user","#btn-submit","#alertPass");
+    /*$(document).ready(function() {
         $('#passwdConfirm').keyup(function(){
             if($(this).val() != $("#passwdinput").val())
             {
@@ -319,7 +324,7 @@
                 $("#id_code_add").prop('required', false);
             }
         });
-    });
+    });*/
 </script>
 <!-- ตาราง DataTable -->
 <script>

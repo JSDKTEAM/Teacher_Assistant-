@@ -1,5 +1,30 @@
 <?php
     include('views/header/nav2.php');
+    if(isset($_REQUEST['success']) || isset($_REQUEST['error']))
+    {
+       if($_REQUEST['success'] == 1)
+       {
+           echo "<script>    
+           swal({
+               icon: 'success',
+               title: 'สำเร็จ',
+               text: 'เพิ่มงานสำเร็จ',
+               buttons: false ,
+               timer: 1500
+           })</script>";
+       }
+       else
+       {
+           echo "<script>    
+           swal({
+               icon: 'error',
+               title: 'ไม่สำเร็จ',
+               text: 'เพิ่มงานไม่สำเร็จ',
+               buttons: false ,
+               timer: 1500
+           })</script>";
+       }
+    }
 ?>
 <style>
     .work{
