@@ -11,9 +11,7 @@
 <div class="content p-4" style="width:100%">
     <h2>ตั้งค่าปีการศึกษา</h2>
     <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addYear">
-    เพิ่มปีการศึกษา
-    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addYear">เพิ่มปีการศึกษา</button>
     </br></br>
 
     <!-- The Modal เพิ่มปีการศึกษา  -->
@@ -23,7 +21,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">เพิ่มบัญชีผู้ใช้</h4>
+            <h4 class="modal-title">เพิ่มปีการศึกษา</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
@@ -31,16 +29,16 @@
         <div class="modal-body">
             <form method="POST">
                
-                    <label><span class="red">*</span> ปีการศึกษา</label><input type="text" name="id_code" id="id_code_add" class="form-control" required>
-                    <label><span class="red">*</span> วัน/เดือน/ปี เริ่มการศึกษา</label><input type="date" name="fname" class="form-control" required>
-                    <label><span class="red">*</span> วัน/เดือน/ปี สิ้นสุดการศึกษา</label><input type="date" name="lname" class="form-control" required>
+                    <label><span class="red">*</span> ปีการศึกษา</label><input type="text" name="id_year" id="id_code_add" class="form-control" required>
+                    <label><span class="red">*</span> วัน/เดือน/ปี เริ่มการศึกษา</label><input type="date" name="start_date" id ="s_date" class="form-control" required>
+                    <label><span class="red">*</span> วัน/เดือน/ปี สิ้นสุดการศึกษา</label><input type="date" name="end_date" id="f_date" class="form-control" required>
                     
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <input type="hidden" name="controller" value="userMm">
-            <button type="submit" name="action" value="addMember" class="btn btn-success btn-block">เพิ่มบัญชีผู้ใช้</button>
+            <input type="hidden" name="controller" value="yearSet">
+            <button type="submit" name="action" value="addYear" class="btn btn-success btn-block">เพิ่มปีการศึกษา</button>
             </form>
         </div>
 
@@ -143,6 +141,10 @@
     </div>
   </div>
 </div>
+
+<script>
+   
+</script>
 
 
 <script>
