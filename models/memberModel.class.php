@@ -52,9 +52,27 @@
             $this->type = $type;
             $this->img_user = $img_user;
         }
+        public static function validateUsername($username)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT member.username FROM member WHERE member.username = ?');
+            $stmt->execute([$username]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                $data = array("check"=>TRUE);
+            }
+            else
+            {
+                $data = array("check"=>TRUE);
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
         public static function getMemberByYearReport($year)
         {
-           header('Content-type: application/json');
+            header('Content-type: application/json');
             $con = ConDb::getInstance();
             $stmt = $con->prepare('SELECT DISTINCT member.id_member,member.fname,member.lname FROM work 
             INNER JOIN member ON member.id_member = work.person_id
