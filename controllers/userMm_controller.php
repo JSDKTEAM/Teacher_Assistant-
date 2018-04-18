@@ -10,6 +10,10 @@
             $memberListYear = Member::getAllMemberByYear();
             include('views/userMm/index_userMm.php');
         }
+        public function validateUsername($param = NULL)
+        {
+            Member::validateUsername($param['username']);
+        }
         public function addMember($param = NULL)
         {
             $check = Member::addMemberMm($param['fname'],$param['lname'],$param['username'],$param['passwd'],$param['type']);
