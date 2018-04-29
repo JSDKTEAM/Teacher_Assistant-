@@ -87,7 +87,7 @@
                         data-HH ="<?php echo $time[0] ?>"
                         data-mm ="<?php echo $time[1]?>"
                         data-summary ="<?php echo $work->get_summary()?>"
-                        class="btn btn-success btn-sm btn-edit-work">แก้ไขงาน</a>
+                        class="btn btn-success btn-sm btn-edit-work">แก้ไขรายละเอียดงาน</a>
                         <a href="#" 
                         data-id-work = '<?php echo $work->get_id_work()?>'
                         data-title = '<?php echo $work->get_title()?>'
@@ -118,6 +118,7 @@
         var summary = $(this).attr('data-summary');    
 
         // set value to modal
+        
         $("#id-work").val(id_work);
         $("#title").val(title);
         $("#detail").val(detail);
@@ -125,11 +126,39 @@
         $("#timestop").val(timestop);
         $("#status").val(status);
         $("#id_patron").val(id_patron);
-        $("#id_person").val(id_person);
-        $("#due_date").val(due_date);       
-        $("#HH").val(HH);
-        $("#mm").val(mm);
-        $("#summary").val(summary);
+        if(status == 'waiting')
+        {
+          $(".waiting").hide();  
+          $(".booked").hide(); 
+          $("#chkstatus").removeClass();
+          $("#chkstatus").addClass("badge badge-warning"); 
+          $("#chkstatus").empty();
+          $("#chkstatus").append(status);
+        }
+        else if(status == 'booked')
+        {
+            $(".waiting").hide();  
+            $(".booked").show();
+            $("#chkstatus").removeClass();
+            $("#chkstatus").addClass("badge badge-primary");
+            $("#chkstatus").empty();  
+            $("#chkstatus").append(status);  
+            $("#id_person").val(id_person);       
+        }
+        else
+        {
+            $("#chkstatus").removeClass();
+            $("#chkstatus").addClass("badge badge-success"); 
+            $("#chkstatus").empty();
+            $("#chkstatus").append(status);
+            $("#id_person").val(id_person);
+            $("#due_date").val(due_date);       
+            $("#HH").val(HH);
+            $("#mm").val(mm);
+            $("#summary").val(summary);
+        }
+       
+
         $("#edit-work").modal('show');
         });
     });
@@ -153,7 +182,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">แก้ไขงาน</h4>
+        <h4 class="modal-title">แก้ไขงาน <span id="chkstatus"></span></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -165,12 +194,6 @@
                         <label><span class="red">*</span> หัวข้องาน</label><input type="text" name="title" id="title" class="form-control" required>                       
                         <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="timestart" id="timestart" class="form-control" required>
                         <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="timestop" id="timestop"  class="form-control" required>
-                        <label><span class="red">*</span> สถานะ</label>
-                        <select name="status" id="status" class="form-control">
-                         <option value="waiting">waiting</option>
-                         <option value="booked">booked</option>
-                         <option value="finish">finish</option>
-                        </select>
                         <label>รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" id="detail" class="form-control" ></textarea>
                         
                     </div>
@@ -186,6 +209,9 @@
                     }
                     ?>
                     </select>
+                    <input type="hidden" name="status" id="status" value="">
+                 
+                    <div class="booked">
                     <label><span class="red">*</span> ผู้รับงาน</label>
                     <select name="id_person" id="id_person" class="form-control">
                     <?php foreach($personList as $person)
@@ -197,6 +223,8 @@
                     }
                     ?>
                     </select>
+                    </div>
+                    <div class="waiting">
                     <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="due_date"  class="form-control" >                
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
@@ -214,7 +242,7 @@
                                 </div>
                             </div>
                     <label>รายละเอียดการส่ง</label><textarea cols="20" rows="5" type="text" name="summary" id="summary" class="form-control" ></textarea>
-                        
+                    </div>    
                     </div>
                 </div>
         </div>
@@ -222,7 +250,7 @@
       <!-- Modal footer -->
       <div class="modal-footer">
       <input type="hidden" name="controller" value="userMm">
-        <button id="btn-submit" type="submit" name="action" value="" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
+        <button id="btn-submit" type="submit" name="action" value="edit_workMm" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
       </div>
 
     </div>

@@ -65,6 +65,28 @@
             $patronList = Member::getAllStaff();
             include('views/userMm/index_workMm.php');
         }
+        public function edit_workMm($param  = NULL)
+        {
+            if($param['status']=='waiting')
+            {
+                $check1=Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+                $check2=Work::editPatronWork($param['id_work'],$param['id_patron']);
+            }
+            else if($param['status']=='booked')
+            {
+                $check1=Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+                $check2=Work::editPatronWork($param['id_work'],$param['id_patron']);
+                $check3=Work::editPersonWork($param['id_work'],$param['id_person']);
+            }
+            else
+            {
+                $check1=Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+                $check2=Work::editPatronWork($param['id_work'],$param['id_patron']);
+                $check3=Work::editPersonWork($param['id_work'],$param['id_person']);
+                $check4=Work::finishWork($param['id_work'],$param['due_date'],$param['HH'],$param['mm'],$param['summary']);
+            }
+            header('location:index.php?controller=userMm&action=index_workMm');
+        }
         public function delete_workMm($param  = NULL)
         {
             if($_SESSION['member']['type'] !='นิสิต')
