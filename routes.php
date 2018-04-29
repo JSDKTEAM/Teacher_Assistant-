@@ -51,7 +51,9 @@ function call($controller,$action)
 						$param['id_code'] = $_POST['id_code']??NULL;
 						$param['fname'] = $_POST['fname']??NULL;
 						$param['lname'] = $_POST['lname']??NULL;
+						$param['passwdOld'] = $_POST['passwdOld']??NULL;
 						$param['passwd'] = $_POST['passwd']??NULL;
+
 						$param['imagebase64'] = $_POST['imagebase64']??NULL;
 						break;
 		case "identify":$controller = new IdentifyController();
@@ -80,8 +82,13 @@ function call($controller,$action)
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
 ||  ($controller == 'work' && ($action == 'index_work' || $action == 'searchWork' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork'))
 ||  ($controller == 'myWork' && ($action == 'index_work' || $action == 'getWork' ||$action == 'get_myWork' || $action == 'getWork' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork' ))
+<<<<<<< HEAD
+||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm' || $action == 'validateUsername'))
+||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo' || $action == 'updatePassMember' || $action == 'validatePassword'))
+=======
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm' || $action == 'validateUsername'||$action=='delete_workMm'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo'))
+>>>>>>> origin/develop
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
 || ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear'))
 || ($controller == 'report' && ($action == 'index_reportMonth' || $action == 'getMemberByYear' || $action == 'reportMonth' || $action == 'reportYear')))

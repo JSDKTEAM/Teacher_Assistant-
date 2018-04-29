@@ -14,7 +14,33 @@
         public function updateInfo($param = NULL)
         {
             $check = Member::updateInfo($param['id_member'],$param['id_code'],$param['fname'],$param['lname']);
-            header('location:index.php?controller=userSet&action=index_userSet');
+            $link = 'location:index.php?controller=userSet&action=index_userSet';
+            if($check)
+            {
+                header($link.'&success=6');
+            }
+            else
+            {
+                header($link.'&error=6');
+            }
+            
+        }
+        public function updatePassMember($param = NULL)
+        {
+            $check = Member::updatePassMember($param['id_member'],$param['passwd']);
+            $link = 'location:index.php?controller=userSet&action=index_userSet';
+            if($check)
+            {
+                header($link.'&success=5');
+            }
+            else
+            {
+                header($link.'&error=5');
+            }
+        }
+        public function validatePassword($param = NULL)
+        {
+            Member::validatePassword($param['passwdOld'],$param['id_member']);
         }
        
     }

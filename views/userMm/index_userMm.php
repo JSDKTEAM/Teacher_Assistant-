@@ -1,4 +1,7 @@
-<?php include('views/header/nav2.php')?>
+<?php 
+    include('views/sweetalert/sweetalert.php');
+    include('views/header/nav2.php')
+?>
 <style>
     .red{
         color:red;
@@ -24,33 +27,33 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-            <form method="POST">
+            <form method="POST" id="add-member">
                 <div class="row">
                     <div class="col-6">
-                        <label>รหัสนิสิต</label><input type="text" name="id_code" id="id_code_add" class="form-control">
-                        <label><span class="red">*</span> ชื่อ</label><input type="text" name="fname" class="form-control" required>
-                        <label><span class="red">*</span> นามสกุล</label><input type="text" name="lname" class="form-control" required>
-                    </div>
-                    <div class="col-6">
-                        <label><span class="red">*</span> Username</label><input type="text" name="username" class="form-control" required>
-                        <label><span class="red">*</span> Password</label><input type="password" name="passwd" class="form-control" required>
-                        <label><span class="red">*</span> Confirm Password</label><input type="password" class="form-control" required>
-
-                        <label><span class="red">*</span> สถานะ</label>
+                        <label></span> สถานะ</label>
                         <select name="type" id="type_user" class="form-control" required>
                             <option value="">เลือกสถานะ</option>
                             <option value="อาจารย์">อาจารย์</option>
                             <option value="ผู้ประเมิน">ผู้ประเมิน</option>
                             <option value="นิสิต">นิสิต</option>
                         </select>
+                        <div id="id_code_add" >
+                            <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  class="form-control">
+                        </div>
+                        <label><span class="red">*</span> ชื่อ</label><input type="text" name="fname" class="form-control" required>
+                        <label><span class="red">*</span> นามสกุล</label><input type="text" name="lname" class="form-control" required>
+                    </div>
+                    <div class="col-6">
+                        <label><span class="red">*</span> Username</label><input type="text" name="username" id="username_add" class="form-control" required>
+                        <label><span class="red">*</span> Password</label><input type="password" name="passwd" id="passwdAdd" class="form-control" required>
+                        <label><span class="red">*</span> Confirm Password</label><input type="password" id="passwdAddc" class="form-control" required>
                     </div>
                 </div>
         </div>
-
         <!-- Modal footer -->
         <div class="modal-footer">
             <input type="hidden" name="controller" value="userMm">
-            <button type="submit" name="action" value="addMember" class="btn btn-success btn-block">เพิ่มบัญชีผู้ใช้</button>
+            <button type="submit" name="action" value="addMember" id="btnadduser" class="btn btn-success btn-block">เพิ่มบัญชีผู้ใช้</button>
             </form>
         </div>
 
@@ -267,12 +270,11 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form method="POST">
+        <form method="POST" id="edit-passwd-member">
             <input type="hidden" id="id-member-password" name="id_member">
             <label>Username</label><input type="text" id="username-password" class="form-control">
             <label>New Password</label><input type="password" name="passwd" id="passwdinput" class="form-control" required>
             <label>Confirm New Password</label><input type="password" name="passwdConfirm" id="passwdConfirm" class="form-control" required>
-            <span id="alertPass" class="text-danger"></span>
       </div>
 
       <!-- Modal footer -->
@@ -288,43 +290,25 @@
 <!-- ตรวจสอบความถูกต้อง -->
 <script>
     remove_spacebar("input");
-    confirm_password("#id_code_add","#passwdinput","#passwdConfirm","#type_user","#btn-submit","#alertPass");
-    /*$(document).ready(function() {
-        $('#passwdConfirm').keyup(function(){
-            if($(this).val() != $("#passwdinput").val())
-            {
-                $("#btn-submit").prop('disabled', true);
-                document.getElementById("alertPass").innerHTML = "ยืนยันรหัสผ่านไม่ถูกต้อง";
-            }
-            else
-            {
-                $("#btn-submit").prop('disabled', false);
-                $("#alertPass").empty();
-            }
+    confirm_password("#passwdinput","#passwdConfirm","#btn-submit");
+    confirm_password("#passwdAdd","#passwdAddc","#btnadduser");
+    check_status("#id_code_add","#type_user")
+    validateUsername("#username_add","#btnadduser");
+    $(document).ready(function() {
+        $("#add-member").submit(function( event ) {
+            if (check_passwd("#passwdAdd","#passwdAddc") && check_username("#username_add")) {
+                return;
+            }  
+            event.preventDefault();
         });
-        $('#passwdinput').keyup(function(){
-            if($(this).val() != $("#passwdConfirm").val() && $("#passwdConfirm").val() != '' )
-            {
-                $("#btn-submit").prop('disabled', true);
-                document.getElementById("alertPass").innerHTML = "ยืนยันรหัสผ่านไม่ถูกต้อง";
-            }
-            else
-            {
-                $("#btn-submit").prop('disabled', false);
-                $("#alertPass").empty();
-            }
+        $("#edit-passwd-member").submit(function( event ) {
+            if (check_passwd("#passwdinput","#passwdConfirm")) {
+                return;
+            }  
+            event.preventDefault();
         });
-        $('#type_user').change(function(){
-            if($(this).val() == 'นิสิต')
-            {
-                $("#id_code_add").prop('required', true);
-            }
-            else
-            {
-                $("#id_code_add").prop('required', false);
-            }
-        });
-    });*/
+
+    });
 </script>
 <!-- ตาราง DataTable -->
 <script>

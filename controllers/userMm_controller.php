@@ -17,7 +17,15 @@
         public function addMember($param = NULL)
         {
             $check = Member::addMemberMm($param['fname'],$param['lname'],$param['username'],$param['passwd'],$param['type']);
-            header('location:index.php?controller=userMm&action=index_userMm');
+            $link = 'location:index.php?controller=userMm&action=index_userMm';
+            if($check)
+            {
+                header($link.'&success=4');
+            }
+            else
+            {
+                header($link.'&error=4');
+            }
         }
         public function addMemberSys($param = NULL)
         {
@@ -27,12 +35,28 @@
         public function updateMember($param = NULL)
         {
             $check = Member::updateMember($param['id_member'],$param['id_code'],$param['fname'],$param['lname'],$param['type']);
-            header('location:index.php?controller=userMm&action=index_userMm');
+            $link = 'location:index.php?controller=userMm&action=index_userMm';
+            if($check)
+            {
+                header($link.'&success=6');
+            }
+            else
+            {
+                header($link.'&error=6');
+            }
         }
         public function updatePassMember($param = NULL)
         {
-            Member::updatePassMember($param['id_member'],$param['passwd']);
-            header('location:index.php?controller=userMm&action=index_userMm');
+            $check = Member::updatePassMember($param['id_member'],$param['passwd']);
+            $link = 'location:index.php?controller=userMm&action=index_userMm';
+            if($check)
+            {
+                header($link.'&success=5');
+            }
+            else
+            {
+                header($link.'&error=5');
+            }
         }
         public function index_workMm($param  = NULL)
         {
