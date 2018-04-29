@@ -169,6 +169,26 @@
                 return FALSE;
             }
         }
+        public static function getAllStaff()
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->query("SELECT * FROM member WHERE member.type != 'นิสิต'");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                foreach($result as $key=>$value)
+                {
+                    $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type'],$value['img_user']);
+                }
+                //$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+                //$result = $stmt->fetchAll();
+                return $member_list;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
         public static function getMemberInSym()
         {
             $con = conDb::getInstance();
