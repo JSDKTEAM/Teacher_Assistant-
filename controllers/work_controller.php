@@ -62,6 +62,19 @@
         }
         public function editWork($param = NULL)
         {
+            if($_SESSION['member']['type'] !='นิสิต')
+            $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+            header("location:index.php?controller=work&action=index_work");
+        }
+        public function deleteWork($param = NULL)
+        {
+            if($_SESSION['member']['type'] !='นิสิต')
+            $check = Work::deleteWork($param['id_work']);         
+            header("location:index.php?controller=work&action=index_work");
+        }
+        /*
+        public function editWork($param = NULL)
+        {
             $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
             if($_SESSION['member']['type']=='อาจารย์')
             header("location:index.php?controller=myWork&action=get_myWork");
@@ -72,5 +85,6 @@
             if($_SESSION['member']['type']=='อาจารย์')
             header("location:index.php?controller=myWork&action=get_myWork");
         }
+        */
     }
 ?>

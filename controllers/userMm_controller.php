@@ -37,7 +37,15 @@
         public function index_workMm($param  = NULL)
         {
             $workList = Work::getAllWork();
+            $personList = Member::getMemberByYear();
+            $patronList = Member::getAllStaff();
             include('views/userMm/index_workMm.php');
+        }
+        public function delete_workMm($param  = NULL)
+        {
+            if($_SESSION['member']['type'] !='นิสิต')
+            $check = Work::deleteWork($param['id_work']);
+            header('location:index.php?controller=userMm&action=index_workMm');
         }
     }
 ?>
