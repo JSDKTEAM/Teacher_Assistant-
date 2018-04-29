@@ -55,7 +55,7 @@ else
 	<link rel="stylesheet" href="Searchable-Multi-select-jQuery-Dropdown/jquery.dropdown.css">
     <script src="Searchable-Multi-select-jQuery-Dropdown/jquery.dropdown.js"></script>
 	<!-- ตรวจสอบ Form -->
-	<script src="js/validate/remove_spacebar.js"></script>
+	<script src="js/validate/validate_form.js"></script>
 	<!--  sweetalert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<style>

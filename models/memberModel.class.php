@@ -58,14 +58,34 @@
             $con = ConDb::getInstance();
             $stmt = $con->prepare('SELECT member.username FROM member WHERE member.username = ?');
             $stmt->execute([$username]);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if($result)
+            if($stmt->rowCount() > 0)
+            {
+                $data = array("check"=>TRUE,"username"=>$username,"count"=>$stmt->rowCount());
+            }
+            else
+            {
+                $data = array("check"=>FALSE,"username"=>$username,"count"=>$stmt->rowCount());
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
+        public static function validatePassword($passwd,$id_member)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
+            $stmt = $con->prepare('SELECT member.passwd FROM member WHERE member.id_member = ?');
+            $stmt->execute([$id_member]);
+            $result = $stmt->fetch();
+            $password_hash = $result['passwd'];
+            $check_password = password_verify($passwd,$password_hash);
+            if($check_password)
             {
                 $data = array("check"=>TRUE);
             }
             else
             {
-                $data = array("check"=>TRUE);
+                $data = array("check"=>FALSE);
             }
             ob_end_clean();
             print json_encode($data);
@@ -267,6 +287,7 @@
         public static function updateInfo($id_member,$id_code,$fname,$lname)
         {
             $con = conDb::getInstance();
+            //echo $id_code;
             $stmt = $con->prepare('UPDATE member SET id_code = ?,fname=?,lname=? WHERE id_member = ?');
             $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
             if($check === TRUE)
@@ -281,14 +302,16 @@
         {
             $con = conDb::getInstance();
             $stmt = $con->prepare('UPDATE member SET id_code=?,fname=?,lname=?,type=? WHERE id_member=?');
-            $stmt->execute([$id_code,$fname,$lname,$type,$id_member]);
+            $check = $stmt->execute([$id_code,$fname,$lname,$type,$id_member]);
+            return $check;
         }
         public static function updatePassMember($id_member,$passwd)
         {
             $con = conDb::getInstance();
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
             $stmt = $con->prepare('UPDATE member SET passwd=? WHERE id_member=?');
-            $stmt->execute([$strPassword,$id_member]);
+            $check = $stmt->execute([$strPassword,$id_member]);
+            return $check;
         }
         public static function upload_image($data_img,$id_member,$username)
         {      
