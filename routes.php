@@ -37,6 +37,7 @@ function call($controller,$action)
 						$param['summary'] = $_POST['summary']??NULL;
 						break;
 		case "userMm":  $controller = new UserMmController();
+						$param['id_work'] = $_POST['id_work']??NULL;
 						$param['id_member'] = $_POST['id_member']??NULL;
 						$param['id_code'] = $_POST['id_code']??NULL;
 						$param['fname'] = $_POST['fname']??NULL;
@@ -79,7 +80,7 @@ function call($controller,$action)
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
 ||  ($controller == 'work' && ($action == 'index_work' || $action == 'searchWork' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork'))
 ||  ($controller == 'myWork' && ($action == 'index_work' || $action == 'getWork' ||$action == 'get_myWork' || $action == 'getWork' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork' ))
-||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm' || $action == 'validateUsername'))
+||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm' || $action == 'validateUsername'||$action=='delete_workMm'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
 || ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear'))

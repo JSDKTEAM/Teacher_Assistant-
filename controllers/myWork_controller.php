@@ -52,14 +52,14 @@
         }
         public function editWork($param = NULL)
         {
+            if($_SESSION['member']['type'] !='นิสิต')
             $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
-            if($_SESSION['member']['type']=='อาจารย์')
             header("location:index.php?controller=myWork&action=get_myWork");
         }
         public function deleteWork($param = NULL)
         {
-            $check = Work::deleteWork($param['id_work']);
-            if($_SESSION['member']['type']=='อาจารย์')
+            if($_SESSION['member']['type'] !='นิสิต')
+            $check = Work::deleteWork($param['id_work']);         
             header("location:index.php?controller=myWork&action=get_myWork");
         }
     }

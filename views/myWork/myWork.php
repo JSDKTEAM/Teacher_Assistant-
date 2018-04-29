@@ -204,7 +204,7 @@
                     <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                 </div>
             </div>
-            <input type="hidden" name="controller" value="work">
+            <input type="hidden" name="controller" value="myWork">
             
         
     </div>
@@ -221,7 +221,7 @@
 
 
 <div class="modal fade" id="delete">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
 
     <!-- Modal Header -->
@@ -246,7 +246,14 @@
 
     <!-- Modal footer -->
     <div class="modal-footer">
+
+    <div style="width :50%">
         <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ลบ</button>
+    </div>
+    <div style="width :50%">    
+        <button type="button" class="btn btn-light btn-block" data-dismiss="modal">ยกเลิก</button>
+    </div> 
+ 
         </form>
     </div>
 
