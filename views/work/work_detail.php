@@ -63,7 +63,7 @@
                 </form>
             </div>
             <div class="col-6">
-                <button href="#" class="btn btn-primary btn-block">ย้อนกลับ</button>
+                <button onclick="window.history.back();" class="btn btn-primary btn-block">ย้อนกลับ</button>
             </div>
             <?php } ?>
             <?php if($work->get_status() == 'booked' && $objPerson->get_id_member() == $_SESSION['member']['id_member']) {?>

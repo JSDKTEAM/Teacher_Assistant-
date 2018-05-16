@@ -101,7 +101,8 @@
         var start_date= $(this).attr('data-start-date');
 
         // set value to modal
-        $("#id-year-edit").val(id_year);
+        document.getElementById("id-year-edit2").innerHTML = "ปีการศึกษา "+id_year;
+        $("#id-year-edit1").val(id_year);
         $("#end-date-edit").val(end_date);
         $("#start-date-edit").val(start_date);
 
@@ -125,7 +126,8 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form method="POST" id="edit_year">
-            <label><span class="red">*</span>  ปีการศึกษา</label><input id="id-year-edit"  type="number" name="id_year" class="form-control" disabled required>
+            <input id="id-year-edit1"  type="hidden" name="id_year" class="form-control">
+            <h4 id="id-year-edit2"></h4>
             <label><span class="red">*</span> เดือน/วัน/ปี เริ่มการศึกษา</label><input id="start-date-edit"  type="date" name="start_date" class="form-control" required>
             <label><span class="red">*</span> เดือน/วัน/ปี สิ้นสุดการศึกษา</label><input id="end-date-edit"  type="date" name="end_date" class="form-control" required>
             <input type="hidden" name="controller" value="yearSet"> 
@@ -140,6 +142,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- ตรวจสอบปีการศึกษา -->
 <script>
 $(document).ready(function() {

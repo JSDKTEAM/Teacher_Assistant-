@@ -83,7 +83,6 @@ function call($controller,$action)
 						$param['id_year']=$_POST['id_year']??NULL;
 						$param['start_date']=$_POST['start_date']??NULL;
 						$param['end_date']=$_POST['end_date']??NULL;
-						$param['id_year']=$_POST['id_year']??NULL;
 						break ; 
 		case "addStd": $controller = new AddStdController();
 						$param['id_member'] = $_POST['id_member']??NULL;

@@ -23,7 +23,7 @@
     <div class="container">
     <div class="row">
             <div class="col-2">
-                <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
+                <img src="<?php echo $member->get_img_user() ?>" class="center" width="120" alt="<?php echo $member->get_username() ?>">
             </div>
             <div class="col-4">
                 <h3> <?php echo $member->get_type()."</br>".$member->get_fname()." ".$member->get_lname() ?></h3>
@@ -146,6 +146,7 @@
     $(document).ready(function(){
         $('.btn-edit').click(function(){
         // get data from edit btn
+        $('.alert').remove();
         var id_work = $(this).attr('data-id-work');
         var title = $(this).attr('data-title');
         var detail = $(this).attr('data-detail');
@@ -167,7 +168,7 @@
         $('.btn-delete').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน "+$(this).attr('data-title')+" ใช่หรือไม่" ;
         // set value to modal
         $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
@@ -216,12 +217,12 @@
 
 
 <div class="modal fade" id="delete">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-md">
     <div class="modal-content">
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ต้องการลบงาน</h4>
+        <h4 class="modal-title">ยืนยันการลบงาน</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -229,11 +230,7 @@
     <div class="modal-body">
         <form method="POST">
         <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
-            <div class="row">   
-                <div class="col-6">
-                    <label id="data-title-delete"></label> 
-                 </div>             
-            </div>
+                <h5 id="data-title-delete"></h5>              
             <input type="hidden" name="controller" value="myWork">
             
         
@@ -271,7 +268,7 @@ $(document).ready(function() {
         else
         {
             $('.alert').remove();
-            $("#data-time-stop-edit").after("<span class='alert red'>วันที่เริ่มงานน้อยกว่าวันที่ส่งงาน</span>");
+            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
         }
         event.preventDefault();
     });

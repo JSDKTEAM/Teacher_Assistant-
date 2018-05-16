@@ -196,7 +196,7 @@
         $('.btn-delete').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน "+$(this).attr('data-title') + " ใช่หรือไม่";
         // set value to modal
         $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
@@ -286,12 +286,12 @@
   </div>
 </div>
 <div class="modal fade" id="delete">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog">
     <div class="modal-content">
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ต้องการลบงาน</h4>
+        <h4 class="modal-title">ยืนยันการลบงาน</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -299,24 +299,18 @@
     <div class="modal-body">
         <form method="POST">
         <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
-            <div class="row">   
-                <div class="col-6">
-                    <label id="data-title-delete"></label> 
-                 </div>             
-            </div>
-            <input type="hidden" name="controller" value="userMm">
-            
-        
+        <h5 id="data-title-delete"></h5>        
+        <input type="hidden" name="controller" value="userMm"> 
     </div>
 
     <!-- Modal footer -->
     <div class="modal-footer">
 
     <div style="width :50%">
-        <button type="submit" class="btn btn-danger btn-block" name="action" value="delete_workMm">ลบ</button>
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="delete_workMm">ใช่</button>
     </div>
     <div style="width :50%">    
-        <button type="button" class="btn btn-light btn-block" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
     </div> 
  
         </form>

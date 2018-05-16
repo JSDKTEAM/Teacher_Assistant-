@@ -67,7 +67,14 @@ else
 		background-color:#EBEBEB;
 	}
 	table{
-		background-color:#FFFF;
+		background-color:#FFFF;	
+	}
+	tbody tr{
+		line-height: 2px;
+		font-size:14px;
+	}
+	.red{
+		color:red;
 	}
 	</style>
 </head>
@@ -85,6 +92,7 @@ else
 			$("#report a:contains('สถิติ')").parent().addClass('active');
 			$("#userMm a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#yearSet a:contains('จัดการระบบ')").parent().addClass('active');
+			$("#addStd a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#report a:contains('สถิติ')").parent().addClass('active');
 		}); //jQuery is loaded
 	</script>
