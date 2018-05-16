@@ -16,8 +16,11 @@
         public function addYear($param = NULL)
         {
             $check = YearSchool::add_yearschool($param['id_year'],$param['start_date'],$param['end_date']);
-          
             header('location:index.php?controller=yearSet&action=index_year');
+        }
+        public function validateYear($param = NULL)
+        {
+            YearSchool::validateYear($param['id_year']);
         }
         
         

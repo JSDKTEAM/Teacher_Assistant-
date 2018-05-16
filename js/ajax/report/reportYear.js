@@ -21,10 +21,10 @@ $(document).ready(function() {
                         labels: name,
                         datasets: [{
                             label: 'งานที่ทำ',
-                            backgroundColor: 'rgba(0,145,234)',
-                            borderColor: 'rgba(0,145,234)',
-                            hoverBackgroundColor: 'rgba(0,176,255)',
-                            hoverBorderColor: 'rgba(0,176,255)',
+                            backgroundColor: 'rgba(139,195,74)',
+                            borderColor: 'rgba(139,195,74)',
+                            hoverBackgroundColor: 'rgba(174,213,129)',
+                            hoverBorderColor: 'rgba(174,213,129)',
                             data: work_count
                         }]
                     };
@@ -38,8 +38,7 @@ $(document).ready(function() {
                                 xAxes: [{
                                     ticks: {
                                         beginAtZero: true,
-                                        min: 0,
-                                        stepSize: 1,
+                                        min: 0
                                     }
                                 }]
                             }

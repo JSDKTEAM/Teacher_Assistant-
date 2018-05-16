@@ -1,5 +1,5 @@
 <?php
-    include('views/header/nav2.php');
+    include('views/header/nav3.php');
 ?>
 <style>
     #work_detail{
@@ -7,12 +7,14 @@
         width:90%;
         box-shadow: 5px 5px 30px 5px #888888;
         padding:30px;
+        background:#FFFF;
     }
     .red{
         color:red;
     }
 </style>
-<div class="content p-4" style="width:100%">
+<div class="banner-sec">
+    <div class="container">
     
     <div id="work_detail" >  
 
@@ -22,15 +24,15 @@
              $objPerson = $work->get_objPerson();
              if($work->get_status() == 'waiting')
              {
-                 $color='badge badge-warning';
+                 $color='badge badge-pill badge-warning';
              }
              else if($work->get_status() == 'booked')
              {
-                 $color='badge badge-primary';
+                 $color='badge badge-pill badge-primary';
              }
              else
              {
-                $color='badge badge-success';
+                $color='badge badge-pill badge-success';
              }
         ?>
         <h3><?php echo $work->get_title() ?> <span class="<?php echo $color ?>"><?php echo $work->get_status() ?></span></h3>

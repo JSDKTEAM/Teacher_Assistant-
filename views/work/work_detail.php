@@ -1,5 +1,5 @@
 <?php
-    include('views/header/nav2.php');
+    include('views/header/nav3.php');
 ?>
 <style>
     #work_detail{
@@ -7,13 +7,14 @@
         width:90%;
         box-shadow: 5px 5px 30px 5px #888888;
         padding:30px;
+        background:#FFFF;
     }
     .red{
         color:red;
     }
 </style>
-<div class="content p-4" style="width:100%">
-    
+<div class="banner-sec">
+    <div class="container">
     <div id="work_detail" >  
     <a href="?controller=work&action=index_work">หน้าแรก</a> <i class="fas fa-angle-right"></i> <a href=""><?php echo $work->get_title() ?></a></p>
         <?php
@@ -21,15 +22,15 @@
              $objPerson = $work->get_objPerson();
              if($work->get_status() == 'waiting')
              {
-                 $color='badge badge-warning';
+                 $color='badge badge-pill badge-warning';
              }
              else if($work->get_status() == 'booked')
              {
-                 $color='badge badge-primary';
+                 $color='badge badge-pill badge-primary';
              }
              else
              {
-                $color='badge badge-success';
+                $color='badge  badge-pill badge-success';
              }
         ?>
         <h3><?php echo $work->get_title() ?> <span class="<?php echo $color ?>"><?php echo $work->get_status() ?></span></h3>
@@ -128,21 +129,26 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">ยกเลิกไม่รับงาน</h4>
+                        <h4 class="modal-title">ยืนยันยกเลิกไม่รับงาน</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form method="POST">
-                            <h5><?php echo $work->get_title() ?></h5>
+                            <h5><?php echo "คุณต้องการยกเลิกรับงาน ".$work->get_title()." ใช่หรือไม่" ?></h5>
                             <input type="hidden" name="id_work" value="<?php echo $work->get_id_work() ?>">
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
                             <input type="hidden" name="controller" value="work">
                     </div>
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="submit" name="action" value="cancelWork" class="btn btn-danger btn-block">ยืนยัน</button>
+                    <div class="modal-footer">             
+                        <div style="width :50%">
+                            <button type="submit" class="btn btn-danger btn-block" name="action" value="cancelWork">ใช่</button>
+                        </div>
+                        <div style="width :50%">    
+                            <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
+                        </div> 
                         </form>
                     </div>
 
