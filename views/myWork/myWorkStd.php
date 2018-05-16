@@ -65,7 +65,7 @@
                         </div>";
              echo  "</div>
                     </td>   
-                    <td align='center'><a href='?controller=myWork&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
+                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
                     <td align='center'>
                     <h4><span class='$color'>".$work->get_status()."</span></h4>
                     </td>
