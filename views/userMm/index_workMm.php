@@ -1,11 +1,12 @@
-<?php include('views/header/nav2.php');
+<?php include('views/header/nav3.php');
     include('views/sweetalert/sweetalert.php');?>
 <style>
     .red{
         color:red;
     }
 </style>
-<div class="content p-4" style="width:100%">
+<div class="banner-sec">
+    <div class="container">
     <h2>จัดการงาน</h2>
     <!-- Button to Open the Modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addWork1">
@@ -328,9 +329,22 @@
 <!-- ตาราง DataTable -->
 <script>
     $(document).ready(function() {
-    $('#memberTable').DataTable();
-} );
-$(document).ready(function() {
-    $('#memberTable2').DataTable();
+    $('#memberTable').DataTable({
+        "language": {
+            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"ค้นหา:",
+            "paginate": {
+            "first":      "หน้าแรก",
+            "last":       "หน้าสุดท้าย",
+            "next":       "ต่อไป",
+            "previous":   "ก่อนหน้า"
+            },
+            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
+        }
+    });
 } );
 </script>

@@ -52,6 +52,23 @@
             $this->type = $type;
             $this->img_user = $img_user;
         }
+        public static function validateCode($id_code)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT member.id_code FROM member WHERE member.id_code = ?');
+            $stmt->execute([$id_code]);
+            if($stmt->rowCount() > 0)
+            {
+                $data = array("check"=>TRUE);
+            }
+            else
+            {
+                $data = array("check"=>FALSE);
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
         public static function validateUsername($username)
         {
             header('Content-type: application/json');
@@ -352,6 +369,22 @@
             $stmt = $con->prepare('UPDATE member SET img_user= ? WHERE id_member=?');
             $_SESSION['member']['img_user'] = $img_user;
             $check = $stmt->execute(['imagesProfile/'.$username.'.png',$id_member]);
+        }
+        public static function deleteUser($id_member)
+        {   
+            /*$con = conDb::getInstance();
+            $stmt = $con->prepare('SELECT * FROM member 
+            INNER JOIN work on work.patron_id = member.id_member or work.person_id 
+            WHERE id_member = ?');
+            $stmt->execute([$id_member]);
+            if($stmt->rowCount() > 0)
+            {
+                return false;
+            }
+            $stmt = $con->prepare('DELETE FROM member WHERE member.id_member = ?');
+            $check = $stmt->execute([$id_member]);
+            return true;*/
+            
         }
     }
 ?>

@@ -37,13 +37,15 @@ else
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+	<!-- fontaws -->
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"> 
-	
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
- 
-	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
+	<!-- dataTable -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css"/>
+
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
 
 
@@ -60,8 +62,9 @@ else
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<style>
 	body{
+		margin:0;
 		font-family:Kanit;
-		background-color:#F5F5F5;
+		background-color:#EBEBEB;
 	}
 	table{
 		background-color:#FFFF;
@@ -88,3 +91,5 @@ else
 </body>
 </html>
 <?php if(isAjax()){ob_end_clean();} ?>
+
+

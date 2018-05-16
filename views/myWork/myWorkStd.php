@@ -1,6 +1,5 @@
 <?php
-    include('views/header/nav2.php');
-    
+    include('views/header/nav3.php');
 ?>
 <style>
     .work{
@@ -16,7 +15,8 @@
     margin-right: auto;
 }
 </style>
-<div class="content p-4" style="width:100%">
+<div class="banner-sec">
+    <div class="container">
     <div class="row">
         <div class="col-2">
             <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
@@ -47,11 +47,11 @@
             $objPerson = $work->get_objPerson();
             if($work->get_status() == 'booked')
             {
-                $color='badge badge-primary';
+                $color='badge badge-pill badge-primary';
             }
             else
             {
-               $color='badge badge-success';
+               $color='badge badge-pill badge-success';
             }
             $submitwork = '';          
             echo "<tr class='table-light'>
@@ -79,7 +79,23 @@
 
 <script>
     $(document).ready(function() {
-    $('#workTable').DataTable();
+    $('#workTable').DataTable({
+        "language": {
+            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"ค้นหา:",
+            "paginate": {
+            "first":      "หน้าแรก",
+            "last":       "หน้าสุดท้าย",
+            "next":       "ต่อไป",
+            "previous":   "ก่อนหน้า"
+            },
+            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
+        }
+    });
 } );
 </script>
 

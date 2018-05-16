@@ -27,6 +27,10 @@
                 header($link.'&error=4');
             }
         }
+        public function validateCode($param = NULL)
+        {
+            Member::validateCode($param['id_code']);
+        }
         public function addMemberSys($param = NULL)
         {
            $check = Member::addMemberSys($param['id_member']);
@@ -150,6 +154,19 @@
                 header($link.'&error=2');
             }
             
+        }
+        public function deleteUser($param = NULL)
+        {
+            $check = Member::deleteUser($param['id_member']);
+            $link = 'location:index.php?controller=userMm&action=index_userMm';
+            if($check)
+            {
+                header($link.'&success=7');
+            }
+            else
+            {
+                header($link.'&error=7');
+            }
         }
     }
 ?>

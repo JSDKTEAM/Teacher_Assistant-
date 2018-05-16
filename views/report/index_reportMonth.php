@@ -1,5 +1,6 @@
-<?php include('views/header/nav2.php')?>
-<div  class="content p-4" style="width:100%">
+<?php include('views/header/nav3.php')?>
+<div class="banner-sec">
+    <div class="container">
     </br>
     <?php include('views/report/nav_report.php')?>
     <div class="row m-chart">
@@ -49,9 +50,3 @@
 </br>
 <script src="js/ajax/report/reportMonth.js"></script>
 <script src="js/ajax/report/reportYear.js"></script>
-<script>
-        $('.member').dropdown({
-            readOnly: true,
-            searchable: false
-        });
-</script>

@@ -1,110 +1,111 @@
 <?php
-    include('views/header/nav2.php');
     include('views/sweetalert/sweetalert.php');
+    include('views/header/nav3.php');
 ?>
-<div class="content p-4" style="width:100%">
-    <?php if($_SESSION['member']['type'] != "นิสิต"){?>
-    <form method="POST">
-        <label>ปีการศึกษา
-        <select name="id_year" id="id_year" class="form-control" required>
-            <option value="">--เลือกปีการศึกษา--</option>
-            <?php
-                foreach($yearSchoolList as $yearSchool)
-                {
-                    echo "<option>".$yearSchool->get_id_year()."</option>";
-                }
-            ?>
-        </select>
-        </label>
-        <input type="hidden" name="controller" value="work">
-        <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
-    </form>
-    </br></br>
-    <?php } ?>
-    <table  id="workTable" class="table  table-bordered"> 
-        <thead>
-            <tr align="center" class="table-light">
-                <th>#</th>
-                <th>รายละเอียด</th>
-                <th>ผู้สั่ง</th>
-                <th>สถานะ</th>
-            </tr>
-        </thead>
-        <tbody>
-        
-        <?php
-        $i = 1;
-        if($workList !== FALSE)
-        {
-        foreach($workList as $key=>$work)
-        {
-            $objPatron = $work->get_objPatron();
-            $submitwork = '';
-            if($work->get_status() == 'waiting')
-            {
-                $color='badge badge-warning';
-            }
-            else if($work->get_status() == 'booked')
-            {
-                $color='badge badge-primary';
-            }
-            else
-            {
-               $color='badge badge-success';
-            }
-            if($work->get_status() == 'waiting' && $_SESSION['member']['type'] == 'นิสิต')
-            {
-               // $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
-            }
-            echo "<tr class='table-light'>
-                    
-                    <td align='center'>$i</td>
-                    <td>
-                    <div class='row'>
-                        <div class='col-9'>
-                            <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
-                            <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
-                        </div>";
-            if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
-            {
-               ?>
-                    <div class='col-3' >
-                    <div class='dropdown'>
-                        <button class='btn btn-sm  float-right dropdown-toggle' data-toggle='dropdown'>
-                            <i class='fas fa-cog'></i>
-                        </button>
-                        <div class='dropdown-menu  dropdown-menu-right'>
-                        <a class='dropdown-item edit-work' href="#"  data-id-work = '<?php echo $work->get_id_work()?>'
-                            data-title = '<?php echo $work->get_title()?>'
-                            data-detail = '<?php echo $work->get_detail()?>'
-                            data-time-start = '<?php echo $work->get_time_start()?>'
-                            data-time-stop  = '<?php echo $work->get_time_stop()?>'><i  class='fas fa-edit'></i> แก้ไข</a>
-                        <a class='dropdown-item delete-work' href='#'
-                            data-id-work = '<?php echo $work->get_id_work()?>'
-                            data-title = '<?php echo $work->get_title()?>'><i class='far fa-trash-alt'></i> ลบงาน</a>
-                        </div>
-                    </div>
-                    </div>
-                    <?php
-            }
-            else
-            {
-                echo "<div class='col-3'>
-                </div>";
-            }
-             echo  "</div>
-                    </td>
-                    <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
-                    <td align='center'>
-                        <h4><span class='$color'>".$work->get_status()."</span></h4>
-                    </td>
-                  </tr>";
+<div class="banner-sec">
+    <div class="container">
+        <?php if($_SESSION['member']['type'] != "นิสิต"){?>
+        <form method="POST">
+            <label>ปีการศึกษา
+            <select name="id_year" id="id_year" class="form-control" required>
+                <option value="">--เลือกปีการศึกษา--</option>
+                <?php
+                    foreach($yearSchoolList as $yearSchool)
+                    {
+                        echo "<option>".$yearSchool->get_id_year()."</option>";
+                    }
+                ?>
+            </select>
+            </label>
+            <input type="hidden" name="controller" value="work">
+            <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
+        </form>
+        </br>
+        <?php } ?>
+        <table  id="workTable" class="table table-bordered" > 
+            <thead>
+                <tr align="center" class="table-light">
+                    <th>#</th>
+                    <th>รายละเอียด</th>
+                    <th>ผู้สั่ง</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
             
-       $i++; }}
-        ?>
-        </tbody>
-    </table>
+            <?php
+            $i = 1;
+            if($workList !== FALSE)
+            {
+            foreach($workList as $key=>$work)
+            {
+                $objPatron = $work->get_objPatron();
+                $submitwork = '';
+                if($work->get_status() == 'waiting')
+                {
+                    $color='badge badge-pill badge-warning';
+                }
+                else if($work->get_status() == 'booked')
+                {
+                    $color='badge badge-pill badge-primary';
+                }
+                else
+                {
+                $color='badge badge-pill badge-success';
+                }
+                if($work->get_status() == 'waiting' && $_SESSION['member']['type'] == 'นิสิต')
+                {
+                // $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
+                }
+                echo "<tr class='table-light'>
+                        
+                        <td align='center'>$i</td>
+                        <td>
+                        <div class='row'>
+                            <div class='col-9'>
+                                <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
+                                <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
+                                <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
+                            </div>";
+                if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+                {
+                ?>
+                        <div class='col-3' >
+                        <div class='dropdown'>
+                            <button class='btn btn-sm  float-right dropdown-toggle' data-toggle='dropdown'>
+                                <i class='fas fa-cog'></i>
+                            </button>
+                            <div class='dropdown-menu  dropdown-menu-right'>
+                            <a class='dropdown-item edit-work' href="#"  data-id-work = '<?php echo $work->get_id_work()?>'
+                                data-title = '<?php echo $work->get_title()?>'
+                                data-detail = '<?php echo $work->get_detail()?>'
+                                data-time-start = '<?php echo $work->get_time_start()?>'
+                                data-time-stop  = '<?php echo $work->get_time_stop()?>'><i  class='fas fa-edit'></i> แก้ไข</a>
+                            <a class='dropdown-item delete-work' href='#'
+                                data-id-work = '<?php echo $work->get_id_work()?>'
+                                data-title = '<?php echo $work->get_title()?>'><i class='far fa-trash-alt'></i> ลบงาน</a>
+                            </div>
+                        </div>
+                        </div>
+                        <?php
+                }
+                else
+                {
+                    echo "<div class='col-3'>
+                    </div>";
+                }
+                echo  "</div>
+                        </td>
+                        <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
+                        <td align='center'>
+                            <h4><span class='$color'>".$work->get_status()."</span></h4>
+                        </td>
+                    </tr>";
+                
+        $i++; }}
+            ?>
+            </tbody>
+        </table>
 </div>
 <script>
     $(document).ready(function(){
@@ -131,7 +132,7 @@
         $('.delete-work').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
         // set value to modal
         $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
@@ -177,25 +178,22 @@
     </div>
 </div>
 </div>
+<!-- ลบงาน -->
 <div class="modal fade" id="delete">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog">
     <div class="modal-content">
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ต้องการลบงาน</h4>
+        <h4 class="modal-title">ยืนยันการลบงาน</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
     <!-- Modal body -->
     <div class="modal-body">
         <form method="POST">
-        <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
-            <div class="row">   
-                <div class="col-6">
-                    <label id="data-title-delete"></label> 
-                 </div>             
-            </div>
+            <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden> 
+            <h5 id="data-title-delete"></h5>         
             <input type="hidden" name="controller" value="work">
             
         
@@ -205,10 +203,10 @@
     <div class="modal-footer">
 
     <div style="width :50%">
-        <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ลบ</button>
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ใช่</button>
     </div>
     <div style="width :50%">    
-        <button type="button" class="btn btn-light btn-block" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
     </div> 
  
         </form>
@@ -219,7 +217,22 @@
 </div>
 <script>
     $(document).ready(function() {
-    $('#workTable').DataTable();
+    $('#workTable').DataTable({
+        "language": {
+            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"ค้นหา:",
+            "paginate": {
+            "first":      "หน้าแรก",
+            "last":       "หน้าสุดท้าย",
+            "next":       "ต่อไป",
+            "previous":   "ก่อนหน้า"
+            },
+            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
+        }
+    });
 } );
 </script>
-

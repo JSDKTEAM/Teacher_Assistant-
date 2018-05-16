@@ -1,5 +1,5 @@
 <?php
-    include('views/header/nav2.php');
+    include('views/header/nav3.php');
     include('views/sweetalert/sweetalert.php');
 ?>
 <style>
@@ -13,7 +13,8 @@
     color:red;
 }
 </style>
-<div class="content p-4"> 
+<div class="banner-sec">
+    <div class="container">
     <h2>ตั้งค่าบัญชีผู้ใช้</h2>
     <div class="row">
         <div class="col-6">
