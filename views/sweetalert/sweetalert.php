@@ -47,6 +47,7 @@
         {
             $text = "แก้ไขปีการศึกษาสำเร็จ";
         }
+       
         $alert = "<script>    
                 swal({
                     icon: 'success',

@@ -39,8 +39,8 @@ function call($controller,$action)
 		case "userMm":  $controller = new UserMmController();
 						$param['id_work'] = $_POST['id_work']??NULL;
 						$param['title'] = $_POST['title']??NULL;
-						$param['timestart'] = $_POST['timestart']??NULL;
-						$param['timestop'] = $_POST['timestop']??NULL;
+						$param['time_start'] = $_POST['time_start']??NULL;
+						$param['time_stop'] = $_POST['time_stop']??NULL;
 						$param['detail'] = $_POST['detail']??NULL;
 						$param['id_patron'] = $_POST['id_patron']??NULL;
 						$param['id_person'] = $_POST['id_person']??NULL;
@@ -93,7 +93,7 @@ function call($controller,$action)
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
 ||  ($controller == 'work' && ($action == 'index_work' || $action == 'searchWork' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork'))
 ||  ($controller == 'myWork' && ($action == 'index_work' || $action == 'getWork' ||$action == 'get_myWork' || $action == 'getWork' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork' ))
-||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm' || $action == 'validateUsername'||$action=='delete_workMm'||$action ='edit_workMm'))
+||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'index_workMm' || $action == 'validateUsername'||$action=='delete_workMm'||$action =='edit_workMm'||$action =='add_workMm'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo' || $action == 'updatePassMember' || $action == 'validatePassword'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
 || ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear'))

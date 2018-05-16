@@ -1,5 +1,6 @@
 <?php
     include('views/header/nav2.php');
+    include('views/sweetalert/sweetalert.php');
 ?>
 <div class="content p-4" style="width:100%">
     <?php if($_SESSION['member']['type'] != "นิสิต"){?>

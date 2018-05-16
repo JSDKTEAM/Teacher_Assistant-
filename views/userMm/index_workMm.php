@@ -1,4 +1,5 @@
-<?php include('views/header/nav2.php')?>
+<?php include('views/header/nav2.php');
+    include('views/sweetalert/sweetalert.php');?>
 <style>
     .red{
         color:red;
@@ -27,13 +28,23 @@
             <form method="POST">
                 <div class="row">
                     <div class="col-6">
-                        <label><span class="red">*</span>หัวข้องาน</label><input type="text" name="title" id="id__add" class="form-control">
+                        <label><span class="red">*</span>หัวข้องาน</label><input type="text" name="title" class="form-control" required>
                         <label><span class="red">*</span> รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" class="form-control" required></textarea>
                     </div>
                     <div class="col-6">
-                    <label><span class="red">*</span> ผู้สั่งงาน</label><input type="text" name="patron" class="form-control" required>
-                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="text" name="timestart" class="form-control" required>
-                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="text" name="timestop" class="form-control" required>
+                    <label><span class="red">*</span> ผู้สั่งงาน</label>
+                    <select name="id_patron"  class="form-control">
+                    <?php foreach($patronList as $patron)
+                    {
+                        
+                        ?>
+                        <option value="<?php echo $patron->get_id_member() ?>"><?php echo $patron->get_fname()." ".$patron->get_lname()?></option> 
+                        <?php    
+                    }
+                    ?>
+                    </select>
+                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="time_start"  class="form-control" required>
+                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="time_stop"  class="form-control" required>
                     </div>
                 </div>
         </div>
@@ -41,7 +52,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
             <input type="hidden" name="controller" value="userMm">
-            <button type="submit" name="action" value="addMember" class="btn btn-success btn-block">เพิ่มงาน</button>
+            <button type="submit" name="action" value="add_workMm" class="btn btn-success btn-block">เพิ่มงาน</button>
             </form>
         </div>
 
@@ -54,6 +65,7 @@
                 <th>#</th>
                 <th>หัวข้องาน</th>
                 <th>รายละเอียด</th>
+                <th>สถานะ</th>
                 <th></th>
             </tr>
         </thead>
@@ -66,11 +78,24 @@
             {
                 $objPatron = $work->get_objPatron();
                 $objPerson = $work->get_objPerson(); 
+                if($work->get_status() == 'waiting')
+                {
+                    $color='badge badge-warning';
+                }
+                else if($work->get_status() == 'booked')
+                {
+                    $color='badge badge-primary';
+                }
+                else
+                {
+                   $color='badge badge-success';
+                }
                 $time=explode(":",$work->get_used_time());
                 echo "<tr align='center' class='table-light'>
                         <td>$i</td>
                         <td>".$work->get_title()."</td>
                         <td>".$work->get_detail()."</td>
+                        <td><h4><span class='$color'>".$work->get_status()."</span></h4></td>
                      ";
             ?>
                     <td align="center">
@@ -107,8 +132,8 @@
         var id_work = $(this).attr('data-id-work');
         var title = $(this).attr('data-title');
         var detail = $(this).attr('data-detail');
-        var timestart = $(this).attr('data-timestart');
-        var timestop = $(this).attr('data-timestop');
+        var time_start = $(this).attr('data-timestart');
+        var time_stop = $(this).attr('data-timestop');
         var status = $(this).attr('data-status');
         var id_patron = $(this).attr('data-id-patron');   
         var id_person = $(this).attr('data-id-person');        
@@ -122,8 +147,8 @@
         $("#id-work").val(id_work);
         $("#title").val(title);
         $("#detail").val(detail);
-        $("#timestart").val(timestart);
-        $("#timestop").val(timestop);
+        $("#time_start").val(time_start);
+        $("#time_stop").val(time_stop);
         $("#status").val(status);
         $("#id_patron").val(id_patron);
         if(status == 'waiting')
@@ -147,6 +172,8 @@
         }
         else
         {
+            $(".waiting").show();  
+            $(".booked").show();
             $("#chkstatus").removeClass();
             $("#chkstatus").addClass("badge badge-success"); 
             $("#chkstatus").empty();
@@ -189,11 +216,12 @@
       <!-- Modal body -->   
       <div class="modal-body">
             <form method="POST">
+            <input id="id-work" type="text" name="id_work" class="form-control" hidden>
                 <div class="row">
                     <div class="col-6">
                         <label><span class="red">*</span> หัวข้องาน</label><input type="text" name="title" id="title" class="form-control" required>                       
-                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="timestart" id="timestart" class="form-control" required>
-                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="timestop" id="timestop"  class="form-control" required>
+                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="time_start" id="time_start" class="form-control" required>
+                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="time_stop" id="time_stop"  class="form-control" required>
                         <label>รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" id="detail" class="form-control" ></textarea>
                         
                     </div>
