@@ -372,18 +372,41 @@
         }
         public static function deleteUser($id_member)
         {   
-            /*$con = conDb::getInstance();
+            $check_value = true;
+            $check = false;
+            $con = conDb::getInstance();
             $stmt = $con->prepare('SELECT * FROM member 
-            INNER JOIN work on work.patron_id = member.id_member or work.person_id 
-            WHERE id_member = ?');
+            INNER JOIN work on work.patron_id = member.id_member WHERE member.id_member = ?');
             $stmt->execute([$id_member]);
             if($stmt->rowCount() > 0)
             {
-                return false;
+                $check_value = false;
+                $stmt = $con->prepare('SELECT * FROM member 
+                INNER JOIN work on work.person_id = member.id_member
+                WHERE member.id_member = ?');
+                $stmt->execute([$id_member]);
+                if($stmt->rowCount() > 0)
+                {
+                    $check_value = false;
+                }
             }
-            $stmt = $con->prepare('DELETE FROM member WHERE member.id_member = ?');
-            $check = $stmt->execute([$id_member]);
-            return true;*/
+            else
+            {
+                $stmt = $con->prepare('SELECT * FROM member 
+                INNER JOIN work on work.person_id = member.id_member 
+                WHERE member.id_member = ?');
+                $stmt->execute([$id_member]);
+                if($stmt->rowCount() > 0)
+                {
+                    $check_value = false;
+                }
+            }
+            if($check_value)
+            {
+                $stmt = $con->prepare('DELETE FROM member WHERE member.id_member = ?');
+                $check = $stmt->execute([$id_member]);
+            }
+            return $check;
             
         }
     }

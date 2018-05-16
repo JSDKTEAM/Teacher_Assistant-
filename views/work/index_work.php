@@ -63,7 +63,7 @@
                         <td>
                         <div class='row'>
                             <div class='col-9'>
-                                <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
+                                <h5><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h5>
                                 <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
                                 <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                             </div>";
@@ -110,6 +110,7 @@
 <script>
     $(document).ready(function(){
         $('.edit-work').click(function(){
+        $('.alert').remove();
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
         var title = $(this).attr('data-title');
@@ -152,16 +153,16 @@
 
     <!-- Modal body -->
     <div class="modal-body">
-        <form method="POST">
+        <form method="POST" id="form-edit">
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label>หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
-                    <label>รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-                    <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                 </div>
             </div>
             <input type="hidden" name="controller" value="work">
@@ -195,8 +196,6 @@
             <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden> 
             <h5 id="data-title-delete"></h5>         
             <input type="hidden" name="controller" value="work">
-            
-        
     </div>
 
     <!-- Modal footer -->
@@ -233,6 +232,21 @@
             },
             "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
         }
+    });
+    $("#form-edit").submit(function( event ) {
+        var check = data_check('#data-time-start-edit','#data-time-stop-edit')
+        console.log(check);
+        if(check)
+        {
+            $('.alert').remove();
+            return;
+        }
+        else
+        {
+            $('.alert').remove();
+            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
+        }
+        event.preventDefault();
     });
 } );
 </script>

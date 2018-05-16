@@ -5,6 +5,14 @@
         width: 100%; /* Full width */
         z-index:1;
     }
+    .badge-notify{
+        background:red;
+        position: absolute;
+        right: -7px;    
+        top: 1px;
+        z-index:1;
+        
+    }
     section{padding: 30px 0; float: left; width: 100%}
     .card{float: left; width:100%}
     .navbar {border: medium none; float: left; margin-bottom: 0px; width: 100%;border-radius: 0}
@@ -12,7 +20,7 @@
     .title-small { color: #141517; font-size: 16px; font-weight: 400; line-height: 23px; margin: 6px 0 0;}
     .title-x-small {font-size: 18px; margin: 0px;}
     .title-large a, .title-small a, .title-x-small a{color: inherit}
-    .banner-sec{float: left; width: 100%; background: #EBEBEB;margin-top:200px;z-index:-1} 
+    .banner-sec{float: left; width: 100%; background: #EBEBEB;margin-top:170px;z-index:-1} 
     .top-head{background: #42A5F5; width: 100%; float: left; height: 100px;}
     .top-head h1 {color: #fff; font-size: 36px; font-weight: 600; margin: 18px 0 0;}
     .top-head small{float: left; width: 100%; font-size: 14px; color: #fff; margin-top: 5px; margin-left: 5px;}
@@ -20,7 +28,7 @@
     .top-head .admin-bar a {color: #fff; line-height: 49px; position: relative; padding:0 7px;}
     .top-head .admin-bar a:hover{color: #ff0000}
     .top-head .admin-bar a i{margin-right: 6px;}
-    .top-head .admin-bar .ping {background: #ff0000; border: 3px solid #141517; border-radius: 50%; height: 14px; position: absolute; right: 3px;    top: 13px; width: 14px; z-index: 1;}
+    .top-head .admin-bar .ping {background: #ff0000; border: 1px solid #141517; border-radius: 50%; height: 14px; position: absolute; right: 3px;    top: 13px; width: 14px; z-index: 1;}
     .top-head .admin-bar img {float: right; height: 50px; width: 50px; margin-left: 18px;}
     .top-nav{background: #fff; padding: 0; border-bottom: 1px solid #dbdbdb}
     .top-nav .nav-link {padding-bottom: 0.9rem; padding-top: 0.7rem;}
@@ -44,7 +52,12 @@
             </div>
             <div class="col-md-6 col-lg-3 ml-auto admin-bar hidden-sm-down">
                 
-              <nav class="nav nav-inline"><a href=""><i class="fas fa-bell"></i></a> <a href="?controller=userSet&action=index_userSet" class="nav-link"><?php echo $_SESSION['member']['fname']." ".$_SESSION['member']['lname']  ?> <img class="img-fluid rounded-circle" src="<?php echo $_SESSION['member']['img_user'] ?>"></a> </nav>
+              <nav class="nav nav-inline">
+                  <a href="?controller=userSet&action=index_userSet" class="nav-link">
+                      <?php echo $_SESSION['member']['fname']." ".$_SESSION['member']['lname']  ?> 
+                      <img class="img-fluid rounded-circle" src="<?php echo $_SESSION['member']['img_user'] ?>">
+                  </a> 
+                </nav>
             </div>
           </div>
       </div>
@@ -158,7 +171,7 @@ $(document).ready(function() {
         else
         {
             $('.alert').remove();
-            $("#txtToDate").after("<span class='alert red'>วันที่เริ่มงานน้อยกว่าวันที่ส่งงาน</span>");
+            $("#txtToDate").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
         }
         event.preventDefault();
     });

@@ -19,7 +19,7 @@
     <div class="container">
     <div class="row">
         <div class="col-2">
-            <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
+            <img src="<?php echo $member->get_img_user() ?>" class="center" width="120" alt="<?php echo $member->get_username() ?>">
         </div>
         <div class="col-4">
             <h3> <?php echo $member->get_type()."</br>".$member->get_fname()." ".$member->get_lname() ?></h3>
