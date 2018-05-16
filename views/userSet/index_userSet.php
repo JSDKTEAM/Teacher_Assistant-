@@ -247,7 +247,7 @@ return false;
         }
         else
         {
-            $("id_code").show();
+            $("#id_code").show();
             $("#id_code").prop('required', true);
             $("#lable_id_code").show();
             $("#id_code").val(id_code);

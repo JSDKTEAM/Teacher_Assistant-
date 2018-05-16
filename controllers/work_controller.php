@@ -50,27 +50,46 @@
         public function addWork($param = NULL)
         {
             $check = Work::addWork($_SESSION['member']['id_member'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
+            $link='location:index.php?controller=work&action=index_work';
             if($check)
             {
-                header('location:index.php?controller=work&action=index_work&success=1');
+                header($link.'&success=1');
             }
             else
             {
-                header('location:index.php?controller=work&action=index_work&error=1');
+                header($link.'&error=1');
             }
             
         }
         public function editWork($param = NULL)
         {
-            if($_SESSION['member']['type'] !='นิสิต')
+           
             $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
-            header("location:index.php?controller=work&action=index_work");
+            $link ='location:index.php?controller=work&action=index_work';
+            if($check)
+            {
+                header($link.'&success=3');
+            }
+            else
+            {
+                header($link.'&error=3');
+            }
         }
         public function deleteWork($param = NULL)
         {
-            if($_SESSION['member']['type'] !='นิสิต')
-            $check = Work::deleteWork($param['id_work']);         
-            header("location:index.php?controller=work&action=index_work");
+           
+            $check = Work::deleteWork($param['id_work']);  
+            $link ='location:index.php?controller=work&action=index_work';
+            if($check)
+            {
+                header($link.'&success=2');
+            }
+            else
+            {
+                header($link.'&error=2');
+            }
+                   
+          
         }
         /*
         public function editWork($param = NULL)

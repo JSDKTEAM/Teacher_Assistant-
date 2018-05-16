@@ -1,4 +1,5 @@
-<?php include('views/header/nav3.php')?>
+<?php include('views/header/nav3.php');
+    include('views/sweetalert/sweetalert.php');?>
 <style>
     .red{
         color:red;
@@ -28,13 +29,23 @@
             <form method="POST">
                 <div class="row">
                     <div class="col-6">
-                        <label><span class="red">*</span>หัวข้องาน</label><input type="text" name="title" id="id__add" class="form-control">
+                        <label><span class="red">*</span>หัวข้องาน</label><input type="text" name="title" class="form-control" required>
                         <label><span class="red">*</span> รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" class="form-control" required></textarea>
                     </div>
                     <div class="col-6">
-                    <label><span class="red">*</span> ผู้สั่งงาน</label><input type="text" name="patron" class="form-control" required>
-                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="text" name="timestart" class="form-control" required>
-                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="text" name="timestop" class="form-control" required>
+                    <label><span class="red">*</span> ผู้สั่งงาน</label>
+                    <select name="id_patron"  class="form-control">
+                    <?php foreach($patronList as $patron)
+                    {
+                        
+                        ?>
+                        <option value="<?php echo $patron->get_id_member() ?>"><?php echo $patron->get_fname()." ".$patron->get_lname()?></option> 
+                        <?php    
+                    }
+                    ?>
+                    </select>
+                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="time_start"  class="form-control" required>
+                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="time_stop"  class="form-control" required>
                     </div>
                 </div>
         </div>
@@ -42,7 +53,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
             <input type="hidden" name="controller" value="userMm">
-            <button type="submit" name="action" value="addMember" class="btn btn-success btn-block">เพิ่มงาน</button>
+            <button type="submit" name="action" value="add_workMm" class="btn btn-success btn-block">เพิ่มงาน</button>
             </form>
         </div>
 
@@ -55,6 +66,7 @@
                 <th>#</th>
                 <th>หัวข้องาน</th>
                 <th>รายละเอียด</th>
+                <th>สถานะ</th>
                 <th></th>
             </tr>
         </thead>
@@ -67,11 +79,24 @@
             {
                 $objPatron = $work->get_objPatron();
                 $objPerson = $work->get_objPerson(); 
+                if($work->get_status() == 'waiting')
+                {
+                    $color='badge badge-warning';
+                }
+                else if($work->get_status() == 'booked')
+                {
+                    $color='badge badge-primary';
+                }
+                else
+                {
+                   $color='badge badge-success';
+                }
                 $time=explode(":",$work->get_used_time());
                 echo "<tr align='center' class='table-light'>
                         <td>$i</td>
                         <td>".$work->get_title()."</td>
                         <td>".$work->get_detail()."</td>
+                        <td><h4><span class='$color'>".$work->get_status()."</span></h4></td>
                      ";
             ?>
                     <td align="center">
@@ -88,7 +113,7 @@
                         data-HH ="<?php echo $time[0] ?>"
                         data-mm ="<?php echo $time[1]?>"
                         data-summary ="<?php echo $work->get_summary()?>"
-                        class="btn btn-success btn-sm btn-edit-work">แก้ไขงาน</a>
+                        class="btn btn-success btn-sm btn-edit-work">แก้ไขรายละเอียดงาน</a>
                         <a href="#" 
                         data-id-work = '<?php echo $work->get_id_work()?>'
                         data-title = '<?php echo $work->get_title()?>'
@@ -108,8 +133,8 @@
         var id_work = $(this).attr('data-id-work');
         var title = $(this).attr('data-title');
         var detail = $(this).attr('data-detail');
-        var timestart = $(this).attr('data-timestart');
-        var timestop = $(this).attr('data-timestop');
+        var time_start = $(this).attr('data-timestart');
+        var time_stop = $(this).attr('data-timestop');
         var status = $(this).attr('data-status');
         var id_patron = $(this).attr('data-id-patron');   
         var id_person = $(this).attr('data-id-person');        
@@ -119,18 +144,49 @@
         var summary = $(this).attr('data-summary');    
 
         // set value to modal
+        
         $("#id-work").val(id_work);
         $("#title").val(title);
         $("#detail").val(detail);
-        $("#timestart").val(timestart);
-        $("#timestop").val(timestop);
+        $("#time_start").val(time_start);
+        $("#time_stop").val(time_stop);
         $("#status").val(status);
         $("#id_patron").val(id_patron);
-        $("#id_person").val(id_person);
-        $("#due_date").val(due_date);       
-        $("#HH").val(HH);
-        $("#mm").val(mm);
-        $("#summary").val(summary);
+        if(status == 'waiting')
+        {
+          $(".waiting").hide();  
+          $(".booked").hide(); 
+          $("#chkstatus").removeClass();
+          $("#chkstatus").addClass("badge badge-warning"); 
+          $("#chkstatus").empty();
+          $("#chkstatus").append(status);
+        }
+        else if(status == 'booked')
+        {
+            $(".waiting").hide();  
+            $(".booked").show();
+            $("#chkstatus").removeClass();
+            $("#chkstatus").addClass("badge badge-primary");
+            $("#chkstatus").empty();  
+            $("#chkstatus").append(status);  
+            $("#id_person").val(id_person);       
+        }
+        else
+        {
+            $(".waiting").show();  
+            $(".booked").show();
+            $("#chkstatus").removeClass();
+            $("#chkstatus").addClass("badge badge-success"); 
+            $("#chkstatus").empty();
+            $("#chkstatus").append(status);
+            $("#id_person").val(id_person);
+            $("#due_date").val(due_date);       
+            $("#HH").val(HH);
+            $("#mm").val(mm);
+            $("#summary").val(summary);
+        }
+       
+
         $("#edit-work").modal('show');
         });
     });
@@ -154,24 +210,19 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">แก้ไขงาน</h4>
+        <h4 class="modal-title">แก้ไขงาน <span id="chkstatus"></span></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->   
       <div class="modal-body">
             <form method="POST">
+            <input id="id-work" type="text" name="id_work" class="form-control" hidden>
                 <div class="row">
                     <div class="col-6">
                         <label><span class="red">*</span> หัวข้องาน</label><input type="text" name="title" id="title" class="form-control" required>                       
-                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="timestart" id="timestart" class="form-control" required>
-                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="timestop" id="timestop"  class="form-control" required>
-                        <label><span class="red">*</span> สถานะ</label>
-                        <select name="status" id="status" class="form-control">
-                         <option value="waiting">waiting</option>
-                         <option value="booked">booked</option>
-                         <option value="finish">finish</option>
-                        </select>
+                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="time_start" id="time_start" class="form-control" required>
+                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="time_stop" id="time_stop"  class="form-control" required>
                         <label>รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" id="detail" class="form-control" ></textarea>
                         
                     </div>
@@ -187,6 +238,9 @@
                     }
                     ?>
                     </select>
+                    <input type="hidden" name="status" id="status" value="">
+                 
+                    <div class="booked">
                     <label><span class="red">*</span> ผู้รับงาน</label>
                     <select name="id_person" id="id_person" class="form-control">
                     <?php foreach($personList as $person)
@@ -198,6 +252,8 @@
                     }
                     ?>
                     </select>
+                    </div>
+                    <div class="waiting">
                     <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="due_date"  class="form-control" >                
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
@@ -215,7 +271,7 @@
                                 </div>
                             </div>
                     <label>รายละเอียดการส่ง</label><textarea cols="20" rows="5" type="text" name="summary" id="summary" class="form-control" ></textarea>
-                        
+                    </div>    
                     </div>
                 </div>
         </div>
@@ -223,7 +279,7 @@
       <!-- Modal footer -->
       <div class="modal-footer">
       <input type="hidden" name="controller" value="userMm">
-        <button id="btn-submit" type="submit" name="action" value="" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
+        <button id="btn-submit" type="submit" name="action" value="edit_workMm" class="btn btn-success btn-block">ยืนยันการแก้ไข</button></form>
       </div>
 
     </div>

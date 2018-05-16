@@ -253,6 +253,20 @@
         $check = $stmt->execute([$patron_id,$title,$detail,$time_start,$time_stop,$id_year,'waiting']);
         return $check;
     }
+    public static function editPatronWork($id_work,$id_patron)
+    {
+        $con = conDb::getInstance();
+        $stmt = $con->prepare('UPDATE work SET patron_id = ? WHERE id_work = ?');
+        $check = $stmt->execute([$id_patron,$id_work]);
+        return $check;
+    }
+    public static function editPersonWork($id_work,$id_person)
+    {
+        $con = conDb::getInstance();
+        $stmt = $con->prepare('UPDATE work SET  person_id = ? WHERE id_work = ?');
+        $check = $stmt->execute([$id_person,$id_work]);
+        return $check;
+    }
     public static function editWork($id_work,$title,$time_start,$time_stop,$detail)
     {
         $con = conDb::getInstance();
