@@ -1,13 +1,14 @@
 <?php 
     include('views/sweetalert/sweetalert.php');
-    include('views/header/nav2.php')
+    include('views/header/nav3.php')
 ?>
 <style>
     .red{
         color:red;
     }
 </style>
-<div class="content p-4" style="width:100%">
+<div class="banner-sec">
+    <div class="container">
     <h2>จัดการบัญชีผู้ใช้</h2>
     <!-- Button to Open the Modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUser">
@@ -38,7 +39,7 @@
                             <option value="นิสิต">นิสิต</option>
                         </select>
                         <div id="id_code_add" >
-                            <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  class="form-control">
+                            <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  id="id_code_add_input" class="form-control">
                         </div>
                         <label><span class="red">*</span> ชื่อ</label><input type="text" name="fname" class="form-control" required>
                         <label><span class="red">*</span> นามสกุล</label><input type="text" name="lname" class="form-control" required>
@@ -100,71 +101,16 @@
                         class="btn btn-success btn-sm btn-edit-info">แก้ไขประวัติส่วนตัว</a>
                         <a href="#" 
                         data-id-member = <?php echo $member->get_id_member() ?>
-                        class="btn btn-danger btn-sm ">ลบ</a>
+                        data-username = <?php echo $member->get_username() ?>
+                        data-fname = <?php echo $member->get_fname() ?>
+                        data-lname = <?php echo $member->get_lname() ?>
+                        class="btn btn-danger btn-sm btn-delete-user" >ลบ</a>
                     </td>
                     </tr>
       <?php $i++; }} ?>
         </tbody>
     </table>
     </br>
-    <h2>เพิ่มนิสิตเข้าระบบ</h2>
-    <div class="row">
-        <div class="col-4">
-            <div class="demo">
-                <form method="POST">
-                    <select style="display:none"  name="id_member[]" multiple>
-                        <?php
-                        if($memberYearList !== FALSE){
-                            foreach($memberYearList as $member)
-                            {
-                                echo "<option value='".$member->get_id_member()."'>".$member->get_fname()." ".$member->get_lname()."</option>";
-                            }
-                        }
-                        ?>
-                        
-                    </select>
-                    <input type="hidden" name="controller" value="userMm">
-                    
-            </div>
-            </br>
-            <button type="submit" name="action" value="addMemberSys" class="btn btn-success">เพิ่มนิสิตเข้าระบบ</button>
-            </form>
-        </div>
-    </div>
-    </br></br>
-    <table  id="memberTable2" class="table  table-bordered">
-        <thead>
-            <tr class="table-light">
-                <th>#</th>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
-                <th>Username</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if($memberListYear !== FALSE)
-            {
-                $i = 1;
-                foreach($memberListYear as $key=>$value)
-                {
-                 
-                    echo "<tr class='table-light'>
-                            <td>$i</td>
-                            <td>".$value->get_fname()."</td>
-                            <td>".$value->get_lname()."</td>
-                            <td>".$value->get_username()."</td>
-                          </tr>";
-                    $i++;
-                }
-            } ?>
-        </tbody>
-    </table>
-    
-    <script>
-        $('.demo').dropdown({
-  // options here
-        });
-    </script>
 </div>
 
 <script>
@@ -203,6 +149,7 @@
         });
     });
 </script>
+
 <script>
     $(document).ready(function(){
         $('.btn-edit-pasword').click(function(){
@@ -216,6 +163,24 @@
         $("#id-member-password").val(id_member);
         $("#username-password").val(username);
         $("#edit-password").modal('show');
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-delete-user').click(function(){
+        // get data from edit btn
+        var id_member = $(this).attr('data-id-member');
+        var username = $(this).attr('data-username');
+        var fname = $(this).attr('data-fname');
+        var lname = $(this).attr('data-lname');
+        // set value to modal
+        $("#id-member-delete").val(id_member);
+        document.getElementById("username-delete").innerHTML = username;
+        document.getElementById("fname-delete").innerHTML = fname;
+        document.getElementById("lname-delete").innerHTML = lname;
+        $("#delete-user").modal('show');
         });
     });
 </script>
@@ -287,16 +252,46 @@
   </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal fade" id="delete-user">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">ลบบัญชีผู้ใช้</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form method="POST">
+        <input type="hidden" name="id_member" id="id-member-delete">
+        <h4>Username : <span id="username-delete"></span></h4>
+        <h4>ชื่อ : <span id="fname-delete"></span> <span id="lname-delete"></span></h4>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+            <button  type="submit" name="action" value="deleteUser" class="btn btn-danger" style="width:50%">ยืนยันการลบ</button></form>
+            <button  data-dismiss="modal" class="btn btn-success" style="width:50%">ยกเลิก</button></form>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ตรวจสอบความถูกต้อง -->
 <script>
     remove_spacebar("input");
     confirm_password("#passwdinput","#passwdConfirm","#btn-submit");
     confirm_password("#passwdAdd","#passwdAddc","#btnadduser");
-    check_status("#id_code_add","#type_user")
+    check_status("#id_code_add_input","#id_code_add","#type_user")
     validateUsername("#username_add","#btnadduser");
     $(document).ready(function() {
         $("#add-member").submit(function( event ) {
-            if (check_passwd("#passwdAdd","#passwdAddc") && check_username("#username_add")) {
+            if (check_passwd("#passwdAdd","#passwdAddc") && check_username("#username_add") && check_codeStd("#id_code_add_input","#type_user")) {
                 return;
             }  
             event.preventDefault();
@@ -313,9 +308,23 @@
 <!-- ตาราง DataTable -->
 <script>
     $(document).ready(function() {
-    $('#memberTable').DataTable();
+    $('#memberTable').DataTable({
+        "language": {
+            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"ค้นหา:",
+            "paginate": {
+            "first":      "หน้าแรก",
+            "last":       "หน้าสุดท้าย",
+            "next":       "ต่อไป",
+            "previous":   "ก่อนหน้า"
+            },
+            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
+        }
+    });
 } );
-$(document).ready(function() {
-    $('#memberTable2').DataTable();
-} );
+
 </script>

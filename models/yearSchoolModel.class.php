@@ -22,6 +22,24 @@
             $this->start_date = $yearObj['start_date'];
             $this->end_date = $yearObj['end_date'];
         }
+        public function validateYear($id_year)
+        {
+            header('Content-type: application/json');
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('SELECT * FROM year_school WHERE id_year = ?');
+            $stmt->execute([$id_year]);
+            if($stmt->rowCount() > 0)
+            {
+                $data = array("check"=>TRUE);
+            }
+            else
+            {
+                $data = array("check"=>FALSE);
+            }
+            ob_end_clean();
+            print json_encode($data);
+
+        }
         public static function getAllYearSchool()
         {
             $con = conDb::getInstance();
@@ -39,7 +57,6 @@
             echo "ddwweweweewewedd";
             $con = conDb::getInstance();
             $stmt = $con->prepare('INSERT INTO `year_school`(`id_year`, `start_date`, `end_date`) VALUES (?,?,?)');
-           
             $check = $stmt->execute([$id_year, $start_date,$end_date]);
             return $check;
         }
@@ -57,8 +74,6 @@
             $stmt = $con->prepare('UPDATE `year_school` SET`start_date`=?,`end_date`=? WHERE `id_year`=? ');
             $check = $stmt->execute([$start_date,$end_date,$id_year]);
             return $check;
-
-
         }
       
 

@@ -1,429 +1,166 @@
-<header class="header">
-          <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand p-0 mr-5" href="#"><img src="http://via.placeholder.com/61x14"></a>
-            <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a> </div>
-            <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown messages-menu">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="label label-success bg-success">10</span>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <ul class="dropdown-menu-over list-unstyled">
-                      <li class="header-ul text-center">You have 4 messages</li>
-                      <li>
-                        <!-- inner menu: contains the actual data -->
-                        <ul class="menu list-unstyled">
-                          <li><!-- start message -->
-                          <a href="#">
-                            <div class="pull-left">
-                              <img src="http://via.placeholder.com/160x160" class="rounded-circle  " alt="User Image">
-                            </div>
-                            <h4>
-                            Support Team
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                          </a>
-                        </li>
-                        <!-- end message -->
-                        <li>
-                          <a href="#">
-                            <div class="pull-left">
-                              <img src="http://via.placeholder.com/160x160" class="rounded-circle " alt="User Image">
-                            </div>
-                            <h4>
-                            AdminLTE Design Team
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div class="pull-left">
-                              <img src="http://via.placeholder.com/160x160" class="rounded-circle " alt="User Image">
-                            </div>
-                            <h4>
-                            Developers
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div class="pull-left">
-                              <img src="http://via.placeholder.com/160x160" class="rounded-circle " alt="User Image">
-                            </div>
-                            <h4>
-                            Sales Department
-                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div class="pull-left">
-                              <img src="http://via.placeholder.com/160x160" class="rounded-circle " alt="User Image">
-                            </div>
-                            <h4>
-                            Reviewers
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="footer-ul text-center"><a href="#">See All Messages</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item dropdown notifications-menu">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="label label-warning bg-warning">10</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <ul class="dropdown-menu-over list-unstyled">
-                    <li class="header-ul text-center">You have 10 notifications</li>
-                    <li>
-                      <!-- inner menu: contains the actual data -->
-                      <ul class="menu list-unstyled">
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                            page and may cause design problems
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-users text-red"></i> 5 new members joined
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-user text-red"></i> You changed your username
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="footer-ul text-center"><a href="#">View all</a></li>
-                  </ul>
-                </div>
-              </li>
-              
-              <li class="nav-item dropdown  user-menu">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="http://via.placeholder.com/160x160" class="user-image" alt="User Image" >
-                  <span class="hidden-xs">bootstrap develop</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <div class="main">
-        <aside>
-          <div class="sidebar left ">
-            <div class="user-panel">
-              <div class="pull-left image">
-                <img src="http://via.placeholder.com/160x160" class="rounded-circle" alt="User Image">
-              </div>
-              <div class="pull-left info">
-                <p>bootstrap develop</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-              </div>
-            </div>
-            <ul class="list-sidebar bg-defoult">
-              <li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active" > <i class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span> <span class="fa fa-chevron-left pull-right"></span> </a>
-              <ul class="sub-menu collapse" id="dashboard">
-                <li class="active"><a href="#">CSS3 Animation</a></li>
-                <li><a href="#">General</a></li>
-                <li><a href="#">Buttons</a></li>
-                <li><a href="#">Tabs & Accordions</a></li>
-                <li><a href="#">Typography</a></li>
-                <li><a href="#">FontAwesome</a></li>
-                <li><a href="#">Slider</a></li>
-                <li><a href="#">Panels</a></li>
-                <li><a href="#">Widgets</a></li>
-                <li><a href="#">Bootstrap Model</a></li>
-              </ul>
-            </li>
-            <li> <a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a> </li>
-            <li> <a href="#" data-toggle="collapse" data-target="#products" class="collapsed active" > <i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span> <span class="fa fa-chevron-left pull-right"></span> </a>
-            <ul class="sub-menu collapse" id="products">
-              <li class="active"><a href="#">CSS3 Animation</a></li>
-              <li><a href="#">General</a></li>
-              <li><a href="#">Buttons</a></li>
-              <li><a href="#">Tabs & Accordions</a></li>
-              <li><a href="#">Typography</a></li>
-              <li><a href="#">FontAwesome</a></li>
-              <li><a href="#">Slider</a></li>
-              <li><a href="#">Panels</a></li>
-              <li><a href="#">Widgets</a></li>
-              <li><a href="#">Bootstrap Model</a></li>
-            </ul>
-          </li>
-          <li> <a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Grid options</span></a> </li>
-          <li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active" ><i class="fa fa-table"></i> <span class="nav-label">Tables</span><span class="fa fa-chevron-left pull-right"></span></a>
-          <ul  class="sub-menu collapse" id="tables" >
-            <li><a href=""> Static Tables</a></li>
-            <li><a href=""> Data Tables</a></li>
-            <li><a href=""> Foo Tables</a></li>
-            <li><a href=""> jqGrid</a></li>
-          </ul>
-        </li>
-        <li> <a href="#" data-toggle="collapse" data-target="#e-commerce" class="collapsed active" ><i class="fa fa-shopping-cart"></i> <span class="nav-label">E-commerce</span><span class="fa fa-chevron-left pull-right"></span></a>
-        <ul  class="sub-menu collapse" id="e-commerce" >
-          <li><a href=""> Products grid</a></li>
-          <li><a href=""> Products list</a></li>
-          <li><a href="">Product edit</a></li>
-          <li><a href=""> Product detail</a></li>
-          <li><a href="">Cart</a></li>
-          <li><a href=""> Orders</a></li>
-          <li><a href=""> Credit Card form</a> </li>
-        </ul>
-      </li>
-      <li> <a href=""><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> </a></li>
-      <li> <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a> </li>
-      <li> <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a> </li>
-      <li> <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a> </li>
-      <li> <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a> </li>
-      <li> <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a> </li>
-    </ul>
-    </div>
-    </aside>
-    </div>
-
-    <style>
-        a:hover{ text-decoration: none; }
-/** ======================  header ==============================**/
-.header{ background-color: #3c8dbc }
-.header .dropdown-menu {
-    position: absolute;
-    right: 0;
-    left: auto;
-    border-radius: 0px;
-}
-.header .user-image {
-    float: left;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-right: 10px;
-    margin-top: -2px;
-}
-
-.header .navbar-light .navbar-nav .nav-link{ color: #fff }
-.header .navbar-light .navbar-nav .nav-link:hover, .header .navbar-light .navbar-nav .nav-link:focus   {
-    
-       background: rgba(0,0,0,0.1);
-    color: #f6f6f6;
-}
-.header .fa.fa-fw.fa-bars{ color: #fff; }
-.header .navbar-light .navbar-nav .nav-link {
-    color: #fff;
-    padding: 10px 20px;
-    position: relative;
-}
-.header  li>a>.label {
-    position: absolute;
-    top: 9px;
-    right: 7px;
-    text-align: center;
-    font-size: 9px;
-    padding: 2px 3px;
-    line-height: .9; background-color: #333;    border-radius: .25em;
-}
-.header  li>a:after{ display: none; }
-
-.header-ul{    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    background-color: #ffffff;
-    padding: 7px 10px;
-    border-bottom: 1px solid #f4f4f4;
-    color: #333;
-    font-size: 14px;}
-
-    .navbar-nav>.notifications-menu>.dropdown-menu, .navbar-nav>.messages-menu>.dropdown-menu, .navbar-nav>.tasks-menu>.dropdown-menu {
-    width: 280px;
-    padding: 0 0 0 0;
-    margin: 0;
-    top: 100%;
-}
-.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a>div>img {
-    margin: auto 10px auto auto;
-    width: 40px;
-    height: 40px;
-}
-.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a ,.navbar-nav>.notifications-menu>.dropdown-menu li .menu>li>a{
-    margin: 0;
-    padding: 10px 10px;
-        display: block;
-    white-space: nowrap;
-    border-bottom: 1px solid #f4f4f4;
-}
-.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a>h4 {
-    padding: 0;
-    margin: 0 0 0 45px;
-    color: #333;
-    font-size: 15px;
-    position: relative;
-}
-.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a>p {
-    margin: 0 0 0 45px;
-    font-size: 12px;
-    color: #888888;
-}
-
-.footer-ul a{
-	border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    font-size: 12px;
-    background-color: #fff;
-    padding: 7px 10px;
-    border-bottom: 1px solid #eeeeee;
-    color: #333 ; display: block;
+<style>
+    header{ 
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+        z-index:1;
     }
-
-      .dropdown-menu-over .menu{  max-height: 200px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow-x: hidden;}
-
-    .navbar-nav>.notifications-menu>.dropdown-menu li .menu>li>a {
-    color: #444444;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 10px;
-}
-.navbar-nav>.notifications-menu>.dropdown-menu li .menu>li>a>.glyphicon, .navbar-nav>.notifications-menu>.dropdown-menu li .menu>li>a>.fa, .navbar-nav>.notifications-menu>.dropdown-menu li .menu>li>a>.ion {
-    width: 20px;
-}
-
-a.navbar-brand {
-    width: 165px;
-}
-
-
-/***    left menu ****/
-
-/***********************  TOP Bar ********************/
-.sidebar{ width:220px;  background-color:#000;transition: all 0.5s  ease-in-out; }
-.bg-defoult{background-color:#222;}
-.sidebar ul{ list-style:none; margin:0px; padding:0px; }
-.sidebar li a,.sidebar li a.collapsed.active{ display:block; padding:8px 12px; color:#fff;border-left:0px solid #dedede;  text-decoration:none}
-.sidebar li a.active{background-color:#000;border-left:5px solid #dedede; transition: all 0.5s  ease-in-out}
-.sidebar li a:hover{background-color:#000 !important;}
-.sidebar li a i{ padding-right:5px;}
-.sidebar ul li .sub-menu li a{ position:relative}
-.sidebar ul li .sub-menu li a:before{
-    font-family: FontAwesome;
-    content: "\f105";
-    display: inline-block;
-    padding-left: 0px;
-    padding-right: 10px;
-    vertical-align: middle;
-}
-.sidebar ul li .sub-menu li a:hover:after {
-    content: "";
-    position: absolute;
-    left: -5px;
-    top: 0;
-    width: 5px;
-    background-color: #111;
-    height: 100%;
-}
-.sidebar ul li .sub-menu li a:hover{ background-color:#222; padding-left:20px; transition: all 0.5s  ease-in-out}
-.sub-menu{ border-left:5px solid #dedede;}
-	.sidebar li a .nav-label,.sidebar li a .nav-label+span{ transition: all 0.5s  ease-in-out}
-	
-
-	.sidebar.fliph li a .nav-label,.sidebar.fliph li a .nav-label+span{ display:none;transition: all 0.5s  ease-in-out}
-	.sidebar.fliph {
-    width: 42px;transition: all 0.5s  ease-in-out;
-   
-}
-	
-.sidebar.fliph li{ position:relative}
-.sidebar.fliph .sub-menu {
-    position: absolute;
-    left: 39px;
-    top: 0;
-    background-color: #222;
-    width: 150px;
-    z-index: 100;
-}
-	
-
-	.user-panel {
-    clear: left;
-    display: block;
-    float: left;
-}
-.user-panel>.image>img {
-    width: 100%;
-    max-width: 45px;
-    height: auto;
-}
-.user-panel>.info,  .user-panel>.info>a {
-    color: #fff;
-}
-.user-panel>.info>p {
-    font-weight: 600;
-    margin-bottom: 9px;
-}
-.user-panel {
-    clear: left;
-    display: block;
-    float: left;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 25px 15px;
-    border-bottom: 1px solid;
-}
-.user-panel>.info {
-    padding: 5px 5px 5px 15px;
-    line-height: 1;
-    position: absolute;
-    left: 55px;
-}
-
-.fliph .user-panel{ display: none; }
+    section{padding: 30px 0; float: left; width: 100%}
+    .card{float: left; width:100%}
+    .navbar {border: medium none; float: left; margin-bottom: 0px; width: 100%;border-radius: 0}
+    .title-large {font-size: 20px; margin: 10px 0 5px; line-height: 27px; color: #141517;}
+    .title-small { color: #141517; font-size: 16px; font-weight: 400; line-height: 23px; margin: 6px 0 0;}
+    .title-x-small {font-size: 18px; margin: 0px;}
+    .title-large a, .title-small a, .title-x-small a{color: inherit}
+    .banner-sec{float: left; width: 100%; background: #EBEBEB;margin-top:200px;z-index:-1} 
+    .top-head{background: #42A5F5; width: 100%; float: left; height: 100px;}
+    .top-head h1 {color: #fff; font-size: 36px; font-weight: 600; margin: 18px 0 0;}
+    .top-head small{float: left; width: 100%; font-size: 14px; color: #fff; margin-top: 5px; margin-left: 5px;}
+    .top-head .admin-bar {text-align: right; margin-top: 22px;}
+    .top-head .admin-bar a {color: #fff; line-height: 49px; position: relative; padding:0 7px;}
+    .top-head .admin-bar a:hover{color: #ff0000}
+    .top-head .admin-bar a i{margin-right: 6px;}
+    .top-head .admin-bar .ping {background: #ff0000; border: 3px solid #141517; border-radius: 50%; height: 14px; position: absolute; right: 3px;    top: 13px; width: 14px; z-index: 1;}
+    .top-head .admin-bar img {float: right; height: 50px; width: 50px; margin-left: 18px;}
+    .top-nav{background: #fff; padding: 0; border-bottom: 1px solid #dbdbdb}
+    .top-nav .nav-link {padding-bottom: 0.9rem; padding-top: 0.7rem;}
+    .top-nav .navbar-nav .nav-item + .nav-item{margin-left:0}
+    .top-nav li a{color: #141517;   padding: 0 10px; border-bottom: 2px solid #fff}
+    .top-nav li a:hover, .top-nav li.active a{color: #141517; border-bottom: 2px solid #35cbdf }
+    .top-nav .form-control{border-color: #fff}
+    .top-nav .dropdown-item{padding:5px 20px 5px 10px !important;border-bottom: 0 !important }
+    .top-nav .dropdown-item:hover{color: #141517; border-left: 2px solid #35cbdf !important;background: #fff}
+    .top-nav .dropdown-menu{padding:10px;}
+    .red{
+        color:red;
+    }
 </style>
+<header>
+<div class="top-head left">
+      <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-4">
+              <h1>Teacher Assistant<small>ระบบสั่งงานนิสิตทุนทำงาน</small></h1>
+            </div>
+            <div class="col-md-6 col-lg-3 ml-auto admin-bar hidden-sm-down">
+                
+              <nav class="nav nav-inline"><a href=""><i class="fas fa-bell"></i></a> <a href="?controller=userSet&action=index_userSet" class="nav-link"><?php echo $_SESSION['member']['fname']." ".$_SESSION['member']['lname']  ?> <img class="img-fluid rounded-circle" src="<?php echo $_SESSION['member']['img_user'] ?>"></a> </nav>
+            </div>
+          </div>
+      </div>
+</div>
+<section class="top-nav">
+    <nav class="navbar navbar-expand-lg py-0 navbar-light">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link" href="?controller=work&action=index_work"><i class="fas fa-home"></i> หน้าแรก</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?controller=myWork&action=get_myWork"><i class="fas fa-pen-square"></i> จัดการงาน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?controller=report&action=index_reportMonth"><i class="fas fa-chart-bar"></i> สถิติ</a>
+                </li>
+                <li class="nav-item dropdown nav-drop">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <i class="fas fa-cogs"></i> จัดการระบบ
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="?controller=userMm&action=index_workMm">จัดการงานของผู้ใช้</a>
+                        <a class="dropdown-item" href="?controller=userMm&action=index_userMm">จัดการบัญชีผู้ใช้</a>
+                        <a class="dropdown-item" href="?controller=addStd&action=index_addStd">เพิ่มนิสิตในระบบ</a>
+                        <a class="dropdown-item" href="?controller=yearSet&action=index_year">ตั้งค่าปีการศึกษา</a>
+                    </div>
+                </li>  
+              </ul>  
+              <ul class="navbar-nav ml-auto">
+                  <?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" id="addWork" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle" ></i> สั่งงาน</a>
+                  </li> 
+                  <?php } ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="?controller=identify&action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                  </li> 
+                  
+              </ul> 
+          </div>
+        </div>
+    </nav>
+</section>
+</header>
+<?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">กรอกรายละเอียดงาน</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="POST" id="add_work">
+                <div class="row">   
+                    <div class="col-6">
+                        <label><span class='red'>* </span>หัวข้องาน</label><input type="text" name="title" class="form-control" required>
+                        <label><span class='red'>* </span>รายละเอียดงาน</label><textarea name="detail"cols="30" rows="10" class="form-control" required></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label><span class='red'>* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="txtFromDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+                        <label><span class='red'>* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="txtToDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+                    </div>
+                </div>
+                <input type="hidden" name="controller" value="work">
+                
+            
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success btn-block" name="action" value="addWork">สั่งงาน</button>
+            </form>
+        </div>
+
+        </div>
+    </div>
+    </div>
+<?php } ?>
 
 <script>
-    $(document).ready(function(){
-   $('.button-left').click(function(){
-       $('.sidebar').toggleClass('fliph');
-   });
-     
+$(document).ready(function() {
+    $(".nav-drop").hover(            
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+    $("#add_work").submit(function( event ) {
+        var check = data_check('#txtFromDate','#txtToDate')
+        console.log(check);
+        if(check)
+        {
+            $('.alert').remove();
+            return;
+        }
+        else
+        {
+            $('.alert').remove();
+            $("#txtToDate").after("<span class='alert red'>วันที่เริ่มงานน้อยกว่าวันที่ส่งงาน</span>");
+        }
+        event.preventDefault();
+    });
 });
 </script>

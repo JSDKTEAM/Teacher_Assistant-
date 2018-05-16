@@ -12,16 +12,15 @@ function remove_spacebar(elem) {
     });
 }
 
-function check_status(code, type_user) {
+function check_status(code, div, type_user) {
     $(document).ready(function() {
-        $(code).hide();
+        $(div).hide();
         $(type_user).change(function() {
-            console.log("Sdf");
             if ($(this).val() == 'นิสิต') {
-                $(code).show();
+                $(div).show();
                 $(code).prop('required', true);
             } else {
-                $(code).hide();
+                $(div).hide();
                 $(code).prop('required', false);
             }
         });
@@ -49,7 +48,7 @@ function confirm_password(passwd, passwdConfirm, btn) {
             // $(btn).prop('disabled', false);
             if ($(this).val() != $(passwdConfirm).val() && $(passwdConfirm).val() != '') {
                 // $(btn).prop('disabled', true);
-                $(passwdConfirm).after("<span  class='red alert-user'>ยืนยันรหัสผ่านไม่ถูกต้อง</span>")
+                $(passwdConfirm).after("<span  class='red alert-user'> ยืนยันรหัสผ่านไม่ถูกต้อง</span>")
                 return false;
             } else {
                 if (!$(btn).is(":disabled")) {
@@ -137,6 +136,7 @@ function check_passwdOld(passwdOld, input_id_member) {
     if ($(passwdOld).val() != '') {
         var check = true;
         $.ajax({
+            async: false,
             url: "index.php?controller=userSet&action=validatePassword",
             method: "POST",
             data: { passwdOld: $(passwdOld).val(), id_member: $(input_id_member).val() },
@@ -159,6 +159,47 @@ function check_passwdOld(passwdOld, input_id_member) {
 
 }
 
+function check_codeStd(code, type_user) {
+    //console.log("hi");
+    $("#alert-code").remove();
+    if ($(code).val() != '') {
+        if ($(code).val().length == 10) {
+            var check = true;
+            $.ajax({
+                async: false,
+                url: "index.php?controller=userMm&action=validateCode",
+                method: "POST",
+                data: { id_code: $(code).val() },
+                success: function(data) {
+                    if (data.check) {
+                        $(code).after("<span id='alert-code' class='red'>มีรหัสนิสิตนี้ในระบบแล้ว</span>")
+                        $(code).focus()
+                        check = false;
+                    } else {
+                        check = true;
+                    }
+                },
+                error: function(data) {
+                    console.log("error");
+                }
+
+            });
+            return check;
+        } else {
+            $(code).after("<span id='alert-code' class='red'>รหัสนิสิตไม่ครบ 10 หลัก</span>")
+            $(code).focus()
+            return false;
+        }
+
+    } else {
+        if ($(type_user).val() != "นิสิต") {
+            return true;
+        }
+        $(code).after("<span id='alert-code' class='red'>กรุณาใส่รหัสนิสิต</span>")
+        return false;
+    }
+}
+
 function check_passwd(passwdOld, passwdNew) {
     if ($(passwdOld).val() === $(passwdNew).val()) {
         $(".alert-user").remove();
@@ -172,21 +213,21 @@ function check_passwd(passwdOld, passwdNew) {
 }
 
 function check_username(username) {
+    var check = true;
     if ($(username).val() != '') {
         $.ajax({
+            async: false,
             url: "index.php?controller=userMm&action=validateUsername",
             method: "POST",
             data: { username: $(username).val() },
-
             success: function(data) {
                 //console.log(data);
                 if (data.check) {
                     $(username).focus();
-                    return false;
+                    check = false;
                 } else {
                     $('#alertuser').remove();
                     console.log("true username");
-                    return true;
                 }
             },
 
@@ -196,5 +237,44 @@ function check_username(username) {
             }
         });
     }
+    return check;
+}
 
+function data_check(start, end) {
+    var date_s = new Date($(start).val());
+    var date_e = new Date($(end).val());
+    var timeDiff = (date_s.getTime() - date_e.getTime());
+    console.log(timeDiff);
+    //var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    // console.log(timeDiff);
+    if (timeDiff > 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function year_check(year) {
+    var check = true;
+    $.ajax({
+        async: false,
+        url: "index.php?controller=yearSet&action=validateYear",
+        method: "POST",
+        data: { id_year: $(year).val() },
+
+        success: function(data) {
+            //console.log(data);
+            if (data.check) {
+                $(year).focus();
+                check = false;
+            }
+        },
+
+        error: function(data) {
+            console.log("error");
+            console.log(data);
+        }
+    });
+    console.log(check);
+    return check;
 }
