@@ -1,9 +1,10 @@
 <?php
-    include('views/sweetalert/sweetalert.php');
     include('views/header/nav3.php');
 ?>
 <div class="banner-sec">
     <div class="container">
+
+  
         <?php if($_SESSION['member']['type'] != "นิสิต"){?>
         <form method="POST">
             <label>ปีการศึกษา
@@ -63,7 +64,7 @@
                         <td>
                         <div class='row'>
                             <div class='col-9'>
-                                <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
+                                <h5><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h5>
                                 <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
                                 <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                             </div>";
@@ -106,40 +107,10 @@
             ?>
             </tbody>
         </table>
+
 </div>
-<script>
-    $(document).ready(function(){
-        $('.edit-work').click(function(){
-        // get data from edit btn
-        var id_work = $(this).attr('data-id-work');
-        var title = $(this).attr('data-title');
-        var detail = $(this).attr('data-detail');
-        var time_start = $(this).attr('data-time-start');
-        var time_stop = $(this).attr('data-time-stop');        
-        // set value to modal
-        $("#data-id-work-edit").val(id_work);
-        $("#data-title-edit").val(title);
-        $("#data-detail-edit").val(detail);
-        $("#data-time-start-edit").val(time_start);
-        $("#data-time-stop-edit").val(time_stop);
-        $("#edit").modal('show');
-        });
-    });
-</script>
 
-<script>
-    $(document).ready(function(){
-        $('.delete-work').click(function(){
-        // get data from edit btn
-        var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
-        // set value to modal
-        $("#data-id-work-delete").val(id_work);
-        $("#delete").modal('show');
-        });
-    });
-</script>
-
+<!-- แก้ไขงาน -->
 <div class="modal fade" id="edit">
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -152,16 +123,16 @@
 
     <!-- Modal body -->
     <div class="modal-body">
-        <form method="POST">
+        <form method="POST" id="form-edit">
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label>หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
-                    <label>รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-                    <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                 </div>
             </div>
             <input type="hidden" name="controller" value="work">
@@ -195,8 +166,6 @@
             <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden> 
             <h5 id="data-title-delete"></h5>         
             <input type="hidden" name="controller" value="work">
-            
-        
     </div>
 
     <!-- Modal footer -->
@@ -215,9 +184,45 @@
     </div>
 </div>
 </div>
+<!-- แก้ไขงาน -->
+<script>
+    $(document).ready(function(){
+        $('.edit-work').click(function(){
+        $('.alert').remove();
+        // get data from edit btn
+        var id_work = $(this).attr('data-id-work');
+        var title = $(this).attr('data-title');
+        var detail = $(this).attr('data-detail');
+        var time_start = $(this).attr('data-time-start');
+        var time_stop = $(this).attr('data-time-stop');        
+        // set value to modal
+        $("#data-id-work-edit").val(id_work);
+        $("#data-title-edit").val(title);
+        $("#data-detail-edit").val(detail);
+        $("#data-time-start-edit").val(time_start);
+        $("#data-time-stop-edit").val(time_stop);
+        $("#edit").modal('show');
+        });
+    });
+</script>
+<!-- ลบงาน -->
+<script>
+    $(document).ready(function(){
+        $('.delete-work').click(function(){
+        // get data from edit btn
+        var id_work = $(this).attr('data-id-work');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
+        // set value to modal
+        $("#data-id-work-delete").val(id_work);
+        $("#delete").modal('show');
+        });
+    });
+</script>
+<!-- datatable -->
 <script>
     $(document).ready(function() {
     $('#workTable').DataTable({
+
         "language": {
             "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
             "zeroRecords": "Nothing found - sorry",
@@ -233,6 +238,21 @@
             },
             "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
         }
+    });
+    $("#form-edit").submit(function( event ) {
+        var check = data_check('#data-time-start-edit','#data-time-stop-edit')
+        console.log(check);
+        if(check)
+        {
+            $('.alert').remove();
+            return;
+        }
+        else
+        {
+            $('.alert').remove();
+            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
+        }
+        event.preventDefault();
     });
 } );
 </script>

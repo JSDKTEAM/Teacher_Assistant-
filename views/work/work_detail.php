@@ -4,7 +4,7 @@
 <style>
     #work_detail{
         margin:auto;
-        width:90%;
+        width:100%;
         box-shadow: 5px 5px 30px 5px #888888;
         padding:30px;
         background:#FFFF;
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-6">    
                 <p>ผู้สั่งงาน : <a href="#"><?php echo $objPatron->get_fname()." ".$objPatron->get_lname()  ?></a></p>
-                <p>รายละเอียด : <?php echo $work->get_detail() ?></p>
+                <p>รายละเอียด : </p><textarea class="form-control" cols="5" rows="5" readonly><?php echo $work->get_detail() ?></textarea>
                 <p>ระยะเวลาทำงาน : <?php echo $work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop()) ?></p>
             </div>
             <?php if($work->get_status() != 'waiting') { ?>
@@ -63,7 +63,7 @@
                 </form>
             </div>
             <div class="col-6">
-                <button href="#" class="btn btn-primary btn-block">ย้อนกลับ</button>
+                <button onclick="window.history.back();" class="btn btn-primary btn-block">ย้อนกลับ</button>
             </div>
             <?php } ?>
             <?php if($work->get_status() == 'booked' && $objPerson->get_id_member() == $_SESSION['member']['id_member']) {?>
@@ -73,7 +73,7 @@
                 งานเสร็จแล้ว
                 </button>
 
-                <!-- The Modal -->
+                <!-- หน้ากรอกรายละเอียดงานเสร็จแล้ว -->
                 <div class="modal fade" id="finishWork">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -122,7 +122,7 @@
                 ยกเลิกไม่รับงาน
                 </button>
 
-                <!-- The Modal -->
+                <!-- หน้ายกเลิกไม่รับงาน -->
                 <div class="modal fade" id="cancelWork">
                 <div class="modal-dialog">
                     <div class="modal-content">

@@ -4,7 +4,7 @@
 <style>
     #work_detail{
         margin:auto;
-        width:90%;
+        width:100%;
         box-shadow: 5px 5px 30px 5px #888888;
         padding:30px;
         background:#FFFF;
@@ -41,15 +41,15 @@
         <div class="row">
             <div class="col-6">    
                 <p>ผู้สั่งงาน : <a href="#"><?php echo $objPatron->get_fname()." ".$objPatron->get_lname()  ?></a></p>
-                <p>รายละเอียด : <?php echo $work->get_detail() ?></p>
                 <p>ระยะเวลาทำงาน : <?php echo $work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop()) ?></p>
+                <p>รายละเอียด : </p><textarea cols="5" rows="5" class="form-control" readonly><?php echo $work->get_detail() ?></textarea>
             </div>
             <?php if($work->get_status() != 'waiting') { ?>
             <div class="col-6">    
                 <p>ผู้รับงาน : <a href="#"><?php echo $objPerson->get_fname()." ".$objPerson->get_lname()  ?></a></p>
                 <p>วันเวลาที่ทำงานเสร็จ : <?php echo $work->DateThai($work->get_due_date()) ?><p/>
                 <p>จำนวนเวลาที่ทำ : <?php echo $work->get_used_time() ?><p/>
-                <p>รายละเอียดการส่ง : <?php echo $work->get_summary() ?><p/>
+                <p>รายละเอียดการส่ง : <p/><textarea cols="5" rows="3" class="form-control" readonly><?php echo $work->get_summary() ?></textarea>
             </div>
             <?php } ?>
         </div>

@@ -38,7 +38,8 @@ $(document).ready(function() {
                                 xAxes: [{
                                     ticks: {
                                         beginAtZero: true,
-                                        min: 0
+                                        min: 0,
+                                        stepSize: 5
                                     }
                                 }]
                             }

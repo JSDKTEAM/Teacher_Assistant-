@@ -6,7 +6,7 @@
         public function index_userMm($param = NULL)
         {
             $memberList = Member::getAllMember();
-            $memberYearList =  Member::getMemberByYear();
+            //$memberYearList =  Member::getMemberByYear();
             $memberListYear = Member::getAllMemberByYear();
             include('views/userMm/index_userMm.php');
         }
@@ -17,15 +17,15 @@
         public function addMember($param = NULL)
         {
             $check = Member::addMemberMm($param['fname'],$param['lname'],$param['username'],$param['passwd'],$param['type']);
-            $link = 'location:index.php?controller=userMm&action=index_userMm';
             if($check)
             {
-                header($link.'&success=4');
+                sweetalert(4,NULL);
             }
             else
             {
-                header($link.'&error=4');
+                sweetalert(NULL,4);
             }
+            call('userMm','index_userMm');
         }
         public function validateCode($param = NULL)
         {
@@ -39,28 +39,28 @@
         public function updateMember($param = NULL)
         {
             $check = Member::updateMember($param['id_member'],$param['id_code'],$param['fname'],$param['lname'],$param['type']);
-            $link = 'location:index.php?controller=userMm&action=index_userMm';
             if($check)
             {
-                header($link.'&success=6');
+                sweetalert(6,NULL);
             }
             else
             {
-                header($link.'&error=6');
+                sweetalert(NULL,6);
             }
+            call('userMm','index_userMm');
         }
         public function updatePassMember($param = NULL)
         {
             $check = Member::updatePassMember($param['id_member'],$param['passwd']);
-            $link = 'location:index.php?controller=userMm&action=index_userMm';
             if($check)
             {
-                header($link.'&success=5');
+                sweetalert(5,NULL);
             }
             else
             {
-                header($link.'&error=5');
+                sweetalert(NULL,5);
             }
+            call('userMm','index_userMm');
         }
         public function index_workMm($param  = NULL)
         {
@@ -72,15 +72,15 @@
         public function add_workMm($param = NULL)
         {
             $check = Work::addWork($param['id_patron'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
-            $link ='location:index.php?controller=userMm&action=index_workMm';
             if($check)
             {
-                header($link.'&success=1');
+                sweetalert(1,NULL);
             }
             else
             {
-                header($link.'&error=1');
+                sweetalert(NULL,1);
             }
+            call('userMm','index_userMm');
             
         }
         public function edit_workMm($param  = NULL)
@@ -132,12 +132,13 @@
             }
             if($success!=0)
             {
-                header($link.'&success=3');
+                sweetalert(3,NULL);
             }
             else if($error!=0)
             {
-                header($link.'&error=3');
+                sweetalert(NULL,3);
             }
+            call('userMm','index_workMm');
            
           
         }
@@ -147,26 +148,27 @@
             $link='location:index.php?controller=userMm&action=index_workMm';
             if($check)
             {
-                header($link.'&success=2');
+                sweetalert(2,NULL);
             }
             else
             {
-                header($link.'&error=2');
+                sweetalert(NULL,2);
             }
+            call('userMm','index_workMm');
             
         }
         public function deleteUser($param = NULL)
         {
             $check = Member::deleteUser($param['id_member']);
-            $link = 'location:index.php?controller=userMm&action=index_userMm';
             if($check)
             {
-                header($link.'&success=7');
+                sweetalert(7,NULL);
             }
             else
             {
-                header($link.'&error=7');
+                sweetalert(NULL,7);
             }
+            call('userMm','index_userMm');
         }
     }
 ?>

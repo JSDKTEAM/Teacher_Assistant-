@@ -1,5 +1,4 @@
 <?php 
-    include('views/sweetalert/sweetalert.php');
     include('views/header/nav3.php')
 ?>
 <style>
