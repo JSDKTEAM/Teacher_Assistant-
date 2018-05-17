@@ -17,12 +17,13 @@
             $link = 'location:index.php?controller=userSet&action=index_userSet';
             if($check)
             {
-                header($link.'&success=6');
+                sweetalert(6,NULL);
             }
             else
             {
-                header($link.'&error=6');
+                sweetalert(NULL,6);
             }
+            call('userSet','index_userSet');
             
         }
         public function updatePassMember($param = NULL)
@@ -31,12 +32,13 @@
             $link = 'location:index.php?controller=userSet&action=index_userSet';
             if($check)
             {
-                header($link.'&success=5');
+                sweetalert(5,NULL);
             }
             else
             {
-                header($link.'&error=5');
+                sweetalert(NULL,5);
             }
+            call('userSet','index_userSet');
         }
         public function validatePassword($param = NULL)
         {

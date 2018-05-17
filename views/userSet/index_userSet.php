@@ -1,6 +1,5 @@
 <?php
     include('views/header/nav3.php');
-    include('views/sweetalert/sweetalert.php');
 ?>
 <style>
 .center {

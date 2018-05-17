@@ -1,7 +1,5 @@
-<?php include('views/header/nav3.php');
-//print_r($yearlist);
-
-
+<?php 
+    include('views/header/nav3.php');
 ?>
 <style>
     .red{
@@ -49,7 +47,7 @@
 
 <table  id="yearTable" class="table table-bordered"> 
         <thead>
-            <tr class="table-light">
+            <tr class="table-light" align="center">
                 <th>#</th>
                 <th>ปีการศึกษา</th>
                 <th>เริ่มปีการศึกษา</th>
@@ -92,27 +90,36 @@
 </table>
 
 </div>
-<script>
-    $(document).ready(function(){
-        $(".btn-edit-year").click(function(){
-        // get data from edit btn
-        var id_year = $(this).attr('data-id-year');
-        var end_date = $(this).attr('data-end-date');
-        var start_date= $(this).attr('data-start-date');
 
-        // set value to modal
-        document.getElementById("id-year-edit2").innerHTML = "ปีการศึกษา "+id_year;
-        $("#id-year-edit1").val(id_year);
-        $("#end-date-edit").val(end_date);
-        $("#start-date-edit").val(start_date);
+<!-- ลบปีการศึกษา -->
+<div class="modal fade" id="delete-year">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-        $("#edit-year").modal('show');
-        });
-    });
-</script>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">ยืนยันลบปีการศึกษา</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form method="POST">
+    
+      </div>
 
-<!-- The Modal -->
+      <!-- Modal footer -->
+      <div class="modal-footer">
+            <button  type="submit" name="action" value="deleteUser" class="btn btn-danger" style="width:50%">ยืนยันการลบ</button></form>
+            <button  data-dismiss="modal" class="btn btn-success" style="width:50%">ยกเลิก</button></form>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- แก้ไขปีการศึกษา -->
 <div class="modal fade" id="edit-year">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -143,6 +150,47 @@
   </div>
 </div>
 
+
+
+<!-- แก้ไขปีการศึกษา -->
+<script>
+    $(document).ready(function(){
+        $(".btn-edit-year").click(function(){
+        // get data from edit btn
+        var id_year = $(this).attr('data-id-year');
+        var end_date = $(this).attr('data-end-date');
+        var start_date= $(this).attr('data-start-date');
+
+        // set value to modal
+        document.getElementById("id-year-edit2").innerHTML = "ปีการศึกษา "+id_year;
+        $("#id-year-edit1").val(id_year);
+        $("#end-date-edit").val(end_date);
+        $("#start-date-edit").val(start_date);
+
+        $("#edit-year").modal('show');
+        });
+    });
+</script>
+
+<!-- ลบปีการศึกษา -->
+<script>
+    $(document).ready(function(){
+        $(".btn-edit-year").click(function(){
+        // get data from edit btn
+        var id_year = $(this).attr('data-id-year');
+        var end_date = $(this).attr('data-end-date');
+        var start_date= $(this).attr('data-start-date');
+
+        // set value to modal
+        document.getElementById("id-year-edit2").innerHTML = "ปีการศึกษา "+id_year;
+        $("#id-year-edit1").val(id_year);
+        $("#end-date-edit").val(end_date);
+        $("#start-date-edit").val(start_date);
+
+        $("#edit-year").modal('show');
+        });
+    });
+</script>
 
 <!-- ตรวจสอบปีการศึกษา -->
 <script>

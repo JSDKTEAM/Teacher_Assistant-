@@ -2,6 +2,7 @@
     require_once('models/memberModel.class.php');
     require_once('models/workModel.class.php');
     require_once('models/yearSchoolModel.class.php');
+    
     class WorkController{
         public function index_work($param = NULL)
         {
@@ -30,7 +31,8 @@
         public function searchWork($param = NULL)
         {
             $workList = Work::searchWork($param['id_year']);
-            header("location:index.php?controller=work&action=index_work");
+            $yearSchoolList = YearSchool::getAllYearSchool();
+            include('views/work/index_work.php');
         }
         public function submitWork($param = NULL)
         {
@@ -50,15 +52,15 @@
         public function addWork($param = NULL)
         {
             $check = Work::addWork($_SESSION['member']['id_member'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
-            $link='location:index.php?controller=work&action=index_work';
             if($check)
             {
-                header($link.'&success=1');
+                sweetalert(1,NULL);
             }
             else
             {
-                header($link.'&error=1');
+                sweetalert(NULL,1);
             }
+            call('work','index_work');
             
         }
         public function editWork($param = NULL)
@@ -68,28 +70,27 @@
             $link ='location:index.php?controller=work&action=index_work';
             if($check)
             {
-                header($link.'&success=3');
+                sweetalert(3,NULL);
             }
             else
             {
-                header($link.'&error=3');
+                sweetalert(NULL,3);
             }
+            call('work','index_work');
         }
         public function deleteWork($param = NULL)
         {
            
             $check = Work::deleteWork($param['id_work']);  
-            $link ='location:index.php?controller=work&action=index_work';
             if($check)
             {
-                header($link.'&success=2');
+                sweetalert(2,NULL);
             }
             else
             {
-                header($link.'&error=2');
+                sweetalert(NULL,2);
             }
-                   
-          
+            call('work','index_work');
         }
         /*
         public function editWork($param = NULL)

@@ -1,24 +1,25 @@
 <?php 
-function isAjax() {
-    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower(
-        $_SERVER['HTTP_X_REQUESTED_WITH']
-    ) == 'xmlhttprequest';
-}
-session_start();
-if(isAjax())
-{
-	ob_start();
-}
-if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'))
-{
-	$controller = $_REQUEST['controller'];
-	$action = $_REQUEST['action'];
-}
-else
-{
-	$controller = 'identify';
-	$action = 'index_login';
-}
+	require_once('views/sweetalert/sweetalert.php');
+	function isAjax() {
+		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower(
+			$_SERVER['HTTP_X_REQUESTED_WITH']
+		) == 'xmlhttprequest';
+	}
+	session_start();
+	if(isAjax())
+	{
+		ob_start();
+	}
+	if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'))
+	{
+		$controller = $_REQUEST['controller'];
+		$action = $_REQUEST['action'];
+	}
+	else
+	{
+		$controller = 'identify';
+		$action = 'index_login';
+	}
 
 ?>
 <!DOCTYPE html>
@@ -41,12 +42,14 @@ else
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"> 
 	<!-- dataTable -->
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css"/>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
+	<!-- muti-select -->
+	<link rel="stylesheet" href="js/bootstrap-select-1.13.0-beta/css/bootstrap-select.min.css">
+	<script src="js/bootstrap-select-1.13.0-beta/js/bootstrap-select.min.js"></script>
+	<!-- <script src="js/bootstrap-select-1.13.0-beta/js/i18n/defaults-*.min.js"></script> -->
 
 
 	<!-- Crop images -->
@@ -60,6 +63,7 @@ else
 	<script src="js/validate/validate_form.js"></script>
 	<!--  sweetalert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 	<style>
 	body{
 		margin:0;
@@ -70,7 +74,7 @@ else
 		background-color:#FFFF;	
 	}
 	tbody tr{
-		line-height: 2px;
+		line-height: 20px;
 		font-size:14px;
 	}
 	.red{
@@ -79,7 +83,9 @@ else
 	</style>
 </head>
 <body id="<?php echo $controller ?>">
-<?php require_once("routes.php"); ?>
+<?php 
+	require_once("routes.php"); 
+?>
 <?php if(isAjax()){ob_start();} ?>
 <hr>
 <footer>

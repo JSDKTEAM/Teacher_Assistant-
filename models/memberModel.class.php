@@ -226,7 +226,8 @@
             }
             return $member_list;
         }
-        public static function getMemberByYear()
+
+        /*public static function getMemberByYear()
         {
             $con = conDb::getInstance();
             $stmt = $con->query('SELECT * FROM year_school
@@ -250,6 +251,25 @@
                 return FALSE;
             }
             return $member_list;
+        }*/
+        public static function getMemberNotInSys($id_year)
+        {
+            header('Content-type: application/json');
+            $con = conDb::getInstance();
+            $stmt = $con->query("SELECT * FROM member
+                                 WHERE member.id_member NOT IN(SELECT DISTINCT  member.id_member FROM member 
+                                 INNER JOIN year_member ON year_member.id_member = member.id_member
+                                 WHERE year_member.id_year = $id_year) AND member.type = 'นิสิต'");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                foreach($result as $key=>$value)
+                {
+                    $data[] = $value;
+                }
+            }
+            ob_end_clean();
+            print json_encode($data);
         }
         public static function getAllMemberByYear()
         {
@@ -306,17 +326,14 @@
             $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
             return $check;
         }
-        public static function addMemberSys($array_member)
+        public static function addMemberSys($array_member,$id_year)
         {   
             $con = conDb::getInstance();
-            $stmt = $con->query('SELECT * FROM year_school
-            WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
-            $result = $stmt->fetch();
-            $id_year = $result['id_year'];
             $stmt = $con->prepare('INSERT INTO year_member(id_member,id_year) VALUES(?,?)');
             foreach($array_member as $key=>$value)
             {
                 $check = $stmt->execute([$value,$id_year]);
+                echo $id_year;
             }
             return $check;
             

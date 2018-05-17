@@ -1,5 +1,6 @@
-<?php include('views/header/nav3.php');
-    include('views/sweetalert/sweetalert.php');?>
+<?php 
+    include('views/header/nav3.php');
+?>
 <style>
     .red{
         color:red;
@@ -81,11 +82,11 @@
                 $objPerson = $work->get_objPerson(); 
                 if($work->get_status() == 'waiting')
                 {
-                    $color='badge badge-warning';
+                    $color='badge badge-pill badge-warning';
                 }
                 else if($work->get_status() == 'booked')
                 {
-                    $color='badge badge-primary';
+                    $color='badge badge-pill badge-primary';
                 }
                 else
                 {
@@ -124,7 +125,7 @@
         </tbody>
     </table>
     </br>
-
+</div>
 
 <script>
     $(document).ready(function(){

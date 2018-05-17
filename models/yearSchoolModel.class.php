@@ -43,7 +43,7 @@
         public static function getAllYearSchool()
         {
             $con = conDb::getInstance();
-            $stmt = $con->query('SELECT * FROM year_school');
+            $stmt = $con->query('SELECT * FROM year_school ORDER BY id_year DESC');
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
             {
