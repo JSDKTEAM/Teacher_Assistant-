@@ -1,9 +1,10 @@
 <?php
-    include('views/sweetalert/sweetalert.php');
     include('views/header/nav3.php');
 ?>
 <div class="banner-sec">
     <div class="container">
+
+  
         <?php if($_SESSION['member']['type'] != "นิสิต"){?>
         <form method="POST">
             <label>ปีการศึกษา
@@ -106,41 +107,10 @@
             ?>
             </tbody>
         </table>
+
 </div>
-<script>
-    $(document).ready(function(){
-        $('.edit-work').click(function(){
-        $('.alert').remove();
-        // get data from edit btn
-        var id_work = $(this).attr('data-id-work');
-        var title = $(this).attr('data-title');
-        var detail = $(this).attr('data-detail');
-        var time_start = $(this).attr('data-time-start');
-        var time_stop = $(this).attr('data-time-stop');        
-        // set value to modal
-        $("#data-id-work-edit").val(id_work);
-        $("#data-title-edit").val(title);
-        $("#data-detail-edit").val(detail);
-        $("#data-time-start-edit").val(time_start);
-        $("#data-time-stop-edit").val(time_stop);
-        $("#edit").modal('show');
-        });
-    });
-</script>
 
-<script>
-    $(document).ready(function(){
-        $('.delete-work').click(function(){
-        // get data from edit btn
-        var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
-        // set value to modal
-        $("#data-id-work-delete").val(id_work);
-        $("#delete").modal('show');
-        });
-    });
-</script>
-
+<!-- แก้ไขงาน -->
 <div class="modal fade" id="edit">
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -214,9 +184,45 @@
     </div>
 </div>
 </div>
+<!-- แก้ไขงาน -->
+<script>
+    $(document).ready(function(){
+        $('.edit-work').click(function(){
+        $('.alert').remove();
+        // get data from edit btn
+        var id_work = $(this).attr('data-id-work');
+        var title = $(this).attr('data-title');
+        var detail = $(this).attr('data-detail');
+        var time_start = $(this).attr('data-time-start');
+        var time_stop = $(this).attr('data-time-stop');        
+        // set value to modal
+        $("#data-id-work-edit").val(id_work);
+        $("#data-title-edit").val(title);
+        $("#data-detail-edit").val(detail);
+        $("#data-time-start-edit").val(time_start);
+        $("#data-time-stop-edit").val(time_stop);
+        $("#edit").modal('show');
+        });
+    });
+</script>
+<!-- ลบงาน -->
+<script>
+    $(document).ready(function(){
+        $('.delete-work').click(function(){
+        // get data from edit btn
+        var id_work = $(this).attr('data-id-work');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
+        // set value to modal
+        $("#data-id-work-delete").val(id_work);
+        $("#delete").modal('show');
+        });
+    });
+</script>
+<!-- datatable -->
 <script>
     $(document).ready(function() {
     $('#workTable').DataTable({
+
         "language": {
             "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
             "zeroRecords": "Nothing found - sorry",

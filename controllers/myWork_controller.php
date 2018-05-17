@@ -16,6 +16,20 @@
                 include('views/myWork/myWork.php');
             }
         }
+        public function searchWork($param = NULL)
+        {
+            $member = Member::getMember($_SESSION['member']['id_member']);
+            $workList = Work::searchWork($param['id_year']);
+            $yearSchoolList = YearSchool::getAllYearSchool();
+            if($_SESSION['member']['type'] == 'นิสิต')
+            {
+                include('views/myWork/myWorkStd.php');
+            }
+            else
+            {
+                include('views/myWork/myWork.php');
+            }
+        }
         public function getWork($param = NULL)
         {
             $work = Work::getWork($param['id_work']);

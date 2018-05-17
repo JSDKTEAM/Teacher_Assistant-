@@ -1,6 +1,5 @@
 <?php
     include('views/header/nav3.php');
-    include('views/sweetalert/sweetalert.php');
 ?>
 <style>
     .work{
@@ -43,7 +42,7 @@
                     ?>
                 </select>
                 </label>
-                <input type="hidden" name="controller" value="work">
+                <input type="hidden" name="controller" value="myWork">
                 <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
         </form>
         <?php } ?>
