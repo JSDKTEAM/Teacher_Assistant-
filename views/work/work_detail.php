@@ -90,17 +90,22 @@
                             <input type="hidden" name="id_work" value="<?php echo $work->get_id_work() ?>">
                             <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div class="row">
-                                <div class="col-4">
-                                    <label> ชั่วโมง 
-                                        <input type="number" name="HH"   class="form-control" value="0" min=0 required>
-                                    </label>
-                                </div>
-                                <div class="col-4">
                                 
-                                    <label> นาที 
-                                        <input type="number" name="mm"   class="form-control" value="0" min=0  required>
+                                    <div class="col-3">
+                                        <input type="number" name="HH"   class="form-control" value="0" min=0 required>
+                                    </div>
+                                    <div class="col-3">
+                                    <label style="padding-top:7px"> ชั่วโมง 
                                     </label>
-                                </div>
+                                    </div>
+                                    <div class="col-3">     
+                                    <input type="number" name="mm"   class="form-control" value="0" min=0  required>
+                                    </div>
+                                    <div class="col-3">                                
+                                    <label style="padding-top:7px"> นาที 
+                                    </label>
+                                    </div>
+                               
                             </div>
                             <label>รายละเอียดการส่ง </label><textarea name="summary" class="form-control" cols="30" rows="5"></textarea>
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
