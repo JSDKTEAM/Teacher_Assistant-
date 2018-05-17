@@ -65,9 +65,9 @@
         public function index_workMm($param  = NULL)
         {
             $workList = Work::getAllWork();
-            $personList = Member::getMemberByYear();
+            $personList = Member::getAllMemberByYear();
             $patronList = Member::getAllStaff();
-            include('views/userMm/index_workMm.php');
+            include('views/workMm/index_workMm.php');
         }
         public function add_workMm($param = NULL)
         {
