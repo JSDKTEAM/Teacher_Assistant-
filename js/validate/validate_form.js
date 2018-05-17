@@ -172,7 +172,7 @@ function check_codeStd(code, type_user) {
                 data: { id_code: $(code).val() },
                 success: function(data) {
                     if (data.check) {
-                        $(code).after("<span id='alert-code' class='red'>มีรหัสนิสิตนี้ในระบบแล้ว</span>")
+                        $(code).after("<span id='alert-code' class='red'>มีรหัสนิสิตนี้ในระบบแล้ว</br></span>")
                         $(code).focus()
                         check = false;
                     } else {
@@ -186,7 +186,7 @@ function check_codeStd(code, type_user) {
             });
             return check;
         } else {
-            $(code).after("<span id='alert-code' class='red'>รหัสนิสิตไม่ครบ 10 หลัก</span>")
+            $(code).after("<span id='alert-code' class='red'>รหัสนิสิตไม่ครบ 10 หลัก</br></span>")
             $(code).focus()
             return false;
         }
@@ -195,7 +195,7 @@ function check_codeStd(code, type_user) {
         if ($(type_user).val() != "นิสิต") {
             return true;
         }
-        $(code).after("<span id='alert-code' class='red'>กรุณาใส่รหัสนิสิต</span>")
+        $(code).after("<span id='alert-code' class='red'>กรุณาใส่รหัสนิสิต</br></span>")
         return false;
     }
 }

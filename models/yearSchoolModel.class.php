@@ -54,16 +54,15 @@
         
         public static function add_yearschool($id_year,$start_date,$end_date)
         {
-            echo "ddwweweweewewedd";
             $con = conDb::getInstance();
             $stmt = $con->prepare('INSERT INTO `year_school`(`id_year`, `start_date`, `end_date`) VALUES (?,?,?)');
             $check = $stmt->execute([$id_year, $start_date,$end_date]);
             return $check;
         }
-        public static function delect_yearschool($id_year)
+        public static function delete_yearschool($id_year)
         {
             $con = conDb::getInstance();
-            $stmt = $con->prepare('DELETE FROM `year_school` WHERE $id_year = ?');
+            $stmt = $con->prepare('DELETE FROM `year_school` WHERE id_year = ?');
             $check = $stmt->execute([$id_year]);
             return $check ;
 

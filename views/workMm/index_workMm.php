@@ -1,10 +1,30 @@
-<?php 
-    include('views/header/nav3.php');
-?>
+<?php include('views/header/nav3.php');?>
 <style>
     .red{
         color:red;
     }
+    .step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+input.invalid {
+  background-color: #ffdddd;
+}
+.tab {
+  display: none;
+}
+.step.active {
+  opacity: 1;
+}
+.step.finish {
+  background-color: #4CAF50;
+}
 </style>
 <div class="banner-sec">
     <div class="container">
@@ -82,11 +102,11 @@
                 $objPerson = $work->get_objPerson(); 
                 if($work->get_status() == 'waiting')
                 {
-                    $color='badge badge-pill badge-warning';
+                    $color='badge badge-warning';
                 }
                 else if($work->get_status() == 'booked')
                 {
-                    $color='badge badge-pill badge-primary';
+                    $color='badge badge-primary';
                 }
                 else
                 {
@@ -115,6 +135,20 @@
                         data-mm ="<?php echo $time[1]?>"
                         data-summary ="<?php echo $work->get_summary()?>"
                         class="btn btn-success btn-sm btn-edit-work">แก้ไขรายละเอียดงาน</a>
+                        <a href="#"
+                        data-id-work =  "<?php echo $work->get_id_work() ?>"
+                        data-title = "<?php echo $work->get_title() ?>"
+                        data-detail = "<?php echo $work->get_detail() ?>"
+                        data-timestart = "<?php echo $work->get_time_start() ?>"
+                        data-timestop = "<?php echo $work->get_time_stop() ?>"
+                        data-status ="<?php echo $work->get_status() ?>"
+                        data-id-patron ="<?php echo $objPatron->get_id_member() ?>"
+                        data-id-person ="<?php echo $objPerson->get_id_member()  ?>"                       
+                        data-due-date ="<?php echo $work->get_due_date() ?>"
+                        data-HH ="<?php echo $time[0] ?>"
+                        data-mm ="<?php echo $time[1]?>"
+                        data-summary ="<?php echo $work->get_summary()?>"
+                        class="btn btn-success btn-sm btn-edit-status" onclick="showTab(0)">แก้ไขสถานะ</a>
                         <a href="#" 
                         data-id-work = '<?php echo $work->get_id_work()?>'
                         data-title = '<?php echo $work->get_title()?>'
@@ -125,7 +159,7 @@
         </tbody>
     </table>
     </br>
-</div>
+
 
 <script>
     $(document).ready(function(){
@@ -146,7 +180,7 @@
 
         // set value to modal
         
-        $("#id-work").val(id_work);
+        $("#id_work").val(id_work);
         $("#title").val(title);
         $("#detail").val(detail);
         $("#time_start").val(time_start);
@@ -197,13 +231,14 @@
         $('.btn-delete').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน "+$(this).attr('data-title') + " ใช่หรือไม่";
+        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
         // set value to modal
         $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
         });
     });
 </script>
+
 <!-- The Modal -->
 <div class="modal fade" id="edit-work">
   <div class="modal-dialog modal-lg">
@@ -218,7 +253,7 @@
       <!-- Modal body -->   
       <div class="modal-body">
             <form method="POST">
-            <input id="id-work" type="text" name="id_work" class="form-control" hidden>
+            <input id="id_work" type="text" name="id_work" class="form-control" hidden>
                 <div class="row">
                     <div class="col-6">
                         <label><span class="red">*</span> หัวข้องาน</label><input type="text" name="title" id="title" class="form-control" required>                       
@@ -287,12 +322,12 @@
   </div>
 </div>
 <div class="modal fade" id="delete">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ยืนยันการลบงาน</h4>
+        <h4 class="modal-title">ต้องการลบงาน</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -300,18 +335,24 @@
     <div class="modal-body">
         <form method="POST">
         <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
-        <h5 id="data-title-delete"></h5>        
-        <input type="hidden" name="controller" value="userMm"> 
+            <div class="row">   
+                <div class="col-6">
+                    <label id="data-title-delete"></label> 
+                 </div>             
+            </div>
+            <input type="hidden" name="controller" value="userMm">
+            
+        
     </div>
 
     <!-- Modal footer -->
     <div class="modal-footer">
 
     <div style="width :50%">
-        <button type="submit" class="btn btn-danger btn-block" name="action" value="delete_workMm">ใช่</button>
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="delete_workMm">ลบ</button>
     </div>
     <div style="width :50%">    
-        <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
+        <button type="button" class="btn btn-light btn-block" data-dismiss="modal">ยกเลิก</button>
     </div> 
  
         </form>
@@ -343,3 +384,4 @@
     });
 } );
 </script>
+

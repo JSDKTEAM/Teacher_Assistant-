@@ -77,8 +77,8 @@
                         class="btn btn-success btn-sm btn-edit-year">แก้ไขปีการศึกษา</a>
                       
                         <a href="#" 
-                        data-id-member = <?php echo $year->get_id_year() ?>
-                        class="btn btn-danger btn-sm">ลบ</a>
+                        data-id-year = <?php echo $year->get_id_year() ?>
+                        class="btn btn-danger btn-sm btn-delete-year">ลบ</a>
                     </td>
 
 
@@ -91,33 +91,7 @@
 
 </div>
 
-<!-- ลบปีการศึกษา -->
-<div class="modal fade" id="delete-year">
-  <div class="modal-dialog">
-    <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">ยืนยันลบปีการศึกษา</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-      <form method="POST">
-    
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-            <button  type="submit" name="action" value="deleteUser" class="btn btn-danger" style="width:50%">ยืนยันการลบ</button></form>
-            <button  data-dismiss="modal" class="btn btn-success" style="width:50%">ยกเลิก</button></form>
-      </form>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 <!-- แก้ไขปีการศึกษา -->
 <div class="modal fade" id="edit-year">
@@ -150,6 +124,35 @@
   </div>
 </div>
 
+<!-- ลบปีการศึกษา -->
+<div class="modal fade" id="delete-year">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">ยืนยันลบปีการศึกษา</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form method="POST">
+            <input type="hidden" name="id_year" id="id_year_delete">
+            <h5 id="id_year_delete2"></h5>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+            <input type="hidden" name="controller" value="yearSet">
+            <button  type="submit" name="action" value="deleteYear" class="btn btn-danger" style="width:50%">ใช่</button></form>
+            <button  data-dismiss="modal" class="btn btn-success" style="width:50%">ไม่</button></form>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
 <!-- แก้ไขปีการศึกษา -->
@@ -175,19 +178,14 @@
 <!-- ลบปีการศึกษา -->
 <script>
     $(document).ready(function(){
-        $(".btn-edit-year").click(function(){
+        $(".btn-delete-year").click(function(){
         // get data from edit btn
         var id_year = $(this).attr('data-id-year');
-        var end_date = $(this).attr('data-end-date');
-        var start_date= $(this).attr('data-start-date');
-
+        console.log(id_year);
         // set value to modal
-        document.getElementById("id-year-edit2").innerHTML = "ปีการศึกษา "+id_year;
-        $("#id-year-edit1").val(id_year);
-        $("#end-date-edit").val(end_date);
-        $("#start-date-edit").val(start_date);
-
-        $("#edit-year").modal('show');
+        document.getElementById("id_year_delete2").innerHTML = "คุณต้องการลบปีการศึกษา "+id_year+" ใช่หรือไม่";
+        $("#id_year_delete").val(id_year);
+        $("#delete-year").modal('show');
         });
     });
 </script>

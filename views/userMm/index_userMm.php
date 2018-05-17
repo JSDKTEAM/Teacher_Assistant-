@@ -197,7 +197,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form method="POST">
+        <form method="POST" id="edit-info-form">
             <input id="id-member-info" type="hidden" name="id_member" class="form-control" required>
             <label id="lable-code">รหัสนิสิต</label><input id="id-code-info" type="text" name="id_code" class="form-control">
             <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control" required>
@@ -297,6 +297,12 @@
         });
         $("#edit-passwd-member").submit(function( event ) {
             if (check_passwd("#passwdinput","#passwdConfirm")) {
+                return;
+            }  
+            event.preventDefault();
+        });
+        $("#edit-info-form").submit(function( event ) {
+            if (check_codeStd("#id-code-info","#type-info")) {
                 return;
             }  
             event.preventDefault();
