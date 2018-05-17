@@ -102,7 +102,7 @@ if( ($controller =='page'&& ($action =='home'|| $action =='error'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo' || $action == 'updatePassMember' || $action == 'validatePassword'))
 ||  ($controller == 'workMm' && ($action == 'index_workMm' || $action == 'delete_workMm' || $action == 'edit_workMm' || $action == 'add_workMm'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
-|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear' || $action == 'validateYear'))
+|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear' || $action == 'validateYear' || $action == 'deleteYear'))
 || ($controller == 'report' && ($action == 'index_reportMonth' || $action == 'getMemberByYear' || $action == 'reportMonth' || $action == 'reportYear'))
 || ($controller == 'addStd' && ($action == 'index_addStd' || $action == 'addMemberSys' || $action == 'getMember' || $action == 'searchMemberByYear'|| $action == 'deleteStd')))
 {	
