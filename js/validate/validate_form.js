@@ -35,7 +35,7 @@ function confirm_password(passwd, passwdConfirm, btn) {
             //$(btn).prop('disabled', false);
             if ($(this).val() != $(passwd).val()) {
                 //$(btn).prop('disabled', true);
-                $(passwdConfirm).after("<span  class='red alert-user'>ยืนยันรหัสผ่านไม่ถูกต้อง</span>")
+                $(passwdConfirm).after("<span  class='red alert-user alert'>ยืนยันรหัสผ่านไม่ถูกต้อง</span>")
                 return false;
             } else {
                 // $(btn).prop('disabled', false);
@@ -48,7 +48,7 @@ function confirm_password(passwd, passwdConfirm, btn) {
             // $(btn).prop('disabled', false);
             if ($(this).val() != $(passwdConfirm).val() && $(passwdConfirm).val() != '') {
                 // $(btn).prop('disabled', true);
-                $(passwdConfirm).after("<span  class='red alert-user'> ยืนยันรหัสผ่านไม่ถูกต้อง</span>")
+                $(passwdConfirm).after("<span  class='red alert-user alert'> ยืนยันรหัสผ่านไม่ถูกต้อง</span>")
                 return false;
             } else {
                 if (!$(btn).is(":disabled")) {
@@ -75,7 +75,7 @@ function validateUsername(elem, btn) {
                     success: function(data) {
                         console.log(data);
                         if (data.check) {
-                            $(elem).after("<span id='alertuser' class='red'>ชื่อนี้มีอยู่ในระบบแล้ว กรุณากลับไปเพิ่มชื่อเข้ามาใหม่</br></span>")
+                            $(elem).after("<span id='alertuser' class='red alert'>ชื่อนี้มีอยู่ในระบบแล้ว กรุณากลับไปเพิ่มชื่อเข้ามาใหม่</br></span>")
                                 //$(btn).prop('disabled', true);
                             return false;
                         } else {
@@ -117,7 +117,7 @@ function validatePassword(elem, id_member, btn) {
                             return true;
                         } else {
                             //$(btn).prop('disabled', true);
-                            $(elem).after("<span id='alertPassword' class='red'>รหัสผ่านเก่าไม่ถูกต้อง</br></span>")
+                            $(elem).after("<span id='alertPassword' class='red alert'>รหัสผ่านเก่าไม่ถูกต้อง</br></span>")
                             return false;
                         }
                     },
@@ -172,7 +172,7 @@ function check_codeStd(code, type_user) {
                 data: { id_code: $(code).val() },
                 success: function(data) {
                     if (data.check) {
-                        $(code).after("<span id='alert-code' class='red'>มีรหัสนิสิตนี้ในระบบแล้ว</br></span>")
+                        $(code).after("<span class='red alert'>มีรหัสนิสิตนี้ในระบบแล้ว</br></span>")
                         $(code).focus()
                         check = false;
                     } else {
@@ -186,7 +186,7 @@ function check_codeStd(code, type_user) {
             });
             return check;
         } else {
-            $(code).after("<span id='alert-code' class='red'>รหัสนิสิตไม่ครบ 10 หลัก</br></span>")
+            $(code).after("<span  class='red alert'>รหัสนิสิตไม่ครบ 10 หลัก</br></span>")
             $(code).focus()
             return false;
         }
@@ -195,7 +195,7 @@ function check_codeStd(code, type_user) {
         if ($(type_user).val() != "นิสิต") {
             return true;
         }
-        $(code).after("<span id='alert-code' class='red'>กรุณาใส่รหัสนิสิต</br></span>")
+        $(code).after("<span  class='red alert'>กรุณาใส่รหัสนิสิต</br></span>")
         return false;
     }
 }

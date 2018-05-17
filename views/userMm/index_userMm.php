@@ -112,77 +112,7 @@
     </br>
 </div>
 
-<script>
-    $(document).ready(function(){
-        $('.btn-edit-info').click(function(){
-        // get data from edit btn
-        var id_member = $(this).attr('data-id-member');
-        var id_code = $(this).attr('data-id-code');
-        var fname = $(this).attr('data-fname');
-        var lname = $(this).attr('data-lname');
-        var type = $(this).attr('data-type');
-        var type_info = document.getElementById('type-info');
-        var opts = type_info.options;
-        for (var opt, j = 0; opt = opts[j]; j++) {
-            if (opt.value == type) {
-            type_info.selectedIndex = j;
-            break;
-            }
-        }
-        // set value to modal
-        if(type == 'นิสิต')
-        {
-            $("#lable-code").show();
-            $("#id-code-info").show();
-        }
-        else
-        {
-            $("#lable-code").hide();
-            $("#id-code-info").hide();
-        }
-        $("#id-member-info").val(id_member);
-        $("#id-code-info").val(id_code);
-        $("#fname-info").val(fname);
-        $("#lname-info").val(lname);
-        $("#edit-info").modal('show');
-        });
-    });
-</script>
 
-<script>
-    $(document).ready(function(){
-        $('.btn-edit-pasword').click(function(){
-        $("#passwdinput").val('')
-        $("#passwdConfirm").val('')
-        // get data from edit btn
-        var id_member = $(this).attr('data-id-member');
-        var username = $(this).attr('data-username');
-
-        // set value to modal
-        $("#id-member-password").val(id_member);
-        $("#username-password").val(username);
-        $("#edit-password").modal('show');
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function(){
-        $('.btn-delete-user').click(function(){
-        // get data from edit btn
-        var id_member = $(this).attr('data-id-member');
-        var username = $(this).attr('data-username');
-        var fname = $(this).attr('data-fname');
-        var lname = $(this).attr('data-lname');
-        // set value to modal
-        $("#id-member-delete").val(id_member);
-        document.getElementById("username-delete").innerHTML = username;
-        document.getElementById("fname-delete").innerHTML = fname;
-        document.getElementById("lname-delete").innerHTML = lname;
-        $("#delete-user").modal('show');
-        });
-    });
-</script>
 
 <!-- The Modal -->
 <div class="modal fade" id="edit-info">
@@ -280,7 +210,80 @@
     </div>
   </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.btn-edit-info').click(function(){
+        $(".alert").remove();
+        // get data from edit btn
+        var id_member = $(this).attr('data-id-member');
+        var id_code = $(this).attr('data-id-code');
+        var fname = $(this).attr('data-fname');
+        var lname = $(this).attr('data-lname');
+        var type = $(this).attr('data-type');
+        var type_info = document.getElementById('type-info');
+        var opts = type_info.options;
+        for (var opt, j = 0; opt = opts[j]; j++) {
+            if (opt.value == type) {
+            type_info.selectedIndex = j;
+            break;
+            }
+        }
+        // set value to modal
+        if(type == 'นิสิต')
+        {
+            $("#lable-code").show();
+            $("#id-code-info").show();
+        }
+        else
+        {
+            $("#lable-code").hide();
+            $("#id-code-info").hide();
+        }
+        $("#id-member-info").val(id_member);
+        $("#id-code-info").val(id_code);
+        $("#fname-info").val(fname);
+        $("#lname-info").val(lname);
+        $("#edit-info").modal('show');
+        });
+    });
+</script>
 
+<!-- แก้ไขบัญชีผู้ใช้ -->
+<script>
+    $(document).ready(function(){
+        $('.btn-edit-pasword').click(function(){
+        $(".alert").remove();     
+        $("#passwdinput").val('')
+        $("#passwdConfirm").val('')
+        // get data from edit btn
+        var id_member = $(this).attr('data-id-member');
+        var username = $(this).attr('data-username');
+
+        // set value to modal
+        $("#id-member-password").val(id_member);
+        $("#username-password").val(username);
+        $("#edit-password").modal('show');
+        });
+    });
+</script>
+<!-- ลบบัญชีผู้ใช้ -->
+<script>
+    $(document).ready(function(){
+        $('.btn-delete-user').click(function(){
+        // get data from edit btn
+        var id_member = $(this).attr('data-id-member');
+        var username = $(this).attr('data-username');
+        var fname = $(this).attr('data-fname');
+        var lname = $(this).attr('data-lname');
+        // set value to modal
+        $("#id-member-delete").val(id_member);
+        document.getElementById("username-delete").innerHTML = username;
+        document.getElementById("fname-delete").innerHTML = fname;
+        document.getElementById("lname-delete").innerHTML = lname;
+        $("#delete-user").modal('show');
+        });
+    });
+</script>
 <!-- ตรวจสอบความถูกต้อง -->
 <script>
     remove_spacebar("input");

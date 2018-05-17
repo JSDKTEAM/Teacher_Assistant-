@@ -1,8 +1,5 @@
 <?php include('views/header/nav3.php');?>
 <style>
-    .red{
-        color:red;
-    }
     .step {
   height: 15px;
   width: 15px;
@@ -102,15 +99,15 @@ input.invalid {
                 $objPerson = $work->get_objPerson(); 
                 if($work->get_status() == 'waiting')
                 {
-                    $color='badge badge-warning';
+                    $color='badge badge-pill badge-warning';
                 }
                 else if($work->get_status() == 'booked')
                 {
-                    $color='badge badge-primary';
+                    $color='badge badge-pill badge-primary';
                 }
                 else
                 {
-                   $color='badge badge-success';
+                   $color='badge badge-pill badge-success';
                 }
                 $time=explode(":",$work->get_used_time());
                 echo "<tr align='center' class='table-light'>
@@ -192,7 +189,7 @@ input.invalid {
           $(".waiting").hide();  
           $(".booked").hide(); 
           $("#chkstatus").removeClass();
-          $("#chkstatus").addClass("badge badge-warning"); 
+          $("#chkstatus").addClass("badge badge-pill badge-warning"); 
           $("#chkstatus").empty();
           $("#chkstatus").append(status);
         }
@@ -201,7 +198,7 @@ input.invalid {
             $(".waiting").hide();  
             $(".booked").show();
             $("#chkstatus").removeClass();
-            $("#chkstatus").addClass("badge badge-primary");
+            $("#chkstatus").addClass("badge badge-pill badge-primary");
             $("#chkstatus").empty();  
             $("#chkstatus").append(status);  
             $("#id_person").val(id_person);       
@@ -211,7 +208,7 @@ input.invalid {
             $(".waiting").show();  
             $(".booked").show();
             $("#chkstatus").removeClass();
-            $("#chkstatus").addClass("badge badge-success"); 
+            $("#chkstatus").addClass("badge badge-pill badge-success"); 
             $("#chkstatus").empty();
             $("#chkstatus").append(status);
             $("#id_person").val(id_person);

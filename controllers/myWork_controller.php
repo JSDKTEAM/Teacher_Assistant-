@@ -30,6 +30,19 @@
                 include('views/myWork/myWork.php');
             }
         }
+        public function getAllWorkByMember($param = NULL)
+        {
+            $member = Member::getMember($param['id_member']);
+            $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            if($param['type'] == 'นิสิต')
+            {
+                include('views/work/workMemberStd.php');
+            }
+            else
+            {
+                include('views/work/workMember.php');
+            }
+        }
         public function getWork($param = NULL)
         {
             $work = Work::getWork($param['id_work']);
