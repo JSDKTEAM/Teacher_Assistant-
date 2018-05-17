@@ -16,7 +16,7 @@
         }
         public function addMember($param = NULL)
         {
-            $check = Member::addMemberMm($param['fname'],$param['lname'],$param['username'],$param['passwd'],$param['type']);
+            $check = Member::addMemberMm($param['id_code'],$param['fname'],$param['lname'],$param['username'],$param['passwd'],$param['type']);
             if($check)
             {
                 sweetalert(4,NULL);

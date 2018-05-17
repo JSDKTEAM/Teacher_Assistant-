@@ -318,12 +318,27 @@
             $check = $stmt->execute([$id_code,$fname,$lname,$username,$strPassword,'นิสิต']);
             return $check;
         }
-        public static function addMemberMm($fname,$lname,$username,$passwd,$type)
+        public static function addMemberMm($id_code=NULL,$fname,$lname,$username,$passwd,$type)
         {
             $con = conDb::getInstance();
+            if($type == 'นิสิต')
+            {
+                $sql = "INSERT INTO member(id_code,fname,lname,username,passwd,type) VALUES(?,?,?,?,?,?)";
+            }
+            else
+            {
+                $sql = "INSERT INTO member(fname,lname,username,passwd,type) VALUES(?,?,?,?,?)";
+            }
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
-            $stmt = $con->prepare('INSERT INTO member(fname,lname,username,passwd,type) VALUES(?,?,?,?,?)');
-            $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
+            $stmt = $con->prepare($sql);
+            if($type == 'นิสิต')
+            {
+                $check = $stmt->execute([$id_code,$fname,$lname,$username,$strPassword,$type]);
+            }
+            else
+            {
+                $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
+            }
             return $check;
         }
         public static function addMemberSys($array_member,$id_year)
@@ -389,9 +404,9 @@
         }
         public static function deleteUser($id_member)
         {   
-            $check_value = true;
-            $check = false;
             $con = conDb::getInstance();
+            /*$check_value = true;
+            $check = false;
             $stmt = $con->prepare('SELECT * FROM member 
             INNER JOIN work on work.patron_id = member.id_member WHERE member.id_member = ?');
             $stmt->execute([$id_member]);
@@ -417,12 +432,12 @@
                 {
                     $check_value = false;
                 }
-            }
-            if($check_value)
-            {
+            }*/
+            /*if($check_value)
+            {*/
                 $stmt = $con->prepare('DELETE FROM member WHERE member.id_member = ?');
                 $check = $stmt->execute([$id_member]);
-            }
+            //}
             return $check;
             
         }

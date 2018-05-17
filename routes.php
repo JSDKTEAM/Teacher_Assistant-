@@ -45,7 +45,8 @@ function call($controller,$action)
 						$param['detail'] = $_POST['detail']??NULL;
 						$param['id_patron'] = $_POST['id_patron']??NULL;
 						$param['id_person'] = $_POST['id_person']??NULL;
-						$param['status'] = $_POST['status']??NULL;
+						$param['id_code'] = $_POST['id_code']??NULL;
+ 						$param['status'] = $_POST['status']??NULL;
 						$param['due_date'] = $_POST['due_date']??NULL;
 						$param['HH'] = $_POST['HH']??NULL;
 						$param['mm'] = $_POST['mm']??NULL;
