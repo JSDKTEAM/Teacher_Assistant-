@@ -186,17 +186,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
 <!-- แก้ไขงาน -->
 <script>
     $(document).ready(function(){

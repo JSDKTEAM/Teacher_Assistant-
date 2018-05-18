@@ -161,7 +161,7 @@ function check_passwdOld(passwdOld, input_id_member) {
 
 function check_codeStd(code, type_user) {
     //console.log("hi");
-    $("#alert-code").remove();
+    $(".alert").remove();
     if ($(code).val() != '') {
         if ($(code).val().length == 10) {
             var check = true;
