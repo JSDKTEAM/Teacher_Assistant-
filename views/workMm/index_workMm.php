@@ -1,9 +1,5 @@
 <?php include('views/header/nav3.php');?>
 <head>
-
-
-
-
 </head>
 <style>
     /* Style the form */
@@ -105,6 +101,31 @@
         </div>
     </div>
     </div>
+    <?php if($workList !== FALSE)
+    {
+        foreach($workList as $key=>$value)
+        {
+            echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
+            break;
+        }
+    } 
+    ?>
+    <form method="POST">
+        <label>ปีการศึกษา
+        <select name="id_year" id="id_year" class="form-control" required>
+            <option value="">--เลือกปีการศึกษา--</option>
+            <?php
+                foreach($yearSchoolList as $yearSchool)
+                {
+                    echo "<option>".$yearSchool->get_id_year()."</option>";
+                }
+            ?>
+        </select>
+        </label>
+        <input type="hidden" name="controller" value="workMm">
+        <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
+    </form>
+    </br>
     <table  id="memberTable" class="table  table-bordered"> 
         <thead>
             <tr  align="center" class="table-light">
@@ -190,6 +211,7 @@
 <script>
     $(document).ready(function(){
         $('.btn-edit-work').click(function(){
+        $('.alert').remove();
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
         var title = $(this).attr('data-title');
@@ -257,7 +279,7 @@
         $('.btn-delete').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
+        $("#data-title-delete").html("คุณต้องการลบงาน "+$(this).attr('data-title') + " ใช่หรือไม่");
         // set value to modal
         $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
@@ -266,7 +288,7 @@
 </script>
 
 
-<!-- The Modal -->
+<!-- แก้ไขงาน -->
 <div class="modal fade" id="edit-work">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -279,7 +301,7 @@
 
       <!-- Modal body -->   
       <div class="modal-body">
-            <form method="POST">
+            <form method="POST" id="form-edit-work">
             <input id="id_work" type="text" name="id_work" class="form-control" hidden>
                 <div class="row">
                     <div class="col-6">
@@ -348,13 +370,14 @@
     </div>
   </div>
 </div>
+<!-- ลบงาน -->
 <div class="modal fade" id="delete">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog">
     <div class="modal-content">
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ต้องการลบงาน</h4>
+        <h4 class="modal-title">ยืนยันการลบงาน</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -364,7 +387,7 @@
         <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label id="data-title-delete"></label> 
+                    <h4 id="data-title-delete"></h4> 
                  </div>             
             </div>
             <input type="hidden" name="controller" value="workMm">
@@ -376,10 +399,10 @@
     <div class="modal-footer">
 
     <div style="width :50%">
-        <button type="submit" class="btn btn-danger btn-block" name="action" value="delete_workMm">ลบ</button>
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="delete_workMm">ใช่</button>
     </div>
     <div style="width :50%">    
-        <button type="button" class="btn btn-light btn-block" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
     </div> 
  
         </form>
@@ -791,6 +814,38 @@
     });
 </script>
 
+
+<!-- ตรวจสอบ Form-->
+<script>
+    $(document).ready(function(){
+        $("#form-edit-work").submit(function( event ){
+            $status = $("#chkstatus").html();
+            if($status == 'waiting' || $status == 'booked')
+            {
+                if(data_check("#time_start","#time_stop"))
+                {
+                    $('.alert').remove();
+                    return;
+                }
+                else
+                {
+                    $('.alert').remove();
+                    $("#time_stop").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</br></span>");
+                }
+            }
+            else
+            {
+                if(data_check("#time_start","#time_stop") && date_finish("#time_stop","#due_date"))
+                {
+                    return;
+                    $('.alert').remove();
+                    $("#time_stop").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน หรือ วันที่เสร็จงาน</br></span>");
+                }
+            }
+            event.preventDefault();
+        });
+    });
+</script>
 <!-- ตาราง DataTable -->
 <script>
     $(document).ready(function() {

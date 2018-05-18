@@ -61,7 +61,7 @@
                     break;
                 }
             } 
-        ?>
+    ?>
     <form method="POST">
         <label>ปีการศึกษา            
             <select name="id_year" class="form-control" required>
@@ -84,7 +84,7 @@
     
     <table  id="memberTable2" class="table  table-bordered">
         <thead>
-            <tr class="table-light">
+            <tr class="table-light"  align="center">
                 <th>#</th>
                 <th>ชื่อ</th>
                 <th>นามสกุล</th>

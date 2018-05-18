@@ -333,5 +333,12 @@
         return array('waiting'=>$waiting,'booked'=>$booked,'finish'=>$finish);
         
     }
+    public static function changeStatus($status,$due_date,$person_id,$used_time,$summary,$id_work)
+    {
+        $con = ConDb::getInstance();
+        $stmt = $con->prepare('UPDATE work SET status = ?, due_date = ?,  person_id = ? , used_time = ?, summary = ? WHERE id_work = ? ');
+        $check = $stmt->execute([$status,$due_date,$person_id,$used_time,$summary,$id_work]);
+        return $check;
+    }
  }
 ?>

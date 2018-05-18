@@ -38,7 +38,7 @@
                             <option value="นิสิต">นิสิต</option>
                         </select>
                         <div id="id_code_add" >
-                            <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  id="id_code_add_input" class="form-control">
+                            <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  id="id_code_add_input" maxlength="10" class="form-control">
                         </div>
                         <label><span class="red">*</span> ชื่อ</label><input type="text" name="fname" class="form-control" required>
                         <label><span class="red">*</span> นามสกุล</label><input type="text" name="lname" class="form-control" required>
@@ -62,7 +62,7 @@
     </div>
     <table  id="memberTable" class="table  table-bordered"> 
         <thead>
-            <tr class="table-light">
+            <tr class="table-light" align="center">
                 <th>#</th>
                 <th>ชื่อ</th>
                 <th>นามสกุล</th>
@@ -114,9 +114,9 @@
 
 
 
-<!-- The Modal -->
+<!-- แก้ไขประวัติส่วนตัว -->
 <div class="modal fade" id="edit-info">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -126,32 +126,53 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
-        <form method="POST" id="edit-info-form">
-            <input id="id-member-info" type="hidden" name="id_member" class="form-control" required>
-            <label id="lable-code">รหัสนิสิต</label><input id="id-code-info" type="text" name="id_code" class="form-control">
-            <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control" required>
-            <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control" required>
-            <label>สถานะ</label>
-            <select name="type" id="type-info" class="form-control">
-                <option value="อาจารย์">อาจารย์</option>
-                <option value="ผู้ประเมิน">ผู้ประเมิน</option>
-                <option value="นิสิต">นิสิต</option>
-            </select>
-            <input type="hidden" name="controller" value="userMm"> 
-      </div>
+      
+            <div class="modal-body">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="nav-item">
+                    <a class="nav-link" id="btn-info" href="#">แก้ไขประวัติส่วนตัว</a>
+                </li>
+                <li class="nav-item btn-code">
+                    <a class="nav-link" id="btn-code" href="#">แก้ไขรหัสนิสิต</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="btn-status" href="#">แก้ไขสถานะ</a>
+                </li>
+            </ul>
+                </br>
+                <form method="POST" id="edit-info-form">
+                    <input type="hidden"  id="type-info" class="form-control" required>
+                    <input id="id-member-info" type="hidden" name="id_member" class="form-control" required>
+                    <div class="info">
+                        <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control" required>
+                        <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control" required>
+                    </div>
+                    <div class="code-std">
+                        <h5 id="code-old"></h5>
+                        <label id="lable-code">รหัสนิสิต</label><input id="id-code-info"  type="text" name="id_code" maxlength="10" class="form-control">
+                    </div>
+                    <div class="status">
+                        <h5 id="status-old"></h5>
+                        <label>สถานะ</label>
+                        <select name="type" id="type-info-edit" class="form-control" required>
+                        </select>
+                    </div>
+                    <input type="hidden" name="controller" value="userMm"> 
+            </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" name="action" value="updateMember" id="btn-sumit-edit" class="btn btn-success btn-block">ยืนยันการแก้ไขชื่อ - นามสกุล</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="submit" name="action" value="updateMember" class="btn btn-success btn-block">ยืนยันการแก้ไข</button>
-        </form>
-      </div>
 
     </div>
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- แก้ไขรหัสผ่าน -->
 <div class="modal fade" id="edit-password">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -181,7 +202,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- ลบบัญชีผู้ใช้ -->
 <div class="modal fade" id="delete-user">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -210,40 +231,135 @@
     </div>
   </div>
 </div>
+
+<script>
+    $(document).ready(function(){   
+        $("#btn-info").addClass('active');
+        $(".info").show();
+        $(".status").hide();
+        $(".code-std").hide();
+        $(".info > input ,.info > select").prop('disabled', false);
+        $(".status > input,.status > select").prop('disabled', true);
+        $(".code-std > input,.code-std > select").prop('disabled', true);
+        
+        $(".info > input,.info > select").prop('required', true);
+        $(".code-std > input,.code-std > select").prop('required', false);
+        $(".status > input ,.status > select").prop('required', false);
+        $("#btn-info").click(function(){
+            $("#btn-status").removeClass('active');
+            $("#btn-code").removeClass('active');
+            $(this).addClass('active');
+            $(".info").show();
+            $(".code-std").hide();
+            $(".status").hide();
+            $(".info > input,.info > select").prop('disabled', false);
+            $(".code-std > input,.code-std > select").prop('disabled', true);
+            $(".status > input,.status > select").prop('disabled', true);
+
+            $(".info > input,.info > select").prop('required', true);
+            $(".code-std > input,.code-std > select").prop('required', false);
+            $(".status > input ,.status > select").prop('required', false);
+
+            $("#btn-sumit-edit").html("ยืนยันการแก้ไขชื่อ - นามสกุล"); 
+        });
+        $("#btn-code").click(function(){
+            $("#btn-info").removeClass('active');
+            $("#btn-status").removeClass('active');
+            $(this).addClass('active');
+            $(".info").hide();
+            $(".code-std").show();
+            $(".status").hide();
+            $(".info > input,.info > select").prop('disabled', true);
+            $(".code-std > input,.code-std > select").prop('disabled', false);
+            $(".status > input,.status > select").prop('disabled', true);
+
+            $(".info > input,.info > select").prop('required', false);
+            $(".code-std > input,.code-std > select").prop('required', true);
+            $(".status > input ,.status > select").prop('required', false);
+            $("#btn-sumit-edit").html("ยืนยันการแก้ไขรหัสนิสิต"); 
+        });
+        $("#btn-status").click(function(){
+            $("#btn-info").removeClass('active');
+            $("#btn-code").removeClass('active');
+            $(this).addClass('active');
+            $(".info").hide();
+            $(".code-std").hide();
+            $(".status").show();
+            $(".info > input,.info > select").prop('disabled', true);
+            $(".code-std > input,.code-std > select").prop('disabled', true);
+            $(".status > input ,.status > select").prop('disabled', false);
+
+            $(".info > input,.info > select").prop('required', false);
+            $(".code-std > input,.code-std > select").prop('required', false);
+            $(".status > input ,.status > select").prop('required', true);
+            $("#btn-sumit-edit").html("ยืนยันการแก้ไขสถานะ"); 
+        });
+    });
+</script>
 <script>
     $(document).ready(function(){
         $('.btn-edit-info').click(function(){
-        $(".alert").remove();
-        // get data from edit btn
-        var id_member = $(this).attr('data-id-member');
-        var id_code = $(this).attr('data-id-code');
-        var fname = $(this).attr('data-fname');
-        var lname = $(this).attr('data-lname');
-        var type = $(this).attr('data-type');
-        var type_info = document.getElementById('type-info');
-        var opts = type_info.options;
-        for (var opt, j = 0; opt = opts[j]; j++) {
-            if (opt.value == type) {
-            type_info.selectedIndex = j;
-            break;
+            $(".alert").remove();
+            $("#btn-info").removeClass('active');
+            $("#btn-code").removeClass('active');
+            $("#btn-status").removeClass('active');
+            $("#btn-info").addClass('active');
+            $(".info").show();
+            $(".status").hide();
+            $(".code-std").hide();
+            $(".info > input,.info > select").prop('disabled', false);
+            $(".code-std > input,.code-std > select").prop('disabled', true);
+            $(".status > input ,.status > select").prop('disabled', true);
+
+            
+            $(".info > input,.info > select").prop('required', false);
+            $(".code-std > input,.code-std > select").prop('required', true);
+            $(".status > input ,.status > select").prop('required', true);
+            $(".add_code").remove();
+            $("#btn-sumit-edit").html("ยืนยันการแก้ไขชื่อ - นามสกุล"); 
+            // get data from edit btn
+            var id_member = $(this).attr('data-id-member');
+            var id_code = $(this).attr('data-id-code');
+            var fname = $(this).attr('data-fname');
+            var lname = $(this).attr('data-lname');
+            var type = $(this).attr('data-type');
+
+            $("#code-old").html("รหัสนิสิตเดิม "+id_code);
+            $("#status-old").html("สถานะเดิม "+type);
+            $("#type-info-edit").empty();
+            // set value to modal
+            if(type == 'นิสิต')
+            {
+                $("#lable-code").show();
+                //$("#id-code-info").show();
+                $(".btn-code").show();
+                $("#type-info-edit").append("<option value=''>--เลือกสถานะ--</option><option value='เจ้าหน้าที่'>เจ้าหน้าที่</option><option value='ผู้ประเมิน'>ผู้ประเมิน</option><option value='อาจารย์'>อาจารย์</option>");
             }
-        }
-        // set value to modal
-        if(type == 'นิสิต')
-        {
-            $("#lable-code").show();
-            $("#id-code-info").show();
-        }
-        else
-        {
-            $("#lable-code").hide();
-            $("#id-code-info").hide();
-        }
-        $("#id-member-info").val(id_member);
-        $("#id-code-info").val(id_code);
-        $("#fname-info").val(fname);
-        $("#lname-info").val(lname);
-        $("#edit-info").modal('show');
+            else
+            {
+                $("#lable-code").hide();
+                //$("#id-code-info").hide();
+                $(".btn-code").hide();
+                if(type = "อาจารย์")
+                {
+                    $("#type-info-edit").append("<option value=''>--เลือกสถานะ--</option><option value='เจ้าหน้าที่'>เจ้าหน้าที่</option><option value='นิสิต'>นิสิต</option><option value='ผู้ประเมิน'>ผู้ประเมิน</option>");
+                }
+                else{
+                    $("#type-info-edit").append("<option value=''>--เลือกสถานะ--</option><option value='นิสิต'>นิสิต</option><option value='ผู้ประเมิน'>ผู้ประเมิน</option><option value='อาจารย์'>อาจารย์</option>");
+                }
+            }
+            $("#id-member-info").val(id_member);
+            $("#type-info").val(type);
+            $("#fname-info").val(fname);
+            $("#lname-info").val(lname);
+            $("#edit-info").modal('show');
+            });
+        $('#type-info-edit').change(function(){
+            $(".add_code").remove();
+            if($(this).val() == 'นิสิต')
+            {
+                $(".status").append("<div class='add_code'><label>รหัสนิสิต</label><input name='id_code' id='id_code_status' class='form-control' maxlength='10' required></div>");
+            }
         });
     });
 </script>
@@ -305,9 +421,34 @@
             event.preventDefault();
         });
         $("#edit-info-form").submit(function( event ) {
-            if (check_codeStd("#id-code-info","#type-info")) {
+            var edit = $("#btn-sumit-edit").html(); 
+            var type = $('#type-info').val();
+            if(edit == "ยืนยันการแก้ไขชื่อ - นามสกุล")
+            {
                 return;
-            }  
+            }
+            else if(edit == "ยืนยันการแก้ไขรหัสนิสิต")
+            {
+                if (check_codeStd("#id-code-info","#type-info")) 
+                {
+                    return;
+                }  
+            }
+            else if(edit == "ยืนยันการแก้ไขสถานะ")
+            {
+                if($('#type-info-edit').val()== "นิสิต")
+                {
+                    if (check_codeStd("#id_code_status","#type-info-edit")) 
+                    {
+                        return;
+                    }  
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             event.preventDefault();
         });
 
