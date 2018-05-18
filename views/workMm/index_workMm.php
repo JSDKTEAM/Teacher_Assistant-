@@ -366,37 +366,6 @@ input.invalid {
     </div>
 </div>
 </div>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4>แก้ไขสถานะ</h4>
-      </div>
-      <div class="modal-body">
-  <div class="row hide" data-step="1" data-title="This is the first step!">
-    <div class="jumbotron">This is the first step!</div>
-  </div>
-  <div class="row hide" data-step="2" data-title="This is the second step!">
-    <div class="jumbotron">This is the second step!</div>
-  </div>
-  <div class="row hide" data-step="3" data-title="This is the last step!">
-    <div class="jumbotron">This is the last step!</div>
-  </div>
-</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal">cancel</button>
-    <button type="button" class="btn btn-warning js-btn-step" data-orientation="previous">previous</button>
-    <button type="button" class="btn btn-success js-btn-step" data-orientation="next">next</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- ตาราง DataTable -->
 <script>
     $(document).ready(function() {
@@ -419,8 +388,4 @@ input.invalid {
     });
 } );
 </script>
- <script>
-  $('#myModal').modalSteps();
-</script>
 
- <script src="js/dist/modal-steps.min.js"></script>
