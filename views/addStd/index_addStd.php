@@ -29,19 +29,39 @@
         </div>
         <div class="col-3">
             <label>เลือกนิสิต</label>
-                <select  name="id_member[]" id="member_name" multiple required class="form-control">
-                
+                            <!-- Options -->
+                <select  name="id_member[]" id="member_name" multiple required>
+
                 </select>
+                <script>
+                    new SlimSelect({
+                        select: '#member_name',
+                        placeholder: '--เลือกนิสิต--',
+                        closeOnSelect: false
+                    })
+                    </script>
+                <!--<select  name="id_member[]" id="member_name" multiple required class="form-control">
+                
+                </select>-->
         </div>  
         <div class="col-3"> 
-            </br></br>
+            </br>
             <input type="hidden" name="controller" value="addStd">
             <button type="submit" name="action" value="addMemberSys" class="btn btn-success">เพิ่มนิสิตเข้าระบบ</button>
             </form>
         </div>  
 
         </div>
-    </br></br><hr>
+    </br>
+    <?php if($memberListYear !== FALSE)
+            {
+                foreach($memberListYear as $key=>$value)
+                {
+                    echo "<h3>ตารางแสดงปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
+                    break;
+                }
+            } 
+        ?>
     <form method="POST">
         <label>ปีการศึกษา            
             <select name="id_year" class="form-control" required>
@@ -60,15 +80,7 @@
         <input type="hidden" name="controller" value="addStd">
         <button type="submit" name="action" value="searchMemberByYear" class="btn btn-success">ค้นหา</button>
     </form>
-        <?php if($memberListYear !== FALSE)
-            {
-                foreach($memberListYear as $key=>$value)
-                {
-                    echo "<h3>ตารางแสดงปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
-                    break;
-                }
-            } 
-        ?>
+
     
     <table  id="memberTable2" class="table  table-bordered">
         <thead>

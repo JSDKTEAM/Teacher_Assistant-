@@ -40,16 +40,15 @@
         <hr>
         <div class="row">
             <div class="col-6">    
-                <p>ผู้สั่งงาน : <a href="#"><?php echo $objPatron->get_fname()." ".$objPatron->get_lname()  ?></a></p>
+                <p>ผู้สั่งงาน : <a href="?controller=myWork&action=getAllWorkByMember&id_member=<?php echo $objPatron->get_id_member()."&type=".$objPatron->get_type() ?>"><?php echo $objPatron->get_fname()." ".$objPatron->get_lname()  ?></a></p>
                 <p>ระยะเวลาทำงาน : <?php echo $work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop()) ?></p>
                 <p>รายละเอียด : </p><textarea cols="5" rows="5" class="form-control" readonly><?php echo $work->get_detail() ?></textarea>
             </div>
             <?php if($work->get_status() != 'waiting') { ?>
             <div class="col-6">    
-                <p>ผู้รับงาน : <a href="#"><?php echo $objPerson->get_fname()." ".$objPerson->get_lname()  ?></a></p>
-                <p>วันเวลาที่ทำงานเสร็จ : <?php echo $work->DateThai($work->get_due_date()) ?><p/>
-                <p>จำนวนเวลาที่ทำ : <?php echo $work->get_used_time() ?><p/>
-                <p>รายละเอียดการส่ง : <p/><textarea cols="5" rows="3" class="form-control" readonly><?php echo $work->get_summary() ?></textarea>
+                <p>ผู้รับงาน : <a href="?controller=myWork&action=getAllWorkByMember&id_member=<?php echo $objPerson->get_id_member()."&type=".$objPerson->get_type() ?>"><?php echo $objPerson->get_fname()." ".$objPerson->get_lname()  ?></a></p>
+                <p>วันเวลาที่ทำงานเสร็จ : <?php echo $work->DateThai($work->get_due_date()) ?> จำนวนเวลาที่ทำ : <?php echo $work->get_used_time() ?><p/>
+                <p>รายละเอียดการส่ง : <p/><textarea cols="5" rows="5" class="form-control" readonly><?php echo $work->get_summary() ?></textarea>
             </div>
             <?php } ?>
         </div>

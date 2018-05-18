@@ -98,7 +98,7 @@ function call($controller,$action)
 
 if( ($controller =='page'&& ($action =='home'|| $action =='error')) 
 ||  ($controller == 'work' && ($action == 'index_work' || $action == 'searchWork' || $action == 'getWork' || $action == 'getAllWorkByMember' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork'))
-||  ($controller == 'myWork' && ($action == 'index_work' || $action == 'getWork' ||$action == 'get_myWork' || $action == 'getWork' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork' || $action == 'searchWork'))
+||  ($controller == 'myWork' && ($action == 'index_work' || $action == 'getWork' ||$action == 'get_myWork' || $action == 'getWork' ||$action == 'addWork' || $action == 'submitWork' || $action == 'finishWork' ||$action == 'cancelWork'|| $action == 'editWork'|| $action == 'deleteWork' || $action == 'searchWork' || $action == 'getAllWorkByMember'))
 ||  ($controller == 'userMm' && ($action == 'index_userMm' || $action == 'addMember'|| $action == 'updateMember'|| $action == 'updatePassMember' || $action == 'addMemberSys' || $action == 'validateUsername'|| $action == 'validateCode' || $action == 'deleteUser'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo' || $action == 'updatePassMember' || $action == 'validatePassword'))
 ||  ($controller == 'workMm' && ($action == 'index_workMm' || $action == 'delete_workMm' || $action == 'edit_workMm' || $action == 'add_workMm'))

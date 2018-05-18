@@ -46,11 +46,9 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-	<!-- muti-select -->
-	<link rel="stylesheet" href="js/bootstrap-select-1.13.0-beta/css/bootstrap-select.min.css">
-	<script src="js/bootstrap-select-1.13.0-beta/js/bootstrap-select.min.js"></script>
-	<!-- <script src="js/bootstrap-select-1.13.0-beta/js/i18n/defaults-*.min.js"></script> -->
-
+	<!-- mutiselect -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.15.0/slimselect.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.15.0/slimselect.min.css" rel="stylesheet"></link>
 
 	<!-- Crop images -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
@@ -87,8 +85,8 @@
 	require_once("routes.php"); 
 ?>
 <?php if(isAjax()){ob_start();} ?>
-<hr>
-<footer>
+<hr class="footer">
+<footer  class="footer">
     <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
 	<script>

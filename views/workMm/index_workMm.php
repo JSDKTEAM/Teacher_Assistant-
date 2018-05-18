@@ -1,8 +1,11 @@
 <?php include('views/header/nav3.php');?>
+<head>
+
+
+
+
+</head>
 <style>
-    .red{
-        color:red;
-    }
     .step {
   height: 15px;
   width: 15px;
@@ -25,6 +28,7 @@ input.invalid {
 .step.finish {
   background-color: #4CAF50;
 }
+.jumbotron { padding-left: 2em; padding-right: 2em; }
 </style>
 <div class="banner-sec">
     <div class="container">
@@ -102,15 +106,15 @@ input.invalid {
                 $objPerson = $work->get_objPerson(); 
                 if($work->get_status() == 'waiting')
                 {
-                    $color='badge badge-warning';
+                    $color='badge badge-pill badge-warning';
                 }
                 else if($work->get_status() == 'booked')
                 {
-                    $color='badge badge-primary';
+                    $color='badge badge-pill badge-primary';
                 }
                 else
                 {
-                   $color='badge badge-success';
+                   $color='badge badge-pill badge-success';
                 }
                 $time=explode(":",$work->get_used_time());
                 echo "<tr align='center' class='table-light'>
@@ -148,7 +152,7 @@ input.invalid {
                         data-HH ="<?php echo $time[0] ?>"
                         data-mm ="<?php echo $time[1]?>"
                         data-summary ="<?php echo $work->get_summary()?>"
-                        class="btn btn-success btn-sm btn-edit-status" onclick="showTab(0)">แก้ไขสถานะ</a>
+                        class="btn btn-success btn-sm btn-edit-status" >แก้ไขสถานะ</a>
                         <a href="#" 
                         data-id-work = '<?php echo $work->get_id_work()?>'
                         data-title = '<?php echo $work->get_title()?>'
@@ -192,7 +196,7 @@ input.invalid {
           $(".waiting").hide();  
           $(".booked").hide(); 
           $("#chkstatus").removeClass();
-          $("#chkstatus").addClass("badge badge-warning"); 
+          $("#chkstatus").addClass("badge badge-pill badge-warning"); 
           $("#chkstatus").empty();
           $("#chkstatus").append(status);
         }
@@ -201,7 +205,7 @@ input.invalid {
             $(".waiting").hide();  
             $(".booked").show();
             $("#chkstatus").removeClass();
-            $("#chkstatus").addClass("badge badge-primary");
+            $("#chkstatus").addClass("badge badge-pill badge-primary");
             $("#chkstatus").empty();  
             $("#chkstatus").append(status);  
             $("#id_person").val(id_person);       
@@ -211,7 +215,7 @@ input.invalid {
             $(".waiting").show();  
             $(".booked").show();
             $("#chkstatus").removeClass();
-            $("#chkstatus").addClass("badge badge-success"); 
+            $("#chkstatus").addClass("badge badge-pill badge-success"); 
             $("#chkstatus").empty();
             $("#chkstatus").append(status);
             $("#id_person").val(id_person);
@@ -238,6 +242,7 @@ input.invalid {
         });
     });
 </script>
+
 
 <!-- The Modal -->
 <div class="modal fade" id="edit-work">
@@ -361,7 +366,6 @@ input.invalid {
     </div>
 </div>
 </div>
-
 <!-- ตาราง DataTable -->
 <script>
     $(document).ready(function() {

@@ -19,6 +19,7 @@
         {
             $member = Member::getMember($param['id_member']);
             $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            $status_count = Work::countStatus($param['id_member'],$param['type']);
             if($param['type'] == 'นิสิต')
             {
                 include('views/work/workMemberStd.php');

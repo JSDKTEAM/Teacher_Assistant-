@@ -7,6 +7,7 @@
         {
             $member = Member::getMember($_SESSION['member']['id_member']);
             $workList = Work::getAllWorkByMember($_SESSION['member']['id_member'],$_SESSION['member']['type']);
+            $status_count = Work::countStatus($_SESSION['member']['id_member'],$_SESSION['member']['type']);
             if($_SESSION['member']['type'] == 'นิสิต')
             {
                 include('views/myWork/myWorkStd.php');
@@ -30,6 +31,19 @@
                 include('views/myWork/myWork.php');
             }
         }
+        public function getAllWorkByMember($param = NULL)
+        {
+            $member = Member::getMember($param['id_member']);
+            $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            if($param['type'] == 'นิสิต')
+            {
+                include('views/work/workMemberStd.php');
+            }
+            else
+            {
+                include('views/work/workMember.php');
+            }
+        }
         public function getWork($param = NULL)
         {
             $work = Work::getWork($param['id_work']);
@@ -40,6 +54,7 @@
             $member = Member::getMember($_SESSION['member']['id_member']);
             $workList = Work::getAllWorkByMember($_SESSION['member']['id_member'],$_SESSION['member']['type']);
             $yearSchoolList = YearSchool::getAllYearSchool();
+            $status_count = Work::countStatus($_SESSION['member']['id_member'],$_SESSION['member']['type']);
             if($_SESSION['member']['type'] == 'นิสิต')
             {
                 include('views/myWork/myWorkStd.php');
