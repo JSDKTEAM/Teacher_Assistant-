@@ -16,13 +16,7 @@
     }
 
     /* Style the input fields */
-    input {
-    padding: 10px;
-    width: 100%;
-    font-size: 17px;
-    font-family: Raleway;
-    border: 1px solid #aaaaaa;
-    }
+
 
     /* Mark input boxes that gets an error on validation: */
     input.invalid {

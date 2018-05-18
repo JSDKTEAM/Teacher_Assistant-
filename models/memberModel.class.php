@@ -60,6 +60,7 @@
             $stmt->execute([$id_code]);
             if($stmt->rowCount() > 0)
             {
+                
                 $data = array("check"=>TRUE);
             }
             else
@@ -370,8 +371,42 @@
         public static function updateMember($id_member,$id_code,$fname,$lname,$type)
         {
             $con = conDb::getInstance();
-            $stmt = $con->prepare('UPDATE member SET id_code=?,fname=?,lname=?,type=? WHERE id_member=?');
-            $check = $stmt->execute([$id_code,$fname,$lname,$type,$id_member]);
+            if(isset($fname) && isset($lname))
+            {
+                $sql = 'UPDATE member SET fname=?,lname=? WHERE id_member=?';
+            }
+            else if(isset($type))
+            {
+                $sql = 'UPDATE member SET id_code=?,type=? WHERE id_member=?';
+            }
+            else if(isset($id_code))
+            {
+                $sql = 'UPDATE member SET id_code=? WHERE id_member=?';
+            }
+            $stmt = $con->prepare($sql);
+            if(isset($fname) && isset($lname))
+            {
+                $check = $stmt->execute([$fname,$lname,$id_member]);
+                $_SESSION['member']['fname'] = $fname;
+                $_SESSION['member']['lname'] = $lname;
+            }
+            else if(isset($type))
+            {
+                if($type == "นิสิต")
+                {
+                    $check = $stmt->execute([$id_code,$type,$id_member]);
+                }
+                else
+                {
+                    $check = $stmt->execute([NULL,$type,$id_member]);
+                }
+                $_SESSION['member']['type'] = $type;
+            }
+            else if(isset($id_code))
+            {
+                $check = $stmt->execute([$id_code,$id_member]);
+                $_SESSION['member']['id_code'] = $id_code;
+            }
             return $check;
         }
         public static function updatePassMember($id_member,$passwd)

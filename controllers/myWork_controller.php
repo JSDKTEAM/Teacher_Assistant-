@@ -22,6 +22,7 @@
             $member = Member::getMember($_SESSION['member']['id_member']);
             $workList = Work::searchWork($param['id_year']);
             $yearSchoolList = YearSchool::getAllYearSchool();
+            $status_count = Work::countStatus($_SESSION['member']['id_member'],$_SESSION['member']['type']);
             if($_SESSION['member']['type'] == 'นิสิต')
             {
                 include('views/myWork/myWorkStd.php');

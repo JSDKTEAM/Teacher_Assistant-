@@ -84,10 +84,10 @@
                         <i class="fas fa-cogs"></i> จัดการระบบ
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="?controller=workMm&action=index_workMm">จัดการงานของผู้ใช้</a>
-                        <a class="dropdown-item" href="?controller=userMm&action=index_userMm">จัดการบัญชีผู้ใช้</a>
-                        <a class="dropdown-item" href="?controller=addStd&action=index_addStd">เพิ่มนิสิตในระบบ</a>
-                        <a class="dropdown-item" href="?controller=yearSet&action=index_year">ตั้งค่าปีการศึกษา</a>
+                        <a class="dropdown-item" href="?controller=workMm&action=index_workMm"><i class="far fa-edit"></i> จัดการงานของผู้ใช้</a>
+                        <a class="dropdown-item" href="?controller=userMm&action=index_userMm"><i class="fas fa-users"></i> จัดการบัญชีผู้ใช้</a>
+                        <a class="dropdown-item" href="?controller=addStd&action=index_addStd"><i class="fas fa-user-plus"></i> เพิ่มนิสิตในระบบ</a>
+                        <a class="dropdown-item" href="?controller=yearSet&action=index_year"><i class="fas fa-wrench"></i> ตั้งค่าปีการศึกษา</a>
                     </div>
                 </li>  
               </ul>  

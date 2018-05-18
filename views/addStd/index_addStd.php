@@ -84,7 +84,7 @@
     
     <table  id="memberTable2" class="table  table-bordered">
         <thead>
-            <tr class="table-light">
+            <tr class="table-light"  align="center">
                 <th>#</th>
                 <th>ชื่อ</th>
                 <th>นามสกุล</th>
