@@ -390,9 +390,9 @@ input.invalid {
   </div>
 </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal"></button>
-    <button type="button" class="btn btn-warning js-btn-step" data-orientation="previous"></button>
-    <button type="button" class="btn btn-success js-btn-step" data-orientation="next"></button>
+        <button type="button" class="btn btn-default js-btn-step pull-left" data-orientation="cancel" data-dismiss="modal">cancel</button>
+    <button type="button" class="btn btn-warning js-btn-step" data-orientation="previous">previous</button>
+    <button type="button" class="btn btn-success js-btn-step" data-orientation="next">next</button>
       </div>
     </div>
   </div>
@@ -422,4 +422,5 @@ input.invalid {
  <script>
   $('#myModal').modalSteps();
 </script>
+
  <script src="js/dist/modal-steps.min.js"></script>

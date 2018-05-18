@@ -26,6 +26,7 @@
             </div>
             <div class="col-4">
                 <h3> <?php echo $member->get_type()."</br>".$member->get_fname()." ".$member->get_lname() ?></h3>
+                <span class="badge badge-pill badge-warning">Waiting : <?php echo $status_count['waiting'] ?></span> <span class="badge badge-pill badge-primary">Booked : <?php echo $status_count['booked'] ?></span> <span class="badge badge-pill badge-success">Finish : <?php echo $status_count['finish'] ?></span>
             </div>
         </div>
         </br>

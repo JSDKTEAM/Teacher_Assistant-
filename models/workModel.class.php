@@ -295,5 +295,43 @@
             return false;
         }
     }
+    public static function countStatus($id_member,$type)
+    {
+        $waiting = 0;
+        $booked = 0;
+        $finish = 0;
+        $con = ConDb::getInstance();
+        if($type == 'นิสิต')
+        {
+            $sql = 'SELECT work.status , COUNT(work.status) AS count_st FROM work WHERE work.person_id = ? GROUP BY work.status';
+        }
+        else 
+        {
+            $sql = 'SELECT work.status , COUNT(work.status) AS count_st FROM work WHERE work.patron_id = ? GROUP BY work.status'; 
+        }
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$id_member]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($result)
+        {
+            foreach($result as $key=>$value)
+            {
+                if($value['status'] == 'waiting')
+                {
+                    $waiting = $value['count_st'];
+                }
+                else if($value['status'] == '$booked')
+                {
+                    $booked = $value['count_st'];
+                }
+                else if($value['status'] == 'finish')
+                {
+                    $finish = $value['count_st'];
+                }
+            }
+        }
+        return array('waiting'=>$waiting,'booked'=>$booked,'finish'=>$finish);
+        
+    }
  }
 ?>
