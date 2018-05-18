@@ -22,7 +22,7 @@
             $this->start_date = $yearObj['start_date'];
             $this->end_date = $yearObj['end_date'];
         }
-        public function validateYear($id_year)
+        public static function validateYear($id_year)
         {
             header('Content-type: application/json');
             $con = conDb::getInstance();

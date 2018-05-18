@@ -9,6 +9,7 @@
             $workList = Work::getAllWork();
             $personList = Member::getAllMemberByYear();
             $patronList = Member::getAllStaff();
+            $yearSchoolList = YearSchool::getAllYearSchool();
             include('views/workMm/index_workMm.php');    
         }
         public function add_workMm($param = NULL)
@@ -24,6 +25,14 @@
             }
             call('workMm','index_workMm');
             
+        }
+        public function searchWork($param = NULL)
+        {
+            $workList = Work::searchWork($param['id_year']);
+            $yearSchoolList = YearSchool::getAllYearSchool();
+            $personList = Member::getAllMemberByYear();
+            $patronList = Member::getAllStaff();
+            include('views/workMm/index_workMm.php');    
         }
         public function edit_workMm($param  = NULL)
         {
