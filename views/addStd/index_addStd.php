@@ -61,7 +61,7 @@
                     break;
                 }
             } 
-        ?>
+    ?>
     <form method="POST">
         <label>ปีการศึกษา            
             <select name="id_year" class="form-control" required>
