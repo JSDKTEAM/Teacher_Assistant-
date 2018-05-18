@@ -184,6 +184,19 @@
     </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- แก้ไขงาน -->
 <script>
     $(document).ready(function(){
@@ -218,6 +231,7 @@
         });
     });
 </script>
+
 <!-- datatable -->
 <script>
     $(document).ready(function() {

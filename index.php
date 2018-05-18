@@ -54,9 +54,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
 
-	<!-- Search Tags -->
-	<link rel="stylesheet" href="Searchable-Multi-select-jQuery-Dropdown/jquery.dropdown.css">
-    <script src="Searchable-Multi-select-jQuery-Dropdown/jquery.dropdown.js"></script>
 	<!-- ตรวจสอบ Form -->
 	<script src="js/validate/validate_form.js"></script>
 	<!--  sweetalert -->
