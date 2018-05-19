@@ -708,24 +708,48 @@
     function validateForm() {
         // This function deals with validation of the form fields
         
-        var x, y, i, valid = true;
-        if($("#New_status").val() =='waiting' && currentTab ==0)
+        var x, y, i, valid = true, chkdate = true;
+        var currentTab = (Number)($("#regForm").attr('currentTab'));
+        if($("#New_status").val() =='finish' && currentTab ==1)
         {
             
-        var currentTab = (Number)($("#regForm").attr('currentTab'));
+       
         x = document.getElementsByClassName("tab");
         y = x[currentTab].getElementsByTagName("input");
-        console.log(y);
+        $('input').removeClass('invalid');
         // A loop that checks every input field in the current tab:
         for (i = 0; i < y.length; i++) {
             // If a field is empty...
+            
             if (y[i].value == "") {
+             
             // add an "invalid" class to the field:
             y[i].className += " invalid";
             // and set the current valid status to false:
             valid = false;
             }
+            if(y[0].value!="")
+            {
+                $('.alert').remove();     
+                var end =$("#edit_finish_time_stop").val();
+                var finish =  y[0].value;  
+                var check_date = date_finish(end,finish);                         
+                if(check_date)
+                {   y[0].className += " invalid";
+                    valid = false;                   
+                    $("#edit_finish_due_date").after("<span class='alert red'>เกินกำหนดเวลาส่งงาน</br></span>");         
+            
+                }
+
+                
+              
+                
+            }
+       
+           
+        
         }
+      
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
             document.getElementsByClassName("step")[currentTab].className += " finish";
@@ -868,4 +892,40 @@
     });
 } );
 </script>
-
+<script>
+$(document).ready(function() {
+    $("#edit-work").submit(function( event ) {
+        var end =$('#time_stop').val();
+        var finish=$('#due_date').val();
+        var start = $('#time_start').val();
+        var check2 =data_check("#time_start","#due_date");
+        var check3=data_check("#time_start","#time_stop");     
+            if(check2&&check3)
+            {
+                $('.alert').remove();
+                $('.alert1').remove();
+                return;
+            } 
+          
+            else if(!check2)
+            {
+                $('.alert').remove();
+                $("#due_date").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน <br/></span>");
+            }
+            else if(!check3)
+            {
+                $('.alert1').remove();
+                $("#time_stop").after("<span class='alert1 red'>วันที่สิ้นสุดงานน้อยกว่าวันที่เริ่มงาน <br/></span>");
+            }
+            if(check2)
+            {
+                $('.alert').remove();
+            }   
+            if(check3) 
+            {
+                $('.alert1').remove();
+            }     
+            event.preventDefault();
+    });
+});
+</script>
