@@ -107,7 +107,32 @@
             }
             call('workMm','index_workMm');
             
-        }   
+        }  
+        public function changeStatus($param = NULL)
+        {
+            if($param['status']=='waiting')
+            {
+               $check = Work::changeStatus($param['status'],NULL,NULL,NULL,NULL,$param['id_work']);
+            }
+            else if($param['status']=='booked')
+            {
+                $check=Work::changeStatus($param['status'],NULL,$param['id_person'],NULL,NULL,$param['id_work']);
+            }
+            else if($param['status']=='finish')
+            {
+                $used_time="".$param['HH'].":".$param['mm'].":0";
+                $check=Work::changeStatus($param['status'],$param['due_date'],$param['id_person'],$used_time,$param['summary'],$param['id_work']);
+            }
+            if($check)
+            {
+                sweetalert(3,NULL);
+            }
+            else 
+            {
+                sweetalert(NULL,3);
+            }
+            call('workMm','index_workMm');
+        } 
             
     }
 ?>

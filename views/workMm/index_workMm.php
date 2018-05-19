@@ -1,9 +1,5 @@
 <?php include('views/header/nav3.php');?>
 <head>
-
-
-
-
 </head>
 <style>
     /* Style the form */
@@ -16,7 +12,7 @@
     }
 
     /* Style the input fields */
-
+ 
 
     /* Mark input boxes that gets an error on validation: */
     input.invalid {
@@ -135,7 +131,7 @@
             <tr  align="center" class="table-light">
                 <th>#</th>
                 <th>หัวข้องาน</th>
-                <th>รายละเอียด</th>
+                <th>ผู้สั่งงาน</th>             
                 <th>สถานะ</th>
                 <th></th>
             </tr>
@@ -165,7 +161,7 @@
                 echo "<tr align='center' class='table-light'>
                         <td>$i</td>
                         <td>".$work->get_title()."</td>
-                        <td>".$work->get_detail()."</td>
+                        <td>".$objPatron->get_fname()." ".$objPatron->get_lname()."</td>
                         <td><h4><span class='$color'>".$work->get_status()."</span></h4></td>
                      ";
             ?>
@@ -192,8 +188,10 @@
                         data-timestop = "<?php echo $work->get_time_stop() ?>"
                         data-status ="<?php echo $work->get_status() ?>"
                         data-id-patron ="<?php echo $objPatron->get_id_member() ?>"
-                        data-id-person ="<?php echo $objPerson->get_id_member()  ?>"                       
+                        data-id-person ="<?php echo $objPerson->get_id_member()  ?>"
+                        data-name-person = "<?php echo $objPerson->get_fname().' '.$objPerson->get_lname()?>"                      
                         data-due-date ="<?php echo $work->get_due_date() ?>"
+                        data-due-date2 ="<?php echo $work->DateThai($work->get_time_start()) ?>"
                         data-HH ="<?php echo $time[0] ?>"
                         data-mm ="<?php echo $time[1]?>"
                         data-summary ="<?php echo $work->get_summary()?>"
@@ -422,51 +420,139 @@
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ยืนยันการลบงาน</h4>
+        <h4 class="modal-title">แก้ไขสถานะ</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
     <!-- Modal body -->
     <div class="modal-body">
-        <form id="regForm" action="" currentTab="0">
-            <h1>Register:</h1>
-            
+    <input type ='hidden' id='old_status'>
+    <form id="regForm" method ='POST' currentTab="0">  
+    <input type ='hidden' id='edit_status_id_work' name='id_work' >
+     <input type ="hidden" id="controller" name ="controller" >
+     <input type ="hidden" id="action" name ="action" >
             <!-- One "tab" for each step in the form: -->
-            <div class="tab">Name:
-            <p><input placeholder="First name..." oninput="this.className = ''"></p>
-            <p><input placeholder="Last name..." oninput="this.className = ''"></p>
+            <div class="tab" >เลือกสถานะ:
+            <select name="status" id="New_status"class="form-control">
+            </select>
+            <br/>
             </div>
-            
-            <div class="tab">Contact Info:
-            <p><input placeholder="E-mail..." oninput="this.className = ''"></p>
-            <p><input placeholder="Phone..." oninput="this.className = ''"></p>
+            <div class="tab">
+            <div id="edit_waiting">  
+                 
+            <label><span class="red">*</span>  ผู้รับงาน</label>
+            <p id="edit_waiting_person" ></p>                                                         
+            <label><span class="red">*</span>  วันเวลาที่ทำงานเสร็จ</label><p id="edit_waiting_due_date"></p>                
+            <label><span class="red">*</span>  จำนวนเวลาที่ทำงาน </label>
+                            <div  class="row">
+                                <div class="col-3">
+                                <p id="edit_waiting_HH"> </p>
+                               
+                                </div>
+                                <div class="col-3">
+                                <p id="edit_waiting_mm"></p> 
+                                </div>
+                               
+                            </div>
+                    <label ><span class="red">*</span> รายละเอียดการส่ง</label><p id="edit_waiting_summary"></p>
+                    <label><span class="red">(*) การเปลี่ยนสถานะนี้ จำเป็นต้องลบข้อมูลดังกล่าว</span></label>       
+                    
             </div>
-            
-            <div class="tab">Birthday:
-            <p><input placeholder="dd" oninput="this.className = ''"></p>
-            <p><input placeholder="mm" oninput="this.className = ''"></p>
-            <p><input placeholder="yyyy" oninput="this.className = ''"></p>
+            <div id="edit_waiting2">  
+                 
+            <label><span class="red">*</span>  ผู้รับงาน</label>
+            <p id="edit_waiting2_person" > </p>                                                         
+            <label><span class="red">(*) การเปลี่ยนสถานะนี้ จำเป็นต้องลบข้อมูลดังกล่าว</span></label>       
+            <br/>
             </div>
-            
-            <div class="tab">Login Info:
-            <p><input placeholder="Username..." oninput="this.className = ''"></p>
-            <p><input placeholder="Password..." oninput="this.className = ''"></p>
+            <div id="edit_booked">  
+            <label> ผู้รับงาน</label>
+            <select name="id_person" id="edit_booked_id_person" class="form-control ">
+            <?php foreach($personList as $person)
+            {
+                
+                ?>
+                <option value="<?php echo $person->get_id_member() ?>"><?php echo $person->get_fname()." ".$person->get_lname()?></option> 
+                <?php    
+            }
+            ?>
+            </select>                                                         
+            <label><span class="red">*</span>  วันเวลาที่ทำงานเสร็จ</label><p id="edit_booked_due_date"></p>                
+            <label><span class="red">*</span>  จำนวนเวลาที่ทำงาน </label>
+                            <div  class="row">
+                                <div class="col-3">
+                                <p id="edit_booked_HH"></p>
+                                </div>
+                               
+                                <div class="col-3">
+                                <p id="edit_booked_mm"></p> 
+                                </div>
+                               
+                            </div>
+                    <label ><span class="red">*</span> รายละเอียดการส่ง</label><p id="edit_booked_summary"></p>
+                    <label><span class="red">(*) การเปลี่ยนสถานะนี้ จำเป็นต้องลบข้อมูลดังกล่าว</span></label> 
             </div>
-            
+            <div id="edit_booked2">
+            <label><span class="red">*</span> ผู้รับงาน</label>
+                    <select name="id_person" id="edit_booked2_id_person" class="form-control ">
+                    <?php foreach($personList as $person)
+                    {
+                        
+                        ?>
+                        <option value="<?php echo $person->get_id_member() ?>"><?php echo $person->get_fname()." ".$person->get_lname()?></option> 
+                        <?php    
+                    }
+                    ?>
+                    </select>  
+                    <br/>                                                         
+            </div>
+            <div id="edit_finish">
+            <label><span class="red">*</span> ผู้รับงาน</label>
+                    <select name="id_person" id="edit_finish_id_person " class="form-control ">
+                    <?php foreach($personList as $person)
+                    {
+                        
+                        ?>
+                        <option value="<?php echo $person->get_id_member() ?>"><?php echo $person->get_fname()." ".$person->get_lname()?></option> 
+                        <?php    
+                    }
+                    ?>
+                    </select>                                      
+                    <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="edit_finish_due_date"  class="form-control " >  
+                    <input type="date" name="time_stop" id="edit_finish_time_stop"  class="form-control " hidden>                
+
+                    <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
+                            <div  class="row">
+                                <div class="col-3">
+                                <input type="number" id="edit_finish_HH" name="HH"   class="form-control " value="0" min=0 >
+                                </div>
+                                <div class="col-3">
+                                <label style="padding-top:7px">ชั่วโมง</label>  
+                                </div>
+                                <div class="col-3">
+                                <input type="number" id="edit_finish_mm" name="mm"   class="form-control " value="0" min=0  > 
+                                </div>
+                                <div class="col-3">
+                                <label style="padding-top:7px">นาที</label>                                        
+                                </div>
+                            </div>
+                    <label> รายละเอียดการส่ง</label><textarea cols="20" rows="5" type="text" name="summary" id="edit_finish_summary" class="form-control " ></textarea>                                  
+                    <br/>
+            </div>
+            </div>
             <div style="overflow:auto;">
             <div style="float:right;">
-                <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                <button type="button" class="btn btn-success" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <button type="button" class="btn btn-primary" id="prevBtn" onclick="nextPrev(-1)">ย้อนกลับ</button>
+                <button type="button" class="btn btn-success" id="nextBtn" onclick="nextPrev(1)">ถัดไป</button>
             </div>
+            </div> 
             </div>
             
             <!-- Circles which indicates the steps of the form: -->
             <div style="text-align:center;margin-top:40px;">
             <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-            <span class="step"></span>
-            </div> 
+            <span class="step"></span>              
+           
         </form>
     </div>
 
@@ -493,9 +579,9 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
+            document.getElementById("nextBtn").innerHTML = "ยืนยัน";
         } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
+            document.getElementById("nextBtn").innerHTML = "ถัดไป";
         }
         // ... and run a function that displays the correct step indicator:
         fixStepIndicator(n)
@@ -503,33 +589,133 @@
 
     function nextPrev(n) {
         // This function will figure out which tab to display
+       
         var x = document.getElementsByClassName("tab");
         var currentTab = (Number)($("#regForm").attr('currentTab'));
-        
+     
         // Exit the function if any field in the current tab is invalid:
-        if (n == 1 && !validateForm()) return false;
+
+        if (n == 1 && !validateForm())        
+        {
+   
+        return false;
+        }
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
         currentTab = currentTab + n;
+
         $("#regForm").attr('currentTab',currentTab);
-        console.log(currentTab);
+       
         // if you have reached the end of the form... :
         if (currentTab >= x.length) {
             //...the form gets submitted:
+            $("#controller").val("workMm");
+            $("#action").val("changeStatus");
             document.getElementById("regForm").submit();
             return false;
         }
         // Otherwise, display the correct tab:
+       var chkstatus = $("#New_status").val();      
+       var oldstatus =$("#old_status").val();
+       if(oldstatus=='waiting')
+       {
+            
+            if(chkstatus=='booked')
+            {               
+                $("#edit_waiting").hide();    
+                $("#edit_booked").hide(); 
+                $("#edit_booked2").show();
+                $("#edit_waiting2").hide(); 
+                $("#edit_finish").hide();   
+                $("#edit_booked2 > select").prop('disabled',false);                      
+                $("#edit_booked > select").prop('disabled',true);    
+                $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea, #edit_finish_HH, #edit_finish_mm ").prop('required',false);                         
+                $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea, #edit_finish_HH, #edit_finish_mm ").prop('disabled',true);   
+            }
+            else if(chkstatus=='finish')
+            {               
+                $("#edit_waiting").hide();    
+                $("#edit_booked").hide(); 
+                $("#edit_booked2").hide();
+                $("#edit_waiting2").hide(); 
+                $("#edit_finish").show(); 
+                $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea , #edit_finish_HH, #edit_finish_mm").prop('disabled',false);
+                $("#edit_finish > select, #edit_finish > input , #edit_finish_HH, #edit_finish_mm").prop('required',true);                
+                $("#edit_booked > select").prop('disabled',true);                             
+                $("#edit_booked2 > select").prop('disabled',true);                                                                        
+            }
+       }
+       else if(oldstatus=='booked')
+       {
+            if(chkstatus=='waiting')
+            {
+                $("#edit_waiting").hide(); 
+                $("#edit_waiting2").show();
+                $("#edit_booked").hide(); 
+                $("#edit_booked2").hide();
+                $("#edit_finish").hide();   
+                $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea , #edit_finish_HH, #edit_finish_mm").prop('disabled',true);               
+                $("#edit_booked > select").prop('disabled',true); 
+                $("#edit_booked2 > select").prop('disabled',true);                                
+                $("#edit_finish > select, #edit_finish > input , #edit_finish_HH, #edit_finish_mm").prop('required',false); 
+            }
+            else if(chkstatus=='finish')
+            {               
+                $("#edit_waiting").hide();
+                $("#edit_waiting2").hide();    
+                $("#edit_booked").hide(); 
+                $("#edit_booked2").hide();
+                $("#edit_finish").show(); 
+                $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea , #edit_finish_HH, #edit_finish_mm").prop('disabled',false);
+                $("#edit_finish > select, #edit_finish > input , #edit_finish_HH, #edit_finish_mm").prop('required',true);                 
+                $("#edit_booked > select").prop('disabled',true);                             
+                $("#edit_booked2 > select").prop('disabled',true);                                                                       
+            }
+       }
+       else if(oldstatus=='finish')
+       {
+            if(chkstatus=='waiting')
+                {
+                    $("#edit_waiting").show(); 
+                    $("#edit_waiting2").hide();    
+                    $("#edit_booked").hide(); 
+                    $("#edit_booked2").hide();
+                    $("#edit_finish").hide();   
+                    $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea").prop('disabled',true);                    
+                    $("#edit_booked > select, #edit_booked > input , #edit_booked > textarea").prop('disabled',true); 
+                    $("#edit_booked2 > select").prop('disabled',true);                     
+                    $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea").prop('required',false);
+                }
+                
+                else if(chkstatus=='booked')
+                {               
+                    $("#edit_waiting").hide(); 
+                    $("#edit_waiting2").hide();    
+                    $("#edit_booked").show(); 
+                    $("#edit_booked2").hide();
+                    $("#edit_finish").hide();   
+                    $("#edit_booked > select").prop('disabled',false);  
+                    $("#edit_booked2 > select").prop('disabled',true);                                                  
+                    $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea, #edit_finish_HH, #edit_finish_mm ").prop('disabled',true);                                        
+                    $("#edit_finish > select, #edit_finish > input , #edit_finish > textarea, #edit_finish_HH, #edit_finish_mm ").prop('required',false);
+                }
+
+       }
         showTab(currentTab);
     }
 
     function validateForm() {
         // This function deals with validation of the form fields
+        
         var x, y, i, valid = true;
+        if($("#New_status").val() =='waiting' && currentTab ==0)
+        {
+            
         var currentTab = (Number)($("#regForm").attr('currentTab'));
         x = document.getElementsByClassName("tab");
         y = x[currentTab].getElementsByTagName("input");
+        console.log(y);
         // A loop that checks every input field in the current tab:
         for (i = 0; i < y.length; i++) {
             // If a field is empty...
@@ -543,6 +729,7 @@
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
             document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
         }
         return valid; // return the valid status
     }
@@ -569,15 +756,60 @@
     }
     $(document).ready(function(){
         $('.btn-edit-status').click(function(){
-            // get data from edit btn
-            /*var id_work = $(this).attr('data-id-work');
-            document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
-            // set value to modal
-            $("#data-id-work-delete").val(id_work);*/
-            clearinput();
-            $("#regForm").attr('currentTab',0);
-            showTab(0);
-            $("#edit-work-status").modal('show');
+        var id_work = $(this).attr('data-id-work');
+        var title = $(this).attr('data-title');
+        var detail = $(this).attr('data-detail');
+        var time_start = $(this).attr('data-timestart');
+        var time_stop = $(this).attr('data-timestop');
+        var status = $(this).attr('data-status');
+        var id_patron = $(this).attr('data-id-patron');   
+        var id_person = $(this).attr('data-id-person');
+        var name_person=$(this).attr('data-name-person');
+        var due_date = $(this).attr('data-due-date2');   
+        var HH = $(this).attr('data-HH');   
+        var mm = $(this).attr('data-mm');   
+        var summary = $(this).attr('data-summary');  
+        clearinput();
+        $("p").empty();
+        $("#old_status").val(status);
+        $("#edit_status_id_work").val(id_work);       
+        $("#edit_waiting_person").append(" "+name_person);  
+
+        $("#edit_waiting_due_date").append(" "+due_date);  
+        $("#edit_waiting_HH").append(" "+HH +" ชั่วโมง");  
+        $("#edit_waiting_mm").append(" "+mm + " นาที");  
+        $("#edit_waiting_summary").append(" "+summary);
+        $("#edit_waiting2_person").append(" "+name_person);                  
+        $("#edit_booked_id_person").val(id_person);  
+        $("#edit_booked_due_date").append(" "+due_date);  
+        $("#edit_booked_HH").append(" "+HH +" ชั่วโมง");  
+        $("#edit_booked_mm").append(" "+mm+ " นาที");  
+        $("#edit_booked_summary").append(summary);    
+        $("#edit_finish_id_person").val(id_person);  
+        $("#edit_finish_time_stop").val(time_stop); 
+        $("#New_status").empty();   
+        if(status=='waiting')
+        {
+        
+            $("#New_status").append("<option value='booked'>booked</option>");
+            $("#New_status").append("<option value='finish'>finish</option>");
+        }  
+        else if(status=='booked')
+        {
+            
+            $("#New_status").append("<option value='waiting'>waiting</option>");
+            $("#New_status").append("<option value='finish'>finish</option>");
+        }
+        else if(status=='finish')
+        {
+            
+            $("#New_status").append("<option value='waiting'>waiting</option>");
+            $("#New_status").append("<option value='booked'>booked</option>");
+        }
+       
+        $("#regForm").attr('currentTab',0);
+        showTab(0);
+        $("#edit-work-status").modal('show');
         });
     });
 </script>
