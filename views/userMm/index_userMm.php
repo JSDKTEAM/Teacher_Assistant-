@@ -187,7 +187,8 @@
       <div class="modal-body">
         <form method="POST" id="edit-passwd-member">
             <input type="hidden" id="id-member-password" name="id_member">
-            <label>Username</label><input type="text" id="username-password" class="form-control">
+            <h5 id="username-password"></h5>
+            <!--<label>Username</label><input type="text"  class="form-control">-->
             <label>New Password</label><input type="password" name="passwd" id="passwdinput" class="form-control" required>
             <label>Confirm New Password</label><input type="password" name="passwdConfirm" id="passwdConfirm" class="form-control" required>
       </div>
@@ -377,7 +378,8 @@
 
         // set value to modal
         $("#id-member-password").val(id_member);
-        $("#username-password").val(username);
+        $('#username-password').html("username : "+username);
+        //$("#username-password").val(username);
         $("#edit-password").modal('show');
         });
     });

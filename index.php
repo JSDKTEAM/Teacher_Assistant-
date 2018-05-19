@@ -14,6 +14,24 @@
 	{
 		$controller = $_REQUEST['controller'];
 		$action = $_REQUEST['action'];
+		if($controller == 'workMm' || $controller == 'userMm' || $controller == 'report')
+		{
+			//echo $_SESSION['member']['type']);
+			if(isset($_SESSION['member']['type']))
+			{
+				if($_SESSION['member']['type'] != 'ผู้ประเมิน')
+				{
+					$controller = 'identify';
+					$action = 'index_login';
+				}
+			}
+			else
+			{
+				$controller = 'identify';
+				$action = 'index_login';
+			}
+
+		}
 	}
 	else
 	{
@@ -56,9 +74,11 @@
 
 	<!-- ตรวจสอบ Form -->
 	<script src="js/validate/validate_form.js"></script>
+	<script src="js/ajax/yearSchool/getMember.js"></script>
+	<script src="js/ajax/yearSchool/curYear.js"></script>
 	<!--  sweetalert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+	
 	<style>
 	body{
 		margin:0;
@@ -101,5 +121,7 @@
 </body>
 </html>
 <?php if(isAjax()){ob_end_clean();} ?>
+
+
 
 

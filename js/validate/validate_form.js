@@ -254,8 +254,18 @@ function data_check(start, end) {
     }
 }
 
+/*function check_img_size(img) {
+    var uploadField = document.getElementById(img);
+    uploadField.onchange = function() {
+        if (this.files[0].size > 307200) {
+            alert("File is too big!");
+            this.value = "";
+        };
+    };
+}*/
+
 function date_finish(end, finish) {
-    var date_s = new Date($(start).val());
+    var date_s = new Date($(end).val());
     var date_e = new Date($(finish).val());
     var timeDiff = (date_s.getTime() - date_e.getTime());
     console.log(timeDiff);

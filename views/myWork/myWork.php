@@ -196,8 +196,8 @@
                     <label><span class="red">* </span> รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
-                    <label><span class="red">* </span> วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-                    <label><span class="red">* </span> วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span> วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span> วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                 </div>
             </div>
         <input type="hidden" name="controller" value="myWork">

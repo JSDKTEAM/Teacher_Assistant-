@@ -132,12 +132,26 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
+                    <ul class="nav nav-tabs nav-justified" id="nav-set">
+                    <li class="nav-item">
+                        <a class="nav-link" id="btn-info" href="#">แก้ไขประวัติส่วนตัว</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="btn-code" href="#">แก้ไขรหัสนิสิต</a>
+                    </li>
+                    </ul>
                     <form method="POST" id="edit-info-form">
                         <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
+                        <input type="hidden" name="id_code" id="id_code" class="form-control" value=""> 
                         <input type="hidden" name="type_info" id="type_info">
-                        <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code" id="id_code" class="form-control" value=""> 
-                        <label>ชื่อ</label><input type="text" name="fname" id="fname" class="form-control" required>
-                        <label>นามสกุล</label><input type="text" name="lname" id="lname" class="form-control" required>
+                        <div id="form-info">
+                            <label>ชื่อ</label><input type="text" name="fname" id="fname" class="form-control" required>
+                            <label>นามสกุล</label><input type="text" name="lname" id="lname" class="form-control" required>
+                        </div>
+                        <div id="form-code">
+                            <h5 id="code-old"></h5>
+                            <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code_new"  class="form-control" value=""> 
+                        </div>
                         <input type="hidden" name="controller" value="userSet">
                 </div>
 
@@ -187,7 +201,9 @@ $( document ).ready(function() {
         }
     });
 
-    $('#upload').on('change', function () { readFile(this); });
+    $('#upload').on('change', function () {  
+        readFile(this); 
+    });
     $('.form_submit').on('click', function (ev) {
         $uploadCrop.croppie('result', {
             type: 'canvas',
@@ -205,9 +221,46 @@ return false;
 </script>
 
 <script>
+    $(document).ready(function(){
+        $("#btn-info").addClass('active');
+        $("#btn-code").removeClass('active');
+        $("#form-info").show();
+        $("#form-code").hide();
+        $("#form-info > input").prop('disabled', false);
+        $("#form-code > input").prop('disabled', true);
+        $("#form-info > input").prop('required', false);
+        $("#form-code > input").prop('required', true);
+        $("#btn-info").click(function(){
+            $("#btn-info").addClass('active');
+            $("#btn-code").removeClass('active');
+            $("#form-info").show();
+            $("#form-code").hide();
+            $("#form-info > input").prop('disabled', false);
+            $("#form-code > input").prop('disabled', true);
+            $("#form-info > input").prop('required', false);
+            $("#form-code > input").prop('required', true);
+
+        })
+        $("#btn-code").click(function(){
+            $("#btn-code").addClass('active');
+            $("#btn-info").removeClass('active');
+            $("#form-info").hide();
+            $("#form-code").show();
+            $("#form-info > input").prop('disabled', true);
+            $("#form-code > input").prop('disabled', false);
+            $("#form-info > input").prop('required', true);
+            $("#form-code > input").prop('required', false);
+        })
+    })
+</script>
+
+
+
+
+<script>
     remove_spacebar("input")
      $(document).ready(function(){
-        $('.btn-edit-info').click(function(){
+        /*$('.btn-edit-info').click(function(){
             $(".alert").remove();
             // get data from edit btn
             var type = $(this).attr('data-type');
@@ -223,16 +276,26 @@ return false;
             }
             else
             {
-                $("id_code").show();
+                $("#id_code").show();
                 $("#lable_id_code").show();
                 $("#id_code").val(id_code);
             }  
+            
             $("#type_info").val(type);
             $("#fname").val(fname);
             $("#lname").val(lname);
             $("#editInfo").modal('show');
-        });
+        });*/
         $('.btn-edit-info').click(function(){
+            $("#btn-info").removeClass('active');
+            $("#btn-info").addClass('active');
+            $("#btn-code").removeClass('active');
+            $("#form-info").show();
+            $("#form-code").hide();
+            $("#form-info > input").prop('disabled', false);
+            $("#form-code > input").prop('disabled', true);
+            $("#form-info > input").prop('required', false);
+            $("#form-code > input").prop('required', true);
         // get data from edit btn
             var type = $(this).attr('data-type');
             var id_code = $(this).attr('data-id-code');
@@ -242,25 +305,39 @@ return false;
             // set value to modal
             if(type != "นิสิต")
             {
+                $("#nav-set").hide();
+                
                 $("#id_code").hide();
                 $("#id_code").prop('required', false);
                 $("#lable_id_code").hide();
             }
             else
             {
+                $("#nav-set").show();
                 $("#id_code").show();
                 $("#id_code").prop('required', true);
                 $("#lable_id_code").show();
                 $("#id_code").val(id_code);
             }  
+            $('#code-old').html("รหัสนิสิตเก่า " + id_code)
+            $("#type_info").val(type);
             $("#fname").val(fname);
             $("#lname").val(lname);
             $("#editInfo").modal('show');
         });
         $("#edit-info-form").submit(function( event ) {
-            if (check_codeStd("#id_code","#type_info")) {
+            if($("#type_status").val() == 'นิสิต')
+            {
+                if (check_codeStd("#id_code_new","#type_info")) 
+                {
+                    return;
+                }  
+            }
+            else
+            {
                 return;
-            }  
+            }
+
             event.preventDefault();
         });
     });

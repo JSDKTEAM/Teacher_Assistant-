@@ -114,8 +114,8 @@
             $con = ConDb::getInstance();
             $stmt = $con->prepare('SELECT DISTINCT member.id_member,member.fname,member.lname FROM work 
             INNER JOIN member ON member.id_member = work.person_id
-            WHERE YEAR(work.created_date) = ?');
-            $stmt->execute([$year]);
+            WHERE YEAR(work.created_date) = ? AND work.status = ?');
+            $stmt->execute([$year,'finish']);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
             {
@@ -130,17 +130,24 @@
             header('Content-type: application/json');
             $con = ConDb::getInstance();
             $stmt = $con->prepare('SELECT work.person_id,YEAR(work.created_date) as y,MONTHNAME(work.created_date) AS m,COUNT(work.id_work) AS work_count  FROM work 
-            WHERE work.person_id = ? AND YEAR(work.created_date) = ?
+            WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?
             GROUP BY work.person_id,YEAR(work.created_date),MONTHNAME(work.created_date)
             ORDER BY MONTH(work.created_date)');
-            $stmt->execute([$person_id,$year]);
+            $stmt->execute([$person_id,$year,'finish']);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
             {
                 $data[] = $value;
             }
-            $stmt = $con->prepare('SELECT Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 AS timeWork from work WHERE work.person_id = ?');
-            $stmt->execute([$person_id]);
+            $stmt = $con->prepare('SELECT Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 AS timeWork from work WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?');
+            $stmt->execute([$person_id,$year,'finish']);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            $stmt = $con->prepare('SELECT COUNT(work.id_work) AS sum_work FROM work WHERE YEAR(work.created_date) = ? GROUP BY YEAR(work.created_date)');
+            $stmt->execute([$year]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
             {
@@ -354,15 +361,30 @@
             return $check;
             
         }
-        public static function updateInfo($id_member,$id_code,$fname,$lname)
+        public static function updateInfo($id_member,$id_code,$fname,$lname,$id_code_new)
         {
             $con = conDb::getInstance();
-            //echo $id_code;
-            $stmt = $con->prepare('UPDATE member SET id_code = ?,fname=?,lname=? WHERE id_member = ?');
-            $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
+            if(isset($id_code_new))
+            {
+               $sql = 'UPDATE member SET id_code = ? WHERE id_member = ?';
+            }
+            else
+            {
+                $sql = 'UPDATE member SET id_code = ?,fname = ?,lname = ? WHERE id_member = ?';
+            }
+            $stmt = $con->prepare($sql);
+            if(isset($id_code_new))
+            {
+                $check = $stmt->execute([$id_code_new,$id_member]);
+                $_SESSION['member']['id_code'] = $id_code_new;
+            }
+            else
+            {
+                $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
+                $_SESSION['member']['id_code'] = $id_code;
+            }
             if($check === TRUE)
             {
-                $_SESSION['member']['id_code'] = $id_code;
                 $_SESSION['member']['fname'] = $fname;
                 $_SESSION['member']['lname'] = $lname;
             }
@@ -432,9 +454,10 @@
             list($type, $data) = explode(';', $data);
             list(, $data)      = explode(',', $data);
             $data = base64_decode($data);
+            clearstatcache();
             file_put_contents('imagesProfile/'.$username.'.png', $data);
             $stmt = $con->prepare('UPDATE member SET img_user= ? WHERE id_member=?');
-            $_SESSION['member']['img_user'] = $img_user;
+            $_SESSION['member']['img_user'] = 'imagesProfile/'.$username.'.png';
             $check = $stmt->execute(['imagesProfile/'.$username.'.png',$id_member]);
         }
         public static function deleteUser($id_member)

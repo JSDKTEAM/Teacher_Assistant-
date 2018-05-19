@@ -43,6 +43,10 @@
         {
             YearSchool::validateYear($param['id_year']);
         }
+        public function curYear($param = NULL)
+        {
+            YearSchool::curYear();
+        }
         
         
        
