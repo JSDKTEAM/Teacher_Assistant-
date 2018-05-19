@@ -175,7 +175,6 @@
         });
     });
 </script>
-<script src="js/ajax/yearSchool/getMember.js"></script>
 <script>
     $(document).ready(function() {
     $('#memberTable2').DataTable({

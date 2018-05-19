@@ -320,7 +320,7 @@
                 {
                     $waiting = $value['count_st'];
                 }
-                else if($value['status'] == '$booked')
+                else if($value['status'] == 'booked')
                 {
                     $booked = $value['count_st'];
                 }

@@ -22,6 +22,27 @@
             $this->start_date = $yearObj['start_date'];
             $this->end_date = $yearObj['end_date'];
         }
+        public static function curYear()
+        {
+            header('Content-type: application/json');
+            $con = conDb::getInstance();
+            $stmt = $con->query('SELECT * FROM year_school
+            WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+            $result =$stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                foreach($result as $key=>$value)
+                {
+                    $data[] = $value;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
         public static function validateYear($id_year)
         {
             header('Content-type: application/json');
