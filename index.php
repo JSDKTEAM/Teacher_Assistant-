@@ -94,6 +94,7 @@
 			$("#userMm a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#yearSet a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#addStd a:contains('จัดการระบบ')").parent().addClass('active');
+			$("#workMm a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#report a:contains('สถิติ')").parent().addClass('active');
 		}); //jQuery is loaded
 	</script>

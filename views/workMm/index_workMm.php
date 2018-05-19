@@ -105,15 +105,6 @@
         </div>
     </div>
     </div>
-    <?php if($workList !== FALSE)
-    {
-        foreach($workList as $key=>$value)
-        {
-            echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
-            break;
-        }
-    } 
-    ?>
     <form method="POST">
         <label>ปีการศึกษา
         <select name="id_year" id="id_year" class="form-control" required>
@@ -130,6 +121,15 @@
         <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
     </form>
     </br>
+    <?php if($workList !== FALSE)
+    {
+        foreach($workList as $key=>$value)
+        {
+            echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
+            break;
+        }
+    } 
+    ?>
     <table  id="memberTable" class="table  table-bordered"> 
         <thead>
             <tr  align="center" class="table-light">
@@ -208,7 +208,7 @@
         </tbody>
     </table>
     </br>
-
+</div>
 
 <script>
     $(document).ready(function(){
