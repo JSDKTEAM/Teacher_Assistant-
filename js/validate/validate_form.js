@@ -241,27 +241,38 @@ function check_username(username) {
 }
 
 function data_check(start, end) {
-    var date_s = new Date($(start).val());
-    var date_e = new Date($(end).val());
-    var timeDiff = (date_s.getTime() - date_e.getTime());
-    console.log(timeDiff);
-    //var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    // console.log(timeDiff);
-    if (timeDiff > 0) {
+    if(start==""|| end=="")
+    {
         return false;
-    } else {
-        return true;
     }
+        var date_s = new Date($(start).val());
+        var date_e = new Date($(end).val());
+        var timeDiff = (date_s.getTime() - date_e.getTime());
+        console.log(start);
+        console.log(timeDiff);
+        //var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        // console.log(timeDiff);
+        if (timeDiff > 0 ) {
+            return false;
+        } else {
+            return true;
+        }
+
+    
 }
 
 function date_finish(end, finish) {
-    var date_s = new Date($(start).val());
-    var date_e = new Date($(finish).val());
+    if(finish==""|| end=="")
+    {
+        return false;
+    }
+    var date_s = new Date(end);
+    var date_e = new Date(finish);
     var timeDiff = (date_s.getTime() - date_e.getTime());
     console.log(timeDiff);
     //var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     // console.log(timeDiff);
-    if (timeDiff > 0) {
+    if (timeDiff >= 0) {
         return false;
     } else {
         return true;
