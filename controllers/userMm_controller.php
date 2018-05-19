@@ -1,6 +1,8 @@
 <?php
     require_once('models/memberModel.class.php');
+    require_once('models/workModel.class.php');
     require_once('models/yearMemberModel.class.php');
+    require_once('models/yearSchoolModel.class.php');
     class UserMmController{
         public function index_userMm($param = NULL)
         {
@@ -8,6 +10,13 @@
             $memberYearList =  Member::getMemberByYear();
             $memberListYear = Member::getAllMemberByYear();
             include('views/userMm/index_userMm.php');
+        }
+        public function index_workMm($param = NULL)
+        {
+            $workList = Work::getAllWork();
+           //$memberYearList =  Member::getMemberByYear();
+            //$memberListYear = Member::getAllMemberByYear();
+            include('views/userMm/index_workMm.php');
         }
         public function addMember($param = NULL)
         {
