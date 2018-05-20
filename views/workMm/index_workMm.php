@@ -305,10 +305,10 @@
             <input id="id_work" type="text" name="id_work" class="form-control" hidden>
                 <div class="row">
                     <div class="col-6">
-                        <label><span class="red">*</span> หัวข้องาน</label><input type="text" name="title" id="title" class="form-control" required>                       
+                        <label><span class="red">*</span> หัวข้องาน</label><input type="text" maxlength="70" name="title" id="title" class="form-control" required>                       
                         <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="time_start" id="time_start" class="form-control" required>
                         <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="time_stop" id="time_stop"  class="form-control" required>
-                        <label>รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" id="detail" class="form-control" ></textarea>
+                        <label>รายละเอียด</label><textarea maxlength="200" cols="20" rows="5" type="text" name="detail" id="detail" class="form-control" ></textarea>
                         
                     </div>
                     <div class="col-6">
@@ -343,19 +343,19 @@
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
                                 <div class="col-3">
-                                <input type="number" id="HH" name="HH"   class="form-control" value="0" min=0 required>
+                                <input type="number" id="HH" name="HH"   class="form-control" value="1" min="1" required>
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">ชั่วโมง</label>  
                                 </div>
                                 <div class="col-3">
-                                <input type="number" id="mm" name="mm"   class="form-control" value="0" min=0  required> 
+                                <input type="number" id="mm" name="mm"   class="form-control" value="1" min="1"  required> 
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">นาที</label>                                        
                                 </div>
                             </div>
-                    <label>รายละเอียดการส่ง</label><textarea cols="20" rows="5" type="text" name="summary" id="summary" class="form-control" ></textarea>
+                    <label>รายละเอียดการส่ง</label><textarea maxlength="200" cols="20" rows="5" type="text" name="summary" id="summary" class="form-control" ></textarea>
                     </div>    
                     </div>
                 </div>
@@ -518,19 +518,19 @@
                     }
                     ?>
                     </select>                                      
-                    <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="edit_finish_due_date"  class="form-control " >  
+                    <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="edit_finish_due_date"  class="form-control " required>  
                     <input type="date" name="time_stop" id="edit_finish_time_stop"  class="form-control " hidden>                
 
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
                                 <div class="col-3">
-                                <input type="number" id="edit_finish_HH" name="HH"   class="form-control " value="0" min=0 >
+                                <input type="number" id="edit_finish_HH" name="HH"   class="form-control " value="1" min="1" required>
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">ชั่วโมง</label>  
                                 </div>
                                 <div class="col-3">
-                                <input type="number" id="edit_finish_mm" name="mm"   class="form-control " value="0" min=0  > 
+                                <input type="number" id="edit_finish_mm" name="mm"   class="form-control " value="1" min="1"  required> 
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">นาที</label>                                        

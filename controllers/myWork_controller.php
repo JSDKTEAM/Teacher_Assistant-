@@ -115,6 +115,7 @@
             {
                 sweetalert(NULL,3);
             }
+            call('myWork','get_myWork');
             
         }
         public function deleteWork($param = NULL)
