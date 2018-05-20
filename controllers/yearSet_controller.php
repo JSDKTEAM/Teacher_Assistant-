@@ -10,7 +10,15 @@
         public function updateYear($param = NULL)
         {
             $check = YearSchool::update_yearschool($param['id_year'],$param['start_date'],$param['end_date']);
-            header('location:index.php?controller=yearSet&action=index_year');
+            if($check)
+            {
+                sweetalert(10,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,10);
+            }
+            call('yearSet','index_year');
         }
         public function addYear($param = NULL)
         {
@@ -42,6 +50,10 @@
         public function validateYear($param = NULL)
         {
             YearSchool::validateYear($param['id_year']);
+        }
+        public function curYear($param = NULL)
+        {
+            YearSchool::curYear();
         }
         
         

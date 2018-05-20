@@ -22,3 +22,22 @@ function getMember(input_id_year, id_select) {
         })
     });
 }
+
+function curYear(input_year) {
+    $(document).ready(function() {
+        $.ajax({
+            url: 'index.php',
+            method: 'POST',
+            data: { cur_date: input_year, controller: 'yearSet', action: 'curYear' },
+            success: function(data) {
+                console.log(data);
+                for (var i in data) {
+                    //$("input[type='date']").attr('min',min);
+                }
+            },
+            error: function(data) {
+                console.log('error');
+            }
+        })
+    });
+}

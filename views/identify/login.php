@@ -17,5 +17,4 @@
     </br>
     <button type="submit" name="action" value="login" class="btn btn-success btn-block">Login</button> 
     </br>
-    <center><a href="?controller=identify&action=index_register">ลงทะเบียนเข้าระบบ</a></center>
 </form>

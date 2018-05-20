@@ -124,7 +124,14 @@
         $stmt = $con->query('SELECT * FROM year_school
         WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
         $result = $stmt->fetch();
-        $id_year = $result['id_year'];
+        if($result)
+        {
+            $id_year = $result['id_year'];
+        }
+        else
+        {
+            return 2;
+        }
         $stmt = $con->query("SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,DATE(work.due_date) AS due_date ,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
         patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson
         ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
@@ -194,6 +201,17 @@
     public static function getAllWorkByMember($id_member,$type)
     {
         $con = conDb::getInstance();
+        $stmt = $con->query('SELECT * FROM year_school
+        WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+        $result = $stmt->fetch();
+        if($result)
+        {
+            $id_year = $result['id_year'];
+        }
+        else
+        {
+            return 2;
+        }
         if($type == 'นิสิต')
         {
             $stmt = $con->prepare('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,work.due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
@@ -201,7 +219,7 @@
             ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
             INNER JOIN member as patron ON patron.id_member = work.patron_id
             LEFT JOIN member as person ON person.id_member = work.person_id
-            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  person.id_member = ? ORDER BY work.created_date DESC');
+            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  person.id_member = ? AND work.id_year = ? ORDER BY work.created_date DESC');
         }
         else
         {
@@ -210,9 +228,9 @@
             ,person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
             INNER JOIN member as patron ON patron.id_member = work.patron_id
             LEFT JOIN member as person ON person.id_member = work.person_id
-            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  patron.id_member  = ? ORDER BY work.created_date DESC');
+            INNER JOIN year_school ON year_school.id_year = work.id_year WHERE  patron.id_member  = ? AND work.id_year = ? ORDER BY work.created_date DESC');
         }     
-        $stmt->execute([$id_member]);
+        $stmt->execute([$id_member,$id_year]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($result)
         {
@@ -247,7 +265,14 @@
         $stmt = $con->query('SELECT * FROM year_school
         WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
         $result = $stmt->fetch();
-        $id_year = $result['id_year'];
+        if($result)
+        {
+            $id_year = $result['id_year'];
+        }
+        else
+        {
+            return 2;
+        }
         echo $time_start;
         $stmt = $con->prepare('INSERT INTO work(patron_id,title,detail,time_start,time_stop,id_year,status) VALUES(?,?,?,?,?,?,?)');
         $check = $stmt->execute([$patron_id,$title,$detail,$time_start,$time_stop,$id_year,'waiting']);
@@ -301,16 +326,27 @@
         $booked = 0;
         $finish = 0;
         $con = ConDb::getInstance();
+        $stmt = $con->query('SELECT * FROM year_school
+        WHERE DATE(year_school.start_date) <= DATE(CURDATE()) AND DATE(year_school.end_date) >= DATE(CURDATE())');
+        $result = $stmt->fetch();
+        if($result)
+        {
+            $id_year = $result['id_year'];
+        }
+        else
+        {
+            return 2;
+        }
         if($type == 'นิสิต')
         {
-            $sql = 'SELECT work.status , COUNT(work.status) AS count_st FROM work WHERE work.person_id = ? GROUP BY work.status';
+            $sql = 'SELECT work.status , COUNT(work.status) AS count_st FROM work WHERE work.person_id = ? AND work.id_year = ? GROUP BY work.status';
         }
         else 
         {
-            $sql = 'SELECT work.status , COUNT(work.status) AS count_st FROM work WHERE work.patron_id = ? GROUP BY work.status'; 
+            $sql = 'SELECT work.status , COUNT(work.status) AS count_st FROM work WHERE work.patron_id = ? AND work.id_year = ? GROUP BY work.status'; 
         }
         $stmt = $con->prepare($sql);
-        $stmt->execute([$id_member]);
+        $stmt->execute([$id_member,$id_year]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if($result)
         {
@@ -320,7 +356,7 @@
                 {
                     $waiting = $value['count_st'];
                 }
-                else if($value['status'] == '$booked')
+                else if($value['status'] == 'booked')
                 {
                     $booked = $value['count_st'];
                 }

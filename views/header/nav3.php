@@ -42,13 +42,16 @@
     .red{
         color:red;
     }
+    #or{
+        color:#FFB300;
+    }
 </style>
 <header>
 <div class="top-head left">
       <div class="container">
           <div class="row">
             <div class="col-md-6 col-lg-4">
-              <h1>Teacher Assistant<small>ระบบสั่งงานนิสิตทุนทำงาน</small></h1>
+              <h1><span id="or">Work</span>Management<small>ระบบสั่งงานนิสิตทุนทำงาน ปีการศึกษา <span id="year_school"></span></small></h1>
             </div>
             <div class="col-md-6 col-lg-3 ml-auto admin-bar hidden-sm-down">
                 
@@ -76,6 +79,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="?controller=myWork&action=get_myWork"><i class="fas fa-pen-square"></i> จัดการงาน</a>
                 </li>
+                <?php if($_SESSION['member']['type'] == 'ผู้ประเมิน'){?>
                 <li class="nav-item">
                     <a class="nav-link" href="?controller=report&action=index_reportMonth"><i class="fas fa-chart-bar"></i> สถิติ</a>
                 </li>
@@ -90,6 +94,7 @@
                         <a class="dropdown-item" href="?controller=yearSet&action=index_year"><i class="fas fa-wrench"></i> ตั้งค่าปีการศึกษา</a>
                     </div>
                 </li>  
+                <?php } ?>
               </ul>  
               <ul class="navbar-nav ml-auto">
                   <?php if($_SESSION['member']['type'] != 'นิสิต') { ?>
@@ -124,12 +129,12 @@
             <form method="POST" id="add_work">
                 <div class="row">   
                     <div class="col-6">
-                        <label><span class='red'>* </span>หัวข้องาน</label><input type="text" name="title" class="form-control" required>
-                        <label><span class='red'>* </span>รายละเอียดงาน</label><textarea  maxlength="100" name="detail"cols="30" rows="10" class="form-control" required></textarea>
+                        <label><span class='red'>* </span>หัวข้องาน</label><input maxlength="70" type="text" name="title" class="form-control" required>
+                        <label><span class='red'>* </span>รายละเอียดงาน</label><textarea  maxlength="200" name="detail" cols="30" rows="10" class="form-control" required></textarea>
                     </div>
                     <div class="col-6">
-                        <label><span class='red'>* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="txtFromDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
-                        <label><span class='red'>* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="txtToDate" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+                        <label><span class='red'>* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="txtFromDate" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+                        <label><span class='red'>* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="txtToDate" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
                     </div>
                 </div>
                 <input type="hidden" name="controller" value="work">

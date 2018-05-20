@@ -70,6 +70,7 @@ function call($controller,$action)
 						$param['passwdOld'] = $_POST['passwdOld']??NULL;
 						$param['passwd'] = $_POST['passwd']??NULL;
 						$param['imagebase64'] = $_POST['imagebase64']??NULL;
+						$param['id_code_new'] = $_POST['id_code_new']??NULL;
 						break;
 		case "identify":$controller = new IdentifyController();
 						$param['id_code'] = $_POST['id_code']??NULL;
@@ -88,6 +89,7 @@ function call($controller,$action)
 						$param['id_year']=$_POST['id_year']??NULL;
 						$param['start_date']=$_POST['start_date']??NULL;
 						$param['end_date']=$_POST['end_date']??NULL;
+						$param['cur_date']=$_POST['cur_date']??NULL;
 						break ; 
 		case "addStd": $controller = new AddStdController();
 					   $param['id_member'] = $_POST['id_member']??NULL;
@@ -104,7 +106,7 @@ if( ($controller =='page'&& ($action =='home'|| $action =='error'))
 ||  ($controller == 'userSet' && ($action == 'index_userSet' || $action == 'upload_image' || $action == 'updateInfo' || $action == 'updatePassMember' || $action == 'validatePassword'))
 ||  ($controller == 'workMm' && ($action == 'index_workMm' || $action == 'delete_workMm' || $action == 'edit_workMm' || $action == 'add_workMm'|| $action =='changeStatus' || $action == 'searchWork'))
 ||  ($controller == 'identify' && ($action == 'index_login' || $action == 'login' || $action == 'logout' || $action == 'index_register' || $action == 'submit_register'))
-|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear' || $action == 'validateYear' || $action == 'deleteYear'))
+|| ($controller == 'yearSet' && ($action == 'index_year' || $action == 'updateYear'|| $action == 'addYear' || $action == 'validateYear' || $action == 'deleteYear' || $action == 'curYear'))
 || ($controller == 'report' && ($action == 'index_reportMonth' || $action == 'getMemberByYear' || $action == 'reportMonth' || $action == 'reportYear'))
 || ($controller == 'addStd' && ($action == 'index_addStd' || $action == 'addMemberSys' || $action == 'getMember' || $action == 'searchMemberByYear'|| $action == 'deleteStd')))
 {	

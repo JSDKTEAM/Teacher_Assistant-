@@ -49,16 +49,20 @@ $(document).ready(function() {
                     var work_count = [];
                     var sum = 0;
                     var timeWork = 0;
+                    var sum_work = 0;
                     for (var i in data) {
-                        if (i != data.length - 1) {
+                        if (i != data.length - 1 && i != data.length - 2) {
                             m.push(data[i].m);
                             work_count.push(data[i].work_count);
                             sum = sum + data[i].work_count / 1;
+                        }
+                        if (i == data.length - 1) {
+                            sum_work = data[i].sum_work;
                         } else {
                             timeWork = data[i].timeWork;
                         }
                     }
-                    document.getElementById("work_count").innerHTML = "งานทั้งหมดที่ทำ " + sum + " งาน</br>";
+                    document.getElementById("work_count").innerHTML = "งานทั้งหมดที่ทำ " + sum + " งาน จากงานทั้งหมด " + sum_work + " งาน</br>";
                     document.getElementById("timeWork").innerHTML = "เวลาที่ทำงานทั้งหมด " + timeWork + " นาที";
                     var chartdata = {
                         labels: m,

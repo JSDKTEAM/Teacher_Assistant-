@@ -14,6 +14,24 @@
 	{
 		$controller = $_REQUEST['controller'];
 		$action = $_REQUEST['action'];
+		if($controller == 'workMm' || $controller == 'userMm' || $controller == 'report')
+		{
+			//echo $_SESSION['member']['type']);
+			if(isset($_SESSION['member']['type']))
+			{
+				if($_SESSION['member']['type'] != 'ผู้ประเมิน')
+				{
+					$controller = 'identify';
+					$action = 'index_login';
+				}
+			}
+			else
+			{
+				$controller = 'identify';
+				$action = 'index_login';
+			}
+
+		}
 	}
 	else
 	{
@@ -56,9 +74,14 @@
 
 	<!-- ตรวจสอบ Form -->
 	<script src="js/validate/validate_form.js"></script>
+	<!-- ดึงค่านิสิต แล้ว ตรวจสอบปีการศึกษา -->
+	<script src="js/ajax/yearSchool/getMember.js"></script>
+	<script src="js/ajax/yearSchool/curYear.js"></script>
 	<!--  sweetalert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+	<!-- dataTablefunc -->
+	<script src="js/dataTable.js"></script>
+	
 	<style>
 	body{
 		margin:0;
@@ -87,6 +110,7 @@
     <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
 	<script>
+		dataTable(".Tabledata");
 		$(document).ready(function() {
 			$("#work a:contains('หน้าแรก')").parent().addClass('active');
 			$("#myWork a:contains('จัดการงาน')").parent().addClass('active');
@@ -94,11 +118,14 @@
 			$("#userMm a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#yearSet a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#addStd a:contains('จัดการระบบ')").parent().addClass('active');
+			$("#workMm a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#report a:contains('สถิติ')").parent().addClass('active');
 		}); //jQuery is loaded
 	</script>
 </body>
 </html>
 <?php if(isAjax()){ob_end_clean();} ?>
+
+
 
 

@@ -7,6 +7,11 @@
         public function index_work($param = NULL)
         {
             $workList = Work::getAllWork();
+            if($workList == 2)
+            {
+                $workList = FALSE;
+                sweetalert(NULL,17);
+            }
             $yearSchoolList = YearSchool::getAllYearSchool();
             include('views/work/index_work.php');
         }
@@ -19,6 +24,11 @@
         {
             $member = Member::getMember($param['id_member']);
             $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            if($workList == 2)
+            {
+                $workList = FALSE;
+                sweetalert(NULL,17);
+            }
             $status_count = Work::countStatus($param['id_member'],$param['type']);
             if($param['type'] == 'นิสิต')
             {
@@ -43,17 +53,30 @@
         public function cancelWork($param = NULL)
         {
             $check = Work::updateStatusWork(NULL,$param['id_work'],'waiting');
-            header('location:index.php?controller=work&action=index_work');
+            if($check)
+            {
+                sweetalert(18,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,18);
+            }
+            call('work','index_work');
         }
         public function finishWork($param = NULL)
         {
             $check = Work::finishWork($param['id_work'],$param['due_date'],$param['HH'],$param['mm'],$param['summary']);
-            header('location:index.php?controller=work&action=index_work');
+            header("location:index.php?controller=work&action=getWork&id_work=$param[id_work]");
         }
         public function addWork($param = NULL)
         {
             $check = Work::addWork($_SESSION['member']['id_member'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
-            if($check)
+            if($check === 2)
+            {
+                $check = false;
+                sweetalert(NULL,17);
+            }
+            else if($check  === true)
             {
                 sweetalert(1,NULL);
             }
