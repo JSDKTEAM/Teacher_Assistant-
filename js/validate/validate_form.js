@@ -199,7 +199,11 @@ function check_codeStd(code, type_user) {
 
             });
             return check;
-        } else {
+        } else if ($(code).val().length > 10) {
+            $(code).after("<span  class='red alert'>รหัสนิสิตเกิน 10 หลัก</br></span>")
+            $(code).focus()
+            return false;
+        } else if ($(code).val().length < 10) {
             $(code).after("<span  class='red alert'>รหัสนิสิตไม่ครบ 10 หลัก</br></span>")
             $(code).focus()
             return false;
