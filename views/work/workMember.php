@@ -75,7 +75,7 @@
                             <p><i class='far fa-clock'></i> ".$work->DateTimeThai($work->get_created_date())."</p>
                             <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                         </div>";
-            if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+            if($_SESSION['member']['type'] != 'นิสิต' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
             {
                 ?>
                     <div class='col-3' >
