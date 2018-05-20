@@ -91,14 +91,14 @@
                             <div class="row">
                                 
                                     <div class="col-3">
-                                        <input type="number" name="HH"   class="form-control" value="0" min=0 required>
+                                        <input type="number" name="HH"   class="form-control" value="1" min=1 required>
                                     </div>
                                     <div class="col-3">
                                     <label style="padding-top:7px"> ชั่วโมง 
                                     </label>
                                     </div>
                                     <div class="col-3">     
-                                    <input type="number" name="mm"   class="form-control" value="0" min=0  required>
+                                    <input type="number" name="mm"   class="form-control" value="1" min=1  required>
                                     </div>
                                     <div class="col-3">                                
                                     <label style="padding-top:7px"> นาที 
@@ -106,7 +106,7 @@
                                     </div>
                                
                             </div>
-                            <label>รายละเอียดการส่ง </label><textarea name="summary" class="form-control" cols="30" rows="5"></textarea>
+                            <label>รายละเอียดการส่ง </label><textarea name="summary" class="form-control" maxlength="200" cols="30" rows="5"></textarea>
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
                             <input type="hidden" name="controller" value="work">   
                     </div>

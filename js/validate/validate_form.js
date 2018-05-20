@@ -260,15 +260,16 @@ function data_check(start, end) {
 
 }
 
-/*function check_img_size(img) {
+function check_img_size(img) {
     var uploadField = document.getElementById(img);
-    uploadField.onchange = function() {
-        if (this.files[0].size > 307200) {
-            alert("File is too big!");
-            this.value = "";
-        };
-    };
-}*/
+
+    if (uploadField.files[0].size > 307200) {
+        console.log(false);
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function date_finish(end, finish) {
     if (finish == "" || end == "") {

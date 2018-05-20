@@ -28,7 +28,7 @@
         </div>
     </div>
     </br>
-    <table  id="workTable" class="table  table-bordered"> 
+    <table  id="workTable" class="table  table-bordered Tabledata"> 
         <thead>
             <tr align="center" class="table-light">
                 <th>#</th>
@@ -134,8 +134,8 @@
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label>หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
-                    <label>รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
+                    <label>หัวข้องาน</label><input maxlength="70" id="data-title-edit" type="text" name="title" class="form-control">
+                    <label>รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="col-6">
                     <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
@@ -230,25 +230,5 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-    $('#workTable').DataTable({
-        "language": {
-            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Showing page _PAGE_ of _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search":"ค้นหา:",
-            "paginate": {
-            "first":      "หน้าแรก",
-            "last":       "หน้าสุดท้าย",
-            "next":       "ต่อไป",
-            "previous":   "ก่อนหน้า"
-            },
-            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
-        }
-    });
-} );
-</script>
+
 

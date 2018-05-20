@@ -74,10 +74,13 @@
 
 	<!-- ตรวจสอบ Form -->
 	<script src="js/validate/validate_form.js"></script>
+	<!-- ดึงค่านิสิต แล้ว ตรวจสอบปีการศึกษา -->
 	<script src="js/ajax/yearSchool/getMember.js"></script>
 	<script src="js/ajax/yearSchool/curYear.js"></script>
 	<!--  sweetalert -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- dataTablefunc -->
+	<script src="js/dataTable.js"></script>
 	
 	<style>
 	body{
@@ -107,6 +110,7 @@
     <p class="text-center small">Copyright © Kasetsart University Kamphaeng Saen Campus</p>
 </footer>
 	<script>
+		dataTable(".Tabledata");
 		$(document).ready(function() {
 			$("#work a:contains('หน้าแรก')").parent().addClass('active');
 			$("#myWork a:contains('จัดการงาน')").parent().addClass('active');
