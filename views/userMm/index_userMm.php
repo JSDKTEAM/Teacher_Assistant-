@@ -142,11 +142,11 @@
             </ul>
                 </br>
                 <form method="POST" id="edit-info-form">
-                    <input type="hidden"  id="type-info" class="form-control" required>
-                    <input id="id-member-info" type="hidden" name="id_member" class="form-control" required>
+                    <input type="hidden"  id="type-info" class="form-control">
+                    <input id="id-member-info" type="hidden" name="id_member" class="form-control">
                     <div class="info">
-                        <label>ชื่อ</label><input id="fname-info" maxlength="70" type="text" name="fname" class="form-control" required>
-                        <label>นามสกุล</label><input id="lname-info" maxlength="70" type="text" name="lname" class="form-control" required>
+                        <label>ชื่อ</label><input id="fname-info" maxlength="70" type="text" name="fname" class="form-control">
+                        <label>นามสกุล</label><input id="lname-info" maxlength="70" type="text" name="lname" class="form-control">
                     </div>
                     <div class="code-std">
                         <h5 id="code-old"></h5>
@@ -155,7 +155,7 @@
                     <div class="status">
                         <h5 id="status-old"></h5>
                         <label>สถานะ</label>
-                        <select name="type" id="type-info-edit" class="form-control" required>
+                        <select name="type" id="type-info-edit" class="form-control">
                         </select>
                     </div>
                     <input type="hidden" name="controller" value="userMm"> 
@@ -242,13 +242,15 @@
         $(".info").show();
         $(".status").hide();
         $(".code-std").hide();
+
+        $(".info > input,.info > select").prop('required', true);
+        $(".code-std > input,.code-std > select").prop('required', false);
+        $(".status > input ,.status > select").prop('required', false);
+
         $(".info > input ,.info > select").prop('disabled', false);
         $(".status > input,.status > select").prop('disabled', true);
         $(".code-std > input,.code-std > select").prop('disabled', true);
         
-        $(".info > input,.info > select").prop('required', true);
-        $(".code-std > input,.code-std > select").prop('required', false);
-        $(".status > input ,.status > select").prop('required', false);
         $("#btn-info").click(function(){
             $("#btn-status").removeClass('active');
             $("#btn-code").removeClass('active');
@@ -256,13 +258,13 @@
             $(".info").show();
             $(".code-std").hide();
             $(".status").hide();
-            $(".info > input,.info > select").prop('disabled', false);
-            $(".code-std > input,.code-std > select").prop('disabled', true);
-            $(".status > input,.status > select").prop('disabled', true);
-
             $(".info > input,.info > select").prop('required', true);
             $(".code-std > input,.code-std > select").prop('required', false);
             $(".status > input ,.status > select").prop('required', false);
+
+            $(".info > input,.info > select").prop('disabled', false);
+            $(".code-std > input,.code-std > select").prop('disabled', true);
+            $(".status > input,.status > select").prop('disabled', true);
 
             $("#btn-sumit-edit").html("ยืนยันการแก้ไขชื่อ - นามสกุล"); 
         });
@@ -273,13 +275,15 @@
             $(".info").hide();
             $(".code-std").show();
             $(".status").hide();
+            $(".info > input,.info > select").prop('required', false);
+            $(".code-std > input,.code-std > select").prop('required', true);
+            $(".status > input ,.status > select").prop('required', false);
+
             $(".info > input,.info > select").prop('disabled', true);
             $(".code-std > input,.code-std > select").prop('disabled', false);
             $(".status > input,.status > select").prop('disabled', true);
 
-            $(".info > input,.info > select").prop('required', false);
-            $(".code-std > input,.code-std > select").prop('required', true);
-            $(".status > input ,.status > select").prop('required', false);
+
             $("#btn-sumit-edit").html("ยืนยันการแก้ไขรหัสนิสิต"); 
         });
         $("#btn-status").click(function(){
@@ -288,14 +292,15 @@
             $(this).addClass('active');
             $(".info").hide();
             $(".code-std").hide();
-            $(".status").show();
+            $(".status").show();            
+            $(".info > input,.info > select").prop('required', false);
+            $(".code-std > input,.code-std > select").prop('required', false);
+            $(".status > input ,.status > select").prop('required', true);
+
             $(".info > input,.info > select").prop('disabled', true);
             $(".code-std > input,.code-std > select").prop('disabled', true);
             $(".status > input ,.status > select").prop('disabled', false);
 
-            $(".info > input,.info > select").prop('required', false);
-            $(".code-std > input,.code-std > select").prop('required', false);
-            $(".status > input ,.status > select").prop('required', true);
             $("#btn-sumit-edit").html("ยืนยันการแก้ไขสถานะ"); 
         });
     });
@@ -311,14 +316,14 @@
             $(".info").show();
             $(".status").hide();
             $(".code-std").hide();
+            $(".info > input,.info > select").prop('required', true);
+            $(".code-std > input,.code-std > select").prop('required', false);
+            $(".status > input ,.status > select").prop('required', false);
+
             $(".info > input,.info > select").prop('disabled', false);
             $(".code-std > input,.code-std > select").prop('disabled', true);
             $(".status > input ,.status > select").prop('disabled', true);
 
-            
-            $(".info > input,.info > select").prop('required', false);
-            $(".code-std > input,.code-std > select").prop('required', true);
-            $(".status > input ,.status > select").prop('required', true);
             $(".add_code").remove();
             $("#btn-sumit-edit").html("ยืนยันการแก้ไขชื่อ - นามสกุล"); 
             // get data from edit btn
