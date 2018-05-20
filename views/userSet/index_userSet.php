@@ -73,7 +73,7 @@
             data-lname="<?php echo $_SESSION['member']['lname'] ?>">แก้ไขข้อมูลส่วนตัว</a>
 
             
-            <!-- The Modal -->
+            <!-- เปลี่ยนรหัสผ่าน -->
             <div class="modal fade" id="edit-passwd">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -119,7 +119,7 @@
 
                 });
             </script>
-            <!-- The Modal -->
+            <!-- แก้ไขข้อมูลส่วนตัว -->
             <div class="modal fade" id="editInfo">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -150,7 +150,7 @@
                         </div>
                         <div id="form-code">
                             <h5 id="code-old"></h5>
-                            <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code_new"  maxlength="10" class="form-control" value=""> 
+                            <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code_new" id="id_code_new" maxlength="10" class="form-control"> 
                         </div>
                         <input type="hidden" name="controller" value="userSet">
                 </div>
@@ -273,33 +273,9 @@ return false;
 <script>
     remove_spacebar("input")
      $(document).ready(function(){
-        /*$('.btn-edit-info').click(function(){
-            $(".alert").remove();
-            // get data from edit btn
-            var type = $(this).attr('data-type');
-            var id_code = $(this).attr('data-id-code');
-            var fname = $(this).attr('data-fname');
-            var lname = $(this).attr('data-lname');
-            var type = $(this).attr('type');
-            // set value to modal
-            if(type != "นิสิต")
-            {
-                $("#id_code").hide();
-                $("#lable_id_code").hide();
-            }
-            else
-            {
-                $("#id_code").show();
-                $("#lable_id_code").show();
-                $("#id_code").val(id_code);
-            }  
-            
-            $("#type_info").val(type);
-            $("#fname").val(fname);
-            $("#lname").val(lname);
-            $("#editInfo").modal('show');
-        });*/
         $('.btn-edit-info').click(function(){
+            $('.alert').remove();
+            $("#form-code > input").val('');
             $("#btn-info").removeClass('active');
             $("#btn-info").addClass('active');
             $("#btn-code").removeClass('active');
@@ -341,18 +317,21 @@ return false;
             $("#editInfo").modal('show');
         });
         $("#edit-info-form").submit(function( event ) {
-            if($("#type_status").val() == 'นิสิต')
+            if($("#type_info").val() == 'นิสิต')
             {
                 if (check_codeStd("#id_code_new","#type_info")) 
                 {
                     return;
-                }  
+                }
+                else
+                {
+
+                }
             }
             else
             {
                 return;
             }
-
             event.preventDefault();
         });
     });
