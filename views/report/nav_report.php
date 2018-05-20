@@ -17,6 +17,7 @@
             $(".y-chart").hide();     
             $("#myChart2").hide();     
             $("#work_count").show();
+            $("#work_count2").hide();
             $("#timeWork").show();
             $("#year_chart").removeClass('active');
             $(this).addClass('active');
@@ -29,6 +30,7 @@
             $(".m-chart").hide();
             $("#myChart1").hide();
             $("#work_count").hide();
+            $("#work_count2").show();
             $("#timeWork").hide();
             $("#month_chart").removeClass('active');
             $(this).addClass('active');

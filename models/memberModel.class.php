@@ -139,7 +139,9 @@
             {
                 $data[] = $value;
             }
-            $stmt = $con->prepare('SELECT ROUND(Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /3600,2) AS timeWork from work WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?');
+            $stmt = $con->prepare('SELECT 
+            ROUND(Sum((Left(work.used_time,2) * 3600) + (substring(work.used_time, 4,2) * 60) ) /60,2) AS timeWork 
+            from work WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?');
             $stmt->execute([$person_id,$year,'finish']);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
@@ -162,9 +164,16 @@
             $con = ConDb::getInstance();
             $stmt = $con->prepare('SELECT member.fname,member.lname,work.person_id,work.id_year,COUNT(work.id_work) AS work_count FROM work 
             INNER JOIN member ON member.id_member = work.person_id
-            WHERE work.id_year = ? 
+            WHERE work.id_year = ? AND work.status = ?
             GROUP BY  work.person_id,work.id_year 
             ORDER BY work.id_year,work_count DESC');
+            $stmt->execute([$year,'finish']);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            $stmt = $con->prepare('SELECT COUNT(work.id_work) AS sum_work FROM work WHERE work.id_year = ? GROUP BY work.id_year');
             $stmt->execute([$year]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)

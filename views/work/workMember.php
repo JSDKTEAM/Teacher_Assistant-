@@ -20,7 +20,7 @@
 <p><a href="?controller=work&action=index_work">หน้าแรก</a> <i class="fas fa-angle-right"></i> <a href=""><?php echo $member->get_fname()." ".$member->get_lname() ?></a></p>
 <div class="row">
         <div class="col-2">
-            <img src="<?php echo $member->get_img_user() ?>" class="center" width="150" alt="<?php echo $member->get_username() ?>">
+            <img src="<?php echo $member->get_img_user() ?>" class="center" width="120" alt="<?php echo $member->get_username() ?>">
         </div>
         <div class="col-4">
             <h3> <?php echo $member->get_type()."</br>".$member->get_fname()." ".$member->get_lname() ?></h3>
@@ -28,6 +28,15 @@
         </div>
     </div>
     </br>
+    <?php if($workList !== FALSE)
+        {
+            foreach($workList as $key=>$value)
+            {
+                echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
+                break;
+            }
+        } 
+    ?>
     <table  id="workTable" class="table  table-bordered Tabledata"> 
         <thead>
             <tr align="center" class="table-light">
@@ -71,7 +80,7 @@
                     <td>
                     <div class='row'>
                         <div class='col-9'>
-                            <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
+                            <h5><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h5>
                             <p><i class='far fa-clock'></i> ".$work->DateTimeThai($work->get_created_date())."</p>
                             <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                         </div>";

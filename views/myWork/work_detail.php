@@ -93,13 +93,13 @@
                             <div class="row">
                                 <div class="col-4">
                                     <label> ชั่วโมง 
-                                        <input type="number" name="HH"   class="form-control" value="1" min=1 required>
+                                        <input type="number" name="HH"   class="form-control" value="0" min="0" required>
                                     </label>
                                 </div>
                                 <div class="col-4">
                                 
                                     <label> นาที 
-                                        <input type="number" name="mm"   class="form-control" value="1" min=1  required>
+                                        <input type="number" name="mm"   class="form-control" value="0" min="0"  required>
                                     </label>
                                 </div>
                             </div>

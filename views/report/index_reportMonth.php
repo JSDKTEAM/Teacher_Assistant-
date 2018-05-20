@@ -44,6 +44,7 @@
         <canvas id="myChart1"></canvas><br/>
         <span id="work_count"></span>
         <span id="timeWork"></span>
+        <span id="work_count2"></span>
         <canvas id="myChart2"></canvas><br/>
     </div>   
 </div>

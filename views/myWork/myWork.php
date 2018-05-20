@@ -31,21 +31,6 @@
         </div>
         </br>
         <?php if($_SESSION['member']['type'] != "นิสิต"){?>
-        <form method="POST">
-                <label>ปีการศึกษา
-                <select name="id_year" id="id_year" class="form-control" required>
-                    <option value="">--เลือกปีการศึกษา--</option>
-                    <?php
-                        foreach($yearSchoolList as $yearSchool)
-                        {
-                            echo "<option>".$yearSchool->get_id_year()."</option>";
-                        }
-                    ?>
-                </select>
-                </label>
-                <input type="hidden" name="controller" value="myWork">
-                <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
-        </form>
         <?php } ?>
         </br>
         <?php if($workList !== FALSE)

@@ -14,6 +14,10 @@ $(document).ready(function() {
                     var work_count = [];
 
                     for (var i in data) {
+                        if (i == data.length - 1) {
+                            $("#work_count2").html("งานทั้งหมด " + data[i].sum_work + " งาน");
+                            break;
+                        }
                         name.push(data[i].fname + " " + data[i].lname);
                         work_count.push(data[i].work_count);
                     }
@@ -29,7 +33,7 @@ $(document).ready(function() {
                         }]
                     };
                     var ctx = document.getElementById("myChart2");
-                    ctx.height = 100;
+                    ctx.height = 200;
                     var barGraph = new Chart(ctx, {
                         type: 'horizontalBar',
                         data: chartdata,
