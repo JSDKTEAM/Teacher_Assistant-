@@ -139,7 +139,7 @@
             {
                 $data[] = $value;
             }
-            $stmt = $con->prepare('SELECT Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 AS timeWork from work WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?');
+            $stmt = $con->prepare('SELECT ROUND(Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /3600,2) AS timeWork from work WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?');
             $stmt->execute([$person_id,$year,'finish']);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($result as $key=>$value)
@@ -368,32 +368,49 @@
             {
                $sql = 'UPDATE member SET id_code = ? WHERE id_member = ?';
             }
-            else
+            else if($id_code != NULL)
             {
                 $sql = 'UPDATE member SET id_code = ?,fname = ?,lname = ? WHERE id_member = ?';
+            }
+            else
+            {
+                $sql = 'UPDATE member SET fname = ?,lname = ? WHERE id_member = ?';
             }
             $stmt = $con->prepare($sql);
             if(isset($id_code_new))
             {
                 $check = $stmt->execute([$id_code_new,$id_member]);
-                if($_SESSION['member']['id_member'] == $id_member)
+                if($_SESSION['member']['id_member'] == $id_member && $check)
                 $_SESSION['member']['id_code'] = $id_code_new;
+                return $check;
             }
             else
             {
-                $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
-                if($_SESSION['member']['id_member'] == $id_member)
-                $_SESSION['member']['id_code'] = $id_code;
-            }
-            if($check === TRUE)
-            {
-                if($_SESSION['member']['id_member'] == $id_member)
+                if($id_code != NULL)
                 {
-                    $_SESSION['member']['fname'] = $fname;
-                    $_SESSION['member']['lname'] = $lname;
+                    $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
+                    if($_SESSION['member']['id_member'] == $id_member && $check)
+                    {
+                        $_SESSION['member']['id_code'] = $id_code;
+                        $_SESSION['member']['fname'] = $fname;
+                        $_SESSION['member']['lname'] = $lname;
+                    }
                 }
+                else
+                {
+                   // echo "$fname $lname";
+                    $check = $stmt->execute([$fname,$lname,$id_member]);
+                    if($_SESSION['member']['id_member'] == $id_member && $check)
+                    {
+                        $_SESSION['member']['fname'] = $fname;
+                        $_SESSION['member']['lname'] = $lname;
+                    }
+                }
+                
+ 
+                return $check;
             }
-            return $check;
+            
         }
         public static function updateMember($id_member,$id_code,$fname,$lname,$type)
         {
@@ -414,7 +431,7 @@
             if(isset($fname) && isset($lname))
             {
                 $check = $stmt->execute([$fname,$lname,$id_member]);
-                if($_SESSION['member']['id_member'] == $id_member)
+                if($_SESSION['member']['id_member'] == $id_member && $check)
                 {
                     $_SESSION['member']['fname'] = $fname;
                     $_SESSION['member']['lname'] = $lname;
@@ -430,7 +447,7 @@
                 {
                     $check = $stmt->execute([NULL,$type,$id_member]);
                 }
-                if($_SESSION['member']['id_member'] == $id_member)
+                if($_SESSION['member']['id_member'] == $id_member && $check)
                 $_SESSION['member']['type'] = $type;
             }
             else if(isset($id_code))

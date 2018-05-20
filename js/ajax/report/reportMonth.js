@@ -63,7 +63,7 @@ $(document).ready(function() {
                         }
                     }
                     document.getElementById("work_count").innerHTML = "งานทั้งหมดที่ทำ " + sum + " งาน จากงานทั้งหมด " + sum_work + " งาน</br>";
-                    document.getElementById("timeWork").innerHTML = "เวลาที่ทำงานทั้งหมด " + timeWork + " นาที";
+                    document.getElementById("timeWork").innerHTML = "เวลาที่ทำงานทั้งหมด " + timeWork + " ชั่วโมง";
                     var chartdata = {
                         labels: m,
                         datasets: [{

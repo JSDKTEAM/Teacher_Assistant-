@@ -75,7 +75,7 @@
                             <p><i class='far fa-clock'></i> ".$work->DateTimeThai($work->get_created_date())."</p>
                             <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                         </div>";
-            if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+            if($_SESSION['member']['type'] != 'นิสิต' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
             {
                 ?>
                     <div class='col-3' >
@@ -116,7 +116,6 @@
     </table>
 
 </div>
-
 <!-- แก้ไขงาน -->
 <div class="modal fade" id="edit">
 <div class="modal-dialog modal-lg">
@@ -130,16 +129,16 @@
 
     <!-- Modal body -->
     <div class="modal-body">
-        <form method="POST">
+        <form method="POST" id="form-edit">
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label>หัวข้องาน</label><input maxlength="70" id="data-title-edit" type="text" name="title" class="form-control" required>
-                    <label>รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control" required></textarea>
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" maxlength="70" type="text" name="title" class="form-control" required>
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control" required></textarea>
                 </div>
                 <div class="col-6">
-                    <label>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
-                    <label>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" requireds>
+                    <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+                    <label><span class="red">* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
                 </div>
             </div>
             <input type="hidden" name="controller" value="work">
@@ -158,37 +157,31 @@
 </div>
 <!-- ลบงาน -->
 <div class="modal fade" id="delete">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog">
     <div class="modal-content">
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">ต้องการลบงาน</h4>
+        <h4 class="modal-title">ยืนยันการลบงาน</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
     <!-- Modal body -->
     <div class="modal-body">
         <form method="POST">
-        <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden>
-            <div class="row">   
-                <div class="col-6">
-                    <label id="data-title-delete"></label> 
-                 </div>             
-            </div>
+            <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden> 
+            <h5 id="data-title-delete"></h5>         
             <input type="hidden" name="controller" value="work">
-            
-        
     </div>
 
     <!-- Modal footer -->
     <div class="modal-footer">
 
     <div style="width :50%">
-        <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ลบ</button>
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ใช่</button>
     </div>
     <div style="width :50%">    
-        <button type="button" class="btn btn-light btn-block" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
     </div> 
  
         </form>
@@ -197,10 +190,15 @@
     </div>
 </div>
 </div>
+
+<!-- ตรวจสอบวันที่ --> 
+
+
 <!-- แก้ไขงาน -->
 <script>
     $(document).ready(function(){
         $('.edit-work').click(function(){
+        $('.alert').remove();
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
         var title = $(this).attr('data-title');
@@ -223,12 +221,34 @@
         $('.delete-work').click(function(){
         // get data from edit btn
         var id_work = $(this).attr('data-id-work');
-        document.getElementById("data-title-delete").innerHTML = $(this).attr('data-title');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
         // set value to modal
         $("#data-id-work-delete").val(id_work);
         $("#delete").modal('show');
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+    $("#form-edit").submit(function( event ) {
+        var check = data_check('#data-time-start-edit','#data-time-stop-edit')
+        console.log(check);
+        if(check)
+        {
+            $('.alert').remove();
+            return;
+        }
+        else
+        {
+            $('.alert').remove();
+            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</br></span>");
+        }
+        event.preventDefault();
+    });
+} );
+</script>
+
+
 
 

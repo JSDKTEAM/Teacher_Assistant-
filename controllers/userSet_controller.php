@@ -14,7 +14,6 @@
         public function updateInfo($param = NULL)
         {
             $check = Member::updateInfo($param['id_member'],$param['id_code'],$param['fname'],$param['lname'],$param['id_code_new']);
-            $link = 'location:index.php?controller=userSet&action=index_userSet';
             if($check)
             {
                 sweetalert(6,NULL);
@@ -23,7 +22,7 @@
             {
                 sweetalert(NULL,6);
             }
-            call('userSet','index_userSet');
+           call('userSet','index_userSet');
             
         }
         public function updatePassMember($param = NULL)
