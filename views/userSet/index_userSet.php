@@ -150,7 +150,7 @@
                         </div>
                         <div id="form-code">
                             <h5 id="code-old"></h5>
-                            <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code_new" id="id_code_new" maxlength="10" class="form-control"> 
+                            <label id="lable_id_code">รหัสนิสิต</label><input type="number" name="id_code_new" id="id_code_new" maxlength="10" class="form-control"> 
                         </div>
                         <input type="hidden" name="controller" value="userSet">
                 </div>
@@ -230,6 +230,7 @@ return false;
 
 <script>
     $(document).ready(function(){
+        $(":input[type='number']").val();
         $("#btn-info").addClass('active');
         $("#btn-code").removeClass('active');
         $("#form-info").show();
