@@ -77,7 +77,7 @@
                                 <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
                                 <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                             </div>";
-                if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+                if(($_SESSION['member']['type'] !="นิสิต") && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
                 {
                 ?>
                         <div class='col-3' >
@@ -136,8 +136,8 @@
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" maxlength="70" type="text" name="title" class="form-control">
-                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" maxlength="70" type="text" name="title" class="form-control"required>
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"required></textarea>
                 </div>
                 <div class="col-6">
                     <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">

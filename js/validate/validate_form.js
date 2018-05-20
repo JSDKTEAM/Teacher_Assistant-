@@ -263,7 +263,7 @@ function data_check(start, end) {
 function check_img_size(img) {
     var uploadField = document.getElementById(img);
 
-    if (uploadField.files[0].size > 307200) {
+    if (uploadField.files[0].size > 1000000) {
         console.log(false);
         return false;
     } else {

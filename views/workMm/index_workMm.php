@@ -519,7 +519,7 @@
                     ?>
                     </select>                                      
                     <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="edit_finish_due_date"  class="form-control " >  
-                    <input type="date" name="time_stop" id="edit_finish_time_stop"  class="form-control " hidden>                
+                    <input type="date" name="time_stop" id="edit_finish_time_start"  class="form-control " hidden>                
 
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
@@ -730,7 +730,7 @@
             }
             if(y[0].value!="")
             {
-                $('.alert').remove();     
+                /*$('.alert').remove();     
                 var end =$("#edit_finish_time_stop").val();
                 var finish =  y[0].value;  
                 var check_date = date_finish(end,finish);                         
@@ -739,8 +739,18 @@
                     valid = false;                   
                     $("#edit_finish_due_date").after("<span class='alert red'>เกินกำหนดเวลาส่งงาน</br></span>");         
             
+                }*/
+                if(data_check("#edit_finish_time_start","#edit_finish_due_date"))
+                {
+                    $('.alert').remove();
+                    
                 }
-
+                else
+                {
+                    $('.alert').remove();
+                    $("#edit_finish_due_date").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</br></span>");
+                    valid = false;
+                }
                 
               
                 
@@ -810,7 +820,7 @@
         $("#edit_booked_mm").append(" "+mm+ " นาที");  
         $("#edit_booked_summary").append(summary);    
         $("#edit_finish_id_person").val(id_person);  
-        $("#edit_finish_time_stop").val(time_stop); 
+        $("#edit_finish_time_start").val(time_start); 
         $("#New_status").empty();   
         if(status=='waiting')
         {
