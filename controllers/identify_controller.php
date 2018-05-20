@@ -11,15 +11,26 @@
         {
             //session_start();
             $member = Indentify::login($param['username'],$param['passwd']);
-            if($member != FALSE)
+            //print_r($member);
+            if(is_array($member))
             {
                 $_SESSION['member'] = $member;
+                header('location:index.php?controller=work&action=index_work');
                 call('work','index_work');
             }
-            else
+            else if($member == 1)
             {
-                call('identify','index_login');
+                sweetalert(NULL,14);
             }
+            else if($member == 2)
+            {
+                sweetalert(NULL,15);
+            }
+            else if($member == 3)
+            {
+                sweetalert(NULL,16);
+            }
+            call('identify','index_login');
         }
         public function logout($param = NULL)
         {

@@ -52,10 +52,145 @@
             $this->type = $type;
             $this->img_user = $img_user;
         }
+        public static function validateCode($id_code)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT member.id_code FROM member WHERE member.id_code = ?');
+            $stmt->execute([$id_code]);
+            if($stmt->rowCount() > 0)
+            {
+                
+                $data = array("check"=>TRUE);
+            }
+            else
+            {
+                $data = array("check"=>FALSE);
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
+        public static function validateUsername($username)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT member.username FROM member WHERE member.username = ?');
+            $stmt->execute([$username]);
+            if($stmt->rowCount() > 0)
+            {
+                $data = array("check"=>TRUE,"username"=>$username,"count"=>$stmt->rowCount());
+            }
+            else
+            {
+                $data = array("check"=>FALSE,"username"=>$username,"count"=>$stmt->rowCount());
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
+        public static function validatePassword($passwd,$id_member)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
+            $stmt = $con->prepare('SELECT member.passwd FROM member WHERE member.id_member = ?');
+            $stmt->execute([$id_member]);
+            $result = $stmt->fetch();
+            $password_hash = $result['passwd'];
+            $check_password = password_verify($passwd,$password_hash);
+            if($check_password)
+            {
+                $data = array("check"=>TRUE);
+            }
+            else
+            {
+                $data = array("check"=>FALSE);
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
+        public static function getMemberByYearReport($year)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT DISTINCT member.id_member,member.fname,member.lname FROM work 
+            INNER JOIN member ON member.id_member = work.person_id
+            WHERE YEAR(work.created_date) = ?');
+            $stmt->execute([$year]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            ob_end_clean();
+            print json_encode($data);
+            //return $data;
+        }
+        public static function reportMonth($person_id,$year)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT work.person_id,YEAR(work.created_date) as y,MONTHNAME(work.created_date) AS m,COUNT(work.id_work) AS work_count  FROM work 
+            WHERE work.person_id = ? AND YEAR(work.created_date) = ?
+            GROUP BY work.person_id,YEAR(work.created_date),MONTHNAME(work.created_date)
+            ORDER BY MONTH(work.created_date)');
+            $stmt->execute([$person_id,$year]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            $stmt = $con->prepare('SELECT Sum(Left(work.used_time,2) * 3600 + substring(work.used_time, 4,2) * 60 + substring(work.used_time, 7,2)) /60 AS timeWork from work WHERE work.person_id = ?');
+            $stmt->execute([$person_id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
+        public static function reportYear($year)
+        {
+            header('Content-type: application/json');
+            $con = ConDb::getInstance();
+            $stmt = $con->prepare('SELECT member.fname,member.lname,work.person_id,work.id_year,COUNT(work.id_work) AS work_count FROM work 
+            INNER JOIN member ON member.id_member = work.person_id
+            WHERE work.id_year = ? 
+            GROUP BY  work.person_id,work.id_year 
+            ORDER BY work.id_year,work_count DESC');
+            $stmt->execute([$year]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($result as $key=>$value)
+            {
+                $data[] = $value;
+            }
+            ob_end_clean();
+            print json_encode($data);
+        }
         public static function getAllMember()
         {
             $con = conDb::getInstance();
             $stmt = $con->query('SELECT * FROM member');
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                foreach($result as $key=>$value)
+                {
+                    $member_list[] = new Member($value['id_member'],$value['id_code'],$value['username'],$value['passwd'],$value['fname'],$value['lname'],$value['type'],$value['img_user']);
+                }
+                //$stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Member');
+                //$result = $stmt->fetchAll();
+                return $member_list;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        public static function getAllStaff()
+        {
+            $con = conDb::getInstance();
+            $stmt = $con->query("SELECT * FROM member WHERE member.type != 'นิสิต'");
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if($result)
             {
@@ -92,7 +227,8 @@
             }
             return $member_list;
         }
-        public static function getMemberByYear()
+
+        /*public static function getMemberByYear()
         {
             $con = conDb::getInstance();
             $stmt = $con->query('SELECT * FROM year_school
@@ -116,6 +252,25 @@
                 return FALSE;
             }
             return $member_list;
+        }*/
+        public static function getMemberNotInSys($id_year)
+        {
+            header('Content-type: application/json');
+            $con = conDb::getInstance();
+            $stmt = $con->query("SELECT * FROM member
+                                 WHERE member.id_member NOT IN(SELECT DISTINCT  member.id_member FROM member 
+                                 INNER JOIN year_member ON year_member.id_member = member.id_member
+                                 WHERE year_member.id_year = $id_year) AND member.type = 'นิสิต'");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($result)
+            {
+                foreach($result as $key=>$value)
+                {
+                    $data[] = $value;
+                }
+            }
+            ob_end_clean();
+            print json_encode($data);
         }
         public static function getAllMemberByYear()
         {
@@ -164,29 +319,106 @@
             $check = $stmt->execute([$id_code,$fname,$lname,$username,$strPassword,'นิสิต']);
             return $check;
         }
-        public static function addMemberMm($fname,$lname,$username,$passwd,$type)
+        public static function addMemberMm($id_code=NULL,$fname,$lname,$username,$passwd,$type)
         {
             $con = conDb::getInstance();
+            if($type == 'นิสิต')
+            {
+                $sql = "INSERT INTO member(id_code,fname,lname,username,passwd,type) VALUES(?,?,?,?,?,?)";
+            }
+            else
+            {
+                $sql = "INSERT INTO member(fname,lname,username,passwd,type) VALUES(?,?,?,?,?)";
+            }
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
-            $stmt = $con->prepare('INSERT INTO member(fname,lname,username,passwd,type) VALUES(?,?,?,?,?)');
-            $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
+            $stmt = $con->prepare($sql);
+            if($type == 'นิสิต')
+            {
+                $check = $stmt->execute([$id_code,$fname,$lname,$username,$strPassword,$type]);
+            }
+            else
+            {
+                $check = $stmt->execute([$fname,$lname,$username,$strPassword,$type]);
+            }
+            return $check;
+        }
+        public static function addMemberSys($array_member,$id_year)
+        {   
+            $con = conDb::getInstance();
+            $stmt = $con->prepare('INSERT INTO year_member(id_member,id_year) VALUES(?,?)');
+            foreach($array_member as $key=>$value)
+            {
+                $check = $stmt->execute([$value,$id_year]);
+                echo $id_year;
+            }
+            return $check;
+            
+        }
+        public static function updateInfo($id_member,$id_code,$fname,$lname)
+        {
+            $con = conDb::getInstance();
+            //echo $id_code;
+            $stmt = $con->prepare('UPDATE member SET id_code = ?,fname=?,lname=? WHERE id_member = ?');
+            $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
+            if($check === TRUE)
+            {
+                $_SESSION['member']['id_code'] = $id_code;
+                $_SESSION['member']['fname'] = $fname;
+                $_SESSION['member']['lname'] = $lname;
+            }
             return $check;
         }
         public static function updateMember($id_member,$id_code,$fname,$lname,$type)
         {
             $con = conDb::getInstance();
-            $stmt = $con->prepare('UPDATE member SET id_code=?,fname=?,lname=?,type=? WHERE id_member=?');
-            $stmt->execute([$id_code,$fname,$lname,$type,$id_member]);
+            if(isset($fname) && isset($lname))
+            {
+                $sql = 'UPDATE member SET fname=?,lname=? WHERE id_member=?';
+            }
+            else if(isset($type))
+            {
+                $sql = 'UPDATE member SET id_code=?,type=? WHERE id_member=?';
+            }
+            else if(isset($id_code))
+            {
+                $sql = 'UPDATE member SET id_code=? WHERE id_member=?';
+            }
+            $stmt = $con->prepare($sql);
+            if(isset($fname) && isset($lname))
+            {
+                $check = $stmt->execute([$fname,$lname,$id_member]);
+                $_SESSION['member']['fname'] = $fname;
+                $_SESSION['member']['lname'] = $lname;
+            }
+            else if(isset($type))
+            {
+                if($type == "นิสิต")
+                {
+                    $check = $stmt->execute([$id_code,$type,$id_member]);
+                }
+                else
+                {
+                    $check = $stmt->execute([NULL,$type,$id_member]);
+                }
+                $_SESSION['member']['type'] = $type;
+            }
+            else if(isset($id_code))
+            {
+                $check = $stmt->execute([$id_code,$id_member]);
+                $_SESSION['member']['id_code'] = $id_code;
+            }
+            return $check;
         }
         public static function updatePassMember($id_member,$passwd)
         {
             $con = conDb::getInstance();
             $strPassword = password_hash($passwd,PASSWORD_DEFAULT);
             $stmt = $con->prepare('UPDATE member SET passwd=? WHERE id_member=?');
-            $stmt->execute([$strPassword,$id_member]);
+            $check = $stmt->execute([$strPassword,$id_member]);
+            return $check;
         }
         public static function upload_image($data_img,$id_member,$username)
-        {
+        {      
             $con = conDb::getInstance();
             $stmt = $con->prepare('SELECT img_user FROM member WHERE id_member = ?');
             $stmt->execute([$id_member]);
@@ -204,6 +436,45 @@
             $stmt = $con->prepare('UPDATE member SET img_user= ? WHERE id_member=?');
             $_SESSION['member']['img_user'] = $img_user;
             $check = $stmt->execute(['imagesProfile/'.$username.'.png',$id_member]);
+        }
+        public static function deleteUser($id_member)
+        {   
+            $con = conDb::getInstance();
+            /*$check_value = true;
+            $check = false;
+            $stmt = $con->prepare('SELECT * FROM member 
+            INNER JOIN work on work.patron_id = member.id_member WHERE member.id_member = ?');
+            $stmt->execute([$id_member]);
+            if($stmt->rowCount() > 0)
+            {
+                $check_value = false;
+                $stmt = $con->prepare('SELECT * FROM member 
+                INNER JOIN work on work.person_id = member.id_member
+                WHERE member.id_member = ?');
+                $stmt->execute([$id_member]);
+                if($stmt->rowCount() > 0)
+                {
+                    $check_value = false;
+                }
+            }
+            else
+            {
+                $stmt = $con->prepare('SELECT * FROM member 
+                INNER JOIN work on work.person_id = member.id_member 
+                WHERE member.id_member = ?');
+                $stmt->execute([$id_member]);
+                if($stmt->rowCount() > 0)
+                {
+                    $check_value = false;
+                }
+            }*/
+            /*if($check_value)
+            {*/
+                $stmt = $con->prepare('DELETE FROM member WHERE member.id_member = ?');
+                $check = $stmt->execute([$id_member]);
+            //}
+            return $check;
+            
         }
     }
 ?>

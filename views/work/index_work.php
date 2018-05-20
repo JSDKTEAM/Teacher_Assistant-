@@ -1,87 +1,261 @@
 <?php
-    include('views/header/nav2.php');
+    include('views/header/nav3.php');
 ?>
-<div class="content p-4" style="width:100%">
+<div class="banner-sec">
+    <div class="container">
 
-    <label>ปีการศึกษา
-    <select name="id_year" id="id_year" class="form-control">
-        <option value="">--เลือกปีการศึกษา--</option>
-        <?php
-            foreach($yearSchoolList as $yearSchool)
+  
+        <?php if($_SESSION['member']['type'] != "นิสิต"){?>
+        <form method="POST">
+            <label>ปีการศึกษา
+            <select name="id_year" id="id_year" class="form-control" required>
+                <option value="">--เลือกปีการศึกษา--</option>
+                <?php
+                    foreach($yearSchoolList as $yearSchool)
+                    {
+                        echo "<option>".$yearSchool->get_id_year()."</option>";
+                    }
+                ?>
+            </select>
+            </label>
+            <input type="hidden" name="controller" value="work">
+            <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
+        </form>
+        </br>
+        <?php } ?>
+        <table  id="workTable" class="table table-bordered" > 
+            <thead>
+                <tr align="center" class="table-light">
+                    <th>#</th>
+                    <th>รายละเอียด</th>
+                    <th>ผู้สั่ง</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            <?php
+            $i = 1;
+            if($workList !== FALSE)
             {
-                echo "<option>".$yearSchool->get_id_year()."</option>";
-            }
-        ?>
-    </select>
-    </label>
-    </br></br>
-    <table  id="workTable" class="table  table-bordered"> 
-        <thead>
-            <tr align="center">
-                <th>#</th>
-                <th>รายละเอียด</th>
-                <th>สถานะ</th>
-            </tr>
-        </thead>
-        <tbody>
-        
-        <?php
-        $i = 1;
-        if($workList !== FALSE)
-        {
-        foreach($workList as $key=>$work)
-        {
-            $objPatron = $work->get_objPatron();
-            $objPerson = $work->get_objPerson();
-            $submitwork = '';
-            if($work->get_status() == 'waiting' && $_SESSION['member']['type'] == 'นิสิต')
+            foreach($workList as $key=>$work)
             {
-                $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
-            }
-            echo "<tr>
-                    
-                    <td align='center'>$i</td>
-                    <td>
-                    <div class='row'>
-                        <div class='col-6'>
-                            <h4><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h4>
-                            <p><i class='fa fa-clock-o'></i>    ".$work->get_created_date()."</p>
-                            <p>ผู้สั่งงาน : <img src='".$objPatron->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></p>
-                            <p>ผู้รับงาน : <img src='".$objPerson->get_img_user()."'  width='50' alt=''><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPerson->get_id_member()."&type=".$objPerson->get_type()."'>    ".$objPerson->get_fname()." ".$objPerson->get_lname()."</a></p>
-                            <p>ระยะเวลาทำงาน : ".$work->get_time_start()." ถึง ".$work->get_time_stop()."</p>
-                        </div>";
-            if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
-            {
-                echo "
-                    <div class='col-6 ' >
-                        <div class='btn-group float-right'>
-                            <a href='#' class='btn btn-primary'><i class='fa fa-eye'></i></a>
-                            <a href='#' class='btn btn-success'><i class='fa fa-pencil'></i></a>
-                            <a href='#' class='btn btn-danger'><i class='fa fa-trash-o'></i></a>
+                $objPatron = $work->get_objPatron();
+                $submitwork = '';
+                if($work->get_status() == 'waiting')
+                {
+                    $color='badge badge-pill badge-warning';
+                }
+                else if($work->get_status() == 'booked')
+                {
+                    $color='badge badge-pill badge-primary';
+                }
+                else
+                {
+                $color='badge badge-pill badge-success';
+                }
+                if($work->get_status() == 'waiting' && $_SESSION['member']['type'] == 'นิสิต')
+                {
+                // $submitwork = "<a href='?controller=work&action=submitWork&id_work=".$work->get_id_work()."' class='btn btn-success btn-sm'>รับงาน</a>";
+                }
+                echo "<tr class='table-light'>
+                        
+                        <td align='center'>$i</td>
+                        <td>
+                        <div class='row'>
+                            <div class='col-9'>
+                                <h5><a href='?controller=work&action=getWork&id_work=".$work->get_id_work()."'>".$work->get_title()."</a> $submitwork</h5>
+                                <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
+                                <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
+                            </div>";
+                if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+                {
+                ?>
+                        <div class='col-3' >
+                        <div class='dropdown'>
+                            <button class='btn btn-sm  float-right dropdown-toggle' data-toggle='dropdown'>
+                                <i class='fas fa-cog'></i>
+                            </button>
+                            <div class='dropdown-menu  dropdown-menu-right'>
+                            <a class='dropdown-item edit-work' href="#"  data-id-work = '<?php echo $work->get_id_work()?>'
+                                data-title = '<?php echo $work->get_title()?>'
+                                data-detail = '<?php echo $work->get_detail()?>'
+                                data-time-start = '<?php echo $work->get_time_start()?>'
+                                data-time-stop  = '<?php echo $work->get_time_stop()?>'><i  class='fas fa-edit'></i> แก้ไข</a>
+                            <a class='dropdown-item delete-work' href='#'
+                                data-id-work = '<?php echo $work->get_id_work()?>'
+                                data-title = '<?php echo $work->get_title()?>'><i class='far fa-trash-alt'></i> ลบงาน</a>
+                            </div>
                         </div>
+                        </div>
+                        <?php
+                }
+                else
+                {
+                    echo "<div class='col-3'>
                     </div>";
-            }
-            else
-            {
-                echo "<div class='col-6 '>
-                </div>";
-            }
-             echo  "</div>
-                    </td>   
-                    <td align='center'>
-                        ".$work->get_status()."
-                    </td>
-                  </tr>";
-       $i++; }}
-        ?>
-        </tbody>
-    </table>
+                }
+                echo  "</div>
+                        </td>
+                        <td align='center'><a href='?controller=work&action=getAllWorkByMember&id_member=".$objPatron->get_id_member()."&type=".$objPatron->get_type()."'><img src='".$objPatron->get_img_user()."'  width='50' alt=''>   ".$objPatron->get_fname()." ".$objPatron->get_lname()."</a></td>   
+                        <td align='center'>
+                            <h4><span class='$color'>".$work->get_status()."</span></h4>
+                        </td>
+                    </tr>";
+                
+        $i++; }}
+            ?>
+            </tbody>
+        </table>
 
 </div>
 
+<!-- แก้ไขงาน -->
+<div class="modal fade" id="edit">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title">แก้ไขรายละเอียดงาน</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+        <form method="POST" id="form-edit">
+        <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
+            <div class="row">   
+                <div class="col-6">
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control">
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="col-6">
+                    <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                </div>
+            </div>
+            <input type="hidden" name="controller" value="work">
+            
+        
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success btn-block" name="action" value="editWork">แก้ไข</button>
+        </form>
+    </div>
+
+    </div>
+</div>
+</div>
+<!-- ลบงาน -->
+<div class="modal fade" id="delete">
+<div class="modal-dialog">
+    <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title">ยืนยันการลบงาน</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+        <form method="POST">
+            <input id="data-id-work-delete" type="text" name="id_work" class="form-control" hidden> 
+            <h5 id="data-title-delete"></h5>         
+            <input type="hidden" name="controller" value="work">
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+
+    <div style="width :50%">
+        <button type="submit" class="btn btn-danger btn-block" name="action" value="deleteWork">ใช่</button>
+    </div>
+    <div style="width :50%">    
+        <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
+    </div> 
+ 
+        </form>
+    </div>
+
+    </div>
+</div>
+</div>
+
+
+<!-- แก้ไขงาน -->
 <script>
-    $(document).ready(function() {
-    $('#workTable').DataTable();
-} );
+    $(document).ready(function(){
+        $('.edit-work').click(function(){
+        $('.alert').remove();
+        // get data from edit btn
+        var id_work = $(this).attr('data-id-work');
+        var title = $(this).attr('data-title');
+        var detail = $(this).attr('data-detail');
+        var time_start = $(this).attr('data-time-start');
+        var time_stop = $(this).attr('data-time-stop');        
+        // set value to modal
+        $("#data-id-work-edit").val(id_work);
+        $("#data-title-edit").val(title);
+        $("#data-detail-edit").val(detail);
+        $("#data-time-start-edit").val(time_start);
+        $("#data-time-stop-edit").val(time_stop);
+        $("#edit").modal('show');
+        });
+    });
+</script>
+<!-- ลบงาน -->
+<script>
+    $(document).ready(function(){
+        $('.delete-work').click(function(){
+        // get data from edit btn
+        var id_work = $(this).attr('data-id-work');
+        document.getElementById("data-title-delete").innerHTML = "คุณต้องการลบงาน " +$(this).attr('data-title') + " ใช่หรือไม่";
+        // set value to modal
+        $("#data-id-work-delete").val(id_work);
+        $("#delete").modal('show');
+        });
+    });
 </script>
 
+<!-- datatable -->
+<script>
+    $(document).ready(function() {
+    $('#workTable').DataTable({
+
+        "language": {
+            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Showing page _PAGE_ of _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"ค้นหา:",
+            "paginate": {
+            "first":      "หน้าแรก",
+            "last":       "หน้าสุดท้าย",
+            "next":       "ต่อไป",
+            "previous":   "ก่อนหน้า"
+            },
+            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
+        }
+    });
+    $("#form-edit").submit(function( event ) {
+        var check = data_check('#data-time-start-edit','#data-time-stop-edit')
+        console.log(check);
+        if(check)
+        {
+            $('.alert').remove();
+            return;
+        }
+        else
+        {
+            $('.alert').remove();
+            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
+        }
+        event.preventDefault();
+    });
+} );
+</script>

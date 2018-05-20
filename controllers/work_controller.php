@@ -2,6 +2,7 @@
     require_once('models/memberModel.class.php');
     require_once('models/workModel.class.php');
     require_once('models/yearSchoolModel.class.php');
+    
     class WorkController{
         public function index_work($param = NULL)
         {
@@ -18,6 +19,7 @@
         {
             $member = Member::getMember($param['id_member']);
             $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            $status_count = Work::countStatus($param['id_member'],$param['type']);
             if($param['type'] == 'นิสิต')
             {
                 include('views/work/workMemberStd.php');
@@ -27,10 +29,16 @@
                 include('views/work/workMember.php');
             }
         }
+        public function searchWork($param = NULL)
+        {
+            $workList = Work::searchWork($param['id_year']);
+            $yearSchoolList = YearSchool::getAllYearSchool();
+            include('views/work/index_work.php');
+        }
         public function submitWork($param = NULL)
         {
             $check = Work::updateStatusWork($param['id_member'],$param['id_work'],'booked');
-            header('location:index.php?controller=work&action=index_work');
+            header("location:index.php?controller=work&action=getWork&id_work=$param[id_work]");
         }
         public function cancelWork($param = NULL)
         {
@@ -45,7 +53,59 @@
         public function addWork($param = NULL)
         {
             $check = Work::addWork($_SESSION['member']['id_member'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
-            header('location:index.php?controller=work&action=index_work');
+            if($check)
+            {
+                sweetalert(1,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,1);
+            }
+            call('work','index_work');
+            
         }
+        public function editWork($param = NULL)
+        {
+           
+            $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+            $link ='location:index.php?controller=work&action=index_work';
+            if($check)
+            {
+                sweetalert(3,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,3);
+            }
+            call('work','index_work');
+        }
+        public function deleteWork($param = NULL)
+        {
+           
+            $check = Work::deleteWork($param['id_work']);  
+            if($check)
+            {
+                sweetalert(2,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,2);
+            }
+            call('work','index_work');
+        }
+        /*
+        public function editWork($param = NULL)
+        {
+            $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
+            if($_SESSION['member']['type']=='อาจารย์')
+            header("location:index.php?controller=myWork&action=get_myWork");
+        }
+        public function deleteWork($param = NULL)
+        {
+            $check = Work::deleteWork($param['id_work']);
+            if($_SESSION['member']['type']=='อาจารย์')
+            header("location:index.php?controller=myWork&action=get_myWork");
+        }
+        */
     }
 ?>
