@@ -276,12 +276,8 @@ function data_check(start, end) {
 
 function check_img_size(img) {
     var uploadField = document.getElementById(img);
-<<<<<<< HEAD
     //307200
     console.log(uploadField.files[0].size);
-=======
-
->>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
     if (uploadField.files[0].size > 1000000) {
         console.log(false);
         return false;
