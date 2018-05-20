@@ -202,7 +202,15 @@ $( document ).ready(function() {
     });
 
     $('#upload').on('change', function () {  
-        readFile(this); 
+        if(check_img_size('upload') === true)
+        {
+            readFile(this); 
+        }
+        else
+        {
+            alert("ไฟล์ขนาดใหญ่เกินไป");
+            this.value = '';
+        }
     });
     $('.form_submit').on('click', function (ev) {
         $uploadCrop.croppie('result', {

@@ -39,14 +39,14 @@
             unset($_SESSION['member']);
             call('identify','index_login');
         }
-        public function index_register($param = NULL)
+        /*public function index_register($param = NULL)
         {
             include('views/identify/register.php');
         }
         public function submit_register($param = NULL)
         {
             $check = Member::addMemberRegister($param['id_code'],$param['fname'],$param['lname'],$param['username'],$param['passwd']);
-        }
+        }*/
 
     }
 ?>

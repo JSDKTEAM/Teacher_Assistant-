@@ -93,17 +93,17 @@
                             <div class="row">
                                 <div class="col-4">
                                     <label> ชั่วโมง 
-                                        <input type="number" name="HH"   class="form-control" value="0" min=0 required>
+                                        <input type="number" name="HH"   class="form-control" value="1" min=1 required>
                                     </label>
                                 </div>
                                 <div class="col-4">
                                 
                                     <label> นาที 
-                                        <input type="number" name="mm"   class="form-control" value="0" min=0  required>
+                                        <input type="number" name="mm"   class="form-control" value="1" min=1  required>
                                     </label>
                                 </div>
                             </div>
-                            <label>รายละเอียดการส่ง </label><textarea name="summary" class="form-control" cols="30" rows="5"></textarea>
+                            <label>รายละเอียดการส่ง </label><textarea name="summary" maxlength="200" class="form-control" cols="30" rows="5"></textarea>
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
                             <input type="hidden" name="controller" value="myWork">   
                     </div>
@@ -120,7 +120,7 @@
             <div class="col-6">
                 <!-- Button to Open the Modal -->
                 <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#cancelWork">
-                ยกเลิกไม่รับงาน
+                ยืนยันยกเลิกไม่รับงาน
                 </button>
 
                 <!-- The Modal -->
@@ -137,14 +137,19 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form method="POST">
-                            <h5><?php echo $work->get_title() ?></h5>
+                            <h5><?php echo "คุณต้องการยกเลิกรับงาน ".$work->get_title()." ใช่หรือไม่" ?></h5>
                             <input type="hidden" name="id_work" value="<?php echo $work->get_id_work() ?>">
                             <input type="hidden" name="id_member" value="<?php echo $_SESSION['member']['id_member'] ?>">
                             <input type="hidden" name="controller" value="myWork">
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" name="action" value="cancelWork" class="btn btn-danger btn-block">ยืนยัน</button>
+                    <div style="width :50%">
+                            <button type="submit" class="btn btn-danger btn-block" name="action" value="cancelWork">ใช่</button>
+                        </div>
+                        <div style="width :50%">    
+                            <button type="button" class="btn btn-success btn-block" data-dismiss="modal">ไม่</button>
+                        </div> 
                         </form>
                     </div>
 

@@ -194,6 +194,10 @@
             {
                 $text = "ลบปีการศึกษาสำเร็จ";
             }
+            else if($success == 18)
+            {
+                $text = "ยกเลิกงานสำเร็จ";
+            }
             $alert = "<script>    
                     swal({
                         icon: 'success',
@@ -273,6 +277,14 @@
             else if($error == 16)
             {
                 $text = "ไม่มีบัญชีนี้ในระบบ";
+            }
+            else if($error == 17)
+            {
+                $text = "กรุณาเพิ่มปีการศึกษาปัจจุบัน";
+            }
+            else if($error == 18)
+            {
+                $text = "ยกเลิกงานไม่สำเร็จ";
             }
             $alert = "<script>    
             swal({

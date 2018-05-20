@@ -7,6 +7,11 @@
         {
             $member = Member::getMember($_SESSION['member']['id_member']);
             $workList = Work::getAllWorkByMember($_SESSION['member']['id_member'],$_SESSION['member']['type']);
+            if($workList == 2)
+            {
+                $workList = FALSE;
+                sweetalert(NULL,17);
+            }
             $status_count = Work::countStatus($_SESSION['member']['id_member'],$_SESSION['member']['type']);
             if($_SESSION['member']['type'] == 'นิสิต')
             {
@@ -36,6 +41,11 @@
         {
             $member = Member::getMember($param['id_member']);
             $workList = Work::getAllWorkByMember($param['id_member'],$param['type']);
+            if($workList == 2)
+            {
+                $workList = FALSE;
+                sweetalert(NULL,17);
+            }
             if($param['type'] == 'นิสิต')
             {
                 include('views/work/workMemberStd.php');
@@ -54,6 +64,11 @@
         {
             $member = Member::getMember($_SESSION['member']['id_member']);
             $workList = Work::getAllWorkByMember($_SESSION['member']['id_member'],$_SESSION['member']['type']);
+            if($workList == 2)
+            {
+                $workList = FALSE;
+                sweetalert(NULL,17);
+            }
             $yearSchoolList = YearSchool::getAllYearSchool();
             $status_count = Work::countStatus($_SESSION['member']['id_member'],$_SESSION['member']['type']);
             if($_SESSION['member']['type'] == 'นิสิต')
@@ -73,7 +88,15 @@
         public function cancelWork($param = NULL)
         {
             $check = Work::updateStatusWork(NULL,$param['id_work'],'waiting');
-            header('location:index.php?controller=myWork&action=get_myWork');
+            if($check)
+            {
+                sweetalert(18,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,18);
+            }
+            call('myWork','get_myWork');
         }
         public function finishWork($param = NULL)
         {
@@ -84,13 +107,29 @@
         {
             if($_SESSION['member']['type'] !='นิสิต')
             $check = Work::editWork($param['id_work'],$param['title'],$param['time_start'],$param['time_stop'],$param['detail']);
-            header("location:index.php?controller=myWork&action=get_myWork");
+            if($check)
+            {
+                sweetalert(3,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,3);
+            }
+            
         }
         public function deleteWork($param = NULL)
         {
             if($_SESSION['member']['type'] !='นิสิต')
-            $check = Work::deleteWork($param['id_work']);         
-            header("location:index.php?controller=myWork&action=get_myWork");
+            $check = Work::deleteWork($param['id_work']);   
+            if($check)
+            {
+                sweetalert(2,NULL);
+            }
+            else
+            {
+                sweetalert(NULL,2);
+            }      
+            call('myWork','get_myWork');
         }
     }
 ?>

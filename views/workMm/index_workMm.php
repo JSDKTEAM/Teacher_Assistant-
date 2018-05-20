@@ -16,7 +16,7 @@
 
     /* Mark input boxes that gets an error on validation: */
     input.invalid {
-    background-color: #ffdddd;
+        background-color: #ffdddd;
     }
 
     /* Hide all steps by default: */
@@ -70,23 +70,23 @@
             <form method="POST">
                 <div class="row">
                     <div class="col-6">
-                        <label><span class="red">*</span>หัวข้องาน</label><input type="text" name="title" class="form-control" required>
-                        <label><span class="red">*</span> รายละเอียด</label><textarea cols="20" rows="5" type="text" name="detail" class="form-control" required></textarea>
+                        <label><span class="red">* </span>หัวข้องาน</label><input type="text" name="title" class="form-control" required>
+                        <label><span class="red">* </span> รายละเอียดงาน</label><textarea cols="30" rows="10" type="text" name="detail" class="form-control" required></textarea>
                     </div>
                     <div class="col-6">
-                    <label><span class="red">*</span> ผู้สั่งงาน</label>
-                    <select name="id_patron"  class="form-control">
+                    <label><span class="red">* </span> ผู้สั่งงาน</label>
+                    <select name="id_patron"  class="form-control" required>
+                        <option value="">--เลือกผู้สั่งงาน--</option>
                     <?php foreach($patronList as $patron)
-                    {
-                        
-                        ?>
+                    {    
+                    ?>
                         <option value="<?php echo $patron->get_id_member() ?>"><?php echo $patron->get_fname()." ".$patron->get_lname()?></option> 
                         <?php    
                     }
                     ?>
                     </select>
-                        <label><span class="red">*</span> วันที่สร้างงาน</label><input type="date" name="time_start"  class="form-control" required>
-                        <label><span class="red">*</span> วันที่งานสิ้นสุด</label><input type="date" name="time_stop"  class="form-control" required>
+                        <label><span class="red">* </span> วันที่เริ่มงาน</label><input type="date" name="time_start"  class="form-control date_year" required>
+                        <label><span class="red">* </span> วันที่ส่งงาน</label><input type="date" name="time_stop"  class="form-control date_year" required>
                     </div>
                 </div>
         </div>
@@ -126,7 +126,7 @@
         }
     } 
     ?>
-    <table  id="memberTable" class="table  table-bordered"> 
+    <table  id="memberTable" class="table  table-bordered Tabledata"> 
         <thead>
             <tr  align="center" class="table-light">
                 <th>#</th>
@@ -870,28 +870,7 @@
         });
     });
 </script>
-<!-- ตาราง DataTable -->
-<script>
-    $(document).ready(function() {
-    $('#memberTable').DataTable({
-        "language": {
-            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Showing page _PAGE_ of _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search":"ค้นหา:",
-            "paginate": {
-            "first":      "หน้าแรก",
-            "last":       "หน้าสุดท้าย",
-            "next":       "ต่อไป",
-            "previous":   "ก่อนหน้า"
-            },
-            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
-        }
-    });
-} );
-</script>
+
 <script>
 $(document).ready(function() {
     $("#edit-work").submit(function( event ) {

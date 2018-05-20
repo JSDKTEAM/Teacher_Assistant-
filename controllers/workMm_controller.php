@@ -7,6 +7,11 @@
         public function index_workMm($param  = NULL)
         {
             $workList = Work::getAllWork();
+            if($workList == 2)
+            {
+                $workList = FALSE;
+                sweetalert(NULL,17);
+            }
             $personList = Member::getAllMemberByYear();
             $patronList = Member::getAllStaff();
             $yearSchoolList = YearSchool::getAllYearSchool();
@@ -15,7 +20,12 @@
         public function add_workMm($param = NULL)
         {
             $check = Work::addWork($param['id_patron'],$param['title'],$param['detail'],$param['time_start'],$param['time_stop']);
-            if($check)
+            if($check === 2)
+            {
+                $check = FALSE;
+                sweetalert(NULL,17);
+            }
+            else if($check === true)
             {
                 sweetalert(1,NULL);
             }

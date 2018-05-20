@@ -376,17 +376,22 @@
             if(isset($id_code_new))
             {
                 $check = $stmt->execute([$id_code_new,$id_member]);
+                if($_SESSION['member']['id_member'] == $id_member)
                 $_SESSION['member']['id_code'] = $id_code_new;
             }
             else
             {
                 $check = $stmt->execute([$id_code,$fname,$lname,$id_member]);
+                if($_SESSION['member']['id_member'] == $id_member)
                 $_SESSION['member']['id_code'] = $id_code;
             }
             if($check === TRUE)
             {
-                $_SESSION['member']['fname'] = $fname;
-                $_SESSION['member']['lname'] = $lname;
+                if($_SESSION['member']['id_member'] == $id_member)
+                {
+                    $_SESSION['member']['fname'] = $fname;
+                    $_SESSION['member']['lname'] = $lname;
+                }
             }
             return $check;
         }
@@ -409,8 +414,11 @@
             if(isset($fname) && isset($lname))
             {
                 $check = $stmt->execute([$fname,$lname,$id_member]);
-                $_SESSION['member']['fname'] = $fname;
-                $_SESSION['member']['lname'] = $lname;
+                if($_SESSION['member']['id_member'] == $id_member)
+                {
+                    $_SESSION['member']['fname'] = $fname;
+                    $_SESSION['member']['lname'] = $lname;
+                }
             }
             else if(isset($type))
             {
@@ -422,11 +430,13 @@
                 {
                     $check = $stmt->execute([NULL,$type,$id_member]);
                 }
+                if($_SESSION['member']['id_member'] == $id_member)
                 $_SESSION['member']['type'] = $type;
             }
             else if(isset($id_code))
             {
                 $check = $stmt->execute([$id_code,$id_member]);
+                if($_SESSION['member']['id_member'] == $id_member)
                 $_SESSION['member']['id_code'] = $id_code;
             }
             return $check;
@@ -457,6 +467,7 @@
             clearstatcache();
             file_put_contents('imagesProfile/'.$username.'.png', $data);
             $stmt = $con->prepare('UPDATE member SET img_user= ? WHERE id_member=?');
+            if($_SESSION['member']['id_member'] == $id_member)
             $_SESSION['member']['img_user'] = 'imagesProfile/'.$username.'.png';
             $check = $stmt->execute(['imagesProfile/'.$username.'.png',$id_member]);
         }

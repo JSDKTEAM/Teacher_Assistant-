@@ -60,7 +60,7 @@
         </div>
     </div>
     </div>
-    <table  id="memberTable" class="table  table-bordered"> 
+    <table  id="memberTable" class="table  table-bordered Tabledata"> 
         <thead>
             <tr class="table-light" align="center">
                 <th>#</th>
@@ -210,7 +210,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">ลบบัญชีผู้ใช้</h4>
+        <h4 class="modal-title">ยืนยันการลบบัญชีผู้ใช้</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -218,14 +218,16 @@
       <div class="modal-body">
       <form method="POST">
         <input type="hidden" name="id_member" id="id-member-delete">
+        <h4>คุณต้องการลบ</h4>
         <h4>Username : <span id="username-delete"></span></h4>
         <h4>ชื่อ : <span id="fname-delete"></span> <span id="lname-delete"></span></h4>
+        <h4>ใช่หรือไม่</h4>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-            <button  type="submit" name="action" value="deleteUser" class="btn btn-danger" style="width:50%">ยืนยันการลบ</button></form>
-            <button  data-dismiss="modal" class="btn btn-success" style="width:50%">ยกเลิก</button></form>
+            <button  type="submit" name="action" value="deleteUser" class="btn btn-danger" style="width:50%">ใช่</button></form>
+            <button  data-dismiss="modal" class="btn btn-success" style="width:50%">ไม่</button></form>
       </form>
       </div>
 
@@ -455,27 +457,4 @@
         });
 
     });
-</script>
-<!-- ตาราง DataTable -->
-<script>
-    $(document).ready(function() {
-    $('#memberTable').DataTable({
-        "language": {
-            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Showing page _PAGE_ of _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search":"ค้นหา:",
-            "paginate": {
-            "first":      "หน้าแรก",
-            "last":       "หน้าสุดท้าย",
-            "next":       "ต่อไป",
-            "previous":   "ก่อนหน้า"
-            },
-            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
-        }
-    });
-} );
-
 </script>

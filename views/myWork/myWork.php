@@ -47,8 +47,17 @@
                 <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
         </form>
         <?php } ?>
-        </br></br>
-        <table  id="workTable" class="table  table-bordered"> 
+        </br>
+        <?php if($workList !== FALSE)
+        {
+            foreach($workList as $key=>$value)
+            {
+                echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
+                break;
+            }
+        } 
+        ?>
+        <table  id="workTable" class="table  table-bordered Tabledata"> 
             <thead>
                 <tr align="center" class="table-light">
                     <th>#</th>
@@ -121,27 +130,6 @@
 
 </div>
 
-<script>
-    $(document).ready(function() {
-    $('#workTable').DataTable({
-        "language": {
-            "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
-            "zeroRecords": "Nothing found - sorry",
-            "info": "Showing page _PAGE_ of _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search":"ค้นหา:",
-            "paginate": {
-            "first":      "หน้าแรก",
-            "last":       "หน้าสุดท้าย",
-            "next":       "ต่อไป",
-            "previous":   "ก่อนหน้า"
-            },
-            "info":"แสดงแถว _START_ ถึง _END_ จากทั้งหมด _TOTAL_ แถว",
-        }
-    });
-} );
-</script>
 <script>
     $(document).ready(function(){
         $('.btn-edit').click(function(){
