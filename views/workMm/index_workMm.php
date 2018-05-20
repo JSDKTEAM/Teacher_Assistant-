@@ -343,13 +343,13 @@
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
                                 <div class="col-3">
-                                <input type="number" id="HH" name="HH"   class="form-control" value="1" min="1" required>
+                                <input type="number" id="HH" name="HH"   class="form-control" value="0" min="0" required>
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">ชั่วโมง</label>  
                                 </div>
                                 <div class="col-3">
-                                <input type="number" id="mm" name="mm"   class="form-control" value="1" min="1"  required> 
+                                <input type="number" id="mm" name="mm"   class="form-control" value="0" min="0"  required> 
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">นาที</label>                                        
@@ -420,7 +420,7 @@
 
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">แก้ไขสถานะ</h4>
+        <h4 class="modal-title">แก้ไขสถานะ </br><span id="title-status"></span></h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -524,13 +524,13 @@
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
                                 <div class="col-3">
-                                <input type="number" id="edit_finish_HH" name="HH"   class="form-control " value="1" min="1" required>
+                                <input type="number" id="edit_finish_HH" name="HH"   class="form-control " value="0" min="0" required>
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">ชั่วโมง</label>  
                                 </div>
                                 <div class="col-3">
-                                <input type="number" id="edit_finish_mm" name="mm"   class="form-control " value="1" min="1"  required> 
+                                <input type="number" id="edit_finish_mm" name="mm"   class="form-control " value="0" min="0"  required> 
                                 </div>
                                 <div class="col-3">
                                 <label style="padding-top:7px">นาที</label>                                        
@@ -803,6 +803,7 @@
         var HH = $(this).attr('data-HH');   
         var mm = $(this).attr('data-mm');   
         var summary = $(this).attr('data-summary');  
+        $('#title-status').html(title);
         clearinput();
         $("p").empty();
         $("#old_status").val(status);

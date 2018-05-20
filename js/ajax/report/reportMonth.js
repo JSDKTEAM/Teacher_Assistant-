@@ -59,11 +59,17 @@ $(document).ready(function() {
                         if (i == data.length - 1) {
                             sum_work = data[i].sum_work;
                         } else {
-                            timeWork = data[i].timeWork;
+                            timeWork = (Number)(data[i].timeWork);
+                            var timeWork2 = Math.floor(timeWork / 60);
+                            timeWork = timeWork - (timeWork2 * 60);
+                            var HH = new String(timeWork2);
+                            var mm = new String(timeWork);
+                            var time = HH + " ชั่วโมง " + mm + " นาที";
+
                         }
                     }
                     document.getElementById("work_count").innerHTML = "งานทั้งหมดที่ทำ " + sum + " งาน จากงานทั้งหมด " + sum_work + " งาน</br>";
-                    document.getElementById("timeWork").innerHTML = "เวลาที่ทำงานทั้งหมด " + timeWork + " ชั่วโมง";
+                    document.getElementById("timeWork").innerHTML = "เวลาที่ทำงานทั้งหมด " + time;
                     var chartdata = {
                         labels: m,
                         datasets: [{

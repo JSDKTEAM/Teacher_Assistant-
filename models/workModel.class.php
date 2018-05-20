@@ -178,6 +178,7 @@
             return false;
         }
     }
+
     public static function getWork($id_work)
     {
         $con = conDb::getInstance();

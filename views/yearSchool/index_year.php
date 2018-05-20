@@ -160,6 +160,8 @@
     $(document).ready(function(){
         $(".btn-edit-year").click(function(){
         // get data from edit btn
+        $('.alert').remove();
+        $(":input[type='text']").val('');
         var id_year = $(this).attr('data-id-year');
         var end_date = $(this).attr('data-end-date');
         var start_date= $(this).attr('data-start-date');

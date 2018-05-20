@@ -39,7 +39,7 @@
                             <option value="อาจารย์">อาจารย์</option>
                         </select>
                         <div id="id_code_add" >
-                            <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  id="id_code_add_input" maxlength="10" class="form-control">
+                            <label><span class="red">*</span> รหัสนิสิต</label><input type="number" name="id_code"  id="id_code_add_input" maxlength="10" class="form-control">
                         </div>
                         <label><span class="red">*</span> ชื่อ</label><input type="text" maxlength="70" name="fname" class="form-control" required>
                         <label><span class="red">*</span> นามสกุล</label><input type="text" maxlength="70" name="lname" class="form-control" required>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="code-std">
                         <h5 id="code-old"></h5>
-                        <label id="lable-code">รหัสนิสิต</label><input  id="id-code-info"  type="text" name="id_code" maxlength="10" class="form-control">
+                        <label id="lable-code">รหัสนิสิต</label><input  id="id-code-info"  type="number" name="id_code" maxlength="10" class="form-control">
                     </div>
                     <div class="status">
                         <h5 id="status-old"></h5>
@@ -309,6 +309,7 @@
     $(document).ready(function(){
         $('.btn-edit-info').click(function(){
             $(".alert").remove();
+            $(":input[type='number']").val('');
             $("#btn-info").removeClass('active');
             $("#btn-code").removeClass('active');
             $("#btn-status").removeClass('active');
