@@ -12,6 +12,20 @@ function remove_spacebar(elem) {
     });
 }
 
+/*function remove_f_e(elem) {
+    var str = $(elem).val();
+    console.log(str)
+    str = str.trim();
+    console.log(str)
+    if (str != '') {
+        return true;
+    } else {
+        $(elem).val(str);
+        return false;
+    }
+
+}*/
+
 function check_status(code, div, type_user) {
     $(document).ready(function() {
         $(div).hide();
@@ -262,8 +276,13 @@ function data_check(start, end) {
 
 function check_img_size(img) {
     var uploadField = document.getElementById(img);
+<<<<<<< HEAD
+    //307200
+    console.log(uploadField.files[0].size);
+=======
 
-    if (uploadField.files[0].size > 307200) {
+>>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
+    if (uploadField.files[0].size > 1000000) {
         console.log(false);
         return false;
     } else {

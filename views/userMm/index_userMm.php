@@ -33,20 +33,21 @@
                         <label></span> สถานะ</label>
                         <select name="type" id="type_user" class="form-control" required>
                             <option value="">เลือกสถานะ</option>
-                            <option value="อาจารย์">อาจารย์</option>
-                            <option value="ผู้ประเมิน">ผู้ประเมิน</option>
+                            <option value="เจ้าหน้าที่">เจ้าหน้าที่</option>
                             <option value="นิสิต">นิสิต</option>
+                            <option value="ผู้ประเมิน">ผู้ประเมิน</option>
+                            <option value="อาจารย์">อาจารย์</option>
                         </select>
                         <div id="id_code_add" >
                             <label><span class="red">*</span> รหัสนิสิต</label><input type="text" name="id_code"  id="id_code_add_input" maxlength="10" class="form-control">
                         </div>
-                        <label><span class="red">*</span> ชื่อ</label><input type="text" name="fname" class="form-control" required>
-                        <label><span class="red">*</span> นามสกุล</label><input type="text" name="lname" class="form-control" required>
+                        <label><span class="red">*</span> ชื่อ</label><input type="text" maxlength="70" name="fname" class="form-control" required>
+                        <label><span class="red">*</span> นามสกุล</label><input type="text" maxlength="70" name="lname" class="form-control" required>
                     </div>
                     <div class="col-6">
-                        <label><span class="red">*</span> Username</label><input type="text" name="username" id="username_add" class="form-control" required>
-                        <label><span class="red">*</span> Password</label><input type="password" name="passwd" id="passwdAdd" class="form-control" required>
-                        <label><span class="red">*</span> Confirm Password</label><input type="password" id="passwdAddc" class="form-control" required>
+                        <label><span class="red">*</span> Username</label><input type="text" maxlength="25" name="username" id="username_add" class="form-control" required>
+                        <label><span class="red">*</span> Password</label><input type="password" maxlength="50" name="passwd" id="passwdAdd" class="form-control" required>
+                        <label><span class="red">*</span> Confirm Password</label><input type="password" maxlength="50" id="passwdAddc" class="form-control" required>
                     </div>
                 </div>
         </div>
@@ -144,12 +145,12 @@
                     <input type="hidden"  id="type-info" class="form-control" required>
                     <input id="id-member-info" type="hidden" name="id_member" class="form-control" required>
                     <div class="info">
-                        <label>ชื่อ</label><input id="fname-info" type="text" name="fname" class="form-control" required>
-                        <label>นามสกุล</label><input id="lname-info" type="text" name="lname" class="form-control" required>
+                        <label>ชื่อ</label><input id="fname-info" maxlength="70" type="text" name="fname" class="form-control" required>
+                        <label>นามสกุล</label><input id="lname-info" maxlength="70" type="text" name="lname" class="form-control" required>
                     </div>
                     <div class="code-std">
                         <h5 id="code-old"></h5>
-                        <label id="lable-code">รหัสนิสิต</label><input id="id-code-info"  type="text" name="id_code" maxlength="10" class="form-control">
+                        <label id="lable-code">รหัสนิสิต</label><input  id="id-code-info"  type="text" name="id_code" maxlength="10" class="form-control">
                     </div>
                     <div class="status">
                         <h5 id="status-old"></h5>
@@ -189,8 +190,8 @@
             <input type="hidden" id="id-member-password" name="id_member">
             <h5 id="username-password"></h5>
             <!--<label>Username</label><input type="text"  class="form-control">-->
-            <label>New Password</label><input type="password" name="passwd" id="passwdinput" class="form-control" required>
-            <label>Confirm New Password</label><input type="password" name="passwdConfirm" id="passwdConfirm" class="form-control" required>
+            <label>New Password</label><input maxlength="50" type="password" name="passwd" id="passwdinput" class="form-control" required>
+            <label>Confirm New Password</label><input maxlength="50" type="password" name="passwdConfirm" id="passwdConfirm" class="form-control" required>
       </div>
 
       <!-- Modal footer -->
@@ -341,14 +342,17 @@
             else
             {
                 $("#lable-code").hide();
-                //$("#id-code-info").hide();
                 $(".btn-code").hide();
-                if(type = "อาจารย์")
+                if(type == "อาจารย์")
                 {
                     $("#type-info-edit").append("<option value=''>--เลือกสถานะ--</option><option value='เจ้าหน้าที่'>เจ้าหน้าที่</option><option value='นิสิต'>นิสิต</option><option value='ผู้ประเมิน'>ผู้ประเมิน</option>");
                 }
-                else{
+                else if(type == "เจ้าหน้าที่"){
                     $("#type-info-edit").append("<option value=''>--เลือกสถานะ--</option><option value='นิสิต'>นิสิต</option><option value='ผู้ประเมิน'>ผู้ประเมิน</option><option value='อาจารย์'>อาจารย์</option>");
+                }
+                else
+                {
+                    $("#type-info-edit").append("<option value=''>--เลือกสถานะ--</option><option value='เจ้าหน้าที่'>เจ้าหน้าที่</option><option value='นิสิต'>นิสิต</option><option value='อาจารย์'>อาจารย์</option>");
                 }
             }
             $("#id-member-info").val(id_member);

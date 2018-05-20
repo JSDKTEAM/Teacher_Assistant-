@@ -77,7 +77,11 @@
                                 <p><i class='far fa-clock'></i>    ".$work->DateTimeThai($work->get_created_date())."</p>
                                 <p>ระยะเวลาทำงาน : ".$work->DateThai($work->get_time_start())." ถึง ".$work->DateThai($work->get_time_stop())."</p>
                             </div>";
-                if($_SESSION['member']['type'] == 'อาจารย์' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+<<<<<<< HEAD
+                if($_SESSION['member']['type'] != 'นิสิต' && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+=======
+                if(($_SESSION['member']['type'] !="นิสิต") && $_SESSION['member']['id_member'] == $objPatron->get_id_member())
+>>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
                 {
                 ?>
                         <div class='col-3' >
@@ -136,12 +140,17 @@
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" maxlength="70" type="text" name="title" class="form-control">
-                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
+<<<<<<< HEAD
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" maxlength="70" type="text" name="title" class="form-control" required>
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control" required></textarea>
+=======
+                    <label><span class="red">* </span> หัวข้องาน</label><input id="data-title-edit" maxlength="70" type="text" name="title" class="form-control"required>
+                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"required></textarea>
+>>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
                 </div>
                 <div class="col-6">
-                    <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-                    <label><span class="red">* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    <label><span class="red">* </span>วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+                    <label><span class="red">* </span>วันที่ส่งงาน</label><input type="date" name="time_stop" id="data-time-stop-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
                 </div>
             </div>
             <input type="hidden" name="controller" value="work">
@@ -194,6 +203,26 @@
 </div>
 </div>
 
+<!-- ตรวจสอบวันที่ --> 
+<script>
+$(document).ready(function() {
+    remove_f_e('input');
+    $("#add_work").submit(function( event ) {
+        var check = data_check('#data-time-start-edit','#data-time-stop-edit')
+        if(check && remove_f_e("input[type=text],textarea"))
+        {
+            $('.alert').remove();
+            return;
+        }
+        else
+        {
+            $('.alert').remove();
+            $("#txtToDate").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
+        }
+        event.preventDefault();
+    });
+});
+</script>
 
 <!-- แก้ไขงาน -->
 <script>
@@ -243,7 +272,7 @@
         else
         {
             $('.alert').remove();
-            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</span>");
+            $("#data-time-stop-edit").after("<span class='alert red'>วันที่ส่งงานน้อยกว่าวันที่เริ่มงาน</br></span>");
         }
         event.preventDefault();
     });

@@ -88,9 +88,9 @@
                 <div class="modal-body">
                     <form method="POST" id="form-edit-passwd">
                         <input type="hidden" name="id_member" id="id_member_ed_passwd" value="<?php echo $_SESSION['member']['id_member']?>">
-                        <label>รหัสผ่านเก่า</label><input type="password" class="form-control" id="passwdOld" required>
-                        <label>รหัสผ่านใหม่</label><input type="password" class="form-control" id="passwdNew" required>
-                        <label>ยืนยันรหัสผ่านใหม่</label><input type="password" name="passwd" class="form-control" id="passwdNewCon" required>
+                        <label>รหัสผ่านเก่า</label><input type="password" class="form-control" id="passwdOld" required maxlength="50">
+                        <label>รหัสผ่านใหม่</label><input type="password" class="form-control" id="passwdNew" required maxlength="50">
+                        <label>ยืนยันรหัสผ่านใหม่</label><input type="password" name="passwd" class="form-control" id="passwdNewCon" required maxlength="50">
                 </div>
 
                 <!-- Modal footer -->
@@ -145,12 +145,12 @@
                         <input type="hidden" name="id_code" id="id_code" class="form-control" value=""> 
                         <input type="hidden" name="type_info" id="type_info">
                         <div id="form-info">
-                            <label>ชื่อ</label><input type="text" name="fname" id="fname" class="form-control" required>
-                            <label>นามสกุล</label><input type="text" name="lname" id="lname" class="form-control" required>
+                            <label>ชื่อ</label><input type="text" maxlength="70" name="fname" id="fname" class="form-control" required>
+                            <label>นามสกุล</label><input type="text" maxlength="70" name="lname" id="lname" class="form-control" required>
                         </div>
                         <div id="form-code">
                             <h5 id="code-old"></h5>
-                            <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code_new"  class="form-control" value=""> 
+                            <label id="lable_id_code">รหัสนิสิต</label><input type="text" name="id_code_new"  maxlength="10" class="form-control" value=""> 
                         </div>
                         <input type="hidden" name="controller" value="userSet">
                 </div>
