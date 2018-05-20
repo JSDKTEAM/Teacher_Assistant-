@@ -116,7 +116,10 @@
                 sweetalert(NULL,3);
             }
             call('myWork','get_myWork');
+<<<<<<< HEAD
             
+=======
+>>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
         }
         public function deleteWork($param = NULL)
         {
