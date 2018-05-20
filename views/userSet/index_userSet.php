@@ -145,8 +145,8 @@
                         <input type="hidden" name="id_code" id="id_code" class="form-control" value=""> 
                         <input type="hidden" name="type_info" id="type_info">
                         <div id="form-info">
-                            <label>ชื่อ</label><input type="text" maxlength="70" name="fname" id="fname" class="form-control" required>
-                            <label>นามสกุล</label><input type="text" maxlength="70" name="lname" id="lname" class="form-control" required>
+                            <label>ชื่อ</label><input type="text" maxlength="70" name="fname" id="fname" class="form-control">
+                            <label>นามสกุล</label><input type="text" maxlength="70" name="lname" id="lname" class="form-control">
                         </div>
                         <div id="form-code">
                             <h5 id="code-old"></h5>
@@ -234,19 +234,23 @@ return false;
         $("#btn-code").removeClass('active');
         $("#form-info").show();
         $("#form-code").hide();
+        $("#form-info > input").prop('required', true);
+        $("#form-code > input").prop('required', false);
+
         $("#form-info > input").prop('disabled', false);
         $("#form-code > input").prop('disabled', true);
-        $("#form-info > input").prop('required', false);
-        $("#form-code > input").prop('required', true);
+
         $("#btn-info").click(function(){
             $("#btn-info").addClass('active');
             $("#btn-code").removeClass('active');
             $("#form-info").show();
             $("#form-code").hide();
+            $("#form-info > input").prop('required', true);
+            $("#form-code > input").prop('required', false);
+
             $("#form-info > input").prop('disabled', false);
             $("#form-code > input").prop('disabled', true);
-            $("#form-info > input").prop('required', false);
-            $("#form-code > input").prop('required', true);
+
 
         })
         $("#btn-code").click(function(){
@@ -254,10 +258,11 @@ return false;
             $("#btn-info").removeClass('active');
             $("#form-info").hide();
             $("#form-code").show();
+            $("#form-info > input").prop('required', false);
+            $("#form-code > input").prop('required', true);
+
             $("#form-info > input").prop('disabled', true);
             $("#form-code > input").prop('disabled', false);
-            $("#form-info > input").prop('required', true);
-            $("#form-code > input").prop('required', false);
         })
     })
 </script>
@@ -300,10 +305,12 @@ return false;
             $("#btn-code").removeClass('active');
             $("#form-info").show();
             $("#form-code").hide();
+            $("#form-info > input").prop('required', true);
+            $("#form-code > input").prop('required', false);
+
             $("#form-info > input").prop('disabled', false);
             $("#form-code > input").prop('disabled', true);
-            $("#form-info > input").prop('required', false);
-            $("#form-code > input").prop('required', true);
+
         // get data from edit btn
             var type = $(this).attr('data-type');
             var id_code = $(this).attr('data-id-code');
