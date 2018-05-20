@@ -180,13 +180,8 @@
         <input id="data-id-work-edit" type="text" name="id_work" class="form-control" hidden>
             <div class="row">   
                 <div class="col-6">
-<<<<<<< HEAD
                     <label><span class="red">* </span>หัวข้องาน</label><input maxlength="70" id="data-title-edit" type="text" name="title" class="form-control" required>
                     <label><span class="red">* </span> รายละเอียดงาน</label><textarea maxlength="200" id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control"></textarea>
-=======
-                    <label><span class="red">* </span>หัวข้องาน</label><input id="data-title-edit" type="text" name="title" class="form-control"required>
-                    <label><span class="red">* </span> รายละเอียดงาน</label><textarea id="data-detail-edit" name="detail"cols="30" rows="10" class="form-control" required></textarea>
->>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
                 </div>
                 <div class="col-6">
                     <label><span class="red">* </span> วันที่เริ่มงาน</label><input type="date" name="time_start" id="data-time-start-edit" class="form-control date_year" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>

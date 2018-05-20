@@ -518,13 +518,8 @@
                     }
                     ?>
                     </select>                                      
-<<<<<<< HEAD
-                    <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="edit_finish_due_date"  class="form-control " required>  
-                    <input type="date" name="time_stop" id="edit_finish_time_stop"  class="form-control " hidden>                
-=======
                     <label><span class="red">*</span> วันเวลาที่ทำงานเสร็จ</label><input type="date" name="due_date" id="edit_finish_due_date"  class="form-control " >  
-                    <input type="date" name="time_stop" id="edit_finish_time_start"  class="form-control " hidden>                
->>>>>>> b737e39acc5aafcd29d9e153d102c8f880a00f8f
+                    <input type="date" name="time_start" id="edit_finish_time_start"  class="form-control " hidden>                
 
                     <label><span class="red">*</span> จำนวนเวลาที่ทำงาน </label>
                             <div  class="row">
