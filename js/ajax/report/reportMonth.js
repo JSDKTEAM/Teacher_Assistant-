@@ -51,20 +51,22 @@ $(document).ready(function() {
                     var timeWork = 0;
                     var sum_work = 0;
                     for (var i in data) {
-                        if (i != data.length - 1 && i != data.length - 2) {
+                        if (i != data.length - 1 && i != data.length - 2 && i != data.length - 3) {
                             m.push(data[i].m);
                             work_count.push(data[i].work_count);
                             sum = sum + data[i].work_count / 1;
                         }
-                        if (i == data.length - 1) {
+                        if (i == data.length - 2) {
                             sum_work = data[i].sum_work;
-                        } else {
+                        } else if (i == data.length - 3) {
                             timeWork = (Number)(data[i].timeWork);
                             var timeWork2 = Math.floor(timeWork / 60);
                             timeWork = timeWork - (timeWork2 * 60);
                             var HH = new String(timeWork2);
                             var mm = new String(timeWork);
                             var time = HH + " ชั่วโมง " + mm + " นาที";
+                        } else {
+                            var table = data[i].table
 
                         }
                     }
@@ -109,6 +111,7 @@ $(document).ready(function() {
                             }
                         }
                     });
+                    $("#myChart1").after(table);
                 },
 
                 error: function(data) {

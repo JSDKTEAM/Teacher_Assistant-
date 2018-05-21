@@ -1,4 +1,8 @@
 <?php
+    if(!isset($_SESSION['member']))
+    {
+        header('location:index.php?controller=identify&action=index_login');
+    }
     require_once('models/yearSchoolModel.class.php');
     class YearSetController
     {
