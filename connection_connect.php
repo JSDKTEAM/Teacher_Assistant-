@@ -1,9 +1,9 @@
 <?php
 	class conDb {
 		private static $instance = NULL;
-		private static $dsn = "mysql:dbname=web_app;host=localhost";
-		private static $user = "root";
-		private static $pass = "";
+		private static $dsn = "mysql:dbname=WAD_05;host=localhost";
+		private static $user = "WAD_05";
+		private static $pass = "WAD_05";
 			private function __construct() {}
 			private function __clone() {}
 			public static function getInstance() {

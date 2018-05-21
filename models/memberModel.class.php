@@ -155,6 +155,35 @@
             {
                 $data[] = $value;
             }
+            $stmt = $con->prepare('SELECT work.id_work,work.title,DATE(work.time_start) AS time_start,DATE(work.time_stop) AS time_stop,work.detail,work.status,work.created_date,DATE(work.due_date) AS due_date,work.used_time,work.summary,patron.id_member AS id_patron,patron.username AS userPatron,
+            patron.passwd AS passwdPatron , patron.fname AS fnamePatron , patron.lname  AS lnamePatron , patron.type AS typePatron,patron.img_user AS patron_img , person.id_member AS id_person , person.id_code,person.username AS userPerson , person.passwd AS passwdPerson , person.fname AS fnamePerson , person.lname AS lnamePerson , person.type AS typePerson,
+            person.img_user AS person_img,year_school.id_year,year_school.start_date,year_school.end_date FROM work
+            INNER JOIN member as patron ON patron.id_member = work.patron_id
+            LEFT JOIN member as person ON person.id_member = work.person_id
+            INNER JOIN year_school ON year_school.id_year = work.id_year
+            WHERE YEAR(work.created_date) = ? AND work.status = ? AND work.person_id = ?');
+            $stmt->execute([$year,'finish',$person_id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $table = "<table class='table table-bordered Tabledata' id='work_std'>
+            <thead>
+                <tr class='table-light' align='center'>
+                <th>หัวข้องาน</th>
+                <th>ผู้สั่ง</ht>
+                <th>รายละเอียดงาน</th>
+                <th>จำนวนเวลาที่ทำ</th>
+                </tr></thead>
+            <tbody>";
+            foreach($result as $key=>$value){
+                $time = explode(':',$value['used_time']);
+                $table .= "<tr class='table-light'>
+                            <td>".$value['title']."</td>
+                            <td>".$value['fnamePatron']." ".$value['lnamePatron']."</td>
+                            <td>".$value['detail']."</td>
+                            <td>".intval($time[0])." ชั่วโมง ".intval($time[1])." นาที</td>
+                          </tr>";
+            }
+            $table .= "</tbody></table>";
+            $data[] = array('table'=>$table);
             ob_end_clean();
             print json_encode($data);
         }

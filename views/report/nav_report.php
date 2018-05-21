@@ -14,6 +14,7 @@
 <script>
     $(document).ready(function(){
         $("#month_chart").click(function(){
+            $("#work_std").show();
             $(".y-chart").hide();     
             $("#myChart2").hide();     
             $("#work_count").show();
@@ -27,6 +28,7 @@
 });
     $(document).ready(function(){
         $("#year_chart").click(function(){
+            $("#work_std").hide();
             $(".m-chart").hide();
             $("#myChart1").hide();
             $("#work_count").hide();

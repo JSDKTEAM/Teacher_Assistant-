@@ -10,7 +10,7 @@
 	{
 		ob_start();
 	}
-	if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') && isset($_SESSION['member']))
+	if((isset($_REQUEST['controller'])&&isset($_REQUEST['action'])) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'))
 	{
 		$controller = $_REQUEST['controller'];
 		$action = $_REQUEST['action'];
@@ -46,6 +46,8 @@
 	<meta http-equiv="Content-Language" content="th">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ระบบสั่งงานนิสิตทุนทำงาน</title>
+	<link rel="shortcut icon" href="http://www.ku.ac.th/web2012/resources/upload/content/images/edu_kasetsart.jpg" />
 	<!-- Chart -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<!-- Latest compiled and minified CSS -->

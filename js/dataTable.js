@@ -1,7 +1,6 @@
 function dataTable(table) {
     $(document).ready(function() {
         $(table).DataTable({
-
             "language": {
                 "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
                 "zeroRecords": "Nothing found - sorry",
