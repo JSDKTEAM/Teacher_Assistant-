@@ -10,7 +10,7 @@
 	{
 		ob_start();
 	}
-	if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'))
+	if(isset($_REQUEST['controller'])&&isset($_REQUEST['action']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') && isset($_SESSION['member']))
 	{
 		$controller = $_REQUEST['controller'];
 		$action = $_REQUEST['action'];
@@ -121,6 +121,7 @@
 			$("#workMm a:contains('จัดการระบบ')").parent().addClass('active');
 			$("#report a:contains('สถิติ')").parent().addClass('active');
 		}); //jQuery is loaded
+		
 	</script>
 </body>
 </html>

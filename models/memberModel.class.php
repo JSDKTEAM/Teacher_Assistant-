@@ -129,9 +129,9 @@
         {
             header('Content-type: application/json');
             $con = ConDb::getInstance();
-            $stmt = $con->prepare('SELECT work.person_id,YEAR(work.created_date) as y,MONTHNAME(work.created_date) AS m,COUNT(work.id_work) AS work_count  FROM work 
+            $stmt = $con->prepare('SELECT work.person_id,YEAR(work.created_date) as y,MONTH(work.created_date),MONTHNAME(work.created_date) AS m,COUNT(work.id_work) AS work_count  FROM work 
             WHERE work.person_id = ? AND YEAR(work.created_date) = ? AND work.status = ?
-            GROUP BY work.person_id,YEAR(work.created_date),MONTHNAME(work.created_date)
+            GROUP BY work.person_id,YEAR(work.created_date),MONTH(work.created_date),MONTHNAME(work.created_date)
             ORDER BY MONTH(work.created_date)');
             $stmt->execute([$person_id,$year,'finish']);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,6 +1,11 @@
 <?php
     include('views/header/nav3.php');
 ?>
+<style>
+    .waiting ,.booked,.finish,.allshow  {
+        cursor: pointer;
+    }
+</style>
 <div class="banner-sec">
     <div class="container">
 
@@ -21,13 +26,13 @@
             <input type="hidden" name="controller" value="work">
             <button type="submit" class="btn btn-success" name="action" value="searchWork"><i class="fas fa-search"></i> ค้นหา</button>
         </form>
-        </br>
         <?php } ?>
+        <h4><span class="badge badge-pill badge-warning waiting">Waiting</span> <span class="badge badge-pill badge-primary booked">Booked</span> <span class="badge badge-pill badge-success finish">Finish</span> <span class="badge badge-pill badge-info allshow">แสดงงานทั้งหมด</span> </h4>
         <?php if($workList !== FALSE)
         {
             foreach($workList as $key=>$value)
             {
-                echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h4>";
+                echo "<h3>ตารางงานปีการศึกษา ".$value->get_objYearSchool()->get_id_year()."</h3>";
                 break;
             }
         } 
@@ -197,7 +202,6 @@
 <!-- ตรวจสอบวันที่ --> 
 <script>
 $(document).ready(function() {
-    remove_f_e('input');
     $("#add_work").submit(function( event ) {
         var check = data_check('#data-time-start-edit','#data-time-stop-edit')
         if(check && remove_f_e("input[type=text],textarea"))
@@ -268,4 +272,26 @@ $(document).ready(function() {
         event.preventDefault();
     });
 } );
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".waiting").click(function(){
+            $(":input[type='search']").val('waiting');
+            $(":input[type='search']").keyup();
+        })
+        $(".booked").click(function(){
+            $(":input[type='search']").val('booked');
+            $(":input[type='search']").keyup();
+        })
+        $(".finish").click(function(){
+            $(":input[type='search']").val('finish');
+            $(":input[type='search']").keyup();
+        })
+        $(".allshow").click(function(){
+            $(":input[type='search']").val('');
+            $(":input[type='search']").keyup();
+        })
+
+    })
 </script>
